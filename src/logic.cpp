@@ -421,7 +421,7 @@ void Logic::AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow)
         if (PlayerData[1].PlayerInput == Mouse)  pMouse = 1;
         if (PlayerData[2].PlayerInput == Mouse)  pMouse = 2;
         if (PlayerData[3].PlayerInput == Mouse)  pMouse = 3;
-        
+
         if (Player == pMouse && PlayerData[Player].PlayerInput == Mouse)
         {
             float boxScreenX = PlayerData[Player].PlayersPlayfieldScreenX-57;
@@ -558,7 +558,7 @@ void Logic::DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow)
         if (PlayerData[1].PlayerInput == Mouse)  pMouse = 1;
         if (PlayerData[2].PlayerInput == Mouse)  pMouse = 2;
         if (PlayerData[3].PlayerInput == Mouse)  pMouse = 3;
-        
+
         if (Player == pMouse && PlayerData[Player].PlayerInput == Mouse)
         {
             PlayerData[Player].PiecePlayfieldX = MouseMoveX;

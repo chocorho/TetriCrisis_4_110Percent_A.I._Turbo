@@ -1912,7 +1912,7 @@ void Screens::DisplayPlayingGameScreen(void)
     if (logic->PlayersCanJoin == true && input->MouseButtonPressed[0] == true)
     {
         for (int p = 0; p < 4; p++)
-        {  
+        {
             if (logic->PlayerData[p].PlayerInput == Mouse)
             {
                 logic->PlayerData[p].PlayerStatus = NewPieceDropping;
@@ -2215,7 +2215,7 @@ void Screens::DisplayPlayingGameScreen(void)
                 {
                     visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
                     visuals->Sprites[155].ScreenY = 240;
-                    visuals->Sprites[155].Transparency = 0.10f;
+                    visuals->Sprites[155].Transparency = 30;
                     visuals->DrawSpriteOntoScreenBuffer(155);
                 }
             }
