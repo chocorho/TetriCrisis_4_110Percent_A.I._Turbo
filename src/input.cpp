@@ -374,7 +374,22 @@ void Input::GetAllUserInput(void)
             {
                 MouseButtonPressed[index] = true;
 
-                if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[2].PlayerStatus != GameOver && logic->PlayerData[2].PlayerInput == Mouse
+                if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[0].PlayerStatus != GameOver && logic->PlayerData[0].PlayerInput == Mouse
+                && logic->MouseMoveOrRotate == MouseMove)
+                {
+
+                }
+                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[1].PlayerStatus != GameOver && logic->PlayerData[1].PlayerInput == Mouse
+                && logic->MouseMoveOrRotate == MouseMove)
+                {
+
+                }
+                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[2].PlayerStatus != GameOver && logic->PlayerData[2].PlayerInput == Mouse
+                && logic->MouseMoveOrRotate == MouseMove)
+                {
+
+                }
+                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[3].PlayerStatus != GameOver && logic->PlayerData[3].PlayerInput == Mouse
                 && logic->MouseMoveOrRotate == MouseMove)
                 {
 

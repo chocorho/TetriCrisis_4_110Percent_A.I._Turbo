@@ -241,8 +241,8 @@ void Screens::DisplaySixteenBitSoftScreen(void)
     }
 
     if (input->MouseButtonPressed[0] == true
-       || input->KeyOnKeyboardPressedByUser == (int)SDLK_SPACE
-       || input->KeyOnKeyboardPressedByUser == (int)SDLK_RETURN)
+       || input->EnterKeyPressed == true
+       || input->SpacebarKeyPressed == true)
     {
         ScreenDisplayTimer = 0;
         input->DelayAllUserInput = 20;
@@ -1911,7 +1911,13 @@ void Screens::DisplayPlayingGameScreen(void)
 
     if (logic->PlayersCanJoin == true && input->MouseButtonPressed[0] == true)
     {
-        logic->PlayerData[2].PlayerStatus = NewPieceDropping;
+        for (int p = 0; p < 4; p++)
+        {  
+            if (logic->PlayerData[p].PlayerInput == Mouse)
+            {
+                logic->PlayerData[p].PlayerStatus = NewPieceDropping;
+            }
+        }
     }
 
 //    if (ScreenIsDirty == true)

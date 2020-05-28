@@ -416,7 +416,13 @@ void Logic::AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow)
 	}
 	else if (TempOrCurrentOrNextOrDropShadow == DropShadow)
 	{
-        if (Player == 2 && PlayerData[Player].PlayerInput == Mouse)
+        int pMouse = 0;
+        if (PlayerData[0].PlayerInput == Mouse)  pMouse = 0;
+        if (PlayerData[1].PlayerInput == Mouse)  pMouse = 1;
+        if (PlayerData[2].PlayerInput == Mouse)  pMouse = 2;
+        if (PlayerData[3].PlayerInput == Mouse)  pMouse = 3;
+        
+        if (Player == pMouse && PlayerData[Player].PlayerInput == Mouse)
         {
             float boxScreenX = PlayerData[Player].PlayersPlayfieldScreenX-57;
             float boxScreenY = PlayerData[Player].PlayersPlayfieldScreenY-212+18;
@@ -547,12 +553,16 @@ void Logic::DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow)
 
 	if (CurrentOrDropShadow == DropShadow)
 	{
-        if (Player == 2 && PlayerData[Player].PlayerInput == Mouse)
+        int pMouse = 0;
+        if (PlayerData[0].PlayerInput == Mouse)  pMouse = 0;
+        if (PlayerData[1].PlayerInput == Mouse)  pMouse = 1;
+        if (PlayerData[2].PlayerInput == Mouse)  pMouse = 2;
+        if (PlayerData[3].PlayerInput == Mouse)  pMouse = 3;
+        
+        if (Player == pMouse && PlayerData[Player].PlayerInput == Mouse)
         {
             PlayerData[Player].PiecePlayfieldX = MouseMoveX;
             PlayerData[Player].PiecePlayfieldY = MouseMoveY;
-
-
 
             if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 1] == 1
              && PlayerData[Player].Playfield[ PlayerData[Player].PiecePlayfieldX ][ PlayerData[Player].PiecePlayfieldY ] == 1000)
@@ -1376,10 +1386,19 @@ void Logic::SetupForNewGame(void)
         }
     }
 
-    if (PlayerData[2].PlayerInput == CPU)
+    if (PlayerData[2].PlayerInput == CPU && input->JoystickDeviceThree == NULL)
     {
         PlayerData[2].PlayerInput = Mouse;
         PlayerData[2].PlayerStatus = GameOver;
+        MouseMoveX = -1;
+        MouseMoveY = -1;
+
+        MouseMoveOrRotate = -1;
+    }
+    else if (PlayerData[3].PlayerInput == CPU && input->JoystickDeviceThree == NULL)
+    {
+        PlayerData[3].PlayerInput = Mouse;
+        PlayerData[3].PlayerStatus = GameOver;
         MouseMoveX = -1;
         MouseMoveY = -1;
 
