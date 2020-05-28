@@ -21,6 +21,13 @@
 #include <stdio.h>
 #include <cstring>
 
+#include <stdlib.h>
+/*
+#ifdef __WIN32__
+    #include <windows.h>
+    #include <shellapi.h>
+#endif
+*/
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -30,14 +37,14 @@
 
 #include "input.h"
 #include "visuals.h"
-#include "interface.h"
+#include "interfaces.h"
 #include "data.h"
 #include "logic.h"
 #include "audio.h"
 
 extern Input* input;
 extern Visuals* visuals;
-extern Interface* interface;
+extern Interfaces* interfaces;
 extern Data* data;
 extern Logic* logic;
 extern Audio* audio;
@@ -281,17 +288,35 @@ void Screens::DisplayTitleScreen(void)
     {
         int buttonStartY = 204;
         int buttonOffsetY = 39;
-        interface->CreateButton( 1003, 0, buttonStartY );
-        interface->CreateButton( 1004, 1, buttonStartY + (buttonOffsetY*1) );
-        interface->CreateButton( 1005, 2, buttonStartY + (buttonOffsetY*2) );
-        interface->CreateButton( 1006, 3, buttonStartY + (buttonOffsetY*3) );
-        interface->CreateButton( 1007, 4, buttonStartY + (buttonOffsetY*4) );
-        interface->CreateButton( 1008, 5, buttonStartY + (buttonOffsetY*5) );
+        interfaces->CreateButton( 1003, 0, buttonStartY );
+        interfaces->CreateButton( 1004, 1, buttonStartY + (buttonOffsetY*1) );
+        interfaces->CreateButton( 1005, 2, buttonStartY + (buttonOffsetY*2) );
+        interfaces->CreateButton( 1006, 3, buttonStartY + (buttonOffsetY*3) );
+        interfaces->CreateButton( 1007, 4, buttonStartY + (buttonOffsetY*4) );
+        interfaces->CreateButton( 1008, 5, buttonStartY + (buttonOffsetY*5) );
+
+        interfaces->CreateIcon(156, 0+64, 480-64);
 
         ScreenTransitionStatus = FadeIn;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
+    interfaces->ProcessAllIcons();
+
+    if (interfaces->IconSelectedByPlayer == 0)
+    {
+        #ifdef __WIN32__
+        system("start https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
+//           ShellExecute(NULL, "open", "https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo", NULL, NULL, SW_SHOWNORMAL);
+        #endif
+
+        #ifdef __linux__
+        system("xdg-open https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
+//            system("<firefox> https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
+        #endif
+
+        interfaces->IconSelectedByPlayer = -1;
+    }
 
     if (ScreenIsDirty == true)
     {
@@ -328,7 +353,8 @@ void Screens::DisplayTitleScreen(void)
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 135+16
                                           , JustifyCenter, 255, 255, 0, 90, 90, 0);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllIconsOntoScreenBuffer();
 
         visuals->Sprites[10].ScreenX = 565;
         visuals->Sprites[10].ScreenY = 418;
@@ -355,14 +381,15 @@ void Screens::DisplayTitleScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
 
-        if (interface->ButtonSelectedByPlayer == 1)  ScreenToDisplay = OptionsScreen;
-        else if (interface->ButtonSelectedByPlayer == 2)  ScreenToDisplay = HowToPlayScreen;
-        else if (interface->ButtonSelectedByPlayer == 3)  ScreenToDisplay = HighScoresScreen;
-        else if (interface->ButtonSelectedByPlayer == 4)  ScreenToDisplay = AboutScreen;
-        else if (interface->ButtonSelectedByPlayer == 5)  input->EXIT_Game = true;
-        else if (interface->ButtonSelectedByPlayer == 0)  ScreenToDisplay = NewGameOptionsScreen;
+        if (interfaces->ButtonSelectedByPlayer == 1)  ScreenToDisplay = OptionsScreen;
+        else if (interfaces->ButtonSelectedByPlayer == 2)  ScreenToDisplay = HowToPlayScreen;
+        else if (interfaces->ButtonSelectedByPlayer == 3)  ScreenToDisplay = HighScoresScreen;
+        else if (interfaces->ButtonSelectedByPlayer == 4)  ScreenToDisplay = AboutScreen;
+        else if (interfaces->ButtonSelectedByPlayer == 5)  input->EXIT_Game = true;
+        else if (interfaces->ButtonSelectedByPlayer == 0)  ScreenToDisplay = NewGameOptionsScreen;
 
-        interface->DestroyAllButtons();
+        interfaces->DestroyAllButtons();
+        interfaces->DestroyAllIcons();
     }
 }
 
@@ -372,117 +399,117 @@ void Screens::DisplayNewGameOptionsScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1003, 0, 454);
+        interfaces->CreateButton(1003, 0, 454);
 
-        interface->CreateArrowSet(0, 65);
-        interface->CreateArrowSet(1, 105);
-        interface->CreateArrowSet(2, 145);
-        interface->CreateArrowSet(3, 185);
-        interface->CreateArrowSet(4, 225);
-        interface->CreateArrowSet(5, 265);
-        interface->CreateArrowSet(6, 305);
-        interface->CreateArrowSet(7, 345);
+        interfaces->CreateArrowSet(0, 65);
+        interfaces->CreateArrowSet(1, 105);
+        interfaces->CreateArrowSet(2, 145);
+        interfaces->CreateArrowSet(3, 185);
+        interfaces->CreateArrowSet(4, 225);
+        interfaces->CreateArrowSet(5, 265);
+        interfaces->CreateArrowSet(6, 305);
+        interfaces->CreateArrowSet(7, 345);
 
         audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
 
         ScreenTransitionStatus = FadeIn;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
 
-    interface->ProcessAllArrowSets();
+    interfaces->ProcessAllArrowSets();
 
-    if (interface->ArrowSetArrowSelectedByPlayer != -1)
+    if (interfaces->ArrowSetArrowSelectedByPlayer != -1)
     {
-        if (interface->ArrowSetArrowSelectedByPlayer == 0)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 0)
         {
             if (logic->GameMode > 0)  logic->GameMode-=1;
             else  logic->GameMode = CrisisMode;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 0.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 0.5)
         {
             if (logic->GameMode < CrisisMode)  logic->GameMode+=1;
             else  logic->GameMode = 0;
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 1)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 1)
         {
             if (logic->SelectedMusicTrack > 0)  logic->SelectedMusicTrack-=1;
             else  logic->SelectedMusicTrack = 18;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 1.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 1.5)
         {
             if (logic->SelectedMusicTrack < 18)  logic->SelectedMusicTrack+=1;
             else  logic->SelectedMusicTrack = 0;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 2)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 2)
         {
             if (logic->SelectedBackground > 0)  logic->SelectedBackground-=1;
             else  logic->SelectedBackground = 6;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 2.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 2.5)
         {
             if (logic->SelectedBackground < 6)  logic->SelectedBackground+=1;
             else  logic->SelectedBackground = 0;
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 3)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 3)
         {
             if (logic->NewGameGarbageHeight > 0)  logic->NewGameGarbageHeight-=1;
             else  logic->NewGameGarbageHeight = 14;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 3.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 3.5)
         {
             if (logic->NewGameGarbageHeight < 14)  logic->NewGameGarbageHeight+=1;
             else  logic->NewGameGarbageHeight = 0;
         }
 
-        if (interface->ArrowSetArrowSelectedByPlayer == 4)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 4)
         {
             if (logic->PressingUPAction > 0)  logic->PressingUPAction-=1;
             else  logic->PressingUPAction = 3;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 4.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 4.5)
         {
             if (logic->PressingUPAction < 3)  logic->PressingUPAction+=1;
             else  logic->PressingUPAction = 0;
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 5)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 5)
         {
             if (logic->DisplayNextPiece > 0)  logic->DisplayNextPiece-=1;
             else  logic->DisplayNextPiece = 1;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 5.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 5.5)
         {
             if (logic->DisplayNextPiece < 1)  logic->DisplayNextPiece+=1;
             else  logic->DisplayNextPiece = 0;
         }
 
-        if (interface->ArrowSetArrowSelectedByPlayer == 6)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 6)
         {
             if (logic->DisplayDropShadow > 0)  logic->DisplayDropShadow-=1;
             else  logic->DisplayDropShadow = 1;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 6.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 6.5)
         {
             if (logic->DisplayDropShadow < 1)  logic->DisplayDropShadow+=1;
             else  logic->DisplayDropShadow = 0;
         }
 
-        if (interface->ArrowSetArrowSelectedByPlayer == 7)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 7)
         {
             if (logic->TileSet > 0)  logic->TileSet-=1;
             else  logic->TileSet = 5;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 7.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 7.5)
         {
             if (logic->TileSet < 5)  logic->TileSet+=1;
             else  logic->TileSet = 0;
         }
 
-        interface->ArrowSetArrowSelectedByPlayer = -1;
+        interfaces->ArrowSetArrowSelectedByPlayer = -1;
     }
 
     if (ScreenIsDirty == true)
@@ -720,9 +747,9 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , visuals->Font[3], 0, 404-6, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
 
-        interface->DisplayAllArrowSetsOntoScreenBuffer();
+        interfaces->DisplayAllArrowSetsOntoScreenBuffer();
 
         float x = 401;
         for (int boxIndex = 0; boxIndex < 7; boxIndex++)
@@ -743,7 +770,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
 
-        if (interface->ButtonSelectedByPlayer == 0)
+        if (interfaces->ButtonSelectedByPlayer == 0)
         {
             ScreenToDisplay = PlayingGameScreen;
 
@@ -756,9 +783,9 @@ void Screens::DisplayNewGameOptionsScreen(void)
             audio->PlayMusic(0, -1);
         }
 
-        interface->DestroyAllButtons();
+        interfaces->DestroyAllButtons();
 
-        interface->DestroyAllArrowSets();
+        interfaces->DestroyAllArrowSets();
     }
 }
 
@@ -767,20 +794,20 @@ void Screens::DisplayOptionsScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1009, 0, 454);
+        interfaces->CreateButton(1009, 0, 454);
 
-        interface->CreateArrowSet(0, 60);
-        interface->CreateArrowSet(1, 105);
+        interfaces->CreateArrowSet(0, 60);
+        interfaces->CreateArrowSet(1, 105);
 
-        interface->CreateArrowSet(2, 160);
+        interfaces->CreateArrowSet(2, 160);
 
-        interface->CreateArrowSet(3, 215);
+        interfaces->CreateArrowSet(3, 215);
 
-        interface->CreateArrowSet(4, 255);
+        interfaces->CreateArrowSet(4, 255);
 
-        interface->CreateArrowSet(5, 270+25+10);
+        interfaces->CreateArrowSet(5, 270+25+10);
 
-        interface->CreateArrowSet(6, 345);
+        interfaces->CreateArrowSet(6, 345);
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -1074,26 +1101,26 @@ void Screens::DisplayOptionsScreen(void)
     if (input->JoystickSetupProcess == JoySetupNotStarted
      && input->KeyboardSetupProcess == KeyboardSetupNotStarted)
     {
-        interface->ProcessAllButtons();
-        interface->ProcessAllArrowSets();
+        interfaces->ProcessAllButtons();
+        interfaces->ProcessAllArrowSets();
 
-        if (interface->ArrowSetArrowSelectedByPlayer != -1)
+        if (interfaces->ArrowSetArrowSelectedByPlayer != -1)
         {
-            if (interface->ArrowSetArrowSelectedByPlayer == 0)
+            if (interfaces->ArrowSetArrowSelectedByPlayer == 0)
             {
                 if (audio->MusicVolume > 0)  audio->MusicVolume-=32;
                 else  audio->MusicVolume = 128;
 
                 Mix_VolumeMusic(audio->MusicVolume);
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 0.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 0.5)
             {
                 if (audio->MusicVolume < 128)  audio->MusicVolume+=32;
                 else  audio->MusicVolume = 0;
 
                 Mix_VolumeMusic(audio->MusicVolume);
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 1)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 1)
             {
                 if (audio->SoundVolume > 0)  audio->SoundVolume-=32;
                 else  audio->SoundVolume = 128;
@@ -1101,7 +1128,7 @@ void Screens::DisplayOptionsScreen(void)
                 Mix_HaltChannel(-1);
                 audio->PlayDigitalSoundFX(1, 0);
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 1.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 1.5)
             {
                 if (audio->SoundVolume < 128)  audio->SoundVolume+=32;
                 else  audio->SoundVolume = 0;
@@ -1109,7 +1136,7 @@ void Screens::DisplayOptionsScreen(void)
                 Mix_HaltChannel(-1);
                 audio->PlayDigitalSoundFX(1, 0);
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 2)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 2)
             {
                 visuals->FullScreenMode = !visuals->FullScreenMode;
 
@@ -1117,57 +1144,57 @@ void Screens::DisplayOptionsScreen(void)
                 else if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 2.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 2.5)
             {
                 visuals->FullScreenMode = !visuals->FullScreenMode;
 
                 if (visuals->FullScreenMode == false)  SDL_SetWindowFullscreen(visuals->Window, 0);
                 else if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 3)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 3)
             {
                 if (logic->CPUPlayerEnabled > 0)  logic->CPUPlayerEnabled-=1;
                 else  logic->CPUPlayerEnabled = 4;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 3.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 3.5)
             {
                 if (logic->CPUPlayerEnabled < 4)  logic->CPUPlayerEnabled+=1;
                 else  logic->CPUPlayerEnabled = 0;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 4)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 4)
             {
                 if (logic->NaturalIntelligenceCore > 0)  logic->NaturalIntelligenceCore-=1;
                 else  logic->NaturalIntelligenceCore = 1;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 4.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 4.5)
             {
                 if (logic->NaturalIntelligenceCore < 1)  logic->NaturalIntelligenceCore+=1;
                 else  logic->NaturalIntelligenceCore = 0;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 5)
             {
                 if (logic->DelayAutoShift > 0)  logic->DelayAutoShift-=1;
                 else  logic->DelayAutoShift = 2;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 5.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 5.5)
             {
                 if (logic->DelayAutoShift < 2)  logic->DelayAutoShift+=1;
                 else  logic->DelayAutoShift = 0;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 6)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 6)
             {
                 if (logic->PlayingGameFrameLock == 33)  logic->PlayingGameFrameLock = 10;
                 else if (logic->PlayingGameFrameLock == 10)  logic->PlayingGameFrameLock = 25;
                 else if (logic->PlayingGameFrameLock == 25)  logic->PlayingGameFrameLock = 33;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 6.5)
+            else if (interfaces->ArrowSetArrowSelectedByPlayer == 6.5)
             {
                 if (logic->PlayingGameFrameLock == 33)  logic->PlayingGameFrameLock = 25;
                 else if (logic->PlayingGameFrameLock == 25)  logic->PlayingGameFrameLock = 10;
                 else if (logic->PlayingGameFrameLock == 10)  logic->PlayingGameFrameLock = 33;
             }
 
-            interface->ArrowSetArrowSelectedByPlayer = -1;
+            interfaces->ArrowSetArrowSelectedByPlayer = -1;
         }
     }
 
@@ -1191,7 +1218,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 7-6, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllArrowSetsOntoScreenBuffer();
+        interfaces->DisplayAllArrowSetsOntoScreenBuffer();
 
         visuals->DrawTextOntoScreenBuffer("Music Volume:"
                                           , visuals->Font[0], 60, 60-15, JustifyLeft
@@ -1326,7 +1353,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 404-6, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
 
         if (input->KeyboardSetupProcess > KeyboardSetupNotStarted)
         {
@@ -1466,8 +1493,8 @@ void Screens::DisplayOptionsScreen(void)
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
 
-        interface->DestroyAllButtons();
-        interface->DestroyAllArrowSets();
+        interfaces->DestroyAllButtons();
+        interfaces->DestroyAllArrowSets();
     }
 }
 
@@ -1477,12 +1504,12 @@ void Screens::DisplayHowToPlayScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1009, 0, 454);
+        interfaces->CreateButton(1009, 0, 454);
 
         ScreenTransitionStatus = FadeIn;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
 
     if (ScreenIsDirty == true)
     {
@@ -1567,7 +1594,7 @@ void Screens::DisplayHowToPlayScreen(void)
                                               , 0, 390, JustifyCenter, 255, 255, 255, 0, 0, 0);
         }
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -1575,7 +1602,7 @@ void Screens::DisplayHowToPlayScreen(void)
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
 
-        interface->DestroyAllButtons();
+        interfaces->DestroyAllButtons();
     }
 }
 
@@ -1585,27 +1612,27 @@ void Screens::DisplayHighScoresScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1009, 0, 454);
+        interfaces->CreateButton(1009, 0, 454);
 
-        interface->CreateArrowSet(0, 65);
+        interfaces->CreateArrowSet(0, 65);
 
         ScreenTransitionStatus = FadeIn;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
 
-    interface->ProcessAllArrowSets();
+    interfaces->ProcessAllArrowSets();
 
-    if (interface->ArrowSetArrowSelectedByPlayer != -1)
+    if (interfaces->ArrowSetArrowSelectedByPlayer != -1)
     {
-        if (interface->ArrowSetArrowSelectedByPlayer == 0)
+        if (interfaces->ArrowSetArrowSelectedByPlayer == 0)
         {
             if (logic->GameMode > 0)  logic->GameMode-=1;
             else  logic->GameMode = CrisisMode;
 
             visuals->ClearTextCache();
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 0.5)
+        else if (interfaces->ArrowSetArrowSelectedByPlayer == 0.5)
         {
             if (logic->GameMode < CrisisMode)  logic->GameMode+=1;
             else  logic->GameMode = 0;
@@ -1613,7 +1640,7 @@ void Screens::DisplayHighScoresScreen(void)
             visuals->ClearTextCache();
         }
 
-        interface->ArrowSetArrowSelectedByPlayer = -1;
+        interfaces->ArrowSetArrowSelectedByPlayer = -1;
     }
 
     if (input->KeyOnKeyboardPressedByUser == 'C')
@@ -1643,7 +1670,7 @@ void Screens::DisplayHighScoresScreen(void)
                                           , visuals->Font[3], 0, 7-6, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllArrowSetsOntoScreenBuffer();
+        interfaces->DisplayAllArrowSetsOntoScreenBuffer();
 
         if (logic->GameMode == OriginalMode)
             visuals->DrawTextOntoScreenBuffer("Original Mode", visuals->Font[0]
@@ -1733,7 +1760,7 @@ void Screens::DisplayHighScoresScreen(void)
                                           , visuals->Font[3], 0, 404-6, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -1741,8 +1768,8 @@ void Screens::DisplayHighScoresScreen(void)
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
 
-        interface->DestroyAllButtons();
-        interface->DestroyAllArrowSets();
+        interfaces->DestroyAllButtons();
+        interfaces->DestroyAllArrowSets();
     }
 }
 
@@ -2277,14 +2304,14 @@ void Screens::DisplayNameInputKeyboardScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1008, 0, 454);
+        interfaces->CreateButton(1008, 0, 454);
 
         ScreenTransitionStatus = FadeIn;
 
         data->NameInputArayIndex = 0;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
 
     if (input->EnterKeyPressed == true)
     {
@@ -2377,7 +2404,7 @@ void Screens::DisplayNameInputKeyboardScreen(void)
                                           , visuals->Font[0], 0, 404, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2387,7 +2414,7 @@ void Screens::DisplayNameInputKeyboardScreen(void)
 
         logic->CrisisWon = false;
 
-        interface->DestroyAllButtons();
+        interfaces->DestroyAllButtons();
     }
 }
 
@@ -2396,7 +2423,7 @@ void Screens::DisplayNameInputMouseKeyboardScreen(void)
 {
 	if (ScreenTransitionStatus == FadeAll)
 	{
-		interface->CreateButton(1008, 0, 454);
+		interfaces->CreateButton(1008, 0, 454);
 
 		input->DelayAllUserInput = 20;
 
@@ -2409,7 +2436,7 @@ void Screens::DisplayNameInputMouseKeyboardScreen(void)
 		}
 	}
 
-	interface->ProcessAllButtons();
+	interfaces->ProcessAllButtons();
 
 	char characterArray[73] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 		, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -2659,7 +2686,7 @@ void Screens::DisplayNameInputMouseKeyboardScreen(void)
 			, visuals->Font[3], 0, 404-6, JustifyCenter
 			, 255, 255, 1, 90, 90, 1);
 
-		interface->DisplayAllButtonsOntoScreenBuffer();
+		interfaces->DisplayAllButtonsOntoScreenBuffer();
 	}
 
 	if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2683,7 +2710,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        interface->CreateButton(1008, 0, 454);
+        interfaces->CreateButton(1008, 0, 454);
 
         ScreenTransitionStatus = FadeIn;
 
@@ -2695,7 +2722,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         data->NameInputArayIndex = 0;
     }
 
-    interface->ProcessAllButtons();
+    interfaces->ProcessAllButtons();
 
     if (input->JoystickButtonOne[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] == ON)
     {
@@ -2986,7 +3013,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
                                           , visuals->Font[0], 0, 404, JustifyCenter
                                           , 255, 255, 1, 90, 90, 1);
 
-        interface->DisplayAllButtonsOntoScreenBuffer();
+        interfaces->DisplayAllButtonsOntoScreenBuffer();
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2998,7 +3025,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
 
         input->DelayAllUserInput = 20;
 
-        interface->DestroyAllButtons();
+        interfaces->DestroyAllButtons();
     }
 }
 

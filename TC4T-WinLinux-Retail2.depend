@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1590609030 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
+1590609032 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -384,13 +384,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1590514824 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
+1590514826 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
 
-1590617892 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
+1590617894 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
 
-1590616273 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
+1590616274 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
 
-1590609194 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.cpp
+1590609196 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.cpp
 	<fstream>
 	<string.h>
 	"SDL.h"
@@ -403,13 +403,13 @@
 	"logic.h"
 	"visuals.h"
 
-1590514824 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.h
+1590514826 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.h
 
-1590624346 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.h
+1590624348 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.h
 
-1590629313 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
+1590629314 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
 
-1590637000 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
+1590641520 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -438,7 +438,7 @@
 
 1590614852 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.h
 
-1590639345 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
+1590639346 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
 	<cstdlib>
 	"SDL.h"
 	"SDL_image.h"
@@ -450,7 +450,7 @@
 	"input.h"
 	"visuals.h"
 
-1590626245 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
+1590684604 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -461,16 +461,19 @@
 	"visuals.h"
 	"input.h"
 	"screens.h"
-	"interface.h"
+	"interfaces.h"
 	"audio.h"
 	"data.h"
 	"logic.h"
 
 1426349210 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
 
-1590636539 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
+1590689850 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
 	<stdio.h>
 	<cstring>
+	<stdlib.h>
+	<windows.h>
+	<shellapi.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -478,12 +481,12 @@
 	"screens.h"
 	"input.h"
 	"visuals.h"
-	"interface.h"
+	"interfaces.h"
 	"data.h"
 	"logic.h"
 	"audio.h"
 
-1590617396 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
+1590687022 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	<fstream>
@@ -495,4 +498,20 @@
 	"SDL_ttf.h"
 	"visuals.h"
 	"screens.h"
+
+1590688432 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interfaces.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interfaces.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1590684582 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interfaces.h
 

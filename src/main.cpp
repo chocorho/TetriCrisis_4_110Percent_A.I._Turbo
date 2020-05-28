@@ -53,7 +53,7 @@ ________________________________________________________________________________
 #include "visuals.h"
 #include "input.h"
 #include "screens.h"
-#include "interface.h"
+#include "interfaces.h"
 #include "audio.h"
 #include "data.h"
 #include "logic.h"
@@ -61,7 +61,7 @@ ________________________________________________________________________________
 Visuals *visuals;
 Input *input;
 Screens *screens;
-Interface *interface;
+Interfaces *interfaces;
 Audio *audio;
 Data *data;
 Logic *logic;
@@ -89,7 +89,7 @@ int main( int argc, char* args[] )
 
     screens = new Screens();
 
-    interface = new Interface();
+    interfaces = new Interfaces();
 
     data = new Data();
 
@@ -122,7 +122,7 @@ int main( int argc, char* args[] )
     delete logic;
     delete data;
     delete audio;
-    delete interface;
+    delete interfaces;
     delete screens;
     delete input;
     delete visuals;

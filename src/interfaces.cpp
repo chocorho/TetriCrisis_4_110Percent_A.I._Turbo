@@ -26,7 +26,7 @@
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
 
-#include "interface.h"
+#include "interfaces.h"
 
 #include "input.h"
 #include "visuals.h"
@@ -41,7 +41,7 @@ extern Audio* audio;
 extern Logic* logic;
 
 //-------------------------------------------------------------------------------------------------
-Interface::Interface(void)
+Interfaces::Interfaces(void)
 {
     for (int index = 0; index < NumberOfButtons; index++)
     {
@@ -60,16 +60,26 @@ Interface::Interface(void)
         ArrowSetGUIs[index].ScreenY = -100;
         ArrowSetGUIs[index].AnimationTimer = -1;
     }
+
+    for (int index = 0; index < NumberOfIcons; index++)
+    {
+        IconGUIs[index].Index = -1;
+        IconGUIs[index].SpriteIndex = -1;
+        IconGUIs[index].Scale = 1;
+        IconGUIs[index].ScreenX = -100;
+        IconGUIs[index].ScreenY = -100;
+        IconGUIs[index].AnimationTimer = -1;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
-Interface::~Interface(void)
+Interfaces::~Interfaces(void)
 {
 
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY)
+void Interfaces::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY)
 {
     ButtonSelectedByKeyboard = 0;
     ButtonSelectedByPlayer = -1;
@@ -90,7 +100,7 @@ void Interface::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DisplayAllButtonsOntoScreenBuffer(void)
+void Interfaces::DisplayAllButtonsOntoScreenBuffer(void)
 {
     for (int index = 0; index < NumberOfButtons; index++)
     {
@@ -121,7 +131,7 @@ void Interface::DisplayAllButtonsOntoScreenBuffer(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::ProcessAllButtons(void)
+void Interfaces::ProcessAllButtons(void)
 {
     Sint8 MinButtonIndex = 0;
     Sint8 MaxButtonIndex = -1;
@@ -233,7 +243,7 @@ void Interface::ProcessAllButtons(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DestroyAllButtons(void)
+void Interfaces::DestroyAllButtons(void)
 {
     for (int index = 0; index < NumberOfButtons; index++)
     {
@@ -246,7 +256,7 @@ void Interface::DestroyAllButtons(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateArrowSet(float ScreenIndex, int ScreenY)
+void Interfaces::CreateArrowSet(float ScreenIndex, int ScreenY)
 {
     ArrowSetSelectedByKeyboard = 0;
     ArrowSetArrowSelectedByPlayer = -1;
@@ -267,7 +277,7 @@ void Interface::CreateArrowSet(float ScreenIndex, int ScreenY)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DisplayAllArrowSetsOntoScreenBuffer(void)
+void Interfaces::DisplayAllArrowSetsOntoScreenBuffer(void)
 {
     for (int index = 0; index < NumberOfArrowSets; index++)
     {
@@ -298,7 +308,7 @@ void Interface::DisplayAllArrowSetsOntoScreenBuffer(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::ProcessAllArrowSets(void)
+void Interfaces::ProcessAllArrowSets(void)
 {
     Sint8 MinArrowSetIndex = 0;
     Sint8 MaxArrowSetIndex = -1;
@@ -406,7 +416,7 @@ void Interface::ProcessAllArrowSets(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DestroyAllArrowSets(void)
+void Interfaces::DestroyAllArrowSets(void)
 {
     for (int index = 0; index < NumberOfArrowSets; index++)
     {
@@ -419,7 +429,7 @@ void Interface::DestroyAllArrowSets(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateIcon(int spriteIndex, int screenX, int screenY)
+void Interfaces::CreateIcon(int spriteIndex, int screenX, int screenY)
 {
     IconSelectedByPlayer = -1;
 
@@ -439,7 +449,7 @@ void Interface::CreateIcon(int spriteIndex, int screenX, int screenY)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DisplayAllIconsOntoScreenBuffer(void)
+void Interfaces::DisplayAllIconsOntoScreenBuffer(void)
 {
     for (int index = 0; index < NumberOfIcons; index++)
     {
@@ -455,7 +465,7 @@ void Interface::DisplayAllIconsOntoScreenBuffer(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::ProcessAllIcons(void)
+void Interfaces::ProcessAllIcons(void)
 {
     if (input->MouseButtonPressed[0] == true)
     {
@@ -500,7 +510,7 @@ void Interface::ProcessAllIcons(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::DestroyAllIcons()
+void Interfaces::DestroyAllIcons()
 {
     for (int index = 0; index < NumberOfIcons; index++)
     {

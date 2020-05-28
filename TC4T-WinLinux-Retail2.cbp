@@ -56,8 +56,8 @@
 		<Unit filename="src/data.h" />
 		<Unit filename="src/input.cpp" />
 		<Unit filename="src/input.h" />
-		<Unit filename="src/interface.cpp" />
-		<Unit filename="src/interface.h" />
+		<Unit filename="src/interfaces.cpp" />
+		<Unit filename="src/interfaces.h" />
 		<Unit filename="src/logic.cpp" />
 		<Unit filename="src/logic.h" />
 		<Unit filename="src/main.cpp" />

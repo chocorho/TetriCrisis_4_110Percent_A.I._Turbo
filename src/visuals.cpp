@@ -268,6 +268,9 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/Crack.png");
                 break;
 
+            case 156:
+                strcpy(filePath, "data/visuals/Download-Source-Button.png");
+                break;
 
             default:
                 break;

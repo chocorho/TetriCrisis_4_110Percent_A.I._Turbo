@@ -18,15 +18,15 @@
 
   Email the author at: www.16BitSoft.com
 */
-#ifndef INTERFACE
-#define INTERFACE
+#ifndef INTERFACES
+#define INTERFACES
 
-class Interface
+class Interfaces
 {
 public:
 
-	Interface(void);
-	virtual ~Interface(void);
+	Interfaces(void);
+	virtual ~Interfaces(void);
 
     #define NumberOfButtons     7
     struct ButtonGUI
