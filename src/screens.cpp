@@ -1864,6 +1864,8 @@ void Screens::DisplayAboutScreen(void)
 
         if (logic->CrisisWon == true)
         {
+            logic->CrisisWon = false;
+
             if (data->PlayerRankOnGameOver < 10)
             {
                 if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
@@ -1876,7 +1878,6 @@ void Screens::DisplayAboutScreen(void)
         }
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------
 void Screens::DisplayPlayingGameScreen(void)
