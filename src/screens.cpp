@@ -1165,11 +1165,15 @@ void Screens::DisplayOptionsScreen(void)
             {
                 if (logic->NaturalIntelligenceCore > 0)  logic->NaturalIntelligenceCore-=1;
                 else  logic->NaturalIntelligenceCore = 1;
+
+                logic->NaturalIntelligenceCore = 0;
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 4.5)
             {
                 if (logic->NaturalIntelligenceCore < 1)  logic->NaturalIntelligenceCore+=1;
                 else  logic->NaturalIntelligenceCore = 0;
+
+                logic->NaturalIntelligenceCore = 0;
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 5)
             {
@@ -1802,7 +1806,7 @@ void Screens::DisplayAboutScreen(void)
                  && visuals->Sprites[index].BlueHue == 0)
                 {
                     visuals->Sprites[index].ScreenX = 320;
-                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+90;
+                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+120;
                 }
                 else
                 {
