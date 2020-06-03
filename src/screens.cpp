@@ -22,12 +22,7 @@
 #include <cstring>
 
 #include <stdlib.h>
-/*
-#ifdef __WIN32__
-    #include <windows.h>
-    #include <shellapi.h>
-#endif
-*/
+
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -306,13 +301,11 @@ void Screens::DisplayTitleScreen(void)
     if (interfaces->IconSelectedByPlayer == 0)
     {
         #ifdef __WIN32__
-        system("start https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
-//           ShellExecute(NULL, "open", "https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo", NULL, NULL, SW_SHOWNORMAL);
+            system("start https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
         #endif
 
         #ifdef __linux__
-        system("xdg-open https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
-//            system("<firefox> https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
+            system("xdg-open https://github.com/SLNTHERO/TetriCrisis_4_110Percent_A.I._Turbo");
         #endif
 
         interfaces->IconSelectedByPlayer = -1;
@@ -392,7 +385,6 @@ void Screens::DisplayTitleScreen(void)
         interfaces->DestroyAllIcons();
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------
 void Screens::DisplayNewGameOptionsScreen(void)
@@ -1501,7 +1493,6 @@ void Screens::DisplayOptionsScreen(void)
         interfaces->DestroyAllArrowSets();
     }
 }
-
 
 //-------------------------------------------------------------------------------------------------
 void Screens::DisplayHowToPlayScreen(void)
@@ -3069,12 +3060,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
 //    if (ScreenIsDirty == true)
     {
-//        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
-
-//        visuals->Sprites[100+logic->SelectedBackground].ScreenX = 320;
-//        visuals->Sprites[100+logic->SelectedBackground].ScreenY = 240;
-//        visuals->DrawSpriteOntoScreenBuffer(100+logic->SelectedBackground);
-
         if (logic->PlayerData[0].PlayerStatus != GameOver)
         {
             visuals->Sprites[80].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
@@ -3365,20 +3350,17 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
     ScreenIsDirty = true;
 
-//    if (logic->GameDisplayChanged == true)
+    for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
-        for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
+        if (logic->PlayerData[logic->Player].PlayerStatus != FlashingCompletedLines
+            && logic->PlayerData[logic->Player].PlayerStatus != ClearingCompletedLines)
         {
-            if (logic->PlayerData[logic->Player].PlayerStatus != FlashingCompletedLines
-                && logic->PlayerData[logic->Player].PlayerStatus != ClearingCompletedLines)
-            {
-                logic->DeletePieceFromPlayfieldMemory(Current);
-                logic->DeletePieceFromPlayfieldMemory(DropShadow);
-            }
+            logic->DeletePieceFromPlayfieldMemory(Current);
+            logic->DeletePieceFromPlayfieldMemory(DropShadow);
         }
-
-        logic->GameDisplayChanged = false;
     }
+
+    logic->GameDisplayChanged = false;
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {

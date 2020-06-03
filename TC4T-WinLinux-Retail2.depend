@@ -438,7 +438,7 @@
 
 1590614852 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.h
 
-1590713136 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
+1591214838 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
 	<cstdlib>
 	"SDL.h"
 	"SDL_image.h"
@@ -468,12 +468,10 @@
 
 1426349210 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
 
-1590712908 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
+1591214983 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
 	<stdio.h>
 	<cstring>
 	<stdlib.h>
-	<windows.h>
-	<shellapi.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -486,7 +484,7 @@
 	"logic.h"
 	"audio.h"
 
-1590687022 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
+1591215033 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	<fstream>

@@ -408,9 +408,7 @@ void Logic::AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow)
 		value = PlayerData[Player].NextPiece+10;
 		PlayerData[Player].PieceRotation = 1;
 
-        /*if      (Player == 0)*/  PlayerData[Player].PiecePlayfieldX = 5;
-//        else if (Player == 1)  PlayerData[Player].PiecePlayfieldX = 5;
-//        else if (Player == 2)  PlayerData[Player].PiecePlayfieldX = 5;
+        PlayerData[Player].PiecePlayfieldX = 5;
 
 		PlayerData[Player].PiecePlayfieldY = 0;
 	}
@@ -616,19 +614,12 @@ void Logic::DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow)
              && PlayerData[Player].Playfield[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY+3 ] == 1000)
                 PlayerData[Player].Playfield[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY+3 ] = 0;
 
-
-
             PlayerData[Player].Piece = TEMP_Piece;
             PlayerData[Player].PieceRotation = TEMP_PieceRotation;
             PlayerData[Player].PiecePlayfieldX = TEMP_PiecePlayfieldX;
             PlayerData[Player].PiecePlayfieldY = TEMP_PiecePlayfieldY;
 
-
-
             return;
-
-
-
         }
         else
         {

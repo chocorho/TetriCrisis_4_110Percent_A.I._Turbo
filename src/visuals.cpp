@@ -368,8 +368,8 @@ int textureHeight;
             return(false);
         }
 
-        dstRect.x = 0;//8;
-        dstRect.y = 0;//7;
+        dstRect.x = 0;
+        dstRect.y = 0;
         dstRect.w = 13;
         dstRect.h = 18;
 
