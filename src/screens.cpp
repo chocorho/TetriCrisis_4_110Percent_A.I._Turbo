@@ -3038,6 +3038,12 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         logic->SetupForNewGame();
 
+        for (int player = 0; player < 4; player++)
+        {
+            logic->PlayerData[player].PlayerInput = CPU;
+            logic->PlayerData[player].PlayerStatus = NewPieceDropping;
+        }
+
         visuals->FrameLock = 1;
 
         ScreenTransitionStatus = FadeIn;
