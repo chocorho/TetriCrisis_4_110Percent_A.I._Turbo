@@ -3044,7 +3044,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
             logic->PlayerData[player].PlayerStatus = NewPieceDropping;
         }
 
-        visuals->FrameLock = 1;
+        visuals->FrameLock = 0;
 
         ScreenTransitionStatus = FadeIn;
     }
