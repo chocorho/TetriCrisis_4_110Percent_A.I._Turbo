@@ -109,10 +109,18 @@ int main( int argc, char* args[] )
     printf("Main loop started...\n");
     while (visuals->CoreFailure != true && input->EXIT_Game != true)
     {
-        input->GetAllUserInput();
-        visuals->CalculateFramerate();
-        screens->ProcessScreenToDisplay();
-        visuals->ProcessFramerate();
+        if (screens->ScreenToDisplay != TestComputerSkillScreen)
+        {
+            input->GetAllUserInput();
+            visuals->CalculateFramerate();
+            screens->ProcessScreenToDisplay();
+            visuals->ProcessFramerate();
+        }
+        else
+        {
+            input->GetAllUserInput();
+            screens->ProcessScreenToDisplay();
+        }
     }
     printf("...Main loop exited\n");
     //------------------------------------------------------------------------MAIN-LOOP-

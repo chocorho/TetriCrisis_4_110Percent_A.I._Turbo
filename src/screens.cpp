@@ -1157,15 +1157,11 @@ void Screens::DisplayOptionsScreen(void)
             {
                 if (logic->NaturalIntelligenceCore > 0)  logic->NaturalIntelligenceCore-=1;
                 else  logic->NaturalIntelligenceCore = 1;
-
-                logic->NaturalIntelligenceCore = 0;
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 4.5)
             {
                 if (logic->NaturalIntelligenceCore < 1)  logic->NaturalIntelligenceCore+=1;
                 else  logic->NaturalIntelligenceCore = 0;
-
-                logic->NaturalIntelligenceCore = 0;
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 5)
             {
@@ -1298,7 +1294,7 @@ void Screens::DisplayOptionsScreen(void)
             visuals->DrawTextOntoScreenBuffer("Original JeZ+Lee A.I.", visuals->Font[0], 60, 255-15, JustifyRight
                                               , 255, 255, 255, 90, 90, 90);
         else if (logic->NaturalIntelligenceCore == 1)
-            visuals->DrawTextOntoScreenBuffer("New Perfect A.I.", visuals->Font[0], 60, 255-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("New Near Perfect A.I.", visuals->Font[0], 60, 255-15, JustifyRight
                                               , 255, 255, 255, 90, 90, 90);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -2162,7 +2158,7 @@ void Screens::DisplayPlayingGameScreen(void)
 
         for (int player = 0; player < NumberOfPlayers; player++)
         {
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Score);
+            sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX, 9
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -3034,6 +3030,8 @@ void Screens::DisplayNameInputJoystickScreen(void)
 //-------------------------------------------------------------------------------------------------
 void Screens::DisplayTestComputerSkillScreen(void)
 {
+    int averageLinesPerGame = 0;
+
     if (ScreenTransitionStatus == FadeAll)
     {
         logic->SetupForNewGame();
@@ -3247,7 +3245,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
         for (int player = 0; player < NumberOfPlayers; player++)
         {
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Score);
+            sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX, 7
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -3312,49 +3310,54 @@ void Screens::DisplayTestComputerSkillScreen(void)
                                               , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
         }
 
+        visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[0]
+                                          , 0, 110, JustifyCenter, 255, 255, 255, 0, 0, 0);
+
+        char temp[256];
+        strcpy(visuals->VariableText, "Number Of Games: ");
+        sprintf(temp, "%d", logic->NumberofCPUGames);
+        strcat(visuals->VariableText, temp);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 140
+                                          , JustifyCenter, 255, 255, 255, 0, 0, 0);
+
+        strcpy(visuals->VariableText, "Number Of Lines: ");
+        sprintf(temp, "%d", logic->TotalCPUPlayerLines);
+        strcat(visuals->VariableText, temp);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 160
+                                          , JustifyCenter, 255, 255, 255, 0, 0, 0);
+
+        if (logic->NumberofCPUGames > 0)  averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
+        strcpy(visuals->VariableText, "Average Lines/Game: ");
+
+        if (logic->NumberofCPUGames > 0)
+        {
+            sprintf(temp, "%d", averageLinesPerGame);
+        }
+        else
+        {
+            sprintf(   temp, "%d", (  ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) )/4  )   );
+        }
+        strcat(visuals->VariableText, temp);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 180
+                                          , JustifyCenter, 255, 255, 255, 0, 0, 0);
+
+        strcpy(visuals->VariableText, "Completed Lines: 1=");
+        sprintf(temp, "%d", logic->TotalOneLines);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " 2=");
+        sprintf(temp, "%d", logic->TotalTwoLines);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " 3=");
+        sprintf(temp, "%d", logic->TotalThreeLines);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " 4=");
+        sprintf(temp, "%d", logic->TotalFourLines);
+        strcat(visuals->VariableText, temp);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 205
+                                          , JustifyCenter, 255, 255, 255, 0, 0, 0);
+
         ScreenIsDirty = true;
     }
-
-    visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[0]
-                                      , 0, 110, JustifyCenter, 255, 255, 255, 0, 0, 0);
-
-    char temp[256];
-    strcpy(visuals->VariableText, "Number Of Games: ");
-    sprintf(temp, "%d", logic->NumberofCPUGames);
-    strcat(visuals->VariableText, temp);
-    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 140
-                                      , JustifyCenter, 255, 255, 255, 0, 0, 0);
-
-    strcpy(visuals->VariableText, "Number Of Lines: ");
-    sprintf(temp, "%d", logic->TotalCPUPlayerLines);
-    strcat(visuals->VariableText, temp);
-    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 160
-                                      , JustifyCenter, 255, 255, 255, 0, 0, 0);
-
-    int averageLinesPerGame = 0;
-    if (logic->NumberofCPUGames > 0)  averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
-    strcpy(visuals->VariableText, "Average Lines/Game: ");
-    sprintf(temp, "%d", averageLinesPerGame);
-    strcat(visuals->VariableText, temp);
-    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 180
-                                      , JustifyCenter, 255, 255, 255, 0, 0, 0);
-
-    strcpy(visuals->VariableText, "Completed Lines: 1=");
-    sprintf(temp, "%d", logic->TotalOneLines);
-    strcat(visuals->VariableText, temp);
-    strcat(visuals->VariableText, " 2=");
-    sprintf(temp, "%d", logic->TotalTwoLines);
-    strcat(visuals->VariableText, temp);
-    strcat(visuals->VariableText, " 3=");
-    sprintf(temp, "%d", logic->TotalThreeLines);
-    strcat(visuals->VariableText, temp);
-    strcat(visuals->VariableText, " 4=");
-    sprintf(temp, "%d", logic->TotalFourLines);
-    strcat(visuals->VariableText, temp);
-    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1], 0, 205
-                                      , JustifyCenter, 255, 255, 255, 0, 0, 0);
-
-    ScreenIsDirty = true;
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
@@ -3374,7 +3377,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
         {
             logic->NumberofCPUGames++;
             logic->TotalCPUPlayerLines+=logic->PlayerData[logic->Player].Lines;
-
 
             for (int y = 0; y < 26; y++)
                 for (int x = 0; x < 15; x++)

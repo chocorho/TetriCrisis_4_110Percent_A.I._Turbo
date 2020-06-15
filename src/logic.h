@@ -82,11 +82,11 @@ public:
         bool PieceRotated1;
         bool PieceRotated2;
 
-        int MoveOneBlockCavernHoles[15][5];
-        int MoveCompletedLines[15][5];
-        int MovePieceHeight[15][5];
-        int MovePlayfieldBoxEdges[15][5];
-        int MoveTrappedHoles[15][5];
+        float MoveOneBlockCavernHoles[15][5];
+        float MoveCompletedLines[15][5];
+        float MovePieceHeight[15][5];
+        float MovePlayfieldBoxEdges[15][5];
+        float MoveTrappedHoles[15][5];
 
         int BestMoveX;
         int BestRotation;
@@ -108,7 +108,7 @@ public:
         int SkipAFrameForCPUPieceDrop;
         int CPUFrame;
 
-        Uint32 Score;
+        unsigned long int Score;
         Uint32 DropBonus;
         Uint16 Level;
         Uint16 Lines;
