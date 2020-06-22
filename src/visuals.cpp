@@ -543,8 +543,8 @@ int textureHeight;
             else if (index == 1008)  strcpy(buttonText, "Exit\0");
             else if (index == 1009)  strcpy(buttonText, "Back\0");
 
-            SDL_Color textColor = { 0, 0, 0, 255 };//255, 255, 255, 255 };
-            SDL_Color outlineColor = { 205, 205, 205, 255 };//80, 80, 80, 255 };
+            SDL_Color textColor = { 0, 0, 0, 255 };
+            SDL_Color outlineColor = { 205, 205, 205, 255 };
             SDL_Surface *text;
             SDL_Surface *textOutline;
             SDL_Rect destRect;
@@ -645,8 +645,8 @@ char *base_path = SDL_GetBasePath();
             if (index < 372)  buttonText = characterArray.substr(index-300, 1);
             else  buttonText = "End\0";
 
-            SDL_Color textColor = { 0, 0, 0, 255 };//255, 255, 255, 255 };
-            SDL_Color outlineColor = { 205, 205, 205, 255 };//80, 80, 80, 255 };
+            SDL_Color textColor = { 0, 0, 0, 255 };
+            SDL_Color outlineColor = { 205, 205, 205, 255 };
             SDL_Surface *text = NULL;
             SDL_Surface *textOutline = NULL;
             SDL_Rect destRect;
@@ -810,8 +810,16 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' Game Engine Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Yiyuan Lee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
@@ -876,11 +884,6 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Evi''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Zaphod77''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Sparks''", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team www.16BitSoft.com''", 0) == false)  return(false);
 

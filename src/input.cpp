@@ -227,7 +227,11 @@ void Input::GetAllUserInput(void)
     if ( EscapeKeyPressed == true )
     {
         if (screens->ScreenToDisplay == TitleScreen)  EXIT_Game = true;
-        else  screens->ScreenTransitionStatus = FadeOut;
+        else
+        {
+            logic->AbortedGame = true;
+            screens->ScreenTransitionStatus = FadeOut;
+        }
     }
 
     KeyOnKeyboardPressedByUser = -1;
@@ -276,7 +280,6 @@ void Input::GetAllUserInput(void)
             case SDL_WINDOWEVENT:
                 if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN)
                 {
-//                    visuals->ClearTextCache();
                     screens->ScreenIsDirty = true;
                     logic->GameDisplayChanged = true;
                 }

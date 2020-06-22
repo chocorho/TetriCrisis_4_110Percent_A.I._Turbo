@@ -233,6 +233,19 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         audio->PlayDigitalSoundFX(1, 0);
 
         logic->PlayersCanJoin = false;
+
+        logic->AITestDebugMode = 0;
+    }
+    if (input->KeyOnKeyboardPressedByUser == 't')
+    {
+        ScreenToDisplay = TestComputerSkillScreen;
+        ScreenTransitionStatus = FadeAll;
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(1, 0);
+
+        logic->PlayersCanJoin = false;
+
+        logic->AITestDebugMode = 1;
     }
 
     if (input->MouseButtonPressed[0] == true
@@ -1291,10 +1304,10 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[0], 60, 255-15, JustifyLeft
                                           , 255, 255, 255, 90, 90, 90);
         if (logic->NaturalIntelligenceCore == 0)
-            visuals->DrawTextOntoScreenBuffer("Original JeZ+Lee A.I.", visuals->Font[0], 60, 255-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("JeZ+Lee ''Gift Of Sight'' A.I.", visuals->Font[0], 60, 255-15, JustifyRight
                                               , 255, 255, 255, 90, 90, 90);
         else if (logic->NaturalIntelligenceCore == 1)
-            visuals->DrawTextOntoScreenBuffer("New Near Perfect A.I.", visuals->Font[0], 60, 255-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("New (Not 100%) Experimental A.I.", visuals->Font[0], 60, 255-15, JustifyRight
                                               , 255, 255, 255, 90, 90, 90);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -1897,8 +1910,12 @@ void Screens::DisplayPlayingGameScreen(void)
 
     for (int player = 0; player < NumberOfPlayers; player++)
     {
-        if (input->JoystickButtonOne[logic->PlayerData[player].PlayerInput] == ON  && logic->PlayersCanJoin == true
-           && logic->PlayerData[player].PlayerStatus == GameOver)  logic->PlayerData[player].PlayerStatus = NewPieceDropping;
+        if (input->JoystickButtonOne[logic->PlayerData[player].PlayerInput] == ON  && logic->PlayersCanJoin == true && logic->PlayerCanJoinInGame[player] == true
+           && logic->PlayerData[player].PlayerStatus == GameOver)
+        {
+            logic->PlayerData[player].PlayerStatus = NewPieceDropping;
+            logic->PlayerCanJoinInGame[player] = false;
+        }
     }
 
     if (logic->PlayersCanJoin == true && input->MouseButtonPressed[0] == true)
@@ -2142,16 +2159,18 @@ void Screens::DisplayPlayingGameScreen(void)
         {
             if (logic->PlayersCanJoin == true)
             {
-
-                if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDeviceOne != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDeviceTwo != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
-                    || (logic->PlayerData[player].PlayerInput == Keyboard)
-                    || (logic->PlayerData[player].PlayerInput == Mouse) )
+                if (logic->PlayerCanJoinInGame[player] == true)
                 {
-                    if (logic->PlayerData[player].PlayerStatus == GameOver)
-                        visuals->DrawTextOntoScreenBuffer("JOIN IN!", visuals->Font[1], logic->PlayerData[player].PlayersPlayfieldScreenX, 270,
-                                                          JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                    if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDeviceOne != NULL)
+                        || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDeviceTwo != NULL)
+                        || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
+                        || (logic->PlayerData[player].PlayerInput == Keyboard)
+                        || (logic->PlayerData[player].PlayerInput == Mouse) )
+                    {
+                        if (logic->PlayerData[player].PlayerStatus == GameOver)
+                            visuals->DrawTextOntoScreenBuffer("JOIN IN!", visuals->Font[1], logic->PlayerData[player].PlayersPlayfieldScreenX, 270,
+                                                              JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                    }
                 }
             }
         }
@@ -2269,18 +2288,25 @@ void Screens::DisplayPlayingGameScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
 
-        ScreenToDisplay = HighScoresScreen;
-
-        data->CheckForNewHighScore();
-
-        if (data->PlayerRankOnGameOver < 10)
+        if (logic->AbortedGame != true)
         {
-            if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
-                ScreenToDisplay = NameInputKeyboardScreen;
-            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
-                     || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
-                     || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
-                ScreenToDisplay = NameInputJoystickScreen;
+            ScreenToDisplay = HighScoresScreen;
+
+            data->CheckForNewHighScore();
+
+            if (data->PlayerRankOnGameOver < 10)
+            {
+                if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
+                    ScreenToDisplay = NameInputKeyboardScreen;
+                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
+                         || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
+                         || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
+                    ScreenToDisplay = NameInputJoystickScreen;
+            }
+        }
+        else
+        {
+            ScreenToDisplay = TitleScreen;
         }
 
         audio->PlayMusic(0, -1);
@@ -3042,7 +3068,14 @@ void Screens::DisplayTestComputerSkillScreen(void)
             logic->PlayerData[player].PlayerStatus = NewPieceDropping;
         }
 
-        visuals->FrameLock = 0;
+        if (logic->AITestDebugMode == 0)
+        {
+            visuals->FrameLock = 0;
+        }
+        else
+        {
+            visuals->FrameLock = 30;
+        }
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -3393,11 +3426,11 @@ void Screens::DisplayTestComputerSkillScreen(void)
             logic->PlayerData[logic->Player].PiecePlayfieldX = 5;
             logic->PlayerData[logic->Player].PiecePlayfieldY = 0;
 
-            logic->PlayerData[logic->Player].Piece = logic->GetRandomPiece();
+            logic->WithdrawAllSevenPiecesFromBag(logic->Player);
+            logic->PlayerData[logic->Player].Piece = logic->GetRandomPiece(Current);
+
             logic->PlayerData[logic->Player].PieceMovementDelay = 0;
             logic->PlayerData[logic->Player].PieceRotation = 1;
-
-            logic->PlayerData[logic->Player].NextPiece = logic->GetRandomPiece();
 
             logic->PlayerData[logic->Player].PlayerStatus = NewPieceDropping;
 

@@ -388,7 +388,7 @@
 
 1590617894 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
 
-1590616274 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
+1592329480 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
 
 1590609196 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.cpp
 	<fstream>
@@ -407,9 +407,9 @@
 
 1590624348 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.h
 
-1592256692 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
+1592859705 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
 
-1590702838 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
+1592860969 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -438,9 +438,11 @@
 
 1590614852 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.h
 
-1592250244 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
+1592860969 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
 	<cstdlib>
 	<math.h>
+	<fstream>
+	<string.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -451,7 +453,7 @@
 	"input.h"
 	"visuals.h"
 
-1592251600 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
+1592864701 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -469,7 +471,7 @@
 
 1426349210 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
 
-1592256703 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
+1592864860 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
 	<stdio.h>
 	<cstring>
 	<stdlib.h>
@@ -485,7 +487,7 @@
 	"logic.h"
 	"audio.h"
 
-1591215033 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
+1592861169 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	<fstream>

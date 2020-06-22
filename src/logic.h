@@ -25,6 +25,8 @@ class Logic
 {
 public:
 
+    int AITestDebugMode;
+
     #define OriginalMode                0
     #define TimeAttack30Mode            1
     #define TimeAttack60Mode            2
@@ -32,6 +34,9 @@ public:
     #define TwentyLineChallengeMode     4
     #define CrisisMode                  5
     Uint8 GameMode;
+
+    bool AbortedGame = false;
+    bool PlayerCanJoinInGame[4];
 
     Uint8 MaxRotationArray[8];
     Uint8 PieceDropStartHeight[8];
@@ -67,6 +72,9 @@ public:
         Uint8 PiecePlayfieldY;
         Uint8 NextPiece;
 
+        Uint8 PieceBagDrawIndex;
+        int PieceBag[8];
+
         #define GameOver					-1
         #define NewPieceDropping			0
         #define PieceFalling				1
@@ -82,16 +90,22 @@ public:
         bool PieceRotated1;
         bool PieceRotated2;
 
-        float MoveOneBlockCavernHoles[15][5];
-        float MoveCompletedLines[15][5];
-        float MovePieceHeight[15][5];
-        float MovePlayfieldBoxEdges[15][5];
-        float MoveTrappedHoles[15][5];
+        int MoveOneBlockCavernHoles[15][5];
+        int MoveCompletedLines[15][5];
+        int MovePieceHeight[15][5];
+        int MovePlayfieldBoxEdges[15][5];
+        int MoveTrappedHoles[15][5];
+        int MoveBumpiness[15][5];
+        int MoveCombinedPlayfieldHeight[15][5];
+
+        int PlayfieldBackupAI[15][26];
 
         int BestMoveX;
         int BestRotation;
         bool MovedToBestMove;
         bool BestMoveCalculated;
+
+        float bestValue;
 
         bool UPActionTaken;
         Uint8 RotateDirection;
@@ -172,7 +186,7 @@ public:
 
 	void InitializePieceData(void);
 	void ClearPlayfieldsWithCollisionDetection(void);
-	Uint8 GetRandomPiece(void);
+	Uint8 GetRandomPiece(int currentOrNext);
 
     #define CollisionNotTrue            0
     #define CollisionWithPlayfield      1
@@ -197,6 +211,7 @@ public:
 	void MovePieceLeft(void);
 	void MovePieceRight(void);
 
+    void WithdrawAllSevenPiecesFromBag(int player);
 	void SetupForNewGame(void);
 
 	void DisplayTetriScreenOntoScreenBuffer(void);
@@ -212,6 +227,8 @@ public:
 
     bool CrisisModeClearPlayfield(void);
 
+    void DisplayMoveDataToConsole(int movePosX, int moveRot, float testVal, int player);
+    void DisplayBestMoveToConsole(int player);
     void ComputeComputerPlayerMove(void);
 };
 

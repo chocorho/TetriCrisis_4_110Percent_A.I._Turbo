@@ -97,7 +97,7 @@ public:
 
     #define NumberOfFonts           5
     TTF_Font *Font[NumberOfFonts];
-    char VariableText[64];
+    char VariableText[1000];
 
     int TextCacheCurrentIndex;
     #define NumberOfTextsCached     100

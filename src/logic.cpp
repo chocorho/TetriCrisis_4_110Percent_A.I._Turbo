@@ -21,6 +21,10 @@
 #include <cstdlib>
 #include <math.h>
 
+using namespace std;
+#include <fstream>
+#include <string.h>
+
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
@@ -68,7 +72,6 @@ Logic::Logic(void)
         PlayerData[player].Level = 0;
         PlayerData[player].Lines = 0;
     }
-
 
     PlayingGameFrameLock = 33;
 
@@ -329,26 +332,90 @@ void Logic::ClearPlayfieldsWithCollisionDetection(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-Uint8 Logic::GetRandomPiece(void)
+Uint8 Logic::GetRandomPiece(int currentOrNext)
 {
-	Uint8 random = PlayerData[Player].PieceHistory[0];
+    Uint8 returnValue = 0;
 
-	for (Uint8 index = 0; index < 3; index++)
-	{
-		PlayerData[Player].PieceHistory[index] = PlayerData[Player].PieceHistory[index+1];
-	}
+    if (NaturalIntelligenceCore == 0)
+    {
+        Uint8 random = PlayerData[Player].PieceHistory[0];
 
-	Uint8 numberOfTries = 0;
-	while ( (PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[0]
-	      || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[1]
-	      || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[2])
-		  && (numberOfTries < 3) )
-	{
-		PlayerData[Player].PieceHistory[3] = ( rand()%7 + 1 );
-		numberOfTries++;
-	}
+        for (Uint8 index = 0; index < 3; index++)
+        {
+            PlayerData[Player].PieceHistory[index] = PlayerData[Player].PieceHistory[index+1];
+        }
 
-	return(random);
+        Uint8 numberOfTries = 0;
+        while ( (PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[0]
+              || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[1]
+              || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[2])
+              && (numberOfTries < 3) )
+        {
+            PlayerData[Player].PieceHistory[3] = ( rand()%7 + 1 );
+            numberOfTries++;
+        }
+
+        return(random);
+    }
+    else
+    {
+        if (PlayerData[Player].PieceBagDrawIndex < 7)
+        {
+            if (currentOrNext == Current)
+            {
+                PlayerData[Player].Piece = PlayerData[Player].PieceBag[ PlayerData[Player].PieceBagDrawIndex ];
+                PlayerData[Player].NextPiece = PlayerData[Player].PieceBag[ 1+PlayerData[Player].PieceBagDrawIndex ];
+
+                if (Player == 1)
+                {
+                    char temp[10000];
+                    strcpy(visuals->VariableText, "Bag Piece(Current) = ");
+                    sprintf(temp, "%d", PlayerData[Player].PieceBagDrawIndex);
+                    strcat(visuals->VariableText, temp);
+                    strcat(visuals->VariableText, " / ");
+                    sprintf(temp, "%d", PlayerData[Player].PieceBag[ PlayerData[Player].PieceBagDrawIndex ]);
+                    strcat(visuals->VariableText, temp);
+                    printf("%s", visuals->VariableText);
+                    printf("\n");
+                }
+
+                PlayerData[Player].PieceBagDrawIndex++;
+
+                returnValue = PlayerData[Player].Piece;
+            }
+            else
+            {
+                PlayerData[Player].Piece = PlayerData[Player].NextPiece;
+                PlayerData[Player].NextPiece = PlayerData[Player].PieceBag[ 1+PlayerData[Player].PieceBagDrawIndex ];
+
+                if (Player == 1)
+                {
+                    char temp[10000];
+                    strcpy(visuals->VariableText, "Bag Piece(Temp)    = ");
+                    sprintf(temp, "%d", PlayerData[Player].PieceBagDrawIndex);
+                    strcat(visuals->VariableText, temp);
+                    strcat(visuals->VariableText, " / ");
+                    sprintf(temp, "%d", PlayerData[Player].PieceBag[ PlayerData[Player].PieceBagDrawIndex ]);
+                    strcat(visuals->VariableText, temp);
+                    printf("%s", visuals->VariableText);
+                    printf("\n");
+                }
+
+                PlayerData[Player].PieceBagDrawIndex++;
+
+                returnValue = PlayerData[Player].NextPiece;
+            }
+        }
+        else
+        {
+            if (PlayerData[Player].PieceBagDrawIndex > 6)
+            {
+                PlayerData[Player].PieceBagDrawIndex = 0;
+            }
+        }
+
+        return(returnValue);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -708,15 +775,22 @@ void Logic::DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow)
 //-------------------------------------------------------------------------------------------------
 void Logic::SetupNewPiece(void)
 {
-	PlayerData[Player].Piece = PlayerData[Player].NextPiece;
+    if (PlayerData[Player].PieceBagDrawIndex < 7)
+    {
+        PlayerData[Player].Piece = PlayerData[Player].NextPiece;
+        PlayerData[Player].NextPiece = GetRandomPiece(Next);
+    }
+    else
+    {
+        WithdrawAllSevenPiecesFromBag(Player);
+        PlayerData[Player].Piece = GetRandomPiece(Current);
+    }
+
 	PlayerData[Player].PieceMovementDelay = 0;
 	PlayerData[Player].PieceRotation = 1;
 
     PlayerData[Player].PiecePlayfieldX = 5;
-
 	PlayerData[Player].PiecePlayfieldY = 0;
-
-	PlayerData[Player].NextPiece = GetRandomPiece();
 
 	PlayerData[Player].PlayerStatus = NewPieceDropping;
 
@@ -729,18 +803,6 @@ void Logic::SetupNewPiece(void)
 	PlayerData[Player].ClearCompletedLinesTimer = 0;
 
 	PlayerData[Player].DropBonus = 0;
-
-    for (int x = 0; x < 15; x++)
-    {
-        for (int rotation = 1; rotation < 5; rotation++)
-        {
-            PlayerData[Player].MoveOneBlockCavernHoles[x][rotation] = 0;
-            PlayerData[Player].MoveCompletedLines[x][rotation] = 0;
-            PlayerData[Player].MovePieceHeight[x][rotation] = 0;
-            PlayerData[Player].MovePlayfieldBoxEdges[x][rotation] = 0;
-            PlayerData[Player].MoveTrappedHoles[x][rotation] = 0;
-        }
-    }
 
     PlayerData[Player].BestMoveX = -1;
     PlayerData[Player].BestRotation = -1;
@@ -1164,8 +1226,73 @@ void Logic::MovePieceRight(void)
 }
 
 //-------------------------------------------------------------------------------------------------
+void Logic::WithdrawAllSevenPiecesFromBag(int player)
+{
+    if (NaturalIntelligenceCore == 0)
+    {
+		PlayerData[player].Piece = GetRandomPiece(Current);
+		PlayerData[player].NextPiece = GetRandomPiece(Next);
+    }
+    else
+    {
+        PlayerData[player].PieceBagDrawIndex = 0;
+
+        bool pieceDrawnFromBag[7];
+        for (int index = 0; index < 7; index++)
+        {
+            pieceDrawnFromBag[index] = false;
+            PlayerData[player].PieceBag[index] = -1;
+        }
+
+        Uint8 pieceIndex = 0;
+        Uint8 randomPieceInBag = (rand()%7);
+        pieceDrawnFromBag[randomPieceInBag] = true;
+        PlayerData[player].PieceBag[pieceIndex] = (1+randomPieceInBag);
+        pieceIndex = 1;
+        randomPieceInBag = (rand()%7);
+        while (pieceIndex < 7)
+        {
+            while (pieceDrawnFromBag[randomPieceInBag] == true)
+            {
+                randomPieceInBag = (rand()%7);
+            }
+
+            pieceDrawnFromBag[randomPieceInBag] = true;
+            PlayerData[player].PieceBag[pieceIndex] = (1+randomPieceInBag);
+            pieceIndex++;
+        }
+
+        PlayerData[player].Piece = PlayerData[player].PieceBag[0];
+        PlayerData[player].NextPiece = PlayerData[player].PieceBag[1];
+
+        if (player == 1)
+        {
+            char temp[10000];
+            strcpy(visuals->VariableText, "Piece Bag:");
+            for (int index = 0; index < 7; index++)
+            {
+                sprintf(temp, "%d", PlayerData[player].PieceBag[index]);
+                strcat(visuals->VariableText, temp);
+                strcat(visuals->VariableText, "/");
+            }
+
+            printf("%s", visuals->VariableText);
+            printf("\n");
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
 void Logic::SetupForNewGame(void)
 {
+    AbortedGame = false;
+
+    for (int player = 0; player < NumberOfPlayers; player++)
+    {
+        PlayerCanJoinInGame[player] = true;
+    }
+    PlayerCanJoinInGame[1] = false;
+
     PsychoBackgroundRotationOne = 0.0f;
     PsychoBackgroundRotationTwo = 0.0f;
 
@@ -1222,11 +1349,11 @@ void Logic::SetupForNewGame(void)
 	{
 		Player = player;
 
-		PlayerData[player].Piece = GetRandomPiece();
+        WithdrawAllSevenPiecesFromBag(player);
+        PlayerData[player].Piece = GetRandomPiece(Current);
+
 		PlayerData[player].PieceMovementDelay = 0;
 		PlayerData[player].PieceRotation = 1;
-
-		PlayerData[player].NextPiece = GetRandomPiece();
 
 		PlayerData[player].PieceDropTimer = 0;
 		PlayerData[player].TimeToDropPiece = 47;
@@ -1251,18 +1378,6 @@ void Logic::SetupForNewGame(void)
 				PlayerData[player].AttackLines[x][y] = 0;
 
         if (GameMode == TwentyLineChallengeMode)  PlayerData[player].TwentyLineCounter = 20;
-
-        for (int x = 0; x < 12; x++)
-        {
-            for (int rotation = 1; rotation < 5; rotation++)
-            {
-                PlayerData[Player].MoveOneBlockCavernHoles[x][rotation] = 0;
-                PlayerData[Player].MoveCompletedLines[x][rotation] = 0;
-                PlayerData[Player].MovePieceHeight[x][rotation] = 0;
-                PlayerData[Player].MovePlayfieldBoxEdges[x][rotation] = 0;
-                PlayerData[Player].MoveTrappedHoles[x][rotation] = 0;
-            }
-        }
 
         PlayerData[Player].BestMoveX = -1;
         PlayerData[Player].BestRotation = -1;
@@ -2072,9 +2187,63 @@ bool returnValue = false;
 }
 
 //-------------------------------------------------------------------------------------------------
+void Logic::DisplayMoveDataToConsole(int movePosX, int moveRot, float testVal, int player)
+{
+    char temp[10000];
+
+    if (Player == player)
+    {
+        strcpy(visuals->VariableText, "Piece:");
+        sprintf(temp, "%d", PlayerData[Player].Piece);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /PosX:");
+        sprintf(temp, "%d", movePosX);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Rot:");
+        sprintf(temp, "%d", moveRot);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Value:");
+        sprintf(temp, "%lf", testVal);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Height:");
+        sprintf(temp, "%d", PlayerData[Player].MoveCombinedPlayfieldHeight[movePosX][moveRot]);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Lines:");
+        sprintf(temp, "%d", PlayerData[Player].MoveCompletedLines[movePosX][moveRot]);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Holes:");
+        sprintf(temp, "%d", PlayerData[Player].MoveTrappedHoles[movePosX][moveRot]);
+        strcat(visuals->VariableText, temp);
+        strcat(visuals->VariableText, " /Bumpy:");
+        sprintf(temp, "%d", PlayerData[Player].MoveBumpiness[movePosX][moveRot]);
+        strcat(visuals->VariableText, temp);
+strcat(visuals->VariableText, " /Cavern:");
+sprintf(temp, "%d", PlayerData[Player].MoveOneBlockCavernHoles[movePosX][moveRot]);
+strcat(visuals->VariableText, temp);
+        printf("%s\n", visuals->VariableText);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Logic::DisplayBestMoveToConsole(int player)
+{
+    char temp[10000];
+
+    if (Player == 0)
+    {
+        strcpy(visuals->VariableText, "Best:");
+        sprintf(temp, "%lf", PlayerData[Player].bestValue);
+        strcat(visuals->VariableText, temp);
+        printf("%s\n", visuals->VariableText);
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
 void Logic::ComputeComputerPlayerMove(void)
 {
     if (PlayerData[Player].PlayerStatus != PieceFalling)  return;
+
+    float testValue;
 
     if (PlayerData[Player].BestMoveCalculated == false)
     {
@@ -2087,12 +2256,14 @@ void Logic::ComputeComputerPlayerMove(void)
                 PlayerData[Player].MoveOneBlockCavernHoles[indexX][indexRot] = 0;
                 PlayerData[Player].MoveCompletedLines[indexX][indexRot] = 0;
                 PlayerData[Player].MovePieceHeight[indexX][indexRot] = 0;
-                PlayerData[Player].MovePlayfieldBoxEdges[indexX][indexRot] = 999999999;
+                PlayerData[Player].MovePlayfieldBoxEdges[indexX][indexRot] = 0;
                 PlayerData[Player].MoveTrappedHoles[indexX][indexRot] = 0;
+                PlayerData[Player].MoveBumpiness[indexX][indexRot] = 0;
+                PlayerData[Player].MoveCombinedPlayfieldHeight[indexX][indexRot] = 0;
             }
         }
 
-//        if (NaturalIntelligenceCore == 0)
+        if (NaturalIntelligenceCore == 0)
         {
             for (int pieceTestX = (PlayerData[Player].PlayfieldStartX-2); pieceTestX < (PlayerData[Player].PlayfieldEndX-1); pieceTestX+=1)
             {
@@ -2198,60 +2369,230 @@ void Logic::ComputeComputerPlayerMove(void)
                 }
             }
         }
-//        else if (NaturalIntelligenceCore == 1)
-//        {
-//
-//        }
+        else if (NaturalIntelligenceCore == 1)
+        {
+            for (int pieceTestX = (PlayerData[Player].PlayfieldStartX-2); pieceTestX < (PlayerData[Player].PlayfieldEndX-1); pieceTestX+=1)
+            {
+                for (int rotationTest = 1; rotationTest <= MaxRotationArray[ PlayerData[Player].Piece ]; rotationTest+=1)
+                {
+                    int TEMP_PieceRotation;
+                    TEMP_PieceRotation = PlayerData[Player].PieceRotation;
+                    int TEMP_PiecePlayfieldX;
+                    TEMP_PiecePlayfieldX = PlayerData[Player].PiecePlayfieldX;
+                    int TEMP_PiecePlayfieldY;
+                    TEMP_PiecePlayfieldY = PlayerData[Player].PiecePlayfieldY;
+
+                    PlayerData[Player].PiecePlayfieldX = pieceTestX;
+                    PlayerData[Player].PieceRotation = rotationTest;
+
+                    if (PieceCollision() == CollisionNotTrue)
+                    {
+                        //--Find Floor------------------------------------------------------------------------------------------------
+                        int posY;
+                        for (posY = PlayerData[Player].PiecePlayfieldY; posY < 23; posY+=1)
+                        {
+                            PlayerData[Player].PiecePlayfieldY  = posY;
+                            if (PieceCollision() != CollisionNotTrue)
+                            {
+                                PlayerData[Player].PiecePlayfieldY = posY-1;
+                                posY = 100;
+                            }
+                        }
+
+                        //--Backup Playfield------------------------------------------------------------------------------------------
+                        for (int y = 5; y < 24; y++)
+                        {
+                            for (int x = 2; x < 12; x++)
+                            {
+                                PlayerData[Player].PlayfieldBackupAI[x][y] = PlayerData[Player].Playfield[x][y];
+                            }
+                        }
+
+                        AddPieceToPlayfieldMemory(Current);
+
+                        //--Erase Line Clears-----------------------------------------------------------------------------------------
+                        for (int y = 5; y < 24; y++)
+                        {
+                            int boxTotal = 0;
+
+                            for (int x = 2; x < 12; x++)
+                            {
+                                if ( (PlayerData[Player].Playfield[x][y] > 9)&&(PlayerData[Player].Playfield[x][y] < 20) )
+                                    boxTotal++;
+                            }
+
+                            if (boxTotal == 10)
+                            {
+                                for (int yTwo = y; yTwo > 5; yTwo--)
+                                    for (int xTwo = 2; xTwo < 12; xTwo++)
+                                    PlayerData[Player].Playfield[xTwo][yTwo] = PlayerData[Player].Playfield[xTwo][yTwo-1];
+
+                                for (int xTwo = 2; xTwo < 12; xTwo++)
+                                    PlayerData[Player].Playfield[xTwo][5] = 0;
+
+                                PlayerData[Player].MoveCompletedLines[pieceTestX][rotationTest]++;
+                            }
+                        }
+
+                        //--Calculate Combined Height---------------------------------------------------------------------------------
+                        PlayerData[Player].MoveCombinedPlayfieldHeight[pieceTestX][rotationTest] = 0;
+                        for (int posX = PlayerData[Player].PlayfieldStartX; posX < PlayerData[Player].PlayfieldEndX; posX+=1)
+                        {
+                            for (int posY = 5; posY < 24; posY+=1)
+                            {
+                                if (PlayerData[Player].Playfield[posX][posY] > 0)
+                                {
+                                    PlayerData[Player].MoveCombinedPlayfieldHeight[pieceTestX][rotationTest]+=(24-posY);
+                                    posY = 99999;
+                                }
+                            }
+                        }
+
+                        //--Calculate Trapped Holes-----------------------------------------------------------------------------------
+                        PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = 0;
+                        for (int posX = PlayerData[Player].PlayfieldStartX; posX < PlayerData[Player].PlayfieldEndX; posX+=1)
+                        {
+                            int numberOfEmpties;
+                            numberOfEmpties = 0;
+                            for (int posY = 23; posY > 4; posY-=1)
+                            {
+                                if (PlayerData[Player].Playfield[posX][posY] == 0)
+                                {
+                                    numberOfEmpties+=1;
+                                }
+                                else if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
+                                {
+                                    PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest]+=numberOfEmpties;
+                                    numberOfEmpties = 0;
+                                }
+                            }
+                        }
+
+//--Calculate One Block Cavern Holes--------------------------------------------------------------------------
+PlayerData[Player].MoveOneBlockCavernHoles[pieceTestX][rotationTest] = 0;
+for (int posY = 5; posY < 24; posY+=1)
+{
+    for (int posX = PlayerData[Player].PlayfieldStartX; posX < PlayerData[Player].PlayfieldEndX; posX+=1)
+    {
+        if (PlayerData[Player].Playfield[posX][posY] == 0
+        && PlayerData[Player].Playfield[(posX-1)][posY] != 0 && PlayerData[Player].Playfield[(posX+1)][posY] != 0)
+            PlayerData[Player].MoveOneBlockCavernHoles[pieceTestX][rotationTest]+=1;
+    }
+}
+
+                        //--Calculate Bumpiness---------------------------------------------------------------------------------------
+                        int bumps[2];
+                        bumps[0] = 0;
+                        bumps[1] = 0;
+                        int realBump = 1;
+                        PlayerData[Player].MoveBumpiness[pieceTestX][rotationTest] = 0;
+                        for (int posX = PlayerData[Player].PlayfieldStartX+1; posX < PlayerData[Player].PlayfieldEndX; posX+=1)
+                        {
+                            for (int posY = 23; posY > 4; posY-=1)
+                            {
+                                if (PlayerData[Player].Playfield[posX-1][posY] > 0)
+                                {
+                                    bumps[0] = realBump;
+                                }
+
+                                if (PlayerData[Player].Playfield[posX][posY] > 0)
+                                {
+                                    bumps[1] = realBump;
+                                }
+
+                                realBump++;
+                            }
+
+                            PlayerData[Player].MoveBumpiness[pieceTestX][rotationTest] += abs(bumps[0]-bumps[1]);
+                            bumps[0] = 0;
+                            bumps[1] = 0;
+                            realBump = 1;
+                        }
+
+                        //-Restore Playfield------------------------------------------------------------------------------------------
+                        for (int y = 5; y < 24; y++)
+                        {
+                            for (int x = 2; x < 12; x++)
+                            {
+                                PlayerData[Player].Playfield[x][y] = PlayerData[Player].PlayfieldBackupAI[x][y];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = 99999;
+                    }
+
+                    PlayerData[Player].PieceRotation = TEMP_PieceRotation;
+                    PlayerData[Player].PiecePlayfieldX = TEMP_PiecePlayfieldX;
+                    PlayerData[Player].PiecePlayfieldY = TEMP_PiecePlayfieldY;
+                }
+            }
+        }
 
         PlayerData[Player].BestMoveX = -1;
         PlayerData[Player].BestRotation = -1;
-        float bestValue;
-        bestValue = 999999;
+        if (NaturalIntelligenceCore == 0)
+        {
+            PlayerData[Player].bestValue = 999999;
+        }
+        else
+        {
+            PlayerData[Player].bestValue = -999999;
+        }
+
         for (int posX = (PlayerData[Player].PlayfieldStartX-1); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1)
         {
             for (int rot = 1; rot <= MaxRotationArray[ PlayerData[Player].Piece ]; rot+=1)
             {
-                PlayerData[Player].MovePieceHeight[posX][rot]+=PlayerData[Player].MoveCompletedLines[posX][rot];
-
-                float testValue;
                 testValue = 0;
 
                 if (NaturalIntelligenceCore == 0)
                 {
-                    //--["Gift Of Sight" Tetris(R) A.I. Algorithm ~29,000+]---------------------------------------
+                    //--[JeZ+Lee's "Gift Of Sight" Tetris(R) A.I. Algorithm ~29,000+]-----------------------------
+                    PlayerData[Player].MovePieceHeight[posX][rot]+=PlayerData[Player].MoveCompletedLines[posX][rot];
+
                     testValue = ( (3*PlayerData[Player].MoveTrappedHoles[posX][rot])
-                                +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
-                                +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
-                                -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
+                                 +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
+                                 +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
+                                 -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
 
                     if (PlayerData[Player].MoveCompletedLines[posX][rot] > 1)
                         testValue = ( 0 - (PlayerData[Player].MoveCompletedLines[posX][rot]*100) );
-                    //---------------------------------------["Gift Of Sight" Tetris(R) A.I. Algorithm ~29,000+]--
+
+                    if (testValue <= PlayerData[Player].bestValue)
+                    {
+                        PlayerData[Player].bestValue = testValue;
+                        PlayerData[Player].BestMoveX = posX;
+                        PlayerData[Player].BestRotation = rot;
+                    }
+                    //-----------------------------[JeZ+Lee's "Gift Of Sight" Tetris(R) A.I. Algorithm ~29,000+]--
                 }
                 else if (NaturalIntelligenceCore == 1)
                 {
-                    //--["Near Perfect" Tetris(R) A.I. Algorithm]-------------------------------------------------
-                    float completedLinesBonus = 0;
-                    completedLinesBonus = pow( 3, (PlayerData[Player].MoveCompletedLines[posX][rot]-1) );
+                    //--[Yiyuan Lee's "Near Perfect" Tetris(R) A.I. Algorithm ~2,000,000+]------------------------
+                    testValue = ( (-0.510066*PlayerData[Player].MoveCombinedPlayfieldHeight[posX][rot])
+                                  +(0.760666*PlayerData[Player].MoveCompletedLines[posX][rot])
+                                 +(-0.356630*PlayerData[Player].MoveTrappedHoles[posX][rot])
+                                 +(-0.184483*PlayerData[Player].MoveBumpiness[posX][rot]) );
 
-                    testValue = ( (3*PlayerData[Player].MoveTrappedHoles[posX][rot])
-                                +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
-                                +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
-                                -(1*PlayerData[Player].MovePieceHeight[posX][rot])
-                                -(completedLinesBonus) );
-                    //-------------------------------------------------["Near Perfect" Tetris(R) A.I. Algorithm]--
-                }
+                    if (testValue >= PlayerData[Player].bestValue)
+                    {
+                        PlayerData[Player].bestValue = testValue;
+                        PlayerData[Player].BestMoveX = posX;
+                        PlayerData[Player].BestRotation = rot;
+                    }
 
-                if (testValue <= bestValue)
-                {
-                    bestValue = testValue;
-                    PlayerData[Player].BestMoveX = posX;
-                    PlayerData[Player].BestRotation = rot;
+                    if (AITestDebugMode == 1)  DisplayMoveDataToConsole(posX, rot, testValue, 0);
+
+                    //------------------------[Yiyuan Lee's "Near Perfect" Tetris(R) A.I. Algorithm ~2,000,000+]--
                 }
             }
         }
 
         PlayerData[Player].BestMoveCalculated = true;
+
+        if (AITestDebugMode == 1)  DisplayBestMoveToConsole(0);
     }
 
     if (PlayerData[Player].MovedToBestMove == false && PlayerData[Player].BestMoveX != -1 && PlayerData[Player].BestRotation != -1)
