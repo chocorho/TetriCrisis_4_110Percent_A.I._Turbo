@@ -815,6 +815,8 @@ void Screens::DisplayOptionsScreen(void)
         interfaces->CreateArrowSet(6, 345);
 
         ScreenTransitionStatus = FadeIn;
+
+        if (audio->MusicVolume == 0)   Mix_PauseMusic();
     }
 
     if (input->F2KeyPressed == true && input->JoystickSetupProcess == JoySetupNotStarted)
@@ -1117,6 +1119,10 @@ void Screens::DisplayOptionsScreen(void)
                 else  audio->MusicVolume = 128;
 
                 Mix_VolumeMusic(audio->MusicVolume);
+
+                if (audio->MusicVolume == 0)   Mix_PauseMusic();
+                else  Mix_ResumeMusic();
+
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 0.5)
             {
@@ -1124,6 +1130,9 @@ void Screens::DisplayOptionsScreen(void)
                 else  audio->MusicVolume = 0;
 
                 Mix_VolumeMusic(audio->MusicVolume);
+
+                if (audio->MusicVolume == 0)   Mix_PauseMusic();
+                else  Mix_ResumeMusic();
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 1)
             {
@@ -1497,6 +1506,8 @@ void Screens::DisplayOptionsScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
+
+        if (audio->MusicVolume == 0)   Mix_PauseMusic();
 
         interfaces->DestroyAllButtons();
         interfaces->DestroyAllArrowSets();

@@ -2213,7 +2213,7 @@ void Logic::RunTetriGameEngine(void)
 
             if (BlockAttackTransparency[Player] > 0.0f)  BlockAttackTransparency[Player]-=5;
 
-            if (PlayerData[Player].PlayerInput == Mouse)
+            if (PlayerData[Player].PlayerInput == Mouse && PlayerData[Player].PlayerStatus != GameOver)
             {
                 if (input->MouseButtonPressed[0] == true)
                 {
