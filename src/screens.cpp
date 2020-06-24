@@ -1918,7 +1918,7 @@ void Screens::DisplayPlayingGameScreen(void)
         }
     }
 
-    if (logic->PlayersCanJoin == true && input->MouseButtonPressed[0] == true)
+    if (logic->PAUSEgame == false && logic->PlayersCanJoin == true && input->MouseButtonPressed[0] == true)
     {
         for (int p = 0; p < 4; p++)
         {
@@ -2232,15 +2232,15 @@ void Screens::DisplayPlayingGameScreen(void)
             }
         }
 
-        bool humanStillAlive = false;
-        if (logic->PlayerData[0].PlayerInput != CPU && logic->PlayerData[0].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[1].PlayerInput != CPU && logic->PlayerData[1].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[2].PlayerInput != CPU && logic->PlayerData[2].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[3].PlayerInput != CPU && logic->PlayerData[3].PlayerStatus != GameOver)  humanStillAlive = true;
-
-        if (humanStillAlive == false && input->DEBUG == 0)
-            visuals->DrawTextOntoScreenBuffer("Continue Watching Or Press [Esc] On Keyboard To Exit!"
-                                              , visuals->Font[1], 320, 260, JustifyCenter, 255, 255, 255, 1, 1, 1);
+        if ( logic->HumanStillAlive() == false && input->DEBUG == 0 )
+        {
+            if (logic->PlayerData[0].PlayerStatus != GameOver || logic->PlayerData[1].PlayerStatus != GameOver
+             || logic->PlayerData[2].PlayerStatus != GameOver || logic->PlayerData[3].PlayerStatus != GameOver)
+            {
+                visuals->DrawTextOntoScreenBuffer("Continue Watching Or Press [Esc] On Keyboard To Exit!"
+                                                  , visuals->Font[1], 320, 260, JustifyCenter, 255, 255, 255, 1, 1, 1);
+            }
+        }
 
         if (logic->PAUSEgame == true && input->DEBUG != 1)
         {
@@ -2280,9 +2280,19 @@ void Screens::DisplayPlayingGameScreen(void)
         }
     }
 
-    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
-        && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
+    if (logic->GameOverTimer > 1)
+    {
+        logic->GameOverTimer--;
+    }
+    else if (logic->GameOverTimer == 1)
+    {
+        logic->GameOverTimer = 0;
         ScreenTransitionStatus = FadeOut;
+    }
+
+//    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
+//        && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
+//        ScreenTransitionStatus = FadeOut;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {

@@ -134,6 +134,16 @@ Logic::Logic(void)
 
     DelayAutoShift = 2;
 
+    for (int player = 0; player < NumberOfPlayers; player++)
+    {
+        for (int index = 0; index < 7; index++)
+        {
+            PlayerData[player].PieceBag[index] = -1;
+        }
+
+        PlayerData[player].PieceBag[7] = ( (rand()%7) + 1 );
+    }
+
     PAUSEgame = false;
 }
 
@@ -332,6 +342,17 @@ void Logic::ClearPlayfieldsWithCollisionDetection(void)
 }
 
 //-------------------------------------------------------------------------------------------------
+bool Logic::HumanStillAlive(void)
+{
+    bool humanAlive = false;
+    for (int index = 0; index < NumberOfPlayers; index++)
+    {
+        if (PlayerData[index].PlayerInput != CPU && PlayerData[index].PlayerStatus != GameOver)  humanAlive = true;
+    }
+    return(humanAlive);
+}
+
+//-------------------------------------------------------------------------------------------------
 Uint8 Logic::GetRandomPiece(int currentOrNext)
 {
     Uint8 returnValue = 0;
@@ -413,6 +434,25 @@ Uint8 Logic::GetRandomPiece(int currentOrNext)
                 PlayerData[Player].PieceBagDrawIndex = 0;
             }
         }
+
+
+
+
+if (Player == 1)
+{
+    char temp[10000];
+    strcpy(visuals->VariableText, "Current:");
+    sprintf(temp, "%d", PlayerData[Player].Piece);
+    strcat(visuals->VariableText, temp);
+    strcat(visuals->VariableText, " / Next:");
+    sprintf(temp, "%d", PlayerData[Player].NextPiece);
+    strcat(visuals->VariableText, temp);
+    printf("%s\n", visuals->VariableText);
+}
+
+
+
+
 
         return(returnValue);
     }
@@ -941,6 +981,11 @@ void Logic::MovePieceDown(bool Force)
 		if (PlayerData[Player].PlayerStatus == NewPieceDropping)
         {
             PlayerData[Player].PlayerStatus = GameOver;
+
+            if ( HumanStillAlive() == false )  GameOverTimer = 100;
+
+            PlayerCanJoinInGame[Player] = false;
+
             audio->PlayDigitalSoundFX(11, 0);
         }
 		else  CheckForCompletedLines();
@@ -1006,6 +1051,11 @@ void Logic::MovePieceDownFast(void)
 		if (PlayerData[Player].PlayerStatus == NewPieceDropping)
         {
             PlayerData[Player].PlayerStatus = GameOver;
+
+            if ( HumanStillAlive() == false )  GameOverTimer = 100;
+
+            PlayerCanJoinInGame[Player] = false;
+
             audio->PlayDigitalSoundFX(11, 0);
         }
 		else  CheckForCompletedLines();
@@ -1245,9 +1295,9 @@ void Logic::WithdrawAllSevenPiecesFromBag(int player)
         }
 
         Uint8 pieceIndex = 0;
-        Uint8 randomPieceInBag = (rand()%7);
+        Uint8 randomPieceInBag = PlayerData[player].PieceBag[7]-1; //(rand()%7);
         pieceDrawnFromBag[randomPieceInBag] = true;
-        PlayerData[player].PieceBag[pieceIndex] = (1+randomPieceInBag);
+        PlayerData[player].PieceBag[pieceIndex] = (1+randomPieceInBag); //PlayerData[player].PieceBag[7]; // (1+randomPieceInBag);
         pieceIndex = 1;
         randomPieceInBag = (rand()%7);
         while (pieceIndex < 7)
@@ -1265,6 +1315,8 @@ void Logic::WithdrawAllSevenPiecesFromBag(int player)
         PlayerData[player].Piece = PlayerData[player].PieceBag[0];
         PlayerData[player].NextPiece = PlayerData[player].PieceBag[1];
 
+        PlayerData[player].PieceBag[7] = ( (rand()%7) + 1 );
+
         if (player == 1)
         {
             char temp[10000];
@@ -1275,6 +1327,10 @@ void Logic::WithdrawAllSevenPiecesFromBag(int player)
                 strcat(visuals->VariableText, temp);
                 strcat(visuals->VariableText, "/");
             }
+
+            strcat(visuals->VariableText, "/LastNext:");
+            sprintf(temp, "%d", PlayerData[player].PieceBag[7]);
+            strcat(visuals->VariableText, temp);
 
             printf("%s", visuals->VariableText);
             printf("\n");
@@ -1348,6 +1404,12 @@ void Logic::SetupForNewGame(void)
 	for (int player = 0; player < NumberOfPlayers; player++)
 	{
 		Player = player;
+
+        for (int index = 0; index < 7; index++)
+        {
+            PlayerData[player].PieceBag[index] = -1;
+        }
+        PlayerData[player].PieceBag[7] = ( (rand()%7) + 1 );
 
         WithdrawAllSevenPiecesFromBag(player);
         PlayerData[player].Piece = GetRandomPiece(Current);
@@ -1542,6 +1604,8 @@ void Logic::SetupForNewGame(void)
 
     CrisisWon = false;
     CrisisModeOnePlayerLeftPlayfieldCleared = false;
+
+    GameOverTimer = -1;
 
     GameDisplayChanged = true;
 
@@ -1801,6 +1865,11 @@ int TEMP_Player = Player;
                     if (PlayerData[Player].Playfield[x][5] > 10 && PlayerData[Player].Playfield[x][5] < 20)
                     {
                         PlayerData[Player].PlayerStatus = GameOver;
+
+                        if ( HumanStillAlive() == false )  GameOverTimer = 100;
+
+                        PlayerCanJoinInGame[Player] = false;
+
                         return;
                     }
                 }
@@ -1866,6 +1935,11 @@ bool Logic::AddAnIncompleteLineToPlayfieldCrisisMode(void)
         if (PlayerData[Player].Playfield[x][5] > 10 && PlayerData[Player].Playfield[x][5] < 20)
         {
             PlayerData[Player].PlayerStatus = GameOver;
+
+            if ( HumanStillAlive() == false )  GameOverTimer = 100;
+
+            PlayerCanJoinInGame[Player] = false;
+
             return(true);
         }
     }
@@ -1906,11 +1980,18 @@ void Logic::RunTetriGameEngine(void)
 		if (PAUSEgame == false)
         {
             PAUSEgame = true;
+
+            FrameLockBackup = visuals->FrameLock;
+            visuals->FrameLock = 30;
+
             Mix_PauseMusic();
         }
 		else
         {
             PAUSEgame = false;
+
+            visuals->FrameLock = FrameLockBackup;
+
             Mix_ResumeMusic();
         }
 
@@ -1963,6 +2044,10 @@ void Logic::RunTetriGameEngine(void)
                     if (GameMode == TwentyLineChallengeMode && PlayerData[Player].TwentyLineCounter == 0)
                     {
                         PlayerData[Player].PlayerStatus = GameOver;
+
+                        if ( HumanStillAlive() == false )  GameOverTimer = 100;
+
+                        PlayerCanJoinInGame[Player] = false;
                     }
 
                     if (PlayerData[Player].PieceDropTimer > PlayerData[Player].TimeToDropPiece)

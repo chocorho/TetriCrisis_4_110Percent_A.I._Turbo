@@ -35,7 +35,7 @@ ________________________________________________________________________________
                                                                          TM
                                            "TetriCrisis 4 110% A.I. Turbo"
                                                     (REMASTERED)
-                                                Retail Version 4.5.6
+                                      (W.I.P.) Retail2 Version 4.5.6 (W.I.P.)
 
                                          (C)opyright 2020 By 16BitSoft Inc.
                                                   www.16BitSoft.com

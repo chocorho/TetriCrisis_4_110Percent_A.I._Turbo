@@ -181,11 +181,16 @@ public:
 
     Uint8 TileSet;
 
+    int GameOverTimer;
+
+    Uint32 FrameLockBackup;
+
 	Logic(void);
 	virtual ~Logic(void);
 
 	void InitializePieceData(void);
 	void ClearPlayfieldsWithCollisionDetection(void);
+    bool HumanStillAlive(void);
 	Uint8 GetRandomPiece(int currentOrNext);
 
     #define CollisionNotTrue            0
