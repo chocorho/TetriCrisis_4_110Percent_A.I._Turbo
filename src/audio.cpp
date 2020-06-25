@@ -309,6 +309,8 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
 
     CurrentlySelectedMusicTrack = musicIndex;
 
+    if (MusicVolume == 0)  return;
+
     if(Mix_PlayMusic(MusicTrack[musicIndex], loop)==-1)
     {
         printf( "Mix_PlayMusic: %s\n", Mix_GetError() );
