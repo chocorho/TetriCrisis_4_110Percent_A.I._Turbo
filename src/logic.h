@@ -44,7 +44,7 @@ public:
     Uint8 CPUPlayerEnabled;
 
     Uint8 SelectedBackground;
-    Uint8 SelectedMusicTrack;
+    int SelectedMusicTrack;
     Uint8 NewGameGarbageHeight;
 
     #define OriginalJeZxLeeAI           0

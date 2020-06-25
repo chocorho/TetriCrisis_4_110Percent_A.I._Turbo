@@ -1974,6 +1974,19 @@ bool Logic::AddAnIncompleteLineToPlayfieldCrisisMode(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::RunTetriGameEngine(void)
 {
+    if (SelectedMusicTrack == -1)
+    {
+        if ( Mix_PlayingMusic() == 0 )
+        {
+            int randomTrack = (rand()%19);
+            while ( randomTrack == (audio->CurrentlySelectedMusicTrack-1) )
+            {
+                randomTrack = (rand()%19);
+            }
+            audio->PlayMusic(randomTrack, 0);
+        }
+    }
+
     if (  (input->SpacebarKeyPressed == true && input->UserDefinedKeyPause == -1)
        || ( (input->UserDefinedKeyPause != -1) && (input->KeyOnKeyboardPressedByUser == input->UserDefinedKeyPause) )  )
 	{

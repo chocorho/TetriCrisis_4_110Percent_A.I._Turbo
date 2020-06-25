@@ -415,7 +415,15 @@ void Screens::DisplayNewGameOptionsScreen(void)
         interfaces->CreateArrowSet(6, 305);
         interfaces->CreateArrowSet(7, 345);
 
-        audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+        if (logic->SelectedMusicTrack == -1)
+        {
+            int randomTrack = (rand()%19);
+            audio->PlayMusic(randomTrack, 0);
+        }
+        else
+        {
+            audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+        }
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -438,17 +446,33 @@ void Screens::DisplayNewGameOptionsScreen(void)
         }
         if (interfaces->ArrowSetArrowSelectedByPlayer == 1)
         {
-            if (logic->SelectedMusicTrack > 0)  logic->SelectedMusicTrack-=1;
+            if (logic->SelectedMusicTrack > -1)  logic->SelectedMusicTrack-=1;
             else  logic->SelectedMusicTrack = 18;
 
-            audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            if (logic->SelectedMusicTrack > -1)
+            {
+                audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            }
+            else
+            {
+                int randomTrack = (rand()%19);
+                audio->PlayMusic(randomTrack, 0);
+            }
         }
         else if (interfaces->ArrowSetArrowSelectedByPlayer == 1.5)
         {
             if (logic->SelectedMusicTrack < 18)  logic->SelectedMusicTrack+=1;
-            else  logic->SelectedMusicTrack = 0;
+            else  logic->SelectedMusicTrack = -1;
 
-            audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            if (logic->SelectedMusicTrack > -1)
+            {
+                audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            }
+            else
+            {
+                int randomTrack = (rand()%19);
+                audio->PlayMusic(randomTrack, 0);
+            }
         }
         if (interfaces->ArrowSetArrowSelectedByPlayer == 2)
         {
@@ -568,7 +592,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("Music Track:", visuals->Font[0]
                                           , 50, 105-15, JustifyLeft
                                           , 255, 255, 255, 90, 90, 90);
-        if (logic->SelectedMusicTrack == 0)
+        if (logic->SelectedMusicTrack == -1)
+            visuals->DrawTextOntoScreenBuffer("Random Track JukeBox", visuals->Font[0]
+                                              , 50, 105-15, JustifyRight
+                                              , 255, 255, 255, 90, 90, 90);
+        else if (logic->SelectedMusicTrack == 0)
             visuals->DrawTextOntoScreenBuffer("InGame Track 00", visuals->Font[0]
                                               , 50, 105-15, JustifyRight
                                               , 255, 255, 255, 90, 90, 90);
@@ -779,8 +807,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
         {
             ScreenToDisplay = PlayingGameScreen;
 
-            audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
-            if (logic->SelectedBackground == 1)  Mix_PauseMusic();
+            if (logic->SelectedMusicTrack > -1)
+            {
+                audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+                if (logic->SelectedBackground == 1)  Mix_PauseMusic();
+            }
         }
         else
         {
