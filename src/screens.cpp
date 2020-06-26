@@ -1151,9 +1151,16 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)   Mix_PauseMusic();
-                else  Mix_ResumeMusic();
-
+                if (audio->MusicVolumeOnGameStart > 0)
+                {
+                    if (audio->MusicVolume == 0)   Mix_PauseMusic();
+                    else  Mix_ResumeMusic();
+                }
+                else
+                {
+                    audio->PlayMusic(0, -1);
+                    audio->MusicVolumeOnGameStart = 64;
+                }
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 0.5)
             {
@@ -1162,8 +1169,16 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)   Mix_PauseMusic();
-                else  Mix_ResumeMusic();
+                if (audio->MusicVolumeOnGameStart > 0)
+                {
+                    if (audio->MusicVolume == 0)   Mix_PauseMusic();
+                    else  Mix_ResumeMusic();
+                }
+                else
+                {
+                    audio->PlayMusic(0, -1);
+                    audio->MusicVolumeOnGameStart = 64;
+                }
             }
             else if (interfaces->ArrowSetArrowSelectedByPlayer == 1)
             {

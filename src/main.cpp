@@ -104,7 +104,12 @@ int main( int argc, char* args[] )
     if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     audio->PlayMusic(0, -1);
-    if (audio->MusicVolume == 0)   Mix_PauseMusic();
+    if (audio->MusicVolume == 0)
+    {
+        Mix_PauseMusic();
+        audio->MusicVolumeOnGameStart = 0;
+    }
+    else  audio->MusicVolumeOnGameStart = audio->MusicVolume;
 
     //-MAIN-LOOP------------------------------------------------------------------------
     printf("Main loop started...\n");

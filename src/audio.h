@@ -28,6 +28,8 @@ public:
     Audio(void);
     virtual ~Audio(void);
 
+    int MusicVolumeOnGameStart;
+
     bool AudioWorking;
 
     char Mix_Init_Error[256];

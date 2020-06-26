@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1593010253 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
+1593127928 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -384,7 +384,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1590514826 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
+1593130863 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
 
 1590617894 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
 
@@ -453,7 +453,7 @@
 	"input.h"
 	"visuals.h"
 
-1593024669 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
+1593130944 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -471,7 +471,7 @@
 
 1426349210 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
 
-1593115583 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
+1593131058 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
 	<stdio.h>
 	<cstring>
 	<stdlib.h>
