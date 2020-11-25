@@ -1,23 +1,23 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 using namespace std;
 #include <fstream>
 #include <string.h>
@@ -120,7 +120,7 @@ int playerRank = 10;
 //-------------------------------------------------------------------------------------------------
 void Data::ClearHighScores(void)
 {
-char name1st[19]  = { 'J', 'e', 'Z', '+', 'L', 'e', 'e', '\0' };
+char name1st[19]  = { 'J', 'e', 'Z', 'x', 'L', 'e', 'e', '\0' };
 char name2nd[19]  = { 'D', 'a', 'o', 't', 'h', 'e', 'm', 'a', 'n', '\0' };
 char name3rd[19]  = { 'm', 'a', 't', 't', 'm', 'a', 't', 't', 'e', 'h', '\0' };
 char name4th[19]  = { 'Y', 'o', 'u', '!', '\0' };
@@ -248,7 +248,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6");
 
 	fileStream.open (filename, fstream::in);
 	if (fileStream.is_open())
@@ -294,9 +294,6 @@ char *pref_path = NULL;
 
 		fileStream.getline (textBuffer, 30);
 		logic->TileSet = (int)atoi(textBuffer);
-
-        fileStream.getline (textBuffer, 30);
-        logic->NaturalIntelligenceCore = (int)atoi(textBuffer);
 
         fileStream.getline (textBuffer, 30);
         input->UserDefinedKeyButtonOne = (int)atoi(textBuffer);
@@ -360,7 +357,7 @@ char *pref_path = NULL;
                 HighScoresLevel[gameMode][rank] = atoi(textBuffer);
 
                 fileStream.getline (textBuffer, 30);
-                HighScoresScore[gameMode][rank] = atoi(textBuffer);
+                HighScoresScore[gameMode][rank] = atoll(textBuffer);
             }
         }
 
@@ -385,7 +382,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6");
 
 	fileStream.open (filename, fstream::out);
 	if (fileStream.is_open())
@@ -443,10 +440,6 @@ char *pref_path = NULL;
 		fileStream<<"\n";
 
 		sprintf(textBuffer, "%d", logic->TileSet);
-		fileStream<<textBuffer;
-		fileStream<<"\n";
-
-		sprintf(textBuffer, "%d", logic->NaturalIntelligenceCore);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
@@ -517,7 +510,12 @@ char *pref_path = NULL;
                 fileStream<<textBuffer;
                 fileStream<<"\n";
 
-                sprintf(textBuffer, "%d", HighScoresScore[gameMode][rank]);
+                #ifdef _WIN32
+                    sprintf(textBuffer, "%I64u", HighScoresScore[gameMode][rank]);
+                #else
+                    sprintf(textBuffer, "%lu", HighScoresScore[gameMode][rank]);
+                #endif
+
                 fileStream<<textBuffer;
                 fileStream<<"\n";
             }

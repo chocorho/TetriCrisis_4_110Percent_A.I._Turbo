@@ -1,44 +1,39 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
-                                                      JeZxLee's
-                                                      SDL 2.0.12
-                                            Cross-Platform / Open-Source
-  _______ _______     ______   _______    _       _______          _           _______ _                                _ TM
- (_______|_______)   (_____ \ (_______)  (_)     (_______)        | |         (_______) |      "Retro Blast Tech"      | |
+                                                      SDL 2.0.7
+                                           (SDL2_Image/SDL2_Mixer/SDL2_TTF)
+                                         Cross-Platform / M.I.T. Open-Source
+  _______ _______     ______   _______    _       _______          _           _______ _                                _
+ (_______|_______)   (_____ \ (_______)  (_)     (_______)        | |         (_______) |   Nissan(R) NISMO Powered!   | |
   _   ___    _  _____ _____) )    _ _ _ _ _ ____     _ _   _  ____| |__   ___  _      | |__  _____  ____ ____ _____  __| |
  | | (_  |  | |(_____)  __  /    | | | | | |  _ \   | | | | |/ ___)  _ \ / _ \| |     |  _ \(____ |/ ___) _  | ___ |/ _  |
  | |___) |  | |      | |  \ \    | | | | | | | | |  | | |_| | |   | |_) ) |_| | |_____| | | / ___ | |  ( (_| | ____( (_| |
   \_____/   |_|      |_|   |_|   |_|\___/|_|_| |_|  |_|____/|_|   |____/ \___/ \______)_| |_\_____|_|   \___ |_____)\____|
-                                                                                                       (_____|
+                                                                                                       (_____|Version 2.0
                                            2-Dimensional Video Game Engine
-
-                                       (C)opyright 2020 By Team 16BitSoft Inc.
 .............................................................................................................................
-                                                                         TM
-                                           "TetriCrisis 4 110% A.I. Turbo"
-                                                    (REMASTERED)
-                                      (W.I.P.) Retail2 Version 4.5.6 (W.I.P.)
 
-                                         (C)opyright 2020 By 16BitSoft Inc.
-                                                  www.16BitSoft.com
+                                           "TetriCrisis 4 110% A.I. Turbo"
+                                                Retail2 Version 4.5.6
+
+                                               Team www.16BitSoft.com
 _____________________________________________________________________________________________________________________________
 */
 #include <time.h>
@@ -53,7 +48,7 @@ ________________________________________________________________________________
 #include "visuals.h"
 #include "input.h"
 #include "screens.h"
-#include "interfaces.h"
+#include "interface.h"
 #include "audio.h"
 #include "data.h"
 #include "logic.h"
@@ -61,7 +56,7 @@ ________________________________________________________________________________
 Visuals *visuals;
 Input *input;
 Screens *screens;
-Interfaces *interfaces;
+Interface *interface;
 Audio *audio;
 Data *data;
 Logic *logic;
@@ -69,7 +64,7 @@ Logic *logic;
 //-------------------------------------------------------------------------------------------------
 int main( int argc, char* args[] )
 {
-    printf("JeZxLee's ''GT-R Twin TurboCharged'' game engine started!\n");
+    printf("''GT-R Twin TurboCharged'' game engine started!\n");
     argc = argc; args = args;
 
     if ( SDL_Init(SDL_INIT_EVERYTHING) != 0 )
@@ -89,7 +84,7 @@ int main( int argc, char* args[] )
 
     screens = new Screens();
 
-    interfaces = new Interfaces();
+    interface = new Interface();
 
     data = new Data();
 
@@ -104,12 +99,6 @@ int main( int argc, char* args[] )
     if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     audio->PlayMusic(0, -1);
-    if (audio->MusicVolume == 0)
-    {
-        Mix_PauseMusic();
-        audio->MusicVolumeOnGameStart = 0;
-    }
-    else  audio->MusicVolumeOnGameStart = audio->MusicVolume;
 
     //-MAIN-LOOP------------------------------------------------------------------------
     printf("Main loop started...\n");
@@ -128,15 +117,14 @@ int main( int argc, char* args[] )
     delete logic;
     delete data;
     delete audio;
-    delete interfaces;
+    delete interface;
     delete screens;
     delete input;
     delete visuals;
     SDL_Quit();
     printf("SDL2 closed.\n");
-    printf("JeZxLee's ''GT-R Twin TurboCharged'' game engine ended!\n");
+    printf("''GT-R Twin TurboCharged'' game engine ended!\n");
     return(0);
 }
 
-//                                   TM
 // "A 110% By Team www.16BitSoft.com!"

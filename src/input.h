@@ -1,23 +1,23 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 #ifndef INPUT
 #define INPUT
 
@@ -34,7 +34,7 @@ public:
 
     SDL_Event Event;
 
-    int KeyOnKeyboardPressedByUser;
+    SDL_Keycode KeyOnKeyboardPressedByUser;
 
     int DelayAllUserInput;
 
@@ -42,19 +42,9 @@ public:
 
     SDL_Keymod KeyModState;
 
-    bool EnterKeyPressed;
-    bool BackSpaceKeyPressed;
-    bool SpacebarKeyPressed;
-    bool EscapeKeyPressed;
-    bool F1KeyPressed;
-    bool F2KeyPressed;
-
     bool MouseButtonPressed[2];
     bool MouseButtonWasClicked[2];
     int MouseX, MouseY;
-
-    char KeycodeName[64];
-    char KeycodeChar[3];
 
     #define Keyboard        0
     #define JoystickOne     1
@@ -69,15 +59,15 @@ public:
     #define RIGHT       3
     #define DOWN        5
     #define LEFT        7
-    Uint8 JoystickDirectionHorizonal[5];
+    Uint8 JoystickDirectionHorizontal[5];
     Uint8 JoystickDirectionVertical[5];
 
     #define OFF         0
     #define ON          1
     Uint8 JoystickButtonOne[5];
     Uint8 JoystickButtonTwo[5];
-    bool JoystickButton1Pressed[5];
-    bool JoystickButton2Pressed[5];
+    bool JoystickButtonOnePressed[5];
+    bool JoystickButtonTwoPressed[5];
 
     #define JoySetupNotStarted          0
     #define Joy1SetupPressUP            1

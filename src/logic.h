@@ -1,31 +1,29 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 #ifndef LOGIC
 #define LOGIC
 
 class Logic
 {
 public:
-
-    int AITestDebugMode;
 
     #define OriginalMode                0
     #define TimeAttack30Mode            1
@@ -35,21 +33,14 @@ public:
     #define CrisisMode                  5
     Uint8 GameMode;
 
-    bool AbortedGame = false;
-    bool PlayerCanJoinInGame[4];
-
     Uint8 MaxRotationArray[8];
     Uint8 PieceDropStartHeight[8];
 
     Uint8 CPUPlayerEnabled;
 
     Uint8 SelectedBackground;
-    int SelectedMusicTrack;
+    Uint8 SelectedMusicTrack;
     Uint8 NewGameGarbageHeight;
-
-    #define OriginalJeZxLeeAI           0
-    #define NewPerfectAI                1
-    Uint8 NaturalIntelligenceCore;
 
 	Uint8 PieceData[8][5][17];
 
@@ -72,9 +63,6 @@ public:
         Uint8 PiecePlayfieldY;
         Uint8 NextPiece;
 
-        Uint8 PieceBagDrawIndex;
-        int PieceBag[8];
-
         #define GameOver					-1
         #define NewPieceDropping			0
         #define PieceFalling				1
@@ -95,17 +83,11 @@ public:
         int MovePieceHeight[15][5];
         int MovePlayfieldBoxEdges[15][5];
         int MoveTrappedHoles[15][5];
-        int MoveBumpiness[15][5];
-        int MoveCombinedPlayfieldHeight[15][5];
-
-        int PlayfieldBackupAI[15][26];
 
         int BestMoveX;
         int BestRotation;
         bool MovedToBestMove;
         bool BestMoveCalculated;
-
-        float bestValue;
 
         bool UPActionTaken;
         Uint8 RotateDirection;
@@ -122,10 +104,10 @@ public:
         int SkipAFrameForCPUPieceDrop;
         int CPUFrame;
 
-        unsigned long int Score;
+        Uint64 Score;
         Uint32 DropBonus;
-        Uint16 Level;
-        Uint16 Lines;
+        Uint32 Level;
+        Uint32 Lines;
 
     } PlayerData[NumberOfPlayers];
 
@@ -157,13 +139,6 @@ public:
 
     bool PlayersCanJoin;
 
-    int MouseMoveX;
-    int MouseMoveY;
-
-    #define MouseMove       0
-    #define MouseRotate     1
-    int MouseMoveOrRotate;
-
     Uint32 TimeAttackTimer;
 
     Uint16 ThinkRussianTimer;
@@ -181,17 +156,12 @@ public:
 
     Uint8 TileSet;
 
-    int GameOverTimer;
-
-    Uint32 FrameLockBackup;
-
 	Logic(void);
 	virtual ~Logic(void);
 
 	void InitializePieceData(void);
 	void ClearPlayfieldsWithCollisionDetection(void);
-    bool HumanStillAlive(void);
-	Uint8 GetRandomPiece(int currentOrNext);
+	Uint8 GetRandomPiece(void);
 
     #define CollisionNotTrue            0
     #define CollisionWithPlayfield      1
@@ -216,7 +186,6 @@ public:
 	void MovePieceLeft(void);
 	void MovePieceRight(void);
 
-    void WithdrawAllSevenPiecesFromBag(int player);
 	void SetupForNewGame(void);
 
 	void DisplayTetriScreenOntoScreenBuffer(void);
@@ -232,8 +201,6 @@ public:
 
     bool CrisisModeClearPlayfield(void);
 
-    void DisplayMoveDataToConsole(int movePosX, int moveRot, float testVal, int player);
-    void DisplayBestMoveToConsole(int player);
     void ComputeComputerPlayerMove(void);
 };
 

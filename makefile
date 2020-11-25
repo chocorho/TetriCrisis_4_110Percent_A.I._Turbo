@@ -20,7 +20,7 @@ OBJECTS = src/main.o \
           src/audio.o \
           src/data.o \
           src/input.o \
-          src/interfaces.o \
+          src/interface.o \
           src/logic.o \
           src/screens.o \
           src/visuals.o
@@ -29,7 +29,7 @@ SOURCES = src/main.cpp \
           src/audio.cpp \
           src/data.cpp \
           src/input.cpp \
-          src/interfaces.cpp \
+          src/interface.cpp \
           src/logic.cpp \
           src/screens.cpp \
           src/visuals.cpp
@@ -37,7 +37,7 @@ SOURCES = src/main.cpp \
 HEADERS = src/audio.h \
           src/data.h \
           src/input.h \
-          src/interfaces.h \
+          src/interface.h \
           src/logic.h \
           src/screens.h \
           src/visuals.h

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1593127928 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
+1507654334 source:z:\vm-share\tc4t-winlinux-retail2\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -10,7 +10,1278 @@
 	"screens.h"
 	"visuals.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl.h
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\begin_code.h
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\close_code.h
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451768293 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451803973 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_image-2.0.1\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1451805391 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_mixer-2.0.1\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1454366533 z:\vm-share\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1505590317 z:\vm-share\tc4t-winlinux-retail2\src\audio.h
+
+1505590318 z:\vm-share\tc4t-winlinux-retail2\src\screens.h
+
+1507908581 z:\vm-share\tc4t-winlinux-retail2\src\visuals.h
+
+1507507585 source:z:\vm-share\tc4t-winlinux-retail2\src\data.cpp
+	<fstream>
+	<string.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"data.h"
+	"audio.h"
+	"input.h"
+	"logic.h"
+	"visuals.h"
+
+1505590317 z:\vm-share\tc4t-winlinux-retail2\src\data.h
+
+1507653442 z:\vm-share\tc4t-winlinux-retail2\src\input.h
+
+1505590318 z:\vm-share\tc4t-winlinux-retail2\src\logic.h
+
+1507658374 source:z:\vm-share\tc4t-winlinux-retail2\src\input.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1507843245 source:z:\vm-share\tc4t-winlinux-retail2\src\interface.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interface.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1505590317 z:\vm-share\tc4t-winlinux-retail2\src\interface.h
+
+1507641675 source:z:\vm-share\tc4t-winlinux-retail2\src\logic.cpp
+	<cstdlib>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"logic.h"
+	"audio.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+
+1507853586 source:z:\vm-share\tc4t-winlinux-retail2\src\main.cpp
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"input.h"
+	"screens.h"
+	"interface.h"
+	"audio.h"
+	"data.h"
+	"logic.h"
+
+1426352808 source:z:\vm-share\tc4t-winlinux-retail2\src\resources.rc
+
+1507907692 source:z:\vm-share\tc4t-winlinux-retail2\src\screens.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+	"interface.h"
+	"data.h"
+	"logic.h"
+	"audio.h"
+
+1507909672 source:z:\vm-share\tc4t-winlinux-retail2\src\visuals.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"screens.h"
+
+1512470376 source:e:\tc4t-winlinux-retail2\src\audio.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"audio.h"
+	"screens.h"
+	"visuals.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<iconv.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\begin_code.h
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\close_code.h
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896993 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2-2.0.4\i686-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896994 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_image-2.0.1\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896994 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_mixer-2.0.1\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1509896994 e:\tc4t-winlinux-retail2\sdl-2_0_4\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1512427839 e:\tc4t-winlinux-retail2\src\audio.h
+
+1512427838 e:\tc4t-winlinux-retail2\src\screens.h
+
+1512477350 e:\tc4t-winlinux-retail2\src\visuals.h
+
+1512472864 source:e:\tc4t-winlinux-retail2\src\data.cpp
+	<fstream>
+	<string.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"data.h"
+	"audio.h"
+	"input.h"
+	"logic.h"
+	"visuals.h"
+
+1512470166 e:\tc4t-winlinux-retail2\src\data.h
+
+1512427838 e:\tc4t-winlinux-retail2\src\input.h
+
+1512427838 e:\tc4t-winlinux-retail2\src\logic.h
+
+1512427839 source:e:\tc4t-winlinux-retail2\src\input.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1512470421 source:e:\tc4t-winlinux-retail2\src\interface.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interface.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1512427838 e:\tc4t-winlinux-retail2\src\interface.h
+
+1512471085 source:e:\tc4t-winlinux-retail2\src\logic.cpp
+	<cstdlib>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"logic.h"
+	"audio.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+
+1512431848 source:e:\tc4t-winlinux-retail2\src\main.cpp
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"input.h"
+	"screens.h"
+	"interface.h"
+	"audio.h"
+	"data.h"
+	"logic.h"
+
+1509896994 source:e:\tc4t-winlinux-retail2\src\resources.rc
+
+1512491973 source:e:\tc4t-winlinux-retail2\src\screens.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+	"interface.h"
+	"data.h"
+	"logic.h"
+	"audio.h"
+
+1512477564 source:e:\tc4t-winlinux-retail2\src\visuals.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"screens.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<sal.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\begin_code.h
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\close_code.h
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<mbarrier.h>
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<mmintrin.h>
+	<mm3dnow.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786981 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508786982 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl-2_0_7\sdl2-devel-2.0.7-mingw\sdl2-2.0.7\i686-w64-mingw32\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508772769 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl2_image\sdl2_image-devel-2.0.2-mingw\sdl2_image-2.0.2\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1508772768 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl2_mixer\sdl2_mixer-devel-2.0.2-mingw\sdl2_mixer-2.0.2\i686-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1454362933 e:\tc4t-winlinux-retail2\sdl-2_0_7\sdl2_ttf\sdl2_ttf-devel-2.0.14-mingw\sdl2_ttf-2.0.14\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1606343271 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"audio.h"
+	"screens.h"
+	"visuals.h"
+
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -44,12 +1315,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_main.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_stdinc.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -78,27 +1349,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_config.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_platform.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\begin_code.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\close_code.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\close_code.h
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_assert.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_atomic.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -106,7 +1377,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_audio.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -116,25 +1387,25 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_error.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_endian.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_mutex.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_thread.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -145,18 +1416,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_rwops.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_clipboard.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -175,7 +1446,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_events.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -189,7 +1460,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_video.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -197,13 +1468,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_pixels.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_rect.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -211,7 +1482,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_surface.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -220,11 +1491,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_blendmode.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_keyboard.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -232,27 +1503,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_keycode.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_scancode.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_mouse.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_joystick.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -260,11 +1531,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_quit.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_gesture.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -272,71 +1543,71 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_touch.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_filesystem.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_haptic.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_hints.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_loadso.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_log.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_messagebox.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_metal.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_metal.h
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_power.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_render.h
+1583887077 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_sensor.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_sensor.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_shape.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_shape.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -345,7 +1616,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_system.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -353,24 +1624,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_timer.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl_version.h
+1583887078 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2_image-2.0.5\x86_64-w64-mingw32\include\sdl2\sdl_image.h
+1561866768 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2_image-2.0.5\i686-w64-mingw32\include\sdl2\sdl_image.h
 	"SDL.h"
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2_mixer-2.0.4\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+1540994392 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2_mixer-2.0.4\i686-w64-mingw32\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
 	"SDL_rwops.h"
 	"SDL_audio.h"
@@ -379,18 +1650,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1589170146 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl2_0_12\sdl2_ttf-2.0.15\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+1547322281 c:\users\jlp\desktop\tc4t-winlinux-retail2\sdl-2_0_12\sdl2_ttf-2.0.15\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
 
-1593130863 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
+1512427839 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\audio.h
 
-1590617894 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
+1512427838 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.h
 
-1592329480 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
+1512477350 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.h
 
-1590609196 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.cpp
+1512472864 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.cpp
 	<fstream>
 	<string.h>
 	"SDL.h"
@@ -403,13 +1674,13 @@
 	"logic.h"
 	"visuals.h"
 
-1590514826 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.h
+1512470166 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\data.h
 
-1590624348 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.h
+1512427838 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.h
 
-1593114502 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
+1512427838 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.h
 
-1592860969 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
+1512427839 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\input.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -422,7 +1693,7 @@
 	"audio.h"
 	"logic.h"
 
-1590614852 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.cpp
+1512470421 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -436,13 +1707,10 @@
 	"audio.h"
 	"logic.h"
 
-1590614852 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.h
+1512427838 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interface.h
 
-1593116117 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
+1512471085 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\logic.cpp
 	<cstdlib>
-	<math.h>
-	<fstream>
-	<string.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -453,7 +1721,7 @@
 	"input.h"
 	"visuals.h"
 
-1593130944 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
+1512431848 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -464,17 +1732,16 @@
 	"visuals.h"
 	"input.h"
 	"screens.h"
-	"interfaces.h"
+	"interface.h"
 	"audio.h"
 	"data.h"
 	"logic.h"
 
-1426349210 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
+1509896994 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\resources.rc
 
-1593131058 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
+1606343520 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\screens.cpp
 	<stdio.h>
 	<cstring>
-	<stdlib.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -482,37 +1749,18 @@
 	"screens.h"
 	"input.h"
 	"visuals.h"
-	"interfaces.h"
+	"interface.h"
 	"data.h"
 	"logic.h"
 	"audio.h"
 
-1592861169 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
-	<stdio.h>
-	<cstring>
-	<fstream>
-	<sstream>
-	<iostream>
-	"SDL.h"
-	"SDL_image.h"
-	"SDL_mixer.h"
-	"SDL_ttf.h"
-	"visuals.h"
-	"screens.h"
-
-1590688432 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interfaces.cpp
+1606343411 source:c:\users\jlp\desktop\tc4t-winlinux-retail2\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
 	"SDL_ttf.h"
-	"interfaces.h"
-	"input.h"
 	"visuals.h"
 	"screens.h"
-	"audio.h"
-	"logic.h"
-
-1590684582 c:\users\jlp\desktop\tc4t-winlinux-retail2\src\interfaces.h
 

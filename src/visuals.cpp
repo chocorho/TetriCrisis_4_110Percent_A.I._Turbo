@@ -1,30 +1,25 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 #include <stdio.h>
 #include <cstring>
-
-#include <fstream>
-#include <sstream>
-
-#include <iostream>
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -145,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''TetriCrisis 4 110% A.I. Turbo'' - (C)2020 By 16BitSoft Inc."
+    Window = SDL_CreateWindow("''TetriCrisis 4 110% A.I. Turbo'' - (C)2017 By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -171,6 +166,7 @@ SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
         return(false);
     }
     else  printf("SDL2 renderer created.\n");
+
 
     return(true);
 }
@@ -268,9 +264,6 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/Crack.png");
                 break;
 
-            case 156:
-                strcpy(filePath, "data/visuals/Download-Source-Button.png");
-                break;
 
             default:
                 break;
@@ -461,17 +454,21 @@ int textureAccess;
 int textureWidth;
 int textureHeight;
 
-    for (int index = 1000; index < 1010; index++)
+    for (int index = 999; index < 1010; index++)
     {
         Sprites[index].Texture = NULL;
     }
 
-    for (int index = 1000; index < 1010; index++)
+    for (int index = 999; index < 1010; index++)
     {
         strcpy(filePath, "~");
 
         switch(index)
         {
+            case 999:
+                strcpy(filePath, "data/visuals/Letter-Tile.png");
+                break;
+
             case 1000:
                 strcpy(filePath, "data/visuals/Button-Selector-Left.png");
                 break;
@@ -544,126 +541,13 @@ int textureHeight;
             else if (index == 1009)  strcpy(buttonText, "Back\0");
 
             SDL_Color textColor = { 0, 0, 0, 255 };
-            SDL_Color outlineColor = { 205, 205, 205, 255 };
+            SDL_Color outlineColor = { 255, 255, 255, 255 };
             SDL_Surface *text;
             SDL_Surface *textOutline;
             SDL_Rect destRect;
 
             text = TTF_RenderText_Blended(Font[0], buttonText, textColor);
             textOutline = TTF_RenderText_Solid(Font[0], buttonText, outlineColor);
-
-            for (int posY = -2; posY < 3; posY++)
-            {
-                for (int posX = -2; posX < 3; posX++)
-                {
-                    destRect.x = (tempSurface->w / 2) - (text->w / 2) + posX;
-                    destRect.y = (tempSurface->h / 2) - (text->h / 2) + posY;
-
-                    SDL_BlitSurface(textOutline, NULL, tempSurface, &destRect);
-                }
-            }
-
-            destRect.x = (tempSurface->w / 2) - (text->w / 2);
-            destRect.y = (tempSurface->h / 2) - (text->h / 2);
-
-            SDL_BlitSurface(text, NULL, tempSurface, &destRect);
-
-            SDL_FreeSurface(text);
-            SDL_FreeSurface(textOutline);
-        }
-
-        if (filePath[0] != '~')
-        {
-            Sprites[index].Texture = SDL_CreateTextureFromSurface(Renderer, tempSurface);
-
-            Sprites[index].ScreenX = 320;
-            Sprites[index].ScreenY = 240;
-            Sprites[index].ScaleX = 1.0;
-            Sprites[index].ScaleY = 1.0;
-            Sprites[index].RotationDegree = 0;
-            Sprites[index].RedHue = 255;
-            Sprites[index].GreenHue = 255;
-            Sprites[index].BlueHue = 255;
-            Sprites[index].Transparency = 255;
-            Sprites[index].Smooth = false;
-            Sprites[index].FlipX = false;
-            Sprites[index].FlipY = false;
-
-            Sprites[index].AnimationTimer = 0;
-
-            SDL_QueryTexture(Sprites[index].Texture, &textureFormat, &textureAccess, &textureWidth, &textureHeight);
-            Sprites[index].TextureWidthOriginal = textureWidth;
-            Sprites[index].TextureHeightOriginal = textureHeight;
-
-            SDL_FreeSurface(tempSurface);
-        }
-    }
-
-    if ( LoadCharacterTilesIntoMemory() == false)  return(false);
-
-    return(true);
-}
-
-//-------------------------------------------------------------------------------------------------
-bool Visuals::LoadCharacterTilesIntoMemory(void)
-{
-char filePath[256];
-SDL_Surface *tempSurface = NULL;
-Uint32 textureFormat;
-int textureAccess;
-int textureWidth;
-int textureHeight;
-std::string characterArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&0123456789+_<";
-char *base_path = SDL_GetBasePath();
-
-    for (int index = 300; index < 373; index++)
-    {
-        Sprites[index].Texture = NULL;
-    }
-
-    for (int index = 300; index < 373; index++)
-    {
-        strcpy(filePath, "~");
-        strcpy(filePath, base_path);
-        strcat(filePath, "data/visuals/Letter-Tile.png");
-
-        if (filePath[0] != '~')
-        {
-            tempSurface = IMG_Load(filePath);
-
-            if (!tempSurface)
-            {
-                printf( "Image loading failed: %s\n", IMG_GetError() );
-                CoreFailure = true;
-                return(false);
-            }
-        }
-
-        if (index > 299 && index < 373)
-        {
-            std::string buttonText;
-            if (index < 372)  buttonText = characterArray.substr(index-300, 1);
-            else  buttonText = "End\0";
-
-            SDL_Color textColor = { 0, 0, 0, 255 };
-            SDL_Color outlineColor = { 205, 205, 205, 255 };
-            SDL_Surface *text = NULL;
-            SDL_Surface *textOutline = NULL;
-            SDL_Rect destRect;
-
-            char stringToCharArray[5];
-            strcpy( stringToCharArray, buttonText.c_str() );
-
-            if (index != 372)
-            {
-                text = TTF_RenderText_Blended(Font[0], stringToCharArray, textColor);
-                textOutline = TTF_RenderText_Solid(Font[0], stringToCharArray, outlineColor);
-            }
-            else if (index == 372)
-            {
-                text = TTF_RenderText_Blended(Font[2], stringToCharArray, textColor);
-                textOutline = TTF_RenderText_Solid(Font[2], stringToCharArray, outlineColor);
-            }
 
             for (int posY = -2; posY < 3; posY++)
             {
@@ -798,75 +682,47 @@ char *reg = new char[2];
 sprintf(copyright, "%c", 0xA9);
 sprintf(reg, "%c", 0xAE);
 
-    if ( LoadStaffTextIntoMemory("TM", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory(" ", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("TetriCrisis 4 110% A.I. Turbo", 0) == false)  return(false);
-    strcpy(textToDisplay, copyright);
-    strcat(textToDisplay, "2020, By 16BitSoft Inc.");
+    strcpy(textToDisplay, "Team www.16BitSoft.com");
     if ( LoadStaffTextIntoMemory(textToDisplay, 255) == false)  return(false);
-
-    strcpy(textToDisplay, "Original Tetris");
-    strcat(textToDisplay, reg);
+    strcpy(textToDisplay, "Original Tetris(R)");
     strcat(textToDisplay, " Video Game Concept By:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
-
     if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' Game Engine Programmer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''Yiyuan Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Lead Game Designer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Lead Game Programmer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Lead Game Tester:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Lead Graphic Artist:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
-
-    strcpy(textToDisplay, "Microsoft");
-    strcat(textToDisplay, reg);
-    strcat(textToDisplay, " Windows");
-    strcat(textToDisplay, reg);
+    strcpy(textToDisplay, "Microsoft(R)");
+    strcat(textToDisplay, " Windows(R)");
     strcat(textToDisplay, " Technical Advisors:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
-
     if ( LoadStaffTextIntoMemory("Linux Technical Advisors:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''JeZ+Lee''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
-
-    strcpy(textToDisplay, "Apple");
-    strcat(textToDisplay, reg);
-    strcat(textToDisplay, " Mac");
-    strcat(textToDisplay, reg);
-    strcat(textToDisplay, " OS X");
-    strcat(textToDisplay, reg);
+    strcpy(textToDisplay, "Apple(R)");
+    strcat(textToDisplay, " Mac(R)");
+    strcat(textToDisplay, " OS X(R)");
     strcat(textToDisplay, " Technical Advisor:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Someone?", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("Email: ''Admin@16BitSoft.com'' To Help!", 255) == false)  return(false);
-
+    if ( LoadStaffTextIntoMemory("Email: ''JeZxLee@16BitSoft.com'' To Help!", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Support Designers/Programmers/Testers:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
-
     if ( LoadStaffTextIntoMemory("Support Game Beta Testers:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''XaeL''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Blitz''", 255) == false)  return(false);
@@ -885,7 +741,10 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Zaphod77''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Sparks''", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("''A 110% By Team www.16BitSoft.com''", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''A 110% By Team www.16BitSoft.com!''", 0) == false)  return(false);
 
     return(true);
 }
@@ -956,7 +815,7 @@ int textureHeight;
 bool Visuals::LoadFontsIntoMemory(void)
 {
     Font[0] = NULL;
-    if ( !(Font[0] = TTF_OpenFont("data/fonts/Font-01.ttf", 23)) )
+    if ( !(Font[0] = TTF_OpenFont("data/fonts/Font-01.ttf", 27)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;
@@ -995,6 +854,14 @@ bool Visuals::LoadFontsIntoMemory(void)
         return false;
     }
 
+    Font[5] = NULL;
+    if ( !(Font[5] = TTF_OpenFont("data/fonts/Font-02.ttf", 15)) )
+    {
+        printf( "Error loading font: %s\n", TTF_GetError() );
+        CoreFailure = true;
+        return false;
+    }
+
     printf("Loaded all TTF fonts into memory.\n");
 
     return true;
@@ -1027,6 +894,10 @@ void Visuals::ClearTextCache(void)
 
         TextCachedWidth[index] = 0;
         TextCachedHeight[index] = 0;
+
+        TextCacheRed[index] = -1;
+        TextCacheGreen[index] = -1;
+        TextCacheBlue[index] = -1;
     }
 
     TextCacheCurrentIndex = 0;
@@ -1053,6 +924,9 @@ int textCacheCheckIndex = NumberOfTextsCached;
 bool sentenceMatches = true;
 bool sentenceIsInCache = false;
 
+    if (font != Font[5])  posY-=3;
+    else  posY+=2;
+
     for (textCacheCheckIndex = 0; textCacheCheckIndex < NumberOfTextsCached; textCacheCheckIndex++)
     {
         sentenceMatches = true;
@@ -1070,7 +944,12 @@ bool sentenceIsInCache = false;
             if (TextCachedScreenX[textCacheCheckIndex] == posX && TextCachedScreenY[textCacheCheckIndex] == posY)
             {
                 sentenceIsInCache = true;
-                break;
+
+                if (TextCacheRed[textCacheCheckIndex] != textRed)  sentenceIsInCache = false;
+                if (TextCacheGreen[textCacheCheckIndex] != textGreen)  sentenceIsInCache = false;
+                if (TextCacheBlue[textCacheCheckIndex] != textBlue)  sentenceIsInCache = false;
+
+                if (sentenceIsInCache == true)  break;
             }
         }
     }
@@ -1086,11 +965,31 @@ bool sentenceIsInCache = false;
         TextCachedScreenY[TextCacheCurrentIndex] = 240;
         TextCachedWidth[TextCacheCurrentIndex] = 0;
         TextCachedHeight[TextCacheCurrentIndex] = 0;
+        TextCacheRed[TextCacheCurrentIndex] = textRed;
+        TextCacheGreen[TextCacheCurrentIndex] = textGreen;
+        TextCacheBlue[TextCacheCurrentIndex] = textBlue;
 
-        text = TTF_RenderText_Solid(font, textToDisplay, textColor);
+        text = TTF_RenderText_Blended(font, textToDisplay, textColor);
         textOutline = TTF_RenderText_Solid(font, textToDisplay, outlineColor);
 
         strcpy(TextCachedText[TextCacheCurrentIndex], textToDisplay);
+
+        printf("(");
+        if (TextCacheCurrentIndex < 10)  printf("0");
+        printf("%i", TextCacheCurrentIndex);
+        printf(")");
+
+        for ( Uint16 index = 0; index < strlen(TextCachedText[TextCacheCurrentIndex]); index++ )
+        {
+            printf("%c", TextCachedText[TextCacheCurrentIndex][index]);
+        }
+
+        printf(" | ");
+        for ( Uint16 index = 0; index < strlen(textToDisplay); index++ )
+        {
+            printf("%c", textToDisplay[index]);
+        }
+        printf("\n");
 
         TextCachedScreenX[TextCacheCurrentIndex] = posX;
         TextCachedScreenY[TextCacheCurrentIndex] = posY;

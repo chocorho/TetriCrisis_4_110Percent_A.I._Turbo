@@ -1,23 +1,23 @@
 /*
-  "TetriCrisis 4 110% A.I. Turbo" - Open-source cross-platform puzzle game.
-  Copyright (C) 2020 - 16BitSoft Inc.
+    Copyright 2017 Team www.16BitSoft.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-  Email the author at: www.16BitSoft.com
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 #include <stdio.h>
 #include <cstring>
 
@@ -48,13 +48,6 @@ Input::Input(void)
     DelayAllUserInput = 0;
 
     KeyOnKeyboardPressedByUser = -1;
-
-    EnterKeyPressed = false;
-    BackSpaceKeyPressed = false;
-    SpacebarKeyPressed = false;
-    EscapeKeyPressed = false;
-    F1KeyPressed = false;
-    F2KeyPressed = false;
 
     MouseButtonPressed[0] = false;
     MouseButtonPressed[1] = false;
@@ -108,12 +101,10 @@ Input::Input(void)
 
     for (int index = 0; index < 5; index++)
     {
-        JoystickDirectionHorizonal[index] = CENTER;
+        JoystickDirectionHorizontal[index] = CENTER;
         JoystickDirectionVertical[index] = CENTER;
         JoystickButtonOne[index] = OFF;
         JoystickButtonTwo[index] = OFF;
-        JoystickButton1Pressed[index] = false;
-        JoystickButton2Pressed[index] = false;
     }
 
     KeyboardSetupProcess = KeyboardSetupNotStarted;
@@ -224,39 +215,24 @@ int returnValue = -1;
 //-------------------------------------------------------------------------------------------------
 void Input::GetAllUserInput(void)
 {
-    if ( EscapeKeyPressed == true )
+    if (KeyOnKeyboardPressedByUser == SDLK_ESCAPE)
     {
         if (screens->ScreenToDisplay == TitleScreen)  EXIT_Game = true;
-        else
-        {
-            logic->AbortedGame = true;
-            screens->ScreenTransitionStatus = FadeOut;
-        }
+        else  screens->ScreenTransitionStatus = FadeOut;
     }
 
     KeyOnKeyboardPressedByUser = -1;
 
-    EnterKeyPressed = false;
-    BackSpaceKeyPressed = false;
-    SpacebarKeyPressed = false;
-    EscapeKeyPressed = false;
-    F1KeyPressed = false;
-    F2KeyPressed = false;
-
     MouseButtonPressed[0] = false;
-
     MouseButtonPressed[1] = false;
 
     for (int index = 0; index < 5; index++)
     {
-        JoystickDirectionHorizonal[index] = CENTER;
+        JoystickDirectionHorizontal[index] = CENTER;
         JoystickDirectionVertical[index] = CENTER;
         JoystickButtonOne[index] = OFF;
         JoystickButtonTwo[index] = OFF;
     }
-
-    strcpy(KeycodeName, "");
-    strcpy(KeycodeChar, "");
 
     if (DelayAllUserInput > 0)
     {
@@ -265,7 +241,7 @@ void Input::GetAllUserInput(void)
     }
 
     KeyModState = SDL_GetModState();
-    if (KeyModState & KMOD_SHIFT)  ShiftKeyPressed = true;
+    if ( (KeyModState & KMOD_LSHIFT) || (KeyModState & KMOD_RSHIFT) )  ShiftKeyPressed = true;
     else  ShiftKeyPressed = false;
 
     while ( SDL_PollEvent(&Event) )
@@ -286,26 +262,10 @@ void Input::GetAllUserInput(void)
                 break;
 
             case SDL_KEYDOWN:
-                {
-                    char keyDown = Event.key.keysym.scancode;
+                KeyOnKeyboardPressedByUser = SDL_GetKeyFromScancode(Event.key.keysym.scancode);
 
-                    if (keyDown == SDL_SCANCODE_RETURN)  EnterKeyPressed = true;
-                    else if (keyDown == SDL_SCANCODE_BACKSPACE)  BackSpaceKeyPressed = true;
-                    else if (keyDown == SDL_SCANCODE_SPACE)  SpacebarKeyPressed = true;
-                    else if (keyDown == SDL_SCANCODE_ESCAPE)  EscapeKeyPressed = true;
-                    else if (keyDown == SDL_SCANCODE_F1)  F1KeyPressed = true;
-                    else if (keyDown == SDL_SCANCODE_F2)  F2KeyPressed = true;
-                }
-                break;
-
-            case SDL_TEXTINPUT:
-                for(int i=0; i<SDL_TEXTINPUTEVENT_TEXT_SIZE; ++i)
-                {
-                    char c = Event.text.text[0];
-                    if(c < ' ' || c > '~')  break;
-
-                    KeyOnKeyboardPressedByUser = (char)c;
-                }
+                if (KeyOnKeyboardPressedByUser == SDLK_LSHIFT || KeyOnKeyboardPressedByUser == SDLK_RSHIFT)
+                    KeyOnKeyboardPressedByUser = -1;
                 break;
 
             default:
@@ -332,19 +292,19 @@ void Input::GetAllUserInput(void)
         if      (keyboardState[   SDL_SCANCODE_UP])  JoystickDirectionVertical[Keyboard] = UP;
         else if (keyboardState[ SDL_SCANCODE_DOWN])  JoystickDirectionVertical[Keyboard] = DOWN;
 
-        if      (keyboardState[ SDL_SCANCODE_LEFT])  JoystickDirectionHorizonal[Keyboard] = LEFT;
-        else if (keyboardState[SDL_SCANCODE_RIGHT])  JoystickDirectionHorizonal[Keyboard] = RIGHT;
+        if      (keyboardState[ SDL_SCANCODE_LEFT])  JoystickDirectionHorizontal[Keyboard] = LEFT;
+        else if (keyboardState[SDL_SCANCODE_RIGHT])  JoystickDirectionHorizontal[Keyboard] = RIGHT;
     }
     else if (screens->ScreenToDisplay == PlayingGameScreen && usingCustomKeys == true)
     {
-        if      (KeyOnKeyboardPressedByUser == UserDefinedKeyButtonOne && screens->ScreenToDisplay != NameInputKeyboardScreen)  JoystickButtonOne[Keyboard] = ON;
-        else if (KeyOnKeyboardPressedByUser == UserDefinedKeyButtonTwo && screens->ScreenToDisplay != NameInputKeyboardScreen)  JoystickButtonTwo[Keyboard] = ON;
+        if      (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyButtonOne) ] && screens->ScreenToDisplay != NameInputKeyboardScreen)  JoystickButtonOne[Keyboard] = ON;
+        else if (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyButtonTwo) ] && screens->ScreenToDisplay != NameInputKeyboardScreen)  JoystickButtonTwo[Keyboard] = ON;
 
-        if      (KeyOnKeyboardPressedByUser == UserDefinedKeyUP)  JoystickDirectionVertical[Keyboard] = UP;
-        else if (KeyOnKeyboardPressedByUser == UserDefinedKeyDOWN)  JoystickDirectionVertical[Keyboard] = DOWN;
+        if      (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyUP) ])  JoystickDirectionVertical[Keyboard] = UP;
+        else if (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyDOWN) ])  JoystickDirectionVertical[Keyboard] = DOWN;
 
-        if      (KeyOnKeyboardPressedByUser == UserDefinedKeyLEFT)  JoystickDirectionHorizonal[Keyboard] = LEFT;
-        else if (KeyOnKeyboardPressedByUser == UserDefinedKeyRIGHT)  JoystickDirectionHorizonal[Keyboard] = RIGHT;
+        if      (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyLEFT) ])  JoystickDirectionHorizontal[Keyboard] = LEFT;
+        else if (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyRIGHT) ])  JoystickDirectionHorizontal[Keyboard] = RIGHT;
     }
 
 //------------------------------------------------------------------------
@@ -376,28 +336,7 @@ void Input::GetAllUserInput(void)
             if (MouseButtonWasClicked[index] == false)
             {
                 MouseButtonPressed[index] = true;
-
-                if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[0].PlayerStatus != GameOver && logic->PlayerData[0].PlayerInput == Mouse
-                && logic->MouseMoveOrRotate == MouseMove)
-                {
-
-                }
-                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[1].PlayerStatus != GameOver && logic->PlayerData[1].PlayerInput == Mouse
-                && logic->MouseMoveOrRotate == MouseMove)
-                {
-
-                }
-                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[2].PlayerStatus != GameOver && logic->PlayerData[2].PlayerInput == Mouse
-                && logic->MouseMoveOrRotate == MouseMove)
-                {
-
-                }
-                else if (screens->ScreenToDisplay == PlayingGameScreen && logic->PlayerData[3].PlayerStatus != GameOver && logic->PlayerData[3].PlayerInput == Mouse
-                && logic->MouseMoveOrRotate == MouseMove)
-                {
-
-                }
-                else  MouseButtonWasClicked[index] = true;
+                MouseButtonWasClicked[index] = true;
             }
         }
         else  MouseButtonWasClicked[index] = false;
@@ -411,8 +350,8 @@ void Input::GetAllUserInput(void)
 		Sint16 joystickXmovement = 0;
         if (JoyLEFT[0] > Axis7)
         {
-            if ( SDL_JoystickGetButton(JoystickDeviceOne, JoyLEFT[0]-8) )  JoystickDirectionHorizonal[JoystickOne] = LEFT;
-            else  if ( SDL_JoystickGetButton(JoystickDeviceOne, JoyRIGHT[0]-8) )  JoystickDirectionHorizonal[JoystickOne] = RIGHT;
+            if ( SDL_JoystickGetButton(JoystickDeviceOne, JoyLEFT[0]-8) )  JoystickDirectionHorizontal[JoystickOne] = LEFT;
+            else  if ( SDL_JoystickGetButton(JoystickDeviceOne, JoyRIGHT[0]-8) )  JoystickDirectionHorizontal[JoystickOne] = RIGHT;
         }
         else joystickXmovement = SDL_JoystickGetAxis(JoystickDeviceOne, JoyLEFT[0]);
 
@@ -435,11 +374,11 @@ void Input::GetAllUserInput(void)
 
 		if (joystickXmovement < -16383)
 		{
-            JoystickDirectionHorizonal[JoystickOne] = LEFT;
+            JoystickDirectionHorizontal[JoystickOne] = LEFT;
 		}
 		else if (joystickXmovement > 16383)
 		{
-            JoystickDirectionHorizonal[JoystickOne] = RIGHT;
+            JoystickDirectionHorizontal[JoystickOne] = RIGHT;
 		}
 
         if (JoyButton1[0] > Axis7)
@@ -470,8 +409,8 @@ void Input::GetAllUserInput(void)
 		Sint16 joystickXmovement = 0;
         if (JoyLEFT[1] > Axis7)
         {
-            if ( SDL_JoystickGetButton(JoystickDeviceTwo, JoyLEFT[1]-8) )  JoystickDirectionHorizonal[JoystickTwo] = LEFT;
-            else  if ( SDL_JoystickGetButton(JoystickDeviceTwo, JoyRIGHT[1]-8) )  JoystickDirectionHorizonal[JoystickTwo] = RIGHT;
+            if ( SDL_JoystickGetButton(JoystickDeviceTwo, JoyLEFT[1]-8) )  JoystickDirectionHorizontal[JoystickTwo] = LEFT;
+            else  if ( SDL_JoystickGetButton(JoystickDeviceTwo, JoyRIGHT[1]-8) )  JoystickDirectionHorizontal[JoystickTwo] = RIGHT;
         }
         else joystickXmovement = SDL_JoystickGetAxis(JoystickDeviceTwo, JoyLEFT[1]);
 
@@ -494,11 +433,11 @@ void Input::GetAllUserInput(void)
 
 		if (joystickXmovement < -16383)
 		{
-            JoystickDirectionHorizonal[JoystickTwo] = LEFT;
+            JoystickDirectionHorizontal[JoystickTwo] = LEFT;
 		}
 		else if (joystickXmovement > 16383)
 		{
-            JoystickDirectionHorizonal[JoystickTwo] = RIGHT;
+            JoystickDirectionHorizontal[JoystickTwo] = RIGHT;
 		}
 
         if (JoyButton1[1] > Axis7)
@@ -529,8 +468,8 @@ void Input::GetAllUserInput(void)
 		Sint16 joystickXmovement = 0;
         if (JoyLEFT[2] > Axis7)
         {
-            if ( SDL_JoystickGetButton(JoystickDeviceThree, JoyLEFT[2]-8) )  JoystickDirectionHorizonal[JoystickThree] = LEFT;
-            else  if ( SDL_JoystickGetButton(JoystickDeviceThree, JoyRIGHT[2]-8) )  JoystickDirectionHorizonal[JoystickThree] = RIGHT;
+            if ( SDL_JoystickGetButton(JoystickDeviceThree, JoyLEFT[2]-8) )  JoystickDirectionHorizontal[JoystickThree] = LEFT;
+            else  if ( SDL_JoystickGetButton(JoystickDeviceThree, JoyRIGHT[2]-8) )  JoystickDirectionHorizontal[JoystickThree] = RIGHT;
         }
         else joystickXmovement = SDL_JoystickGetAxis(JoystickDeviceThree, JoyLEFT[2]);
 
@@ -553,11 +492,11 @@ void Input::GetAllUserInput(void)
 
 		if (joystickXmovement < -16383)
 		{
-            JoystickDirectionHorizonal[JoystickThree] = LEFT;
+            JoystickDirectionHorizontal[JoystickThree] = LEFT;
 		}
 		else if (joystickXmovement > 16383)
 		{
-            JoystickDirectionHorizonal[JoystickThree] = RIGHT;
+            JoystickDirectionHorizontal[JoystickThree] = RIGHT;
 		}
 
         if (JoyButton1[2] > Axis7)
@@ -582,18 +521,21 @@ void Input::GetAllUserInput(void)
     }
 //------------------------------------------------------------------------
 
-    JoystickDirectionHorizonal[Any] = CENTER;
-    JoystickDirectionVertical[Any] = CENTER;
-    JoystickButtonOne[Any] = OFF;
-    JoystickButtonTwo[Any] = OFF;
-
     for (int index = 0; index < 4; index++)
     {
-        if (JoystickDirectionHorizonal[Any] == CENTER)  JoystickDirectionHorizonal[Any] = JoystickDirectionHorizonal[index];
+        if (JoystickDirectionHorizontal[Any] == CENTER)  JoystickDirectionHorizontal[Any] = JoystickDirectionHorizontal[index];
         if (JoystickDirectionVertical[Any] == CENTER)  JoystickDirectionVertical[Any] = JoystickDirectionVertical[index];
-        if (JoystickButtonOne[Any] == OFF)  JoystickButtonOne[Any] = JoystickButtonOne[index];
+        if (JoystickButtonOne[Any] == OFF && JoystickButtonOnePressed[index] == false)  JoystickButtonOne[Any] = JoystickButtonOne[index];
         if (JoystickButtonTwo[Any] == OFF)  JoystickButtonTwo[Any] = JoystickButtonTwo[index];
     }
 
+    if (screens->ScreenToDisplay != NameInputJoystickScreen)
+    {
+        for (int index = 0; index < 4; index++)
+        {
+            if (JoystickButtonOne[index] == ON)  JoystickButtonOnePressed[index] = true;
+            else  JoystickButtonOnePressed[index] = false;
+        }
+    }
 //------------------------------------------------------------------------
 }
