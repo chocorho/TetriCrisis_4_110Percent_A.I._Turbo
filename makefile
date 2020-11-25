@@ -1,5 +1,5 @@
-# "TetriCrisis 4 110% A.I.Turbo[TM]" - MAKEFILE by JeZ+Lee & mattmatteh...
-# (C)opyright 2014 By www.16BitSoft.com
+# "TetriCrisis 4 110% A.I. Turbo[TM]" - MAKEFILE by JeZ+Lee & mattmatteh...
+# (C)opyright 2017 By www.16BitSoft.com
 
 TARGET = tc4ai
 
