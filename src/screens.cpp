@@ -1,5 +1,5 @@
 /*
-    Copyright 2017 Team www.16BitSoft.com
+    Copyright 2020 Team www.16BitSoft.com
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -243,6 +243,11 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(1, 0);
 
+        audio->SoundVolume = 0;
+        audio->MusicVolume = 0;
+
+        audio->PlayMusic(0, -1);
+
         logic->PlayersCanJoin = false;
     }
 
@@ -313,7 +318,7 @@ void Screens::DisplayTitleScreen(void)
         visuals->DrawSpriteOntoScreenBuffer(3);
 
         visuals->DrawTextOntoScreenBuffer("A.I. 100,000+", visuals->Font[2]
-                                          , 585, 80+6+4, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                                          , 585+2, 80+6+4, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Line Average", visuals->Font[2]
                                           , 585, 96+6+4, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -2971,17 +2976,17 @@ void Screens::DisplayTestComputerSkillScreen(void)
             #endif
 
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX, 7
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX, 7+4
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-56, 62
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-56, 62+4
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+56, 62
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+56, 62+4
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
         }
 
