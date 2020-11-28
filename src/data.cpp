@@ -237,7 +237,7 @@ void Data::LoadHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4a-SDL2");
 char *pref_path = NULL;
 
     if (base_path)
@@ -371,7 +371,7 @@ void Data::SaveHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4a-SDL2");
 char *pref_path = NULL;
 
     if (base_path)

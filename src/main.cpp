@@ -127,4 +127,4 @@ int main( int argc, char* args[] )
     return(0);
 }
 
-// "A 110% By Team www.16BitSoft.com!"
+// "A 110% By Team 16BitSoft!"
