@@ -299,6 +299,7 @@ void Interface::DisplayAllArrowSetsOntoScreenBuffer(void)
                 visuals->Sprites[1002].ScreenX = 320;
                 visuals->Sprites[1002].ScreenY = ArrowSetGUIs[index].ScreenY;
                 visuals->Sprites[1002].Smooth = true;
+                visuals->Sprites[1002].BlueHue = 0;
                 visuals->Sprites[1002].Transparency = 60;
                 visuals->DrawSpriteOntoScreenBuffer(1002);
             }

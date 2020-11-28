@@ -45,7 +45,7 @@ Logic::Logic(void)
     CPUPlayerEnabled = 2;
 
     SelectedBackground = 0;
-    SelectedMusicTrack = 19;
+    SelectedMusicTrack = 2;
     NewGameGarbageHeight = 0;
 
     DisplayNextPiece = true;
@@ -1229,7 +1229,7 @@ void Logic::SetupForNewGame(void)
         PlayerData[2].Score = 32647654097;
         PlayerData[2].Level = 9905;
         PlayerData[2].Lines = 99052;
-        PlayerData[3].Score = 33539763964;
+        PlayerData[3].Score = 37539763964;
         PlayerData[3].Level = 9094;
         PlayerData[3].Lines = 90947;
     }
@@ -1273,6 +1273,8 @@ void Logic::SetupForNewGame(void)
            }
         }
     }
+
+//PlayerData[1].Level = 6;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -2047,12 +2049,12 @@ void Logic::ComputeComputerPlayerMove(void)
 
                 float testValue;
 
-                //--["Gift Of Sight" Tetris(R) A.I. Algorithm ~24,000+]---------------------------------------
+                //--["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]---------------------------------------
                 testValue = ( (3*PlayerData[Player].MoveTrappedHoles[posX][rot])
                             +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
                             +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
                             -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
-                //---------------------------------------["Gift Of Sight" Tetris(R) A.I. Algorithm ~24,000+]--
+                //---------------------------------------["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]--
 
                 if (PlayerData[Player].MoveCompletedLines[posX][rot] > 1)
                     testValue = ( 0 - (PlayerData[Player].MoveCompletedLines[posX][rot]*100) );

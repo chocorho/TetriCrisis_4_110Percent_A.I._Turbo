@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''TetriCrisis 4 110% A.I. Turbo'' - (C)2017 By Team 16BitSoft"
+    Window = SDL_CreateWindow("''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -208,7 +208,7 @@ int textureHeight;
                 break;
 
             case 2:
-                strcpy(filePath, "data/visuals/SaintBasilsCathedral-BG1.png");
+                strcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png");
                 break;
 
             case 3:
@@ -233,31 +233,31 @@ int textureHeight;
                 break;
 
             case 100:
-                strcpy(filePath, "data/visuals/SaintBasilsCathedral-BG1.png");
+                strcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png");
                 break;
 
             case 101:
-                strcpy(filePath, "data/visuals/MIG31-BG.png");
+                strcpy(filePath, "data/visuals/BG-MIG31.png");
                 break;
 
             case 102:
-                strcpy(filePath, "data/visuals/GT-R-BG.png");
+                strcpy(filePath, "data/visuals/BG-GT-R.png");
                 break;
 
             case 103:
-                strcpy(filePath, "data/visuals/NY-BG.png");
+                strcpy(filePath, "data/visuals/BG-NY.png");
                 break;
 
             case 104:
-                strcpy(filePath, "data/visuals/Van-Gogh-BG.png");
+                strcpy(filePath, "data/visuals/BG-Van-Gogh.png");
                 break;
 
             case 105:
-                strcpy(filePath, "data/visuals/Kittens-BG.png");
+                strcpy(filePath, "data/visuals/BG-Kittens.png");
                 break;
 
             case 106:
-                strcpy(filePath, "data/visuals/Psycho-BG.png");
+                strcpy(filePath, "data/visuals/BG-Psycho.png");
                 break;
 
             case 155:
@@ -683,46 +683,59 @@ sprintf(copyright, "%c", 0xA9);
 sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory(" ", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("TetriCrisis 4 110% A.I. Turbo", 0) == false)  return(false);
-    strcpy(textToDisplay, "Team www.16BitSoft.com");
+    if ( LoadStaffTextIntoMemory("''TetriCrisis 4 110% A.I. Turbo''", 0) == false)  return(false);
+    strcpy(textToDisplay, "Team 16BitSoft");
     if ( LoadStaffTextIntoMemory(textToDisplay, 255) == false)  return(false);
-    strcpy(textToDisplay, "Original Tetris(R)");
+
+    strcpy(textToDisplay, "Original Tetris");
     strcat(textToDisplay, " Video Game Concept By:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' Game Engine Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Lead Game Designer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Lead Game Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Lead Game Tester:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Lead Graphic Artist:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
-    strcpy(textToDisplay, "Microsoft(R)");
-    strcat(textToDisplay, " Windows(R)");
+
+    strcpy(textToDisplay, "Microsoft");
+    strcat(textToDisplay, " Windows");
     strcat(textToDisplay, " Technical Advisors:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Linux Technical Advisors:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
-    strcpy(textToDisplay, "Apple(R)");
-    strcat(textToDisplay, " Mac(R)");
-    strcat(textToDisplay, " OS X(R)");
-    strcat(textToDisplay, " Technical Advisor:");
+
+    strcpy(textToDisplay, "Apple");
+    strcat(textToDisplay, " macOS");
+    strcat(textToDisplay, " Technical Advisors:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Someone?", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("Email: ''JeZxLee@16BitSoft.com'' To Help!", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Email: ''JeZxLee @ 16BitSoft'' To Help!", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Support Designers/Programmers/Testers:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''fogobogo''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Support Game Beta Testers:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''XaeL''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Blitz''", 255) == false)  return(false);
@@ -744,7 +757,8 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''A 110% By Team www.16BitSoft.com!''", 0) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
 
     return(true);
 }
@@ -855,7 +869,7 @@ bool Visuals::LoadFontsIntoMemory(void)
     }
 
     Font[5] = NULL;
-    if ( !(Font[5] = TTF_OpenFont("data/fonts/Font-02.ttf", 15)) )
+    if ( !(Font[5] = TTF_OpenFont("data/fonts/Font-02.ttf", 15+3)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;
@@ -969,27 +983,10 @@ bool sentenceIsInCache = false;
         TextCacheGreen[TextCacheCurrentIndex] = textGreen;
         TextCacheBlue[TextCacheCurrentIndex] = textBlue;
 
-        text = TTF_RenderText_Blended(font, textToDisplay, textColor);
+        text = TTF_RenderText_Solid(font, textToDisplay, textColor);
         textOutline = TTF_RenderText_Solid(font, textToDisplay, outlineColor);
 
         strcpy(TextCachedText[TextCacheCurrentIndex], textToDisplay);
-
-        printf("(");
-        if (TextCacheCurrentIndex < 10)  printf("0");
-        printf("%i", TextCacheCurrentIndex);
-        printf(")");
-
-        for ( Uint16 index = 0; index < strlen(TextCachedText[TextCacheCurrentIndex]); index++ )
-        {
-            printf("%c", TextCachedText[TextCacheCurrentIndex][index]);
-        }
-
-        printf(" | ");
-        for ( Uint16 index = 0; index < strlen(textToDisplay); index++ )
-        {
-            printf("%c", textToDisplay[index]);
-        }
-        printf("\n");
 
         TextCachedScreenX[TextCacheCurrentIndex] = posX;
         TextCachedScreenY[TextCacheCurrentIndex] = posY;

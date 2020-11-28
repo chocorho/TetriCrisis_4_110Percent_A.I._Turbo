@@ -117,107 +117,107 @@ void Audio::SetupAudio(void)
         switch(index)
         {
             case 0:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Title-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Title.mod");
                 break;
 
             case 1:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-1-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-1.mod");
                 break;
 
             case 2:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-2-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-2.mod");
                 break;
 
             case 3:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-3-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-3.mod");
                 break;
 
             case 4:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-4-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-4.mod");
                 break;
 
             case 5:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-5-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-5.mod");
                 break;
 
             case 6:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-6-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-6.mod");
                 break;
 
             case 7:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-7-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-7.mod");
                 break;
 
             case 8:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-8-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-8.mod");
                 break;
 
             case 9:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-9-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-9.mod");
                 break;
 
             case 10:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-10-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-10.mod");
                 break;
 
             case 11:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-11-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-11.mod");
                 break;
 
             case 12:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-12-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-12.mod");
                 break;
 
             case 13:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-13-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-13.mod");
                 break;
 
             case 14:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-14-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-14.mod");
                 break;
 
             case 15:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-15-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-15.mod");
                 break;
 
             case 16:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-16-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-16.mod");
                 break;
 
             case 17:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-17-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-17.mod");
                 break;
 
             case 18:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-18-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-18.mod");
                 break;
 
             case 19:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-19-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-19.mod");
                 break;
 
             case 20:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-20-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-19.mod");
                 break;
 
             case 21:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-21-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-19.mod");
                 break;
 
             case 22:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-22-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-19.mod");
                 break;
 
             case 23:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Track-23-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Track-19.mod");
                 break;
 
             case 24:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Crisis-I-Mode-Level7-BGM.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Level7.mod");
                 break;
 
             case 25:
-                MusicTrack[index] = Mix_LoadMUS("data/music/Crisis-I-Mode-Ending-BGM.ogg");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Ending.mod");
                 break;
 
             default:
@@ -237,63 +237,63 @@ void Audio::SetupAudio(void)
         switch(index)
         {
             case 0:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Menu-MoveWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Menu-Move.ogg");
                 break;
 
             case 1:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Menu-ClickWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Menu-Click.ogg");
                 break;
 
             case 2:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Move-PieceWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Move-Piece.ogg");
                 break;
 
             case 3:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Piece-CollisionWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Piece-Collision.ogg");
                 break;
 
             case 4:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Piece-DropWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Piece-Drop.ogg");
                 break;
 
             case 5:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Piece-RotateWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Piece-Rotate.ogg");
                 break;
 
             case 6:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Line-ClearedWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Line-Cleared.ogg");
                 break;
 
             case 7:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Tetri-ClearedWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Tetri-Cleared.ogg");
                 break;
 
             case 8:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Level-UpWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Level-Up.ogg");
                 break;
 
             case 9:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Must-Think-In-RussianWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Must-Think-In-Russian.ogg");
                 break;
 
             case 10:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Incoming-LineWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Incoming-Line.ogg");
                 break;
 
             case 11:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Game-OverWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Game-Over.ogg");
                 break;
 
             case 12:
-                SoundFX[index] = Mix_LoadWAV("data/effects/CrackWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Crack.ogg");
                 break;
 
             case 13:
-                SoundFX[index] = Mix_LoadWAV("data/effects/Shall-We-Play-A-GameWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Shall-We-Play-A-Game.ogg");
                 break;
 
             case 14:
-                SoundFX[index] = Mix_LoadWAV("data/effects/SwordWav.ogg");
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Sword.ogg");
                 break;
 
             default:
@@ -331,117 +331,7 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
         printf( "Mix_PlayMusic: %s\n", Mix_GetError() );
     }
 
-    switch(CurrentlySelectedMusicTrack)
-    {
-        case 0:
-            SDL_SetWindowTitle(visuals->Window, "t.A.T.u. - ''All About Us''");
-            break;
-
-        case 1:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 00''");
-            break;
-
-        case 2:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 01''");
-            break;
-
-        case 3:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 02''");
-            break;
-
-        case 4:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 03''");
-            break;
-
-        case 5:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 04''");
-            break;
-
-        case 6:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 05''");
-            break;
-
-        case 7:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 06''");
-            break;
-
-        case 8:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 07''");
-            break;
-
-        case 9:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 08''");
-            break;
-
-        case 10:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 09''");
-            break;
-
-        case 11:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 10''");
-            break;
-
-        case 12:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 11''");
-            break;
-
-        case 13:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 12''");
-            break;
-
-        case 14:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 13''");
-            break;
-
-        case 15:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 14''");
-            break;
-
-        case 16:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 15''");
-            break;
-
-        case 17:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 16''");
-            break;
-
-        case 18:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 17''");
-            break;
-
-        case 19:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. InGame Track 18''");
-            break;
-
-        case 20:
-            SDL_SetWindowTitle(visuals->Window, "Pajama Party - '' Yo No Se' ''(D.J. Fading Twilight Remix)");
-            break;
-
-        case 21:
-            SDL_SetWindowTitle(visuals->Window, "Aria - ''Without You''(Russian Lyrics)");
-            break;
-
-        case 22:
-            SDL_SetWindowTitle(visuals->Window, "Europe - ''The Final Countdown''");
-            break;
-
-        case 23:
-            SDL_SetWindowTitle(visuals->Window, "Milli Vanilli - '' Girl You Know It's True ''(Numarx Remix)");
-            break;
-
-        case 24:
-            SDL_SetWindowTitle(visuals->Window, "D.J. Fading Twilight - ''T-Crisis 3 100% A.I. Crisis+Mode Level 7''");
-            break;
-
-        case 25:
-            SDL_SetWindowTitle(visuals->Window, "Sweet Sensation - ''Hooked On You''");
-            break;
-
-        default:
-            break;
-    }
-
-    if (MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - Team www.16BitSoft.com");
+    if (MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
 }
 
 //-------------------------------------------------------------------------------------------------

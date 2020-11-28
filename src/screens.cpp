@@ -276,7 +276,7 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         visuals->DrawTextOntoScreenBuffer("Bringing back old memories from the 16bit era!", visuals->Font[1]
                                           , 0, 307, JustifyCenter, 1, 255, 1, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("www.16BitSoft.com", visuals->Font[0]
+        visuals->DrawTextOntoScreenBuffer("Team 16BitSoft", visuals->Font[0]
                                           , 0, 447, JustifyCenter, 1, 255, 1, 1, 90, 1);
     }
 
@@ -344,10 +344,10 @@ void Screens::DisplayTitleScreen(void)
         visuals->Sprites[10].Transparency = 155;
         visuals->DrawSpriteOntoScreenBuffer(10);
 
-        visuals->DrawTextOntoScreenBuffer("Retail2 v4.5.6 Final", visuals->Font[2]
-                                          , 2+3, 462-4, JustifyRight, 255, 255, 255, 1, 1, 1);
+        visuals->DrawTextOntoScreenBuffer("Retail2 v4.5.6 Remix", visuals->Font[2]
+                                          , 2+3, 462-2, JustifyRight, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Team www.16BitSoft.com", visuals->Font[0]
+        visuals->DrawTextOntoScreenBuffer("Team 16BitSoft", visuals->Font[0]
                                           , 0, 447, JustifyCenter, 255, 255, 255, 1, 1, 1);
     }
 
@@ -400,13 +400,13 @@ void Screens::DisplayNewGameOptionsScreen(void)
         if (interface->ArrowSetArrowSelectedByPlayer == 1)
         {
             if (logic->SelectedMusicTrack > 0)  logic->SelectedMusicTrack-=1;
-            else  logic->SelectedMusicTrack = 22;
+            else  logic->SelectedMusicTrack = 18;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
         else if (interface->ArrowSetArrowSelectedByPlayer == 1.5)
         {
-            if (logic->SelectedMusicTrack < 22)  logic->SelectedMusicTrack+=1;
+            if (logic->SelectedMusicTrack < 18)  logic->SelectedMusicTrack+=1;
             else  logic->SelectedMusicTrack = 0;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
@@ -499,163 +499,147 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , 255, 255, 1, 90, 90, 1);
 
         visuals->DrawTextOntoScreenBuffer("Game Mode:", visuals->Font[0]
-                                          , 50, 65-15, JustifyLeft
+                                          , 60, 65-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->GameMode == OriginalMode)
-            visuals->DrawTextOntoScreenBuffer("Original Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Original", visuals->Font[0]
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack30Mode)
-            visuals->DrawTextOntoScreenBuffer("Time Attack 30 Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Time Attack 30", visuals->Font[0]
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack60Mode)
-            visuals->DrawTextOntoScreenBuffer("Time Attack 60 Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Time Attack 60", visuals->Font[0]
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack120Mode)
-            visuals->DrawTextOntoScreenBuffer("Time Attack 120 Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Time Attack 120", visuals->Font[0]
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TwentyLineChallengeMode)
-            visuals->DrawTextOntoScreenBuffer("20 Line Challenge Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("20 Line Challenge", visuals->Font[0]
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == CrisisMode)
             visuals->DrawTextOntoScreenBuffer("Crisis+Mode", visuals->Font[0]
-                                              , 50, 65-15, JustifyRight
+                                              , 60, 65-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Music Track:", visuals->Font[0]
-                                          , 50, 105-15, JustifyLeft
+                                          , 60, 105-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->SelectedMusicTrack == 0)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 00", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 00", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 1)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 01", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 01", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 2)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 02", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 02", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 3)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 03", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 03", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 4)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 04", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 04", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 5)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 05", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 05", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 6)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 06", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 06", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 7)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 07", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 07", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 8)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 08", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 08", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 9)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 09", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 09", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 10)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 10", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 10", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 11)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 11", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 11", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 12)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 12", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 12", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 13)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 13", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 13", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 14)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 14", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 14", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 15)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 15", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 15", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 16)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 16", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 16", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 17)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 17", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 17", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedMusicTrack == 18)
-            visuals->DrawTextOntoScreenBuffer("T-C3 InGame Track 18", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedMusicTrack == 19)
-            visuals->DrawTextOntoScreenBuffer("Bonus Track 19", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedMusicTrack == 20)
-            visuals->DrawTextOntoScreenBuffer("Bonus Track 20", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedMusicTrack == 21)
-            visuals->DrawTextOntoScreenBuffer("Bonus Track 21", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedMusicTrack == 22)
-            visuals->DrawTextOntoScreenBuffer("Bonus Track 22", visuals->Font[0]
-                                              , 50, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Track 18", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Background:", visuals->Font[0]
-                                          , 50, 145-15, JustifyLeft
+                                          , 60, 145-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->SelectedBackground == 0)
-            visuals->DrawTextOntoScreenBuffer("Saint Basils Cathedral", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Cathedral", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 1)
-            visuals->DrawTextOntoScreenBuffer("Russian MIG-31 Firefox", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Firefox", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 2)
-            visuals->DrawTextOntoScreenBuffer("Nissan GT-R(Blue)", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("GT-R", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 3)
-            visuals->DrawTextOntoScreenBuffer("New York City", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("New York", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 4)
-            visuals->DrawTextOntoScreenBuffer("Van Gogh Painting", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Painting", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 5)
             visuals->DrawTextOntoScreenBuffer("Kittens", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->SelectedBackground == 6)
             visuals->DrawTextOntoScreenBuffer("Psychedelic", visuals->Font[0]
-                                              , 50, 145-15, JustifyRight
+                                              , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Garbage Level Height:", visuals->Font[0]
-                                          , 50, 185-15, JustifyLeft
+        visuals->DrawTextOntoScreenBuffer("Garbage Height:", visuals->Font[0]
+                                          , 60, 185-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
 
         char temp[256];
@@ -663,55 +647,55 @@ void Screens::DisplayNewGameOptionsScreen(void)
         strcpy(visuals->VariableText, temp);
 
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                          , 50, 185-15, JustifyRight
+                                          , 60, 185-15+3, JustifyRight
                                           , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Pressing [UP] Action:", visuals->Font[0]
-                                          , 50, 225-15, JustifyLeft
+        visuals->DrawTextOntoScreenBuffer("[UP] Action:", visuals->Font[0]
+                                          , 60, 225-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->PressingUPAction == 0)
             visuals->DrawTextOntoScreenBuffer("None", visuals->Font[0]
-                                              , 50, 225-15, JustifyRight
+                                              , 60, 225-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PressingUPAction == 1)
             visuals->DrawTextOntoScreenBuffer("Quick Drop", visuals->Font[0]
-                                              , 50, 225-15, JustifyRight
+                                              , 60, 225-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PressingUPAction == 2)
             visuals->DrawTextOntoScreenBuffer("Smart Rotate", visuals->Font[0]
-                                              , 50, 225-15, JustifyRight
+                                              , 60, 225-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PressingUPAction == 3)
             visuals->DrawTextOntoScreenBuffer("Drop & Drag", visuals->Font[0]
-                                              , 50, 225-15, JustifyRight
+                                              , 60, 225-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Display Next Piece:", visuals->Font[0]
-                                          , 50, 265-15, JustifyLeft
+        visuals->DrawTextOntoScreenBuffer("Display Next:", visuals->Font[0]
+                                          , 60, 265-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->DisplayNextPiece == 0)
             visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0]
-                                              , 50, 265-15, JustifyRight
+                                              , 60, 265-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DisplayNextPiece == 1)
             visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0]
-                                              , 50, 265-15, JustifyRight
+                                              , 60, 265-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Display Drop Shadow:", visuals->Font[0]
-                                          , 50, 305-15, JustifyLeft
+        visuals->DrawTextOntoScreenBuffer("Display Shadow:", visuals->Font[0]
+                                          , 60, 305-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->DisplayDropShadow == 0)
             visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0]
-                                              , 50, 305-15, JustifyRight
+                                              , 60, 305-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DisplayDropShadow == 1)
             visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0]
-                                              , 50, 305-15, JustifyRight
+                                              , 60, 305-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Box Tileset:", visuals->Font[0]
-                                          , 50, 345-15, JustifyLeft
+                                          , 60, 345-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Press [Enter] Or Click [Start!] To Begin!"
@@ -724,7 +708,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
 
         interface->DisplayAllArrowSetsOntoScreenBuffer();
 
-        float x = 401;
+        float x = 401-10;
         for (int boxIndex = 0; boxIndex < 7; boxIndex++)
         {
             visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScreenX = x;
@@ -1077,8 +1061,8 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - Team www.16BitSoft.com");
-                else  SDL_SetWindowTitle(visuals->Window, "t.A.T.u. - ''All About Us''");
+                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                else  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 0.5)
             {
@@ -1087,8 +1071,8 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - Team www.16BitSoft.com");
-                else  SDL_SetWindowTitle(visuals->Window, "t.A.T.u. - ''All About Us''");
+                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                else  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 1)
             {
@@ -1180,41 +1164,41 @@ void Screens::DisplayOptionsScreen(void)
         interface->DisplayAllArrowSetsOntoScreenBuffer();
 
         visuals->DrawTextOntoScreenBuffer("Music Volume:"
-                                          , visuals->Font[0], 60, 60-15, JustifyLeft
+                                          , visuals->Font[0], 60, 60-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (audio->MusicVolume == 0)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 60-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 60-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->MusicVolume == 32)
-            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 60-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 60-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->MusicVolume == 64)
-            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 60-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 60-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->MusicVolume == 96)
-            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 60-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 60-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->MusicVolume == 128)
-            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 60-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 60-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Sound Effects Volume:"
-                                          , visuals->Font[0], 60, 105-15, JustifyLeft
+                                          , visuals->Font[0], 60, 105-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (audio->SoundVolume == 0)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 32)
-            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 64)
-            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 96)
-            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 128)
-            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 105-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -1222,13 +1206,13 @@ void Screens::DisplayOptionsScreen(void)
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Full Screen Mode:"
-                                          , visuals->Font[0], 60, 160-15, JustifyLeft
+                                          , visuals->Font[0], 60, 160-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (visuals->FullScreenMode == false)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 160-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 160-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (visuals->FullScreenMode == true)
-            visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0], 60, 160-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0], 60, 160-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -1236,35 +1220,35 @@ void Screens::DisplayOptionsScreen(void)
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("C.P.U. Players:"
-                                          , visuals->Font[0], 60, 215-15, JustifyLeft
+                                          , visuals->Font[0], 60, 215-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->CPUPlayerEnabled == 0)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 1)
-            visuals->DrawTextOntoScreenBuffer("Slow Speed", visuals->Font[0], 60, 215-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Slow Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 2)
-            visuals->DrawTextOntoScreenBuffer("Medium Speed", visuals->Font[0], 60, 215-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Medium Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 3)
-            visuals->DrawTextOntoScreenBuffer("Fast Speed", visuals->Font[0], 60, 215-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 4)
-            visuals->DrawTextOntoScreenBuffer("Very Fast Speed", visuals->Font[0], 60, 215-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Very Fast Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Delayed Auto Shift:"
-                                          , visuals->Font[0], 60, 215+45-15, JustifyLeft
+                                          , visuals->Font[0], 60, 215+45-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->DelayAutoShift == 0)
-            visuals->DrawTextOntoScreenBuffer("Original", visuals->Font[0], 60, 215+45-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Original", visuals->Font[0], 60, 215+45-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DelayAutoShift == 1)
-            visuals->DrawTextOntoScreenBuffer("Slow Shift", visuals->Font[0], 60, 215+45-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Slow Shift", visuals->Font[0], 60, 215+45-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DelayAutoShift == 2)
-            visuals->DrawTextOntoScreenBuffer("Fast Shift", visuals->Font[0], 60, 215+45-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast Shift", visuals->Font[0], 60, 215+45-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -1272,16 +1256,16 @@ void Screens::DisplayOptionsScreen(void)
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Playing Game Speed:", visuals->Font[0]
-                                          , 60, 325-15, JustifyLeft
+                                          , 60, 325-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->PlayingGameFrameLock == 33)
-            visuals->DrawTextOntoScreenBuffer("Normal", visuals->Font[0], 60, 325-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Normal", visuals->Font[0], 60, 325-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PlayingGameFrameLock == 25)
-            visuals->DrawTextOntoScreenBuffer("Fast", visuals->Font[0], 60, 325-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast", visuals->Font[0], 60, 325-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PlayingGameFrameLock == 10)
-            visuals->DrawTextOntoScreenBuffer("Very Fast", visuals->Font[0], 60, 325-15, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Very Fast", visuals->Font[0], 60, 325-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
@@ -1501,52 +1485,52 @@ const char* keyName;
                                               , 0, 110, JustifyCenter, 255, 255, 255, 90, 90, 1);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyUP);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Special UP Action");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 260, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Special UP Action");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 260-(6*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyRIGHT);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Move Piece Right");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 280, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Move Piece Right");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 280-(5*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyDOWN);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Move Piece Down");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 300, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Move Piece Down");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 300-(4*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyLEFT);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Move Piece Left");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 320, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Move Piece Left");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 320-(3*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyPause);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Pause");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 340, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Pause");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 340-(2*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyButtonOne);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Rotate Clockwise");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
-                                              , 0, 370, JustifyCenter, 255, 255, 255, 0, 0, 0);
+            strcat(visuals->VariableText, " = Rotate Clockwise");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
+                                              , 0, 370-(1*10), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyButtonTwo);
-            strcpy(visuals->VariableText, "[");
+            strcpy(visuals->VariableText, "");
             strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, "] = Rotate Counter Clockwise");
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
+            strcat(visuals->VariableText, " = Rotate Counter Clockwise");
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 390, JustifyCenter, 255, 255, 255, 0, 0, 0);
         }
     }
@@ -1621,27 +1605,27 @@ void Screens::DisplayHighScoresScreen(void)
 
         if (logic->GameMode == OriginalMode)
             visuals->DrawTextOntoScreenBuffer("Original Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack30Mode)
             visuals->DrawTextOntoScreenBuffer("Time Attack 30 Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack60Mode)
             visuals->DrawTextOntoScreenBuffer("Time Attack 60 Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TimeAttack120Mode)
             visuals->DrawTextOntoScreenBuffer("Time Attack 120 Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == TwentyLineChallengeMode)
             visuals->DrawTextOntoScreenBuffer("20 Line Challenge Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->GameMode == CrisisMode)
             visuals->DrawTextOntoScreenBuffer("Crisis+Mode", visuals->Font[0]
-                                              , 0, 65-15, JustifyCenter
+                                              , 0, 65-15+3, JustifyCenter
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Name:", visuals->Font[1],
@@ -1748,7 +1732,7 @@ void Screens::DisplayAboutScreen(void)
                  && visuals->Sprites[index].BlueHue == 0)
                 {
                     visuals->Sprites[index].ScreenX = 320;
-                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+60;
+                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+90;
                 }
                 else
                 {
@@ -1759,7 +1743,7 @@ void Screens::DisplayAboutScreen(void)
             else if (index == 1100 + visuals->TotalNumberOfLoadedStaffTexts-1)
             {
                 visuals->Sprites[index].ScreenX = 320;
-                visuals->Sprites[index].ScreenY = visuals->Sprites[index-2].ScreenY+250;
+                visuals->Sprites[index].ScreenY = visuals->Sprites[index-2].ScreenY+250+30;
             }
         }
 
@@ -2184,17 +2168,17 @@ const char* keyName;
             #endif
 
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-1
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-2
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-2
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
         }
 
@@ -2203,27 +2187,27 @@ const char* keyName;
             if (logic->PlayerData[player].PlayerInput == Keyboard)
                 visuals->DrawTextOntoScreenBuffer("Keyboard"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
             else if (logic->PlayerData[player].PlayerInput == JoystickOne)
                 visuals->DrawTextOntoScreenBuffer("Joystick #1"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
             else if (logic->PlayerData[player].PlayerInput == JoystickTwo)
                 visuals->DrawTextOntoScreenBuffer("Joystick #2"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
             else if (logic->PlayerData[player].PlayerInput == JoystickThree)
                 visuals->DrawTextOntoScreenBuffer("Joystick #3"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
             else if (logic->PlayerData[player].PlayerInput == CPU)
                 visuals->DrawTextOntoScreenBuffer("C.P.U."
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
             else if (logic->PlayerData[player].PlayerInput == Mouse)
                 visuals->DrawTextOntoScreenBuffer("Mouse"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+                                          , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
 
             if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
             {
@@ -2298,12 +2282,12 @@ const char* keyName;
 
         if (data->PlayerRankOnGameOver < 10)
         {
-            if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
-                ScreenToDisplay = NameInputKeyboardScreen;
-            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
+            if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
                      || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
                      || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
                 ScreenToDisplay = NameInputJoystickScreen;
+            else//if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
+                ScreenToDisplay = NameInputKeyboardScreen;
         }
 
         audio->PlayMusic(0, -1);

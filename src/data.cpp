@@ -248,7 +248,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
 
 	fileStream.open (filename, fstream::in);
 	if (fileStream.is_open())
@@ -382,7 +382,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
 
 	fileStream.open (filename, fstream::out);
 	if (fileStream.is_open())
@@ -511,7 +511,7 @@ char *pref_path = NULL;
                 fileStream<<"\n";
 
                 #ifdef _WIN32
-                    sprintf(textBuffer, "%I64u", HighScoresScore[gameMode][rank]);
+                    sprintf(textBuffer, "%I64u", (Uint32)HighScoresScore[gameMode][rank]);
                 #else
                     sprintf(textBuffer, "%lu", HighScoresScore[gameMode][rank]);
                 #endif

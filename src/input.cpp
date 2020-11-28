@@ -217,8 +217,17 @@ void Input::GetAllUserInput(void)
 {
     if (KeyOnKeyboardPressedByUser == SDLK_ESCAPE)
     {
-        if (screens->ScreenToDisplay == TitleScreen)  EXIT_Game = true;
-        else  screens->ScreenTransitionStatus = FadeOut;
+        screens->ScreenTransitionStatus = FadeOut;
+
+        if (screens->ScreenToDisplay == PlayingGameScreen)
+        {
+            for (int index = 0; index < 4; index++)
+
+            if (logic->PlayerData[index].PlayerInput != CPU)
+            {
+                logic->PlayerData[index].Score = 0;
+            }
+        }
     }
 
     KeyOnKeyboardPressedByUser = -1;
