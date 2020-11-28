@@ -253,7 +253,8 @@ void Screens::DisplaySixteenBitSoftScreen(void)
 
     if (input->MouseButtonPressed[0] == true
        || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
-       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN)
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
     {
         ScreenDisplayTimer = 0;
         input->DelayAllUserInput = 20;
@@ -2414,10 +2415,6 @@ bool lastKeyWasNotAcceptable = false;
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
 
-//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-//                                          , visuals->Font[0], 0, 7, JustifyCenter
-//                                          , 255, 255, 1, 90, 90, 1);
-
         visuals->DrawTextOntoScreenBuffer("You have achieved a new high score!", visuals->Font[0],
                                           0, 80, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
@@ -2438,10 +2435,6 @@ bool lastKeyWasNotAcceptable = false;
         visuals->Sprites[7].ScreenY = 404-6+30;
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
-
-//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-//                                          , visuals->Font[0], 0, 404, JustifyCenter
-//                                          , 255, 255, 1, 90, 90, 1);
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2640,10 +2633,6 @@ void Screens::DisplayNameInputJoystickScreen(void)
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
 
-//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-//                                          , visuals->Font[0], 0, 7, JustifyCenter
-//                                          , 255, 255, 1, 90, 90, 1);
-
         visuals->DrawTextOntoScreenBuffer("You have achieved a new high score!", visuals->Font[0],
                                           0, 80, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
@@ -2748,8 +2737,6 @@ void Screens::DisplayNameInputJoystickScreen(void)
         visuals->Sprites[7].ScreenY = 404-6+30;
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
-
-//        visuals->DrawTextOntoScreenBuffer("_____________________________________", visuals->Font[0], 0, 404, JustifyCenter, 255, 255, 1, 90, 90, 1);
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
