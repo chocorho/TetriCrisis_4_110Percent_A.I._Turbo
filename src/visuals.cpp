@@ -219,6 +219,10 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/Keyboard-Controls.png");
                 break;
 
+            case 7:
+                strcpy(filePath, "data/visuals/Line.png");
+                break;
+
             case 10:
                 strcpy(filePath, "data/visuals/SDL2-Logo.png");
                 break;

@@ -494,9 +494,10 @@ void Screens::DisplayNewGameOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("N E W   G A M E   O P T I O N S:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 7-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         visuals->DrawTextOntoScreenBuffer("Game Mode:", visuals->Font[0]
                                           , 60, 65-15+3, JustifyLeft
@@ -702,9 +703,10 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , visuals->Font[0], 0, 380, JustifyCenter
                                           , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 404-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         interface->DisplayAllArrowSetsOntoScreenBuffer();
 
@@ -1157,9 +1159,10 @@ void Screens::DisplayOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("O P T I O N S:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 7-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         interface->DisplayAllArrowSetsOntoScreenBuffer();
 
@@ -1282,9 +1285,10 @@ void Screens::DisplayOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("Press [F2] On Keyboard To Setup Keyboard", visuals->Font[1]
                                           , 0, 399, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 404-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         if (input->KeyboardSetupProcess > KeyboardSetupNotStarted)
         {
@@ -1471,13 +1475,15 @@ const char* keyName;
         visuals->DrawTextOntoScreenBuffer("H O W   T O   P L A Y:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 7-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 404-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         if (input->UserDefinedKeyButtonOne != -1 && input->UserDefinedKeyButtonTwo != -1)
         {
@@ -1597,9 +1603,10 @@ void Screens::DisplayHighScoresScreen(void)
         visuals->DrawTextOntoScreenBuffer("H I G H   S C O R E S:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 7-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
 
         interface->DisplayAllArrowSetsOntoScreenBuffer();
 
@@ -1692,9 +1699,10 @@ void Screens::DisplayHighScoresScreen(void)
             rankY += offsetY;
         }
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 404-6, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2401,9 +2409,14 @@ bool lastKeyWasNotAcceptable = false;
         visuals->DrawTextOntoScreenBuffer("H I G H   S C O R E   N A M E   I N P U T:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[0], 0, 7, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
+//                                          , visuals->Font[0], 0, 7, JustifyCenter
+//                                          , 255, 255, 1, 90, 90, 1);
 
         visuals->DrawTextOntoScreenBuffer("You have achieved a new high score!", visuals->Font[0],
                                           0, 80, JustifyCenter, 255, 255, 255, 1, 1, 1);
@@ -2421,9 +2434,14 @@ bool lastKeyWasNotAcceptable = false;
         visuals->DrawTextOntoScreenBuffer("Press [Enter] key when finished.", visuals->Font[0],
                                           0, 345, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[0], 0, 404, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
+//                                          , visuals->Font[0], 0, 404, JustifyCenter
+//                                          , 255, 255, 1, 90, 90, 1);
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2617,9 +2635,14 @@ void Screens::DisplayNameInputJoystickScreen(void)
         visuals->DrawTextOntoScreenBuffer("H I G H   S C O R E   N A M E   I N P U T:", visuals->Font[0]
                                           , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[0], 0, 7, JustifyCenter
-                                          , 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+//        visuals->DrawTextOntoScreenBuffer("_____________________________________"
+//                                          , visuals->Font[0], 0, 7, JustifyCenter
+//                                          , 255, 255, 1, 90, 90, 1);
 
         visuals->DrawTextOntoScreenBuffer("You have achieved a new high score!", visuals->Font[0],
                                           0, 80, JustifyCenter, 255, 255, 255, 1, 1, 1);
@@ -2721,7 +2744,12 @@ void Screens::DisplayNameInputJoystickScreen(void)
         else
             visuals->DrawTextOntoScreenBuffer("END", visuals->Font[0], 320, 389, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("_____________________________________", visuals->Font[0], 0, 404, JustifyCenter, 255, 255, 1, 90, 90, 1);
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+//        visuals->DrawTextOntoScreenBuffer("_____________________________________", visuals->Font[0], 0, 404, JustifyCenter, 255, 255, 1, 90, 90, 1);
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
