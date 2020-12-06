@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -36,24 +36,31 @@ public:
     Uint8 ScreenTransitionStatus;
     Uint32 ScreenDisplayTimer;
 
-    #define SixteenBitSoftScreen        0
-    #define TitleScreen                 1
-    #define OptionsScreen               2
-    #define HowToPlayScreen             3
-    #define HighScoresScreen            4
-    #define AboutScreen                 5
-    #define NewGameOptionsScreen        6
-    #define PlayingGameScreen           7
-    #define TestComputerSkillScreen     8
-    #define NameInputKeyboardScreen     9
-    #define NameInputJoystickScreen     10
+    float JoystickScreenDisplayTimer;
+
+    #define JoystickScreen              0
+    #define SixteenBitSoftScreen        1
+    #define TitleScreen                 2
+    #define OptionsScreen               3
+    #define HowToPlayScreen             4
+    #define HighScoresScreen            5
+    #define AboutScreen                 6
+    #define NewGameOptionsScreen        7
+    #define PlayingGameScreen           8
+    #define TestComputerSkillScreen     9
+    #define NameInputKeyboardScreen     10
+    #define NameInputJoystickScreen     11
     int ScreenToDisplay;
     int ScreenIsDirty;
 
     void ApplyScreenFadeTransition(void);
 
     void ProcessScreenToDisplay(void);
+
     void DisplaySixteenBitSoftScreen(void);
+
+    void DisplayJoystickScreen(void);
+
     void DisplayTitleScreen(void);
 
     void DisplayNewGameOptionsScreen(void);

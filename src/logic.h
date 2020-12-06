@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -153,6 +153,13 @@ public:
     bool GameWasJustPlayed;
 
 	bool PAUSEgame;
+
+	bool GameForfeit;
+
+    int JoinInTimer;
+	int ContinueWatchingTimer;
+
+	bool DontDisplayTestImages;
 
     Uint8 TileSet;
 

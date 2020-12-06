@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -166,7 +166,6 @@ SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
         return(false);
     }
     else  printf("SDL2 renderer created.\n");
-
 
     return(true);
 }
@@ -717,6 +716,13 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("''Neo's Kiss'' Graphical User Interface By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Video Game Made On:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.openSUSE.org", 255) == false)  return(false);
+
     strcpy(textToDisplay, "Microsoft");
     strcat(textToDisplay, " Windows");
     strcat(textToDisplay, " Technical Advisors:");
@@ -761,6 +767,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
 
@@ -874,6 +881,14 @@ bool Visuals::LoadFontsIntoMemory(void)
 
     Font[5] = NULL;
     if ( !(Font[5] = TTF_OpenFont("data/fonts/Font-02.ttf", 15+3)) )
+    {
+        printf( "Error loading font: %s\n", TTF_GetError() );
+        CoreFailure = true;
+        return false;
+    }
+
+    Font[6] = NULL;
+    if ( !(Font[6] = TTF_OpenFont("data/fonts/Font-02.ttf", 14)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;

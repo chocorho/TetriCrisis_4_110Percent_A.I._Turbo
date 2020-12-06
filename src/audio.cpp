@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -40,6 +40,7 @@ Audio::Audio(void)
     MusicVolume = 64;
     SoundVolume = 64;
     CurrentlySelectedMusicTrack = 0;
+    MusicJukeboxMode = 0;
 
     for (int soundIndex = 0; soundIndex < SoundTotal; soundIndex++)  SoundFX[soundIndex] = NULL;
     for (int musicIndex = 0; musicIndex < MusicTotal; musicIndex++)  MusicTrack[musicIndex] = NULL;

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1606554638 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
+1607186608 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -10,7 +10,7 @@
 	"screens.h"
 	"visuals.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -44,7 +44,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_main.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -81,7 +81,7 @@
 1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
@@ -92,13 +92,13 @@
 
 1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\close_code.h
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
@@ -106,7 +106,7 @@
 	<mbarrier.h>
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -116,19 +116,19 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_error.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
@@ -145,18 +145,18 @@
 	<stdlib.h>
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -175,7 +175,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_events.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -197,13 +197,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"SDL_endian.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -220,11 +220,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -232,27 +232,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
 1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -260,11 +260,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -279,51 +279,51 @@
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_log.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_metal.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_metal.h
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_power.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1583887077 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_render.h
+1583887078 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2-2.0.12\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
@@ -379,18 +379,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1547322281 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2_ttf-2.0.15\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+1547322282 c:\users\jlp\desktop\tc4t-linuxwin-retail3\sdl-2_0_12\sdl2_ttf-2.0.15\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.h
+1607186392 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.h
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.h
+1607142764 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.h
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.h
+1607207792 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.h
 
-1606583079 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.cpp
+1607186752 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.cpp
 	<fstream>
 	<string.h>
 	"SDL.h"
@@ -403,13 +403,13 @@
 	"logic.h"
 	"visuals.h"
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.h
+1607142764 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.h
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.h
+1607190580 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.h
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.h
+1607210686 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.h
 
-1606566542 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.cpp
+1607199188 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -422,7 +422,7 @@
 	"audio.h"
 	"logic.h"
 
-1606538997 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\interface.cpp
+1607142764 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\interface.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -436,9 +436,9 @@
 	"audio.h"
 	"logic.h"
 
-1606358999 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\interface.h
+1607142764 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\interface.h
 
-1606553940 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.cpp
+1607215176 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.cpp
 	<cstdlib>
 	"SDL.h"
 	"SDL_image.h"
@@ -450,7 +450,7 @@
 	"input.h"
 	"visuals.h"
 
-1606587769 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\main.cpp
+1607191414 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -466,11 +466,13 @@
 	"data.h"
 	"logic.h"
 
-1509896994 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\resources.rc
+1509896996 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\resources.rc
 
-1606568069 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
+1607214714 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
 	<stdio.h>
 	<cstring>
+	<iostream>
+	<cmath>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -483,7 +485,7 @@
 	"logic.h"
 	"audio.h"
 
-1606559989 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
+1607207836 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"

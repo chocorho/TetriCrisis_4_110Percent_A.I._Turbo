@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -20,6 +20,8 @@
 
 #include <stdio.h>
 #include <cstring>
+#include <iostream>
+#include <cmath>
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -46,7 +48,11 @@ extern Audio* audio;
 Screens::Screens(void)
 {
     ScreenIsDirty = true;
-    ScreenToDisplay = SixteenBitSoftScreen;
+
+    if (input->JoystickDeviceOne != NULL)
+        ScreenToDisplay = JoystickScreen;
+    else
+        ScreenToDisplay = SixteenBitSoftScreen;
 
     ScreenFadeTransparency = 255;
     ScreenTransitionStatus = FadeAll;
@@ -134,6 +140,10 @@ int windowHeight;
 
     switch(ScreenToDisplay)
     {
+        case JoystickScreen:
+            DisplayJoystickScreen();
+            break;
+
         case SixteenBitSoftScreen:
             DisplaySixteenBitSoftScreen();
             break;
@@ -221,12 +231,248 @@ int windowHeight;
 }
 
 //-------------------------------------------------------------------------------------------------
+void Screens::DisplayJoystickScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        input->JoystickDisabled[0] = 1;
+        input->JoystickDisabled[1] = 1;
+        input->JoystickDisabled[2] = 1;
+
+        JoystickScreenDisplayTimer = 1000;
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (JoystickScreenDisplayTimer > 0)  JoystickScreenDisplayTimer--;
+    else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
+
+    int joyAction;
+
+    joyAction = input->QueryJoysticksForAction(0, true);
+    if (joyAction > 0)
+        input->JoystickDisabled[0] = 0;
+
+    joyAction = input->QueryJoysticksForAction(1, true);
+    if (joyAction > 0)
+        input->JoystickDisabled[1] = 0;
+
+    joyAction = input->QueryJoysticksForAction(2, true);
+    if (joyAction > 0)
+        input->JoystickDisabled[2] = 0;
+
+    ScreenIsDirty = true;
+    if (ScreenIsDirty == true)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30+10;
+        visuals->Sprites[7].RedHue = 0;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+        if (input->JoystickDeviceThree != NULL)
+        {
+            visuals->DrawTextOntoScreenBuffer("3 Joysticks Found!", visuals->Font[0]
+                                              , 0, 10, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            visuals->DrawTextOntoScreenBuffer("Press Joystick's Button To Activate!", visuals->Font[0]
+                                              , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            if (input->JoystickDisabled[0] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640/2)-200, (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , (640/2)-200, (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640/2)-200, (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , (640/2)-200, (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+
+            if (input->JoystickDisabled[1] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #2", visuals->Font[0]
+                                  , (640/2), (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , (640/2), (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #2", visuals->Font[0]
+                                  , (640/2), (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , (640/2), (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+
+            if (input->JoystickDisabled[2] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #3", visuals->Font[0]
+                                  , (640/2)+200, (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , (640/2)+200, (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #3", visuals->Font[0]
+                                  , (640/2)+200, (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , (640/2)+200, (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+        }
+        else if (input->JoystickDeviceTwo != NULL)
+        {
+            input->JoystickDisabled[2] = -1;
+
+            visuals->DrawTextOntoScreenBuffer("2 Joysticks Found!", visuals->Font[0]
+                                              , 0, 10, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            visuals->DrawTextOntoScreenBuffer("Press Joystick's Button To Activate!", visuals->Font[0]
+                                              , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            if (input->JoystickDisabled[0] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640*.30), (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , (640*.30), (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640*.30), (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , (640*.30), (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+
+            if (input->JoystickDisabled[1] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #2", visuals->Font[0]
+                                  , 640-(640*.30), (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , 640-(640*.30), (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #2", visuals->Font[0]
+                                  , 640-(640*.30), (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , 640-(640*.30), (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+        }
+        else if (input->JoystickDeviceOne != NULL)
+        {
+            input->JoystickDisabled[1] = -1;
+            input->JoystickDisabled[2] = -1;
+
+            visuals->DrawTextOntoScreenBuffer("1 Joystick Found!", visuals->Font[0]
+                                              , 0, 6, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            visuals->DrawTextOntoScreenBuffer("Press Joystick Button To Activate!", visuals->Font[0]
+                                              , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            if (input->JoystickDisabled[0] == 1)
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640/2), (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+                visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
+                                  , (640/2), (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+            }
+            else
+            {
+                visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
+                                  , (640/2), (480/2)-20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+
+                visuals->DrawTextOntoScreenBuffer("ACTIVE", visuals->Font[0]
+                                  , (640/2), (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
+            }
+        }
+        else
+        {
+            visuals->DrawTextOntoScreenBuffer("No Joysticks Found?", visuals->Font[0]
+                                              , 0, 10, JustifyCenter, 0, 255, 0, 0, 100, 0);
+
+            JoystickScreenDisplayTimer = 0;
+        }
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30+10;
+        visuals->Sprites[7].RedHue = 0;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+        int percent = floor( (JoystickScreenDisplayTimer/1000)*10 );
+        sprintf(visuals->VariableText, "%d", percent);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 450
+                                          , JustifyCenter, 255, 255, 0, 100, 100, 0);
+    }
+
+    if (input->JoystickDisabled[0] == 0 && input->JoystickDisabled[1] == -1 && input->JoystickDisabled[2] == -1)
+    {
+        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
+    }
+    else if (input->JoystickDisabled[0] == 0 && input->JoystickDisabled[1] == 0 && input->JoystickDisabled[2] == -1)
+    {
+        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
+    }
+    else if (input->JoystickDisabled[0] == 0 && input->JoystickDisabled[1] == 0 && input->JoystickDisabled[2] == 0)
+    {
+        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+
+        visuals->Sprites[7].RedHue = 255;
+        visuals->Sprites[7].BlueHue = 255;
+
+        if (input->JoystickDisabled[0] == 1)
+        {
+            if (input->JoystickDeviceOne != NULL)
+            {
+                printf("SDL2 Joystick #0 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceOne));
+            }
+        }
+
+        if (input->JoystickDisabled[1] == 1)
+        {
+            if (input->JoystickDeviceTwo != NULL)
+            {
+                printf("SDL2 Joystick #1 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceTwo));
+            }
+        }
+
+        if (input->JoystickDisabled[2] == 1)
+        {
+            if (input->JoystickDeviceThree != NULL)
+            {
+                printf("SDL2 Joystick #2 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceThree));
+            }
+        }
+
+        ScreenToDisplay = SixteenBitSoftScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
 void Screens::DisplaySixteenBitSoftScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
         ScreenDisplayTimer = 370;
         ScreenTransitionStatus = FadeIn;
+
+        audio->PlayMusic(0, -1);
     }
 
     if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_d)
@@ -283,7 +529,10 @@ void Screens::DisplaySixteenBitSoftScreen(void)
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+
         ScreenTransitionStatus = FadeAll;
+
         ScreenToDisplay = TitleScreen;
     }
 }
@@ -345,7 +594,7 @@ void Screens::DisplayTitleScreen(void)
         visuals->Sprites[10].Transparency = 155;
         visuals->DrawSpriteOntoScreenBuffer(10);
 
-        visuals->DrawTextOntoScreenBuffer("Retail2 v4.5.6 Remix", visuals->Font[2]
+        visuals->DrawTextOntoScreenBuffer("Retail3 4.5.6 Remix", visuals->Font[2]
                                           , 2+3, 462-2, JustifyRight, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Team 16BitSoft", visuals->Font[0]
@@ -398,52 +647,51 @@ void Screens::DisplayNewGameOptionsScreen(void)
             if (logic->GameMode < CrisisMode)  logic->GameMode+=1;
             else  logic->GameMode = 0;
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 1)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 1 && audio->MusicJukeboxMode == 0)
         {
             if (logic->SelectedMusicTrack > 0)  logic->SelectedMusicTrack-=1;
             else  logic->SelectedMusicTrack = 18;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 1.5)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 1.5 && audio->MusicJukeboxMode == 0)
         {
             if (logic->SelectedMusicTrack < 18)  logic->SelectedMusicTrack+=1;
             else  logic->SelectedMusicTrack = 0;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 2)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 2)
+        {
+            if (audio->MusicJukeboxMode > 0)  audio->MusicJukeboxMode-=1;
+            else  audio->MusicJukeboxMode = 1;
+        }
+        else if (interface->ArrowSetArrowSelectedByPlayer == 2.5)
+        {
+            if (audio->MusicJukeboxMode < 1)  audio->MusicJukeboxMode+=1;
+            else  audio->MusicJukeboxMode = 0;
+        }
+        else if (interface->ArrowSetArrowSelectedByPlayer == 3)
         {
             if (logic->SelectedBackground > 0)  logic->SelectedBackground-=1;
             else  logic->SelectedBackground = 6;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 2.5)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 3.5)
         {
             if (logic->SelectedBackground < 6)  logic->SelectedBackground+=1;
             else  logic->SelectedBackground = 0;
         }
-        if (interface->ArrowSetArrowSelectedByPlayer == 3)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 4)
         {
             if (logic->NewGameGarbageHeight > 0)  logic->NewGameGarbageHeight-=1;
             else  logic->NewGameGarbageHeight = 14;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 3.5)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 4.5)
         {
             if (logic->NewGameGarbageHeight < 14)  logic->NewGameGarbageHeight+=1;
             else  logic->NewGameGarbageHeight = 0;
         }
-
-        if (interface->ArrowSetArrowSelectedByPlayer == 4)
-        {
-            if (logic->PressingUPAction > 0)  logic->PressingUPAction-=1;
-            else  logic->PressingUPAction = 3;
-        }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 4.5)
-        {
-            if (logic->PressingUPAction < 3)  logic->PressingUPAction+=1;
-            else  logic->PressingUPAction = 0;
-        }
-        if (interface->ArrowSetArrowSelectedByPlayer == 5)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 5)
         {
             if (logic->DisplayNextPiece > 0)  logic->DisplayNextPiece-=1;
             else  logic->DisplayNextPiece = 1;
@@ -453,8 +701,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
             if (logic->DisplayNextPiece < 1)  logic->DisplayNextPiece+=1;
             else  logic->DisplayNextPiece = 0;
         }
-
-        if (interface->ArrowSetArrowSelectedByPlayer == 6)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 6)
         {
             if (logic->DisplayDropShadow > 0)  logic->DisplayDropShadow-=1;
             else  logic->DisplayDropShadow = 1;
@@ -464,8 +711,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
             if (logic->DisplayDropShadow < 1)  logic->DisplayDropShadow+=1;
             else  logic->DisplayDropShadow = 0;
         }
-
-        if (interface->ArrowSetArrowSelectedByPlayer == 7)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 7)
         {
             if (logic->TileSet > 0)  logic->TileSet-=1;
             else  logic->TileSet = 5;
@@ -531,7 +777,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("Music Track:", visuals->Font[0]
                                           , 60, 105-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
-        if (logic->SelectedMusicTrack == 0)
+        if (audio->MusicJukeboxMode == 1)
+            visuals->DrawTextOntoScreenBuffer("Random", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedMusicTrack == 0)
             visuals->DrawTextOntoScreenBuffer("Track 00", visuals->Font[0]
                                               , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
@@ -608,40 +858,52 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                               , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Background:", visuals->Font[0]
+        visuals->DrawTextOntoScreenBuffer("Music Mode:", visuals->Font[0]
                                           , 60, 145-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
-        if (logic->SelectedBackground == 0)
-            visuals->DrawTextOntoScreenBuffer("Cathedral", visuals->Font[0]
+        if (audio->MusicJukeboxMode == 0)
+            visuals->DrawTextOntoScreenBuffer("Repeat", visuals->Font[0]
                                               , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 1)
-            visuals->DrawTextOntoScreenBuffer("Firefox", visuals->Font[0]
-                                              , 60, 145-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 2)
-            visuals->DrawTextOntoScreenBuffer("GT-R", visuals->Font[0]
-                                              , 60, 145-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 3)
-            visuals->DrawTextOntoScreenBuffer("New York", visuals->Font[0]
-                                              , 60, 145-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 4)
-            visuals->DrawTextOntoScreenBuffer("Painting", visuals->Font[0]
-                                              , 60, 145-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 5)
-            visuals->DrawTextOntoScreenBuffer("Kittens", visuals->Font[0]
-                                              , 60, 145-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->SelectedBackground == 6)
-            visuals->DrawTextOntoScreenBuffer("Psychedelic", visuals->Font[0]
+        if (audio->MusicJukeboxMode == 1)
+            visuals->DrawTextOntoScreenBuffer("Random", visuals->Font[0]
                                               , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("Garbage Height:", visuals->Font[0]
+        visuals->DrawTextOntoScreenBuffer("Background:", visuals->Font[0]
                                           , 60, 185-15+3, JustifyLeft
+                                          , 255, 255, 255, 1, 1, 1);
+        if (logic->SelectedBackground == 0)
+            visuals->DrawTextOntoScreenBuffer("Cathedral", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 1)
+            visuals->DrawTextOntoScreenBuffer("Firefox", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 2)
+            visuals->DrawTextOntoScreenBuffer("GT-R", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 3)
+            visuals->DrawTextOntoScreenBuffer("New York", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 4)
+            visuals->DrawTextOntoScreenBuffer("Painting", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 5)
+            visuals->DrawTextOntoScreenBuffer("Kittens", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->SelectedBackground == 6)
+            visuals->DrawTextOntoScreenBuffer("Psychedelic", visuals->Font[0]
+                                              , 60, 185-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("Garbage Height:", visuals->Font[0]
+                                          , 60, 225-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
 
         char temp[256];
@@ -649,28 +911,8 @@ void Screens::DisplayNewGameOptionsScreen(void)
         strcpy(visuals->VariableText, temp);
 
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                          , 60, 185-15+3, JustifyRight
+                                          , 60, 225-15+3, JustifyRight
                                           , 255, 255, 255, 1, 1, 1);
-
-        visuals->DrawTextOntoScreenBuffer("[UP] Action:", visuals->Font[0]
-                                          , 60, 225-15+3, JustifyLeft
-                                          , 255, 255, 255, 1, 1, 1);
-        if (logic->PressingUPAction == 0)
-            visuals->DrawTextOntoScreenBuffer("None", visuals->Font[0]
-                                              , 60, 225-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->PressingUPAction == 1)
-            visuals->DrawTextOntoScreenBuffer("Quick Drop", visuals->Font[0]
-                                              , 60, 225-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->PressingUPAction == 2)
-            visuals->DrawTextOntoScreenBuffer("Smart Rotate", visuals->Font[0]
-                                              , 60, 225-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->PressingUPAction == 3)
-            visuals->DrawTextOntoScreenBuffer("Drop & Drag", visuals->Font[0]
-                                              , 60, 225-15+3, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Display Next:", visuals->Font[0]
                                           , 60, 265-15+3, JustifyLeft
@@ -734,7 +976,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
         {
             ScreenToDisplay = PlayingGameScreen;
 
-            audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            if (audio->MusicJukeboxMode == 0)
+                audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+            else
+                audio->PlayMusic( (rand()%22 + 1 ), 0 );
+
             if (logic->SelectedBackground == 1)  Mix_PauseMusic();
         }
         else
@@ -753,15 +999,17 @@ void Screens::DisplayOptionsScreen(void)
         interface->CreateButton(1009, 0, 454);
 
         interface->CreateArrowSet(0, 60);
-        interface->CreateArrowSet(1, 105);
+        interface->CreateArrowSet(1, 105-4);
 
-        interface->CreateArrowSet(2, 160);
+        interface->CreateArrowSet(2, 160-7);
 
-        interface->CreateArrowSet(3, 215);
+        interface->CreateArrowSet(3, 215-10);
 
-        interface->CreateArrowSet(4, 215+45);
+        interface->CreateArrowSet(4, 215+45-10);
 
-        interface->CreateArrowSet(5, 325);
+        interface->CreateArrowSet(5, 215+45-10+45);
+
+        interface->CreateArrowSet(6, 325+16);
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -860,7 +1108,7 @@ void Screens::DisplayOptionsScreen(void)
         ScreenIsDirty = true;
     }
 
-    if ( input->KeyOnKeyboardPressedByUser == SDLK_F1 && input->JoystickDeviceOne != NULL
+    if ( input->KeyOnKeyboardPressedByUser == SDLK_F1
         && input->KeyboardSetupProcess == KeyboardSetupNotStarted )
     {
         ScreenIsDirty = true;
@@ -868,7 +1116,14 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
         {
-            input->JoystickSetupProcess = Joy1SetupPressUP;
+            if (input->JoystickDeviceOne != NULL)
+                input->JoystickSetupProcess = Joy1SetupPressUP;
+            else if (input->JoystickDeviceTwo != NULL)
+                input->JoystickSetupProcess = Joy2SetupPressUP;
+            else if (input->JoystickDeviceThree != NULL)
+                input->JoystickSetupProcess = Joy3SetupPressUP;
+            else
+                input->JoystickSetupProcess = JoySetupNotStarted;
         }
         else
         {
@@ -888,11 +1143,11 @@ void Screens::DisplayOptionsScreen(void)
 
     int joyAction = -1;
     if (input->JoystickSetupProcess > Joy2SetupPressBUTTONTwo)
-        joyAction = input->QueryJoysticksForAction(2);
+        joyAction = input->QueryJoysticksForAction(2, false);
     else if (input->JoystickSetupProcess > Joy1SetupPressBUTTONTwo)
-        joyAction = input->QueryJoysticksForAction(1);
+        joyAction = input->QueryJoysticksForAction(1, false);
     else if (input->JoystickSetupProcess > JoySetupNotStarted)
-        joyAction = input->QueryJoysticksForAction(0);
+        joyAction = input->QueryJoysticksForAction(0, false);
 
     if (joyAction > -1)
     {
@@ -1127,13 +1382,25 @@ void Screens::DisplayOptionsScreen(void)
                 if (logic->DelayAutoShift < 2)  logic->DelayAutoShift+=1;
                 else  logic->DelayAutoShift = 0;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 5)
+
+            if (interface->ArrowSetArrowSelectedByPlayer == 5)
+            {
+                if (logic->PressingUPAction > 0)  logic->PressingUPAction-=1;
+                else  logic->PressingUPAction = 3;
+            }
+            else if (interface->ArrowSetArrowSelectedByPlayer == 5.5)
+            {
+                if (logic->PressingUPAction < 3)  logic->PressingUPAction+=1;
+                else  logic->PressingUPAction = 0;
+            }
+
+            else if (interface->ArrowSetArrowSelectedByPlayer == 6)
             {
                 if (logic->PlayingGameFrameLock == 33)  logic->PlayingGameFrameLock = 10;
                 else if (logic->PlayingGameFrameLock == 10)  logic->PlayingGameFrameLock = 25;
                 else if (logic->PlayingGameFrameLock == 25)  logic->PlayingGameFrameLock = 33;
             }
-            else if (interface->ArrowSetArrowSelectedByPlayer == 5.5)
+            else if (interface->ArrowSetArrowSelectedByPlayer == 6.5)
             {
                 if (logic->PlayingGameFrameLock == 33)  logic->PlayingGameFrameLock = 25;
                 else if (logic->PlayingGameFrameLock == 25)  logic->PlayingGameFrameLock = 10;
@@ -1187,96 +1454,116 @@ void Screens::DisplayOptionsScreen(void)
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Sound Effects Volume:"
-                                          , visuals->Font[0], 60, 105-15+3, JustifyLeft
+                                          , visuals->Font[0], 60, 105-15+3-4, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (audio->SoundVolume == 0)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 105-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 105-15+3-4, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 32)
-            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 105-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("25%", visuals->Font[0], 60, 105-15+3-4, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 64)
-            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 105-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("50%", visuals->Font[0], 60, 105-15+3-4, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 96)
-            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 105-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("75%", visuals->Font[0], 60, 105-15+3-4, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (audio->SoundVolume == 128)
-            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 105-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("100%", visuals->Font[0], 60, 105-15+3-4, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 107-6, JustifyCenter
+                                          , visuals->Font[3], 0, 107-6-4, JustifyCenter
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Full Screen Mode:"
-                                          , visuals->Font[0], 60, 160-15+3, JustifyLeft
+                                          , visuals->Font[0], 60, 160-15+3-7, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (visuals->FullScreenMode == false)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 160-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 160-15+3-7, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (visuals->FullScreenMode == true)
-            visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0], 60, 160-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0], 60, 160-15+3-7, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 162-6, JustifyCenter
+                                          , visuals->Font[3], 0, 162-6-7, JustifyCenter
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("C.P.U. Players:"
-                                          , visuals->Font[0], 60, 215-15+3, JustifyLeft
+                                          , visuals->Font[0], 60, 215-15+3-10, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->CPUPlayerEnabled == 0)
-            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 1)
-            visuals->DrawTextOntoScreenBuffer("Slow Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Slow Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 2)
-            visuals->DrawTextOntoScreenBuffer("Medium Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Medium Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 3)
-            visuals->DrawTextOntoScreenBuffer("Fast Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 4)
-            visuals->DrawTextOntoScreenBuffer("Very Fast Speed", visuals->Font[0], 60, 215-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Very Fast Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Delayed Auto Shift:"
-                                          , visuals->Font[0], 60, 215+45-15+3, JustifyLeft
+                                          , visuals->Font[0], 60, 215+45-15+3-10, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->DelayAutoShift == 0)
-            visuals->DrawTextOntoScreenBuffer("Original", visuals->Font[0], 60, 215+45-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Original", visuals->Font[0], 60, 215+45-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DelayAutoShift == 1)
-            visuals->DrawTextOntoScreenBuffer("Slow Shift", visuals->Font[0], 60, 215+45-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Slow Shift", visuals->Font[0], 60, 215+45-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->DelayAutoShift == 2)
-            visuals->DrawTextOntoScreenBuffer("Fast Shift", visuals->Font[0], 60, 215+45-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast Shift", visuals->Font[0], 60, 215+45-15+3-10, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("[UP] Action:", visuals->Font[0]
+                                          , 60, 215+45-10+45-13, JustifyLeft
+                                          , 255, 255, 255, 1, 1, 1);
+        if (logic->PressingUPAction == 0)
+            visuals->DrawTextOntoScreenBuffer("None", visuals->Font[0]
+                                              , 60, 215+45-10+45-13, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->PressingUPAction == 1)
+            visuals->DrawTextOntoScreenBuffer("Quick Drop", visuals->Font[0]
+                                              , 60, 215+45-10+45-13, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->PressingUPAction == 2)
+            visuals->DrawTextOntoScreenBuffer("Smart Rotate", visuals->Font[0]
+                                              , 60, 215+45-10+45-13, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->PressingUPAction == 3)
+            visuals->DrawTextOntoScreenBuffer("Drop & Drag", visuals->Font[0]
+                                              , 60, 215+45-10+45-13, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
-                                          , visuals->Font[3], 0, 256, JustifyCenter
+                                          , visuals->Font[3], 0, 256-10+42, JustifyCenter
                                           , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Playing Game Speed:", visuals->Font[0]
-                                          , 60, 325-15+3, JustifyLeft
+                                          , 60, 325-15+3+16, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
         if (logic->PlayingGameFrameLock == 33)
-            visuals->DrawTextOntoScreenBuffer("Normal", visuals->Font[0], 60, 325-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Normal", visuals->Font[0], 60, 325-15+3+16, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PlayingGameFrameLock == 25)
-            visuals->DrawTextOntoScreenBuffer("Fast", visuals->Font[0], 60, 325-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast", visuals->Font[0], 60, 325-15+3+16, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->PlayingGameFrameLock == 10)
-            visuals->DrawTextOntoScreenBuffer("Very Fast", visuals->Font[0], 60, 325-15+3, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Turbo!", visuals->Font[0], 60, 325-15+3+16, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("_____________________________________"
                                           , visuals->Font[3], 0, 344-6, JustifyCenter
                                           , 255, 255, 255, 90, 90, 90);
 
-        if (input->JoystickDeviceOne != NULL)
+        if (input->JoystickDeviceOne != NULL || input->JoystickDeviceTwo != NULL || input->JoystickDeviceThree != NULL)
         {
             visuals->DrawTextOntoScreenBuffer("Press [F1] On Keyboard To Setup Joystick(s)"
                                               , visuals->Font[1]
@@ -1898,7 +2185,7 @@ const char* keyName;
         {
             visuals->Sprites[80].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
             visuals->Sprites[80].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
+            visuals->Sprites[80].Transparency = 150;//200;
             visuals->Sprites[80].RedHue = 255;
             visuals->Sprites[80].GreenHue = 0;
             visuals->Sprites[80].BlueHue = 0;
@@ -1909,7 +2196,7 @@ const char* keyName;
         {
             visuals->Sprites[80].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
             visuals->Sprites[80].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
+            visuals->Sprites[80].Transparency = 150;//200;
             visuals->Sprites[80].RedHue = 255;
             visuals->Sprites[80].GreenHue = 255;
             visuals->Sprites[80].BlueHue = 0;
@@ -1920,7 +2207,7 @@ const char* keyName;
         {
             visuals->Sprites[80].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
             visuals->Sprites[80].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
+            visuals->Sprites[80].Transparency = 150;//200;
             visuals->Sprites[80].RedHue = 0;
             visuals->Sprites[80].GreenHue = 255;
             visuals->Sprites[80].BlueHue = 0;
@@ -1931,7 +2218,7 @@ const char* keyName;
         {
             visuals->Sprites[80].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
             visuals->Sprites[80].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
+            visuals->Sprites[80].Transparency = 150;//200;
             visuals->Sprites[80].RedHue = 0;
             visuals->Sprites[80].GreenHue = 0;
             visuals->Sprites[80].BlueHue = 255;
@@ -2010,14 +2297,14 @@ const char* keyName;
             {
                 Uint32 taTimer = logic->TimeAttackTimer / 200;
                 sprintf(visuals->VariableText, "%d", taTimer);
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                                  , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[player].PlayersPlayfieldScreenX
+                                                  , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
             else if (logic->GameMode == TwentyLineChallengeMode)
             {
                 sprintf(visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                                  , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[player].PlayersPlayfieldScreenX
+                                                  , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
         }
 
@@ -2161,9 +2448,14 @@ const char* keyName;
                     || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
                     || (logic->PlayerData[player].PlayerInput == Keyboard) || (logic->PlayerData[player].PlayerInput == Mouse) )
                 {
-                    if (logic->PlayerData[player].PlayerStatus == GameOver)
-                        visuals->DrawTextOntoScreenBuffer("JOIN IN!", visuals->Font[1], logic->PlayerData[player].PlayersPlayfieldScreenX, 270,
-                                                          JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+                    logic->JoinInTimer++;
+                    if (logic->JoinInTimer > 30)
+                        logic->JoinInTimer = 0;
+
+                    if (logic->JoinInTimer < 15)
+                        if (logic->PlayerData[player].PlayerStatus == GameOver)
+                            visuals->DrawTextOntoScreenBuffer("JOIN IN!", visuals->Font[1], logic->PlayerData[player].PlayersPlayfieldScreenX, 270,
+                                                              JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
                 }
             }
         }
@@ -2181,13 +2473,13 @@ const char* keyName;
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-2
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
             sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
-            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-2
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
         }
 
@@ -2237,8 +2529,15 @@ const char* keyName;
         if (logic->PlayerData[3].PlayerInput != CPU && logic->PlayerData[3].PlayerStatus != GameOver)  humanStillAlive = true;
 
         if (humanStillAlive == false && input->DEBUG == 0)
-            visuals->DrawTextOntoScreenBuffer("Continue Watching Or Press [Esc] On Keyboard To Exit!"
-                                              , visuals->Font[1], 320, 260, JustifyCenter, 255, 255, 255, 1, 1, 1);
+        {
+            logic->ContinueWatchingTimer++;
+            if (logic->ContinueWatchingTimer > 20)
+                logic->ContinueWatchingTimer = 0;
+
+            if (logic->ContinueWatchingTimer < 15)
+                visuals->DrawTextOntoScreenBuffer("Continue Watching Or Press [Esc] On Keyboard To Exit!"
+                                                , visuals->Font[1], 320, 260, JustifyCenter, 255, 255, 255, 1, 1, 1);
+        }
 
         if (logic->PAUSEgame == true && input->DEBUG != 1)
         {
@@ -2289,7 +2588,7 @@ const char* keyName;
 
         data->CheckForNewHighScore();
 
-        if (data->PlayerRankOnGameOver < 10)
+        if (data->PlayerRankOnGameOver < 10 && logic->GameForfeit == false)
         {
             if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
                      || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
@@ -2761,10 +3060,28 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
         visuals->FrameLock = 1;
 
+        input->DelayAllUserInput = 50;
+
         ScreenTransitionStatus = FadeIn;
     }
 
     logic->RunTetriGameEngine();
+
+    if (input->KeyOnKeyboardPressedByUser == SDLK_t)
+    {
+        input->DelayAllUserInput = 50;
+
+        if (logic->DontDisplayTestImages == false)
+        {
+            logic->DontDisplayTestImages = true;
+            visuals->FrameLock = 0;
+        }
+        else
+        {
+            logic->DontDisplayTestImages = false;
+            visuals->FrameLock = 1;
+        }
+    }
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
@@ -2786,6 +3103,9 @@ void Screens::DisplayTestComputerSkillScreen(void)
 //        visuals->Sprites[100+logic->SelectedBackground].ScreenX = 320;
 //        visuals->Sprites[100+logic->SelectedBackground].ScreenY = 240;
 //        visuals->DrawSpriteOntoScreenBuffer(100+logic->SelectedBackground);
+
+if (logic->DontDisplayTestImages == false)
+{
 
         if (logic->PlayerData[0].PlayerStatus != GameOver)
         {
@@ -3044,7 +3364,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
         ScreenIsDirty = true;
     }
-
+}
     visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[0]
                                       , 0, 110, JustifyCenter, 255, 255, 255, 0, 0, 0);
 

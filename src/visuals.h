@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -94,7 +94,7 @@ public:
     #define JustifyRight            2
     #define JustifyCenterOnPoint    3
 
-    #define NumberOfFonts           6
+    #define NumberOfFonts           7
     TTF_Font *Font[NumberOfFonts];
     char VariableText[64];
 

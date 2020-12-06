@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -56,6 +56,10 @@ Input::Input(void)
     JoystickDeviceTwo = NULL;
     JoystickDeviceThree = NULL;
 
+    JoystickDisabled[0] = 1;
+    JoystickDisabled[1] = 1;
+    JoystickDisabled[2] = 1;
+
     if (SDL_NumJoysticks() == 0)
     {
         printf("No USB joysticks are plugged in.\n");
@@ -67,7 +71,8 @@ Input::Input(void)
             JoystickDeviceOne = SDL_JoystickOpen(0);
             NumberOfJoyButtons[0] = SDL_JoystickNumButtons(JoystickDeviceOne);
             NumberOfJoyAxises[0] = SDL_JoystickNumAxes(JoystickDeviceOne);
-            printf("SDL2 Joystick 0 initialized.\n");
+            printf("SDL2 Joystick #0 ''%s'' opened.\n", SDL_JoystickName(JoystickDeviceOne));
+            JoystickDisabled[0] = 0;
         }
 
         if (SDL_NumJoysticks()>1)
@@ -75,7 +80,8 @@ Input::Input(void)
             JoystickDeviceTwo = SDL_JoystickOpen(1);
             NumberOfJoyButtons[1] = SDL_JoystickNumButtons(JoystickDeviceTwo);
             NumberOfJoyAxises[1] = SDL_JoystickNumAxes(JoystickDeviceTwo);
-            printf("SDL2 Joystick 1 initialized.\n");
+            printf("SDL2 Joystick #1 ''%s'' opened.\n", SDL_JoystickName(JoystickDeviceTwo));
+            JoystickDisabled[1] = 0;
         }
 
         if (SDL_NumJoysticks()>2)
@@ -83,7 +89,8 @@ Input::Input(void)
             JoystickDeviceThree = SDL_JoystickOpen(2);
             NumberOfJoyButtons[2] = SDL_JoystickNumButtons(JoystickDeviceThree);
             NumberOfJoyAxises[2] = SDL_JoystickNumAxes(JoystickDeviceThree);
-            printf("SDL2 Joystick 2 initialized.\n");
+            printf("SDL2 Joystick #2 ''%s'' opened.\n", SDL_JoystickName(JoystickDeviceThree));
+            JoystickDisabled[2] = 0;
         }
     }
 
@@ -128,7 +135,7 @@ Input::~Input(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-int Input::QueryJoysticksForAction(Uint8 joy)
+int Input::QueryJoysticksForAction(Uint8 joy, bool justButtons)
 {
 int returnValue = -1;
 
@@ -138,14 +145,17 @@ int returnValue = -1;
 	{
 		SDL_JoystickUpdate();
 
-        for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
+        if (justButtons == false)
         {
-            Sint16 joyAxis = 0;
-            joyAxis = SDL_JoystickGetAxis(JoystickDeviceOne, index);
-            if (joyAxis < -16383 || joyAxis > 16383)
+            for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
             {
-                returnValue = Axis0+index;
-                return(returnValue);
+                Sint16 joyAxis = 0;
+                joyAxis = SDL_JoystickGetAxis(JoystickDeviceOne, index);
+                if (joyAxis < -16383 || joyAxis > 16383)
+                {
+                    returnValue = Axis0+index;
+                    return(returnValue);
+                }
             }
         }
 
@@ -163,14 +173,17 @@ int returnValue = -1;
 	{
 		SDL_JoystickUpdate();
 
-        for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
+        if (justButtons == false)
         {
-            Sint16 joyAxis = 0;
-            joyAxis = SDL_JoystickGetAxis(JoystickDeviceTwo, index);
-            if (joyAxis < -16383 || joyAxis > 16383)
+            for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
             {
-                returnValue = Axis0+index;
-                return(returnValue);
+                Sint16 joyAxis = 0;
+                joyAxis = SDL_JoystickGetAxis(JoystickDeviceTwo, index);
+                if (joyAxis < -16383 || joyAxis > 16383)
+                {
+                    returnValue = Axis0+index;
+                    return(returnValue);
+                }
             }
         }
 
@@ -188,14 +201,17 @@ int returnValue = -1;
 	{
 		SDL_JoystickUpdate();
 
-        for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
+        if (justButtons == false)
         {
-            Sint16 joyAxis = 0;
-            joyAxis = SDL_JoystickGetAxis(JoystickDeviceThree, index);
-            if (joyAxis < -16383 || joyAxis > 16383)
+            for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
             {
-                returnValue = Axis0+index;
-                return(returnValue);
+                Sint16 joyAxis = 0;
+                joyAxis = SDL_JoystickGetAxis(JoystickDeviceThree, index);
+                if (joyAxis < -16383 || joyAxis > 16383)
+                {
+                    returnValue = Axis0+index;
+                    return(returnValue);
+                }
             }
         }
 
@@ -223,6 +239,8 @@ void Input::GetAllUserInput(void)
 
         if (screens->ScreenToDisplay == PlayingGameScreen)
         {
+            logic->GameForfeit = true;
+
             for (int index = 0; index < 4; index++)
 
             if (logic->PlayerData[index].PlayerInput != CPU)
@@ -357,7 +375,7 @@ void Input::GetAllUserInput(void)
     }
 
 //------------------------------------------------------------------------
-    if (JoystickDeviceOne != NULL)
+    if (JoystickDeviceOne != NULL && JoystickDisabled[0] == 0)
 	{
 		SDL_JoystickUpdate();
 
@@ -416,7 +434,7 @@ void Input::GetAllUserInput(void)
         }
     }
 
-    if (JoystickDeviceTwo != NULL)
+    if (JoystickDeviceTwo != NULL && JoystickDisabled[1] == 0)
 	{
 		SDL_JoystickUpdate();
 
@@ -475,7 +493,7 @@ void Input::GetAllUserInput(void)
         }
     }
 
-    if (JoystickDeviceThree != NULL)
+    if (JoystickDeviceThree != NULL && JoystickDisabled[2] == 0)
 	{
 		SDL_JoystickUpdate();
 

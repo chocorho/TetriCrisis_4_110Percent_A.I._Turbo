@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -237,7 +237,7 @@ void Data::LoadHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4a-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4b-SDL2");
 char *pref_path = NULL;
 
     if (base_path)
@@ -248,7 +248,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6b");
 
 	fileStream.open (filename, fstream::in);
 	if (fileStream.is_open())
@@ -276,6 +276,9 @@ char *pref_path = NULL;
 
 		fileStream.getline (textBuffer, 30);
 		logic->SelectedMusicTrack = (int)atoi(textBuffer);
+
+        fileStream.getline (textBuffer, 30);
+		audio->MusicJukeboxMode = (int)atoi(textBuffer);
 
 		fileStream.getline (textBuffer, 30);
 		logic->SelectedBackground = (int)atoi(textBuffer);
@@ -371,7 +374,7 @@ void Data::SaveHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4a-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", "TetriCrisis4b-SDL2");
 char *pref_path = NULL;
 
     if (base_path)
@@ -382,7 +385,7 @@ char *pref_path = NULL;
     else  return;
 
 	strcpy(filename, pref_path);
-	strcat(filename, "TetriCrisis4-Data-Retail4_5_6a");
+	strcat(filename, "TetriCrisis4-Data-Retail4_5_6b");
 
 	fileStream.open (filename, fstream::out);
 	if (fileStream.is_open())
@@ -416,6 +419,10 @@ char *pref_path = NULL;
 		fileStream<<"\n";
 
 		sprintf(textBuffer, "%d", logic->SelectedMusicTrack);
+		fileStream<<textBuffer;
+		fileStream<<"\n";
+
+		sprintf(textBuffer, "%d", audio->MusicJukeboxMode);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 

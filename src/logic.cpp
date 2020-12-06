@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -1015,6 +1015,13 @@ void Logic::SetupForNewGame(void)
     PlayersCanJoin = true;
     GameWasJustPlayed = true;
 
+    GameForfeit = false;
+
+    JoinInTimer = 0;
+    ContinueWatchingTimer = 0;
+
+    DontDisplayTestImages = false;
+
     if (SelectedBackground == 1)
     {
         audio->PlayDigitalSoundFX(9, 0);
@@ -1126,7 +1133,7 @@ void Logic::SetupForNewGame(void)
     {
         if (PlayerData[1].PlayerInput == Keyboard)
         {
-            if (input->JoystickDeviceOne != NULL)  PlayerData[0].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == 0)  PlayerData[0].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[0].PlayerInput = CPU;
@@ -1134,7 +1141,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[0].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDeviceTwo != NULL)  PlayerData[2].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == 0)  PlayerData[2].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1142,7 +1149,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDeviceThree != NULL)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1153,7 +1160,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDeviceTwo != NULL)  PlayerData[2].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == 0)  PlayerData[2].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1161,7 +1168,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDeviceThree != NULL)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1173,7 +1180,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDeviceOne != NULL)  PlayerData[2].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1181,7 +1188,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDeviceThree != NULL)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1192,7 +1199,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDeviceOne != NULL)  PlayerData[2].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1200,7 +1207,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDeviceTwo != NULL)  PlayerData[3].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == 0)  PlayerData[3].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[3].PlayerInput = CPU;
@@ -1273,8 +1280,6 @@ void Logic::SetupForNewGame(void)
            }
         }
     }
-
-//PlayerData[1].Level = 6;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1327,7 +1332,7 @@ int numberOfCompletedLines = 0;
                         boxTotal++;
                 }
 
-                if (boxTotal == 10 && numberOfCompletedLines > 1)
+                if (boxTotal == 10 && numberOfCompletedLines > 1)//0)//1)
                 {
                     for (int attackY = 1; attackY < 12; attackY++)
                         for (int attackX = 0; attackX < 10; attackX++)
@@ -1632,6 +1637,14 @@ void Logic::RunTetriGameEngine(void)
         audio->PlayMusic(1+SelectedMusicTrack, -1);
         Mix_ResumeMusic();
         ThinkRussianTimer = 0;
+    }
+
+    if (ThinkRussianTimer == 0 && audio->MusicJukeboxMode == 1)
+    {
+        if ( Mix_PlayingMusic() == 0 )
+        {
+            audio->PlayMusic( (rand()%22 + 1 ), 0 );
+        }
     }
 
 	if (PAUSEgame == false)

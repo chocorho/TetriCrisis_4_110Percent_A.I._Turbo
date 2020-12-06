@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team www.16BitSoft.com
+    Copyright 2020 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -31,7 +31,7 @@ ________________________________________________________________________________
 .............................................................................................................................
 
                                            "TetriCrisis 4 110% A.I. Turbo"
-                                             Retail2 Version 4.5.6 Remix
+                                             Retail3 Version 4.5.6 Remix
 
                                                     Team 16BitSoft
 _____________________________________________________________________________________________________________________________
@@ -98,7 +98,7 @@ int main( int argc, char* args[] )
 
     if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
-    audio->PlayMusic(0, -1);
+    SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
     //-MAIN-LOOP------------------------------------------------------------------------
     printf("Main loop started...\n");
