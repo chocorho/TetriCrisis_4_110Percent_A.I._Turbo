@@ -159,6 +159,8 @@ public:
     int JoinInTimer;
 	int ContinueWatchingTimer;
 
+    bool HumanStillAlive;
+
 	bool DontDisplayTestImages;
 
     Uint8 TileSet;

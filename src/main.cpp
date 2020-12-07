@@ -30,7 +30,7 @@ ________________________________________________________________________________
                                            2-Dimensional Video Game Engine
 .............................................................................................................................
 
-                                           "TetriCrisis 4 110% A.I. Turbo"
+                                            "T-Crisis 4 110% A.I. Turbo"
                                              Retail3 Version 4.5.6 Remix
 
                                                     Team 16BitSoft
@@ -109,7 +109,8 @@ int main( int argc, char* args[] )
         screens->ProcessScreenToDisplay();
         visuals->ProcessFramerate();
     }
-    printf("...Main loop exited\n");
+    if (visuals->CoreFailure == true)  printf("Game crashed in Main loop\n");
+    else  printf("...Main loop exited\n");
     //------------------------------------------------------------------------MAIN-LOOP-
 
     data->SaveHighScoresAndOptions();

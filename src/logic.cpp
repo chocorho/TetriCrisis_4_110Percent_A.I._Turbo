@@ -1020,6 +1020,8 @@ void Logic::SetupForNewGame(void)
     JoinInTimer = 0;
     ContinueWatchingTimer = 0;
 
+    HumanStillAlive = false;
+
     DontDisplayTestImages = false;
 
     if (SelectedBackground == 1)
@@ -1280,6 +1282,13 @@ void Logic::SetupForNewGame(void)
            }
         }
     }
+
+
+PlayerData[3].Score = 7777;
+PlayerData[3].Level = 6;
+PlayerData[3].Lines = 69;
+
+
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1639,7 +1648,7 @@ void Logic::RunTetriGameEngine(void)
         ThinkRussianTimer = 0;
     }
 
-    if (ThinkRussianTimer == 0 && audio->MusicJukeboxMode == 1)
+    if (ThinkRussianTimer == 0 && audio->MusicJukeboxMode == 1 && Crisis7BGMPlayed == false)
     {
         if ( Mix_PlayingMusic() == 0 )
         {

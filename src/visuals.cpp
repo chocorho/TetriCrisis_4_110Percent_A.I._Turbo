@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -211,7 +211,7 @@ int textureHeight;
                 break;
 
             case 3:
-                strcpy(filePath, "data/visuals/T-C-4-Logo.png");
+                strcpy(filePath, "data/visuals/T-C-4a-Logo.png");
                 break;
 
             case 4:
@@ -456,13 +456,15 @@ Uint32 textureFormat;
 int textureAccess;
 int textureWidth;
 int textureHeight;
+int indexOffset = 0;
+char temp[256];
 
-    for (int index = 999; index < 1010; index++)
+    for ( int index = 999; index < (1010+65+10); index++ )
     {
         Sprites[index].Texture = NULL;
     }
 
-    for (int index = 999; index < 1010; index++)
+    for ( int index = 999; index < (1010+65+10); index++ )
     {
         strcpy(filePath, "~");
 
@@ -517,6 +519,8 @@ int textureHeight;
                 break;
         }
 
+        if (index > 1019)  strcpy(filePath, "data/visuals/Letter-Tile.png");
+
         if (filePath[0] != '~')
         {
             tempSurface = IMG_Load(filePath);
@@ -529,7 +533,7 @@ int textureHeight;
             }
         }
 
-        if (index > 1002 && index < 1010)
+        if ( index > 1002 && index < (1010+65+10) && filePath[0] != '~')
         {
             char buttonText[64];
 
@@ -542,6 +546,46 @@ int textureHeight;
             else if (index == 1007)  strcpy(buttonText, "About\0");
             else if (index == 1008)  strcpy(buttonText, "Exit\0");
             else if (index == 1009)  strcpy(buttonText, "Back\0");
+
+            if ( index == (1020+26) )  indexOffset = 0;
+            else if ( index == (1020+26+26) ) indexOffset = 0;
+
+            if ( index > 1019 && index < (1020+26) )
+            {
+                sprintf( temp, "%c", (65+indexOffset) );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
+            else if ( index > (1020+25) && index < (1020+26+26) )
+            {
+                sprintf( temp, "%c", (97+indexOffset) );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
+            else if ( index > (1020+25+25) && index < (1020+26+26+10) )
+            {
+                sprintf( temp, "%c", (48+indexOffset) );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
+            else if ( index == (1020+26+26+10) )
+            {
+                sprintf( temp, "%c", 43 );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
+            else if ( index == (1020+26+26+10+1) )
+            {
+                sprintf( temp, "%c", 95 );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
+            else if ( index == (1020+26+26+10+1+1) )
+            {
+                sprintf( temp, "%c", 60 );
+                strcpy(buttonText, temp);
+                indexOffset++;
+            }
 
             SDL_Color textColor = { 0, 0, 0, 255 };
             SDL_Color outlineColor = { 255, 255, 255, 255 };
@@ -686,16 +730,22 @@ sprintf(copyright, "%c", 0xA9);
 sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory(" ", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''TetriCrisis 4 110% A.I. Turbo''", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''T-Crisis 4 110% A.I. Turbo''", 0) == false)  return(false);
     strcpy(textToDisplay, "Team 16BitSoft");
     if ( LoadStaffTextIntoMemory(textToDisplay, 255) == false)  return(false);
 
-    strcpy(textToDisplay, "Original Tetris");
+    strcpy(textToDisplay, "Original");
     strcat(textToDisplay, " Video Game Concept By:");
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' Game Engine Programmer:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
+
+
+    if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' SDL2 Game Engine Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
@@ -716,12 +766,36 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("''Neo's Kiss'' Graphical User Interface By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Neo's Kiss'' Graphical User Interface Core By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Video Game Made On:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.openSUSE.org", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Source Code Typed Into:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Code::Blocks'' Cross-Platform C++ I.D.E.", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.CodeBlocks.org", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Graphics Edited In:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''PixelNeo'' Windows Graphic Editor", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://visualneo.com/product/pixelneo", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Audio Edited In:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''GoldWave'' Windows Audio Editor", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.GoldWave.com", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Video Game Built On:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("A ''JeZxLee'' Pro-Built Thin Desktop System", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Desktop Code Name: ''BumbleBee'' -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux O.S. -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- 300 Watt Power Supply -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- ASRock Q1900M Motherboard -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Intel Celeron 2GHz(2.42GHz OverClock) 4-Core CPU -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Corsair 2 x 8GB(16GB Total) DDR3 RAM Memory -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- nVidia GeForce GT 1030 2GB GDDR5 PCIexpress GPU -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Solid State  Drive(OS/Apps) -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive(Personal Data) -", 255) == false)  return(false);
 
     strcpy(textToDisplay, "Microsoft");
     strcat(textToDisplay, " Windows");
@@ -763,11 +837,6 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Evi''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Zaphod77''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Sparks''", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
 

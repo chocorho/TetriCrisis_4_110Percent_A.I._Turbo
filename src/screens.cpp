@@ -188,6 +188,10 @@ int windowHeight;
             DisplayNameInputJoystickScreen();
             break;
 
+        case NameInputMouseScreen:
+            DisplayNameInputMouseScreen();
+            break;
+
         default:
             break;
     }
@@ -469,7 +473,7 @@ void Screens::DisplaySixteenBitSoftScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        ScreenDisplayTimer = 370;
+        ScreenDisplayTimer = 610;
         ScreenTransitionStatus = FadeIn;
 
         audio->PlayMusic(0, -1);
@@ -1319,8 +1323,8 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
-                else  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                else  SDL_SetWindowTitle(visuals->Window, "''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 0.5)
             {
@@ -1329,8 +1333,8 @@ void Screens::DisplayOptionsScreen(void)
 
                 Mix_VolumeMusic(audio->MusicVolume);
 
-                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
-                else  SDL_SetWindowTitle(visuals->Window, "''TetriCrisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                if (audio->MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
+                else  SDL_SetWindowTitle(visuals->Window, "''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 1)
             {
@@ -2028,12 +2032,12 @@ void Screens::DisplayAboutScreen(void)
                  && visuals->Sprites[index].BlueHue == 0)
                 {
                     visuals->Sprites[index].ScreenX = 320;
-                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+90;
+                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+110;
                 }
                 else
                 {
                     visuals->Sprites[index].ScreenX = 320;
-                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+30;
+                    visuals->Sprites[index].ScreenY = visuals->Sprites[index-1].ScreenY+35;
                 }
             }
             else if (index == 1100 + visuals->TotalNumberOfLoadedStaffTexts-1)
@@ -2092,12 +2096,14 @@ void Screens::DisplayAboutScreen(void)
         {
             if (data->PlayerRankOnGameOver < 10)
             {
-                if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
-                    ScreenToDisplay = NameInputKeyboardScreen;
-                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
+                if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
                          || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
                          || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
                     ScreenToDisplay = NameInputJoystickScreen;
+                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
+                    ScreenToDisplay = NameInputKeyboardScreen;
+                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Mouse)
+                    ScreenToDisplay = NameInputMouseScreen;
             }
         }
     }
@@ -2522,13 +2528,13 @@ const char* keyName;
             }
         }
 
-        bool humanStillAlive = false;
-        if (logic->PlayerData[0].PlayerInput != CPU && logic->PlayerData[0].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[1].PlayerInput != CPU && logic->PlayerData[1].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[2].PlayerInput != CPU && logic->PlayerData[2].PlayerStatus != GameOver)  humanStillAlive = true;
-        if (logic->PlayerData[3].PlayerInput != CPU && logic->PlayerData[3].PlayerStatus != GameOver)  humanStillAlive = true;
+        logic->HumanStillAlive = false;
+        if (logic->PlayerData[0].PlayerInput != CPU && logic->PlayerData[0].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
+        if (logic->PlayerData[1].PlayerInput != CPU && logic->PlayerData[1].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
+        if (logic->PlayerData[2].PlayerInput != CPU && logic->PlayerData[2].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
+        if (logic->PlayerData[3].PlayerInput != CPU && logic->PlayerData[3].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
 
-        if (humanStillAlive == false && input->DEBUG == 0)
+        if (logic->HumanStillAlive == false && input->DEBUG == 0)
         {
             logic->ContinueWatchingTimer++;
             if (logic->ContinueWatchingTimer > 20)
@@ -2594,8 +2600,10 @@ const char* keyName;
                      || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
                      || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
                 ScreenToDisplay = NameInputJoystickScreen;
-            else//if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
+            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
                 ScreenToDisplay = NameInputKeyboardScreen;
+            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Mouse)
+                ScreenToDisplay = NameInputMouseScreen;
         }
 
         audio->PlayMusic(0, -1);
@@ -2729,6 +2737,167 @@ bool lastKeyWasNotAcceptable = false;
 
         visuals->DrawTextOntoScreenBuffer("Press [Enter] key when finished.", visuals->Font[0],
                                           0, 345, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 404-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+        ScreenToDisplay = HighScoresScreen;
+
+        if (data->NameInputArayIndex == 0)  data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = ' ';
+
+        logic->CrisisWon = false;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayNameInputMouseScreen(void)
+{
+char temp[256];
+char charToAccept[256];
+bool lastKeyWasNotAcceptable = false;
+
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        interface->CreateButton(1008, 0, 454);
+
+        ScreenTransitionStatus = FadeIn;
+
+        data->NameInputArayIndex = 0;
+
+        int screenY = 250;
+        int screenX = 63;
+        int index = -1;
+        for (int y = 0; y < 5; y++)
+        {
+            for (int x = 0; x < 13; x++)
+            {
+                index++;
+
+                interface->CreateIcon(1020+index, screenX, screenY);
+
+                screenX+=(26+17);
+            }
+
+            screenX = 63;
+            screenY+=(36+2);
+        }
+    }
+
+    if (interface->IconSelectedByPlayer == 64)
+    {
+        if (data->NameInputArayIndex == 19)
+        {
+            data->NameInputArayIndex--;
+            data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = '\0';
+        }
+
+        data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = '\0';
+        if (data->NameInputArayIndex > 0)  data->NameInputArayIndex--;
+        data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = '\0';
+
+        input->DelayAllUserInput = 20;
+
+        audio->PlayDigitalSoundFX(0, 0);
+        ScreenIsDirty = true;
+    }
+    else if (interface->IconSelectedByPlayer == 63)
+    {
+        if (data->NameInputArayIndex < 18)
+            data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = ' ';
+
+        if (data->NameInputArayIndex < 19)  data->NameInputArayIndex++;
+
+        input->DelayAllUserInput = 20;
+
+        audio->PlayDigitalSoundFX(0, 0);
+        ScreenIsDirty = true;
+    }
+    else if (interface->IconSelectedByPlayer > -1 && interface->IconSelectedByPlayer < 63)
+    {
+        if (data->NameInputArayIndex < 18)
+        {
+
+            if (interface->IconSelectedByPlayer == 62)
+            {
+                data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = '+';
+                data->NameInputArayIndex++;
+                lastKeyWasNotAcceptable = true;
+            }
+            else if (interface->IconSelectedByPlayer > -1 && interface->IconSelectedByPlayer < 13+13)
+            {
+                sprintf( temp, "%c", (65+interface->IconSelectedByPlayer) );
+                strcpy(charToAccept, temp);
+                data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
+                data->NameInputArayIndex++;
+                lastKeyWasNotAcceptable = true;
+            }
+            else if (interface->IconSelectedByPlayer > 13+13-1 && interface->IconSelectedByPlayer < 13+13+13+13)
+            {
+                sprintf( temp, "%c", (97+(interface->IconSelectedByPlayer-26)) );
+                strcpy(charToAccept, temp);
+                data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
+                data->NameInputArayIndex++;
+                lastKeyWasNotAcceptable = true;
+            }
+            else if (interface->IconSelectedByPlayer > 13+13+13+13-1 && interface->IconSelectedByPlayer < 13+13+13+13+11)
+            {
+                sprintf( temp, "%c", (48+(interface->IconSelectedByPlayer-26-26)) );
+                strcpy(charToAccept, temp);
+                data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
+                data->NameInputArayIndex++;
+                lastKeyWasNotAcceptable = true;
+            }
+        }
+
+        if (lastKeyWasNotAcceptable == false && data->NameInputArayIndex < 19)
+        {
+            data->NameInputArayIndex++;
+
+            input->DelayAllUserInput = 20;
+
+            audio->PlayDigitalSoundFX(0, 0);
+            ScreenIsDirty = true;
+        }
+    }
+
+    if (ScreenIsDirty == true)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[2].ScreenX = 320;
+        visuals->Sprites[2].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(2);
+
+        visuals->Sprites[0].ScreenX = 320;
+        visuals->Sprites[0].ScreenY = 240;
+        visuals->Sprites[0].Transparency = 200;
+        visuals->DrawSpriteOntoScreenBuffer(0);
+
+        visuals->DrawTextOntoScreenBuffer("H I G H   S C O R E   N A M E   I N P U T:", visuals->Font[0]
+                                          , 0, 1, JustifyCenter, 255, 255, 1, 90, 90, 1);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 7-6+30;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+        visuals->DrawTextOntoScreenBuffer("You have achieved a new high score!", visuals->Font[0],
+                                          0, 80, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("Enter your name using the mouse:", visuals->Font[0],
+                                          0, 125, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+
+
+        if (data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][0] != (char)NULL)
+            visuals->DrawTextOntoScreenBuffer(data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver],
+                                              visuals->Font[0], 0, 207-25, JustifyCenter, 255, 255, 0, 1, 1, 1);
 
         visuals->Sprites[7].ScreenX = 320;
         visuals->Sprites[7].ScreenY = 404-6+30;

@@ -239,15 +239,18 @@ void Input::GetAllUserInput(void)
 
         if (screens->ScreenToDisplay == PlayingGameScreen)
         {
-            logic->GameForfeit = true;
-
-            for (int index = 0; index < 4; index++)
-
-            if (logic->PlayerData[index].PlayerInput != CPU)
+            if (logic->HumanStillAlive == true)
             {
-                if (logic->PlayerData[index].PlayerStatus != GameOver)
+                logic->GameForfeit = true;
+
+                for (int index = 0; index < 4; index++)
+
+                if (logic->PlayerData[index].PlayerInput != CPU)
                 {
-                    logic->PlayerData[index].Score = 0;
+                    if (logic->PlayerData[index].PlayerStatus != GameOver)
+                    {
+                        logic->PlayerData[index].Score = 0;
+                    }
                 }
             }
         }
