@@ -222,6 +222,10 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/Line.png");
                 break;
 
+            case 9:
+                strcpy(filePath, "data/visuals/SDL-Logo.png");
+                break;
+
             case 10:
                 strcpy(filePath, "data/visuals/SDL2-Logo.png");
                 break;
@@ -958,6 +962,14 @@ bool Visuals::LoadFontsIntoMemory(void)
 
     Font[6] = NULL;
     if ( !(Font[6] = TTF_OpenFont("data/fonts/Font-02.ttf", 14)) )
+    {
+        printf( "Error loading font: %s\n", TTF_GetError() );
+        CoreFailure = true;
+        return false;
+    }
+
+    Font[7] = NULL;
+    if ( !(Font[7] = TTF_OpenFont("data/fonts/Line-01.ttf", 18)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;

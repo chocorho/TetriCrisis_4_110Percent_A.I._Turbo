@@ -63,7 +63,6 @@ public:
         int ScreenY;
         Sint16 AnimationTimer;
         float Scale;
-//        char Text[50]; // Not implemented, sorry!
     } IconGUIs[NumberOfIcons];
 
     int NumberOfIconsOnScreen;
@@ -79,7 +78,7 @@ public:
     void ProcessAllArrowSets(void);
     void DestroyAllArrowSets(void);
 
-    void CreateIcon(Sint16 spriteIndex, int iconScreenX, int iconScreenY);//, char iconText[50]);
+    void CreateIcon(Sint16 spriteIndex, int iconScreenX, int iconScreenY);
     void DisplayAllIconsOntoScreenBuffer(void);
     void ProcessAllIcons(void);
     void DestroyAllIcons(void);

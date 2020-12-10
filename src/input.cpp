@@ -231,31 +231,6 @@ int returnValue = -1;
 //-------------------------------------------------------------------------------------------------
 void Input::GetAllUserInput(void)
 {
-    if (KeyOnKeyboardPressedByUser == SDLK_ESCAPE)
-    {
-        screens->ScreenTransitionStatus = FadeOut;
-
-        DelayAllUserInput = 30;
-
-        if (screens->ScreenToDisplay == PlayingGameScreen)
-        {
-            if (logic->HumanStillAlive == true)
-            {
-                logic->GameForfeit = true;
-
-                for (int index = 0; index < 4; index++)
-
-                if (logic->PlayerData[index].PlayerInput != CPU)
-                {
-                    if (logic->PlayerData[index].PlayerStatus != GameOver)
-                    {
-                        logic->PlayerData[index].Score = 0;
-                    }
-                }
-            }
-        }
-    }
-
     KeyOnKeyboardPressedByUser = -1;
 
     MouseButtonPressed[0] = false;
@@ -342,6 +317,30 @@ void Input::GetAllUserInput(void)
         else if (keyboardState[ SDL_GetScancodeFromKey(UserDefinedKeyRIGHT) ])  JoystickDirectionHorizontal[Keyboard] = RIGHT;
     }
 
+    if (KeyOnKeyboardPressedByUser == SDLK_ESCAPE)
+    {
+        screens->ScreenTransitionStatus = FadeOut;
+
+        DelayAllUserInput = 30;
+
+        if (screens->ScreenToDisplay == PlayingGameScreen)
+        {
+            if (logic->HumanStillAlive == true)
+            {
+                logic->GameForfeit = true;
+
+                for (int index = 0; index < 4; index++)
+
+                if (logic->PlayerData[index].PlayerInput != CPU)
+                {
+                    if (logic->PlayerData[index].PlayerStatus != GameOver)
+                    {
+                        logic->PlayerData[index].Score = 0;
+                    }
+                }
+            }
+        }
+    }
 //------------------------------------------------------------------------
     SDL_PumpEvents();
     SDL_GetMouseState(&MouseX, &MouseY);

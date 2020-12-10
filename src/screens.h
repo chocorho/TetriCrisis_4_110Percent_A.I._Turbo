@@ -39,18 +39,19 @@ public:
     float JoystickScreenDisplayTimer;
 
     #define JoystickScreen              0
-    #define SixteenBitSoftScreen        1
-    #define TitleScreen                 2
-    #define OptionsScreen               3
-    #define HowToPlayScreen             4
-    #define HighScoresScreen            5
-    #define AboutScreen                 6
-    #define NewGameOptionsScreen        7
-    #define PlayingGameScreen           8
-    #define TestComputerSkillScreen     9
-    #define NameInputKeyboardScreen     10
-    #define NameInputJoystickScreen     11
-    #define NameInputMouseScreen        12
+    #define SDLLogoScreen               1
+    #define SixteenBitSoftScreen        2
+    #define TitleScreen                 3
+    #define OptionsScreen               4
+    #define HowToPlayScreen             5
+    #define HighScoresScreen            6
+    #define AboutScreen                 7
+    #define NewGameOptionsScreen        8
+    #define PlayingGameScreen           9
+    #define TestComputerSkillScreen     10
+    #define NameInputKeyboardScreen     11
+    #define NameInputJoystickScreen     12
+    #define NameInputMouseScreen        13
     int ScreenToDisplay;
     int ScreenIsDirty;
 
@@ -58,9 +59,11 @@ public:
 
     void ProcessScreenToDisplay(void);
 
-    void DisplaySixteenBitSoftScreen(void);
-
     void DisplayJoystickScreen(void);
+
+    void DisplaySDLLogoScreen(void);
+
+    void DisplaySixteenBitSoftScreen(void);
 
     void DisplayTitleScreen(void);
 

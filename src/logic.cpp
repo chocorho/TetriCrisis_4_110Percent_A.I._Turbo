@@ -1283,11 +1283,9 @@ void Logic::SetupForNewGame(void)
         }
     }
 
-
-PlayerData[3].Score = 7777;
-PlayerData[3].Level = 6;
-PlayerData[3].Lines = 69;
-
+//PlayerData[1].Score = 7777;
+//PlayerData[1].Level = 6;
+//PlayerData[1].Lines = 69;
 
 }
 
@@ -1341,7 +1339,7 @@ int numberOfCompletedLines = 0;
                         boxTotal++;
                 }
 
-                if (boxTotal == 10 && numberOfCompletedLines > 1)//0)//1)
+                if (boxTotal == 10 && numberOfCompletedLines > 1)
                 {
                     for (int attackY = 1; attackY < 12; attackY++)
                         for (int attackX = 0; attackX < 10; attackX++)

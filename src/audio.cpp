@@ -331,8 +331,6 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
     {
         printf( "Mix_PlayMusic: %s\n", Mix_GetError() );
     }
-
-//    if (MusicVolume == 0)  SDL_SetWindowTitle(visuals->Window, "''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft");
 }
 
 //-------------------------------------------------------------------------------------------------

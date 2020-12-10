@@ -69,7 +69,6 @@ Interface::Interface(void)
         IconGUIs[index].ScreenY = -999;
         IconGUIs[index].AnimationTimer = -1;
         IconGUIs[index].Scale = 1;
-//        strcpy(IconGUIs[index].Text, " \0");
     }
 }
 
@@ -452,7 +451,7 @@ void Interface::DestroyAllArrowSets(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateIcon(Sint16 spriteIndex, int screenX, int screenY)//, char text[50])
+void Interface::CreateIcon(Sint16 spriteIndex, int screenX, int screenY)
 {
     IconGUIs[NumberOfIconsOnScreen].SpriteIndex = spriteIndex;
     IconGUIs[NumberOfIconsOnScreen].ScreenIndex = NumberOfIconsOnScreen;
@@ -460,7 +459,6 @@ void Interface::CreateIcon(Sint16 spriteIndex, int screenX, int screenY)//, char
     IconGUIs[NumberOfIconsOnScreen].ScreenY = screenY;
     IconGUIs[NumberOfIconsOnScreen].AnimationTimer = -1;
     IconGUIs[NumberOfIconsOnScreen].Scale = 1;
-//    strcpy(IconGUIs[NumberOfIconsOnScreen].Text, text);
 
     NumberOfIconsOnScreen++;
 
@@ -541,8 +539,8 @@ void Interface::DestroyAllIcons(void)
         IconGUIs[index].ScreenY = -999;
         IconGUIs[index].AnimationTimer = -1;
         IconGUIs[index].Scale = 1;
-//        strcpy(IconGUIs[index].Text, " \0");
     }
+
     NumberOfIconsOnScreen = 0;
 
     IconSelectedByPlayer = -1;
