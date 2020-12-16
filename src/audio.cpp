@@ -218,7 +218,19 @@ void Audio::SetupAudio(void)
                 break;
 
             case 25:
-                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Ending.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Ending.ogg");
+                break;
+
+            case 26:
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-StoryStart.ogg");
+                break;
+
+            case 27:
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-StoryStart.ogg");
+                break;
+
+            case 28:
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-StoryEnd.ogg");
                 break;
 
             default:
@@ -326,6 +338,8 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
     Mix_VolumeMusic(MusicVolume);
 
     CurrentlySelectedMusicTrack = musicIndex;
+
+    CurrentMusicTrackPlaying = musicIndex;
 
     if(Mix_PlayMusic(MusicTrack[musicIndex], loop)==-1)
     {

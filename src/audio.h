@@ -32,11 +32,12 @@ public:
 
     char Mix_Init_Error[256];
 
-    #define MusicTotal      26
+    #define MusicTotal      29
     Mix_Music *MusicTrack[MusicTotal];
     int MusicVolume;
     Uint8 CurrentlySelectedMusicTrack;
     Uint8 MusicJukeboxMode;
+    Uint8 CurrentMusicTrackPlaying;
 
     #define SoundTotal      15
     Mix_Chunk *SoundFX[SoundTotal];

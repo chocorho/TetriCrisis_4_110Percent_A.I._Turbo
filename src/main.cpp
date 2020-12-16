@@ -30,10 +30,37 @@ ________________________________________________________________________________
                                            2-Dimensional Video Game Engine
 .............................................................................................................................
 
-                                            "T-Crisis 4 110% A.I. Turbo"
-                                             Retail3 Version 4.5.6 Remix
+                                         "T-Crisis 4 110% A.I. Turbo Remix"
+                                               Retail3 Version 4.5.6
 
                                                    Team 16BitSoft
+_____________________________________________________________________________________________________________________________
+
+Beta2 Change List:
+
+*NOTE: Saved options and high scores will reset with this build!
+
+- Lowered default high scores.
+(in some modes the higher scores were impossible to beat)
+- Added "on-the-fly" average lines/game display to A.I. testing screen.
+([Shift]+[T] to activate on 16BitSoft screen)
+- Changed game window title to: "T-Crisis 4 110% A.I. Turbo Remix".
+(LOL - is the name long enough:)
+- Modified staff screen texts a little.
+(hope we did not forget anyone!)
+- Optimized the staff screen.
+(game runs 60FPS on an 11 year old 1.2GHz thin client)
+- Fixed total completed lines counter in A.I. testing screen.
+(game currently does about 100,000 completed lines per game)
+- Optimized and Added F.P.S. to A.I. testing screen.
+(pressing [T] key during test will toggle playfield display on/off)
+- Introduced "Story+Mode" game mode.
+(will feature story images from a paid graphic artist and a completely new music soundtrack!)
+- Optimized [Options] configuration screen.
+(thanks to "fogobogo" for spotting above on his RPi4!)
+-
+
+
 _____________________________________________________________________________________________________________________________
 */
 #include <time.h>
@@ -102,6 +129,7 @@ int main( int argc, char* args[] )
 
     //-MAIN-LOOP------------------------------------------------------------------------
     printf("Main loop started...\n");
+    printf("---------------------------------------------\n");
     while (visuals->CoreFailure != true && input->EXIT_Game != true)
     {
         input->GetAllUserInput();
@@ -109,8 +137,9 @@ int main( int argc, char* args[] )
         screens->ProcessScreenToDisplay();
         visuals->ProcessFramerate();
     }
-    if (visuals->CoreFailure == true)  printf("Game crashed in Main loop\n");
+    if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
     else  printf("...Main loop exited\n");
+    printf("---------------------------------------------\n");
     //------------------------------------------------------------------------MAIN-LOOP-
 
     data->SaveHighScoresAndOptions();

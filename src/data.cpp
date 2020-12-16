@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-b");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-e");
 
     ClearHighScores();
 
@@ -139,12 +139,12 @@ char name8th[19]  = { 'o', 'p', 'e', 'n', 'S', 'U', 'S', 'E', '\0' };
 char name9th[19]  = { 'C', 'o', 'd', 'e', 'B', 'l', 'o', 'c', 'k', 's', '\0' };
 char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
 
-    for (int gameMode = 0; gameMode < 6; gameMode++)
+    for (int gameMode = 0; gameMode < 7; gameMode++)
         for (int index = 0; index < 10; index++)
             for (int indexTwo = 0; indexTwo < 20; indexTwo++)
                 HighScoresName[gameMode][index][indexTwo] = (char)NULL;
 
-    for (int gameMode = 0; gameMode < 6; gameMode++)
+    for (int gameMode = 0; gameMode < 7; gameMode++)
     {
         for (int loop = 0; loop < 10; loop++)
         {
@@ -155,7 +155,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name1st[index];
 
                     HighScoresLevel[gameMode][loop] = 10;
-                    HighScoresScore[gameMode][loop] = 100000;
+                    HighScoresScore[gameMode][loop] = 10000;
                     break;
 
                 case 1:
@@ -163,7 +163,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name2nd[index];
 
                     HighScoresLevel[gameMode][loop] = 9;
-                    HighScoresScore[gameMode][loop] = 90000;
+                    HighScoresScore[gameMode][loop] = 9000;
                     break;
 
                 case 2:
@@ -171,7 +171,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name3rd[index];
 
                     HighScoresLevel[gameMode][loop] = 8;
-                    HighScoresScore[gameMode][loop] = 80000;
+                    HighScoresScore[gameMode][loop] = 8000;
                     break;
 
                 case 3:
@@ -179,7 +179,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name4th[index];
 
                     HighScoresLevel[gameMode][loop] = 7;
-                    HighScoresScore[gameMode][loop] = 70000;
+                    HighScoresScore[gameMode][loop] = 7000;
                     break;
 
                 case 4:
@@ -187,7 +187,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name5th[index];
 
                     HighScoresLevel[gameMode][loop] = 6;
-                    HighScoresScore[gameMode][loop] = 60000;
+                    HighScoresScore[gameMode][loop] = 6000;
                     break;
 
                 case 5:
@@ -195,7 +195,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name6th[index];
 
                     HighScoresLevel[gameMode][loop] = 5;
-                    HighScoresScore[gameMode][loop] = 50000;
+                    HighScoresScore[gameMode][loop] = 5000;
                     break;
 
                 case 6:
@@ -203,7 +203,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name7th[index];
 
                     HighScoresLevel[gameMode][loop] = 4;
-                    HighScoresScore[gameMode][loop] = 40000;
+                    HighScoresScore[gameMode][loop] = 4000;
                     break;
 
                 case 7:
@@ -211,7 +211,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name8th[index];
 
                     HighScoresLevel[gameMode][loop] = 3;
-                    HighScoresScore[gameMode][loop] = 30000;
+                    HighScoresScore[gameMode][loop] = 3000;
                     break;
 
                 case 8:
@@ -219,7 +219,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name9th[index];
 
                     HighScoresLevel[gameMode][loop] = 2;
-                    HighScoresScore[gameMode][loop] = 20000;
+                    HighScoresScore[gameMode][loop] = 2000;
                     break;
 
                 case 9:
@@ -227,7 +227,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name10th[index];
 
                     HighScoresLevel[gameMode][loop] = 1;
-                    HighScoresScore[gameMode][loop] = 10000;
+                    HighScoresScore[gameMode][loop] = 1000;
                     break;
 
                 default:
@@ -243,7 +243,7 @@ void Data::LoadHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);//"T-Crisis4-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);
 char *pref_path = NULL;
 
     if (base_path)
@@ -270,6 +270,9 @@ char *pref_path = NULL;
 
 		fileStream.getline (textBuffer, 30);
 		logic->CPUPlayerEnabled = (int)atoi(textBuffer);
+
+		fileStream.getline (textBuffer, 30);
+		logic->UseOldAI = (int)atoi(textBuffer);
 
 		fileStream.getline (textBuffer, 30);
 		logic->PlayingGameFrameLock = (int)atoi(textBuffer);
@@ -346,7 +349,7 @@ char *pref_path = NULL;
             input->JoyButton2[index] = (int)atoi(textBuffer);
         }
 
-        for (int gameMode = 0; gameMode < 6; gameMode++)
+        for (int gameMode = 0; gameMode < 7; gameMode++)
         {
             for (Uint8 rank = 0; rank < 10; rank++)
             {
@@ -380,7 +383,7 @@ void Data::SaveHighScoresAndOptions(void)
 char filename[256];
 fstream fileStream;
 char textBuffer[50];
-char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);//"T-Crisis4-SDL2");
+char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);
 char *pref_path = NULL;
 
     if (base_path)
@@ -409,6 +412,10 @@ char *pref_path = NULL;
 		fileStream<<"\n";
 
 		sprintf(textBuffer, "%d", logic->CPUPlayerEnabled);
+		fileStream<<textBuffer;
+		fileStream<<"\n";
+
+		sprintf(textBuffer, "%d", logic->UseOldAI);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
@@ -511,7 +518,7 @@ char *pref_path = NULL;
             fileStream<<"\n";
         }
 
-        for (int gameMode = 0; gameMode < 6; gameMode++)
+        for (int gameMode = 0; gameMode < 7; gameMode++)
         {
             for (Uint8 rank = 0; rank < 10; rank++)
             {

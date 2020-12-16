@@ -349,10 +349,19 @@ void Input::GetAllUserInput(void)
     float tempY, tempYtwo;;
     if (visuals->WindowWidthCurrent != 640)
     {
-        tempX = visuals->WindowWidthCurrent;
-        tempXtwo = tempX / 640;
-        tempX = MouseX;
-        MouseX = (int)(tempX / tempXtwo);
+        if (visuals->ForceAspectRatio == false)
+        {
+            tempX = visuals->WindowWidthCurrent;
+            tempXtwo = tempX / 640;
+            tempX = MouseX;
+            MouseX = (int)(tempX / tempXtwo);
+        }
+        else if (visuals->ForceAspectRatio == true)
+        {
+
+            // STUCK HERE!!!
+
+        }
     }
 
     if (visuals->WindowHeightCurrent != 480)

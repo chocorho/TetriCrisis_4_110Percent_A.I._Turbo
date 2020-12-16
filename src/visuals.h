@@ -94,7 +94,7 @@ public:
     #define JustifyRight            2
     #define JustifyCenterOnPoint    3
 
-    #define NumberOfFonts           8
+    #define NumberOfFonts           9
     TTF_Font *Font[NumberOfFonts];
     char VariableText[64];
 

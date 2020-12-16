@@ -299,7 +299,7 @@ void Interface::DisplayAllArrowSetsOntoScreenBuffer(void)
                 visuals->Sprites[1002].ScreenY = ArrowSetGUIs[index].ScreenY;
                 visuals->Sprites[1002].Smooth = true;
                 visuals->Sprites[1002].BlueHue = 0;
-                visuals->Sprites[1002].Transparency = 60;
+                visuals->Sprites[1002].Transparency = 120;
                 visuals->DrawSpriteOntoScreenBuffer(1002);
             }
 
@@ -383,10 +383,10 @@ void Interface::ProcessAllArrowSets(void)
         {
             if (ArrowSetGUIs[index].LeftArrowScreenIndex != -1)
             {
-                if (  ( input->MouseY > (ArrowSetGUIs[index].ScreenY - 21) )
-                   && ( input->MouseY < (ArrowSetGUIs[index].ScreenY + 21) )
-                   && ( input->MouseX > (320-295-25) )
-                   && ( input->MouseX < (320-295+25) )  )
+                if (  ( input->MouseY > (ArrowSetGUIs[index].ScreenY - 19) )
+                   && ( input->MouseY < (ArrowSetGUIs[index].ScreenY + 19) )
+                   && ( input->MouseX > (320-295-23) )
+                   && ( input->MouseX < (320-295+23) )  )
                 {
                     ArrowSetSelectedByKeyboard = ArrowSetGUIs[index].LeftArrowScreenIndex;
                     ArrowSetGUIs[index].LeftArrowScale = 0.8;

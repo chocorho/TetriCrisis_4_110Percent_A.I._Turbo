@@ -30,9 +30,9 @@ public:
 
 	char DataVersionName[30];
 
-    char HighScoresName[6][10][20];
-    Uint8 HighScoresLevel[6][10];
-    Uint64 HighScoresScore[6][10];
+    char HighScoresName[7][10][20];
+    Uint8 HighScoresLevel[7][10];
+    Uint64 HighScoresScore[7][10];
 
     bool NewHighScoreRegistered;
 

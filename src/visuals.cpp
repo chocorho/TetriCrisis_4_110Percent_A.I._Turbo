@@ -37,7 +37,7 @@ Visuals::Visuals(void)
 {
     CoreFailure = false;
 
-    ForceAspectRatio = false;
+    ForceAspectRatio = false;//true;//false;
 
     FullScreenMode = false;
 
@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo'' - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-Beta2 - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -230,6 +230,21 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/SDL2-Logo.png");
                 break;
 
+            case 13:
+                strcpy(filePath, "data/visuals/TC1Palm-Title.png");
+                break;
+
+            case 14:
+                strcpy(filePath, "data/visuals/TC1Palm-InGame.png");
+                break;
+
+            case 15:
+                strcpy(filePath, "data/visuals/Review.png");
+                break;
+
+            case 79:
+                strcpy(filePath, "data/visuals/PlayfieldStory.png");
+                break;
 
             case 80:
                 strcpy(filePath, "data/visuals/Playfield.png");
@@ -265,6 +280,10 @@ int textureHeight;
 
             case 106:
                 strcpy(filePath, "data/visuals/BG-Psycho.png");
+                break;
+
+            case 108:
+                strcpy(filePath, "data/visuals/BG-Story.png");
                 break;
 
             case 155:
@@ -661,7 +680,7 @@ int textureHeight;
     Sprites[1100+TotalNumberOfLoadedStaffTexts].Texture = NULL;
 
     SDL_Color textColor = { 255, 255, 255, 255 };
-    SDL_Color outlineColor = { 80, 80, 80, 255 };
+    SDL_Color outlineColor = { 0, 0, 0, 255 };
     SDL_Surface *text;
     SDL_Surface *textOutline;
     SDL_Rect destRect;
@@ -675,12 +694,12 @@ int textureHeight;
         return(false);
     }
 
-    text = TTF_RenderText_Blended(Font[1], staffText, textColor);
-    textOutline = TTF_RenderText_Solid(Font[1], staffText, outlineColor);
+    text = TTF_RenderText_Blended(Font[8], staffText, textColor);
+    textOutline = TTF_RenderText_Solid(Font[8], staffText, outlineColor);
 
-    for (int posY = -2; posY < 3; posY++)
+    for (int posY = -4; posY < 6; posY++)
     {
-        for (int posX = -2; posX < 3; posX++)
+        for (int posX = -4; posX < 6; posX++)
         {
             destRect.x = (tempSurface->w / 2) - (text->w / 2) + posX;
             destRect.y = (tempSurface->h / 2) - (text->h / 2) + posY;
@@ -734,7 +753,7 @@ sprintf(copyright, "%c", 0xA9);
 sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory(" ", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''T-Crisis 4 110% A.I. Turbo''", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''T-Crisis 4 110% A.I. Turbo Remix''", 0) == false)  return(false);
     strcpy(textToDisplay, "Team 16BitSoft");
     if ( LoadStaffTextIntoMemory(textToDisplay, 255) == false)  return(false);
 
@@ -743,17 +762,34 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("Video Game Made Possible Through Our Mentors:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Garry Kitchen", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Andre' LaMothe", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Technology Credits:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''SDL'' Version 2.0 - Simple DirectMedia Layer", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Cross-Platform Open-Source -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("Video Game Project Directed By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''GT-R Twin TurboCharged'' SDL2 Game Engine Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("100% Arcade Perfect To Home Conversion By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(Original Gameboy Version)", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Yiyuan Lee", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("X,XXX,XXX+ Average Lines Per Game!", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(Not Ready Yet)", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("100,000+ Average Lines Per Game!", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Lead Game Designer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -761,11 +797,16 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Lead Game Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Lead Game Tester:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Lead Game QA Tester:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Lead Graphic Artist:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Lead Storyboard Graphic Artist:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''erdalcetin83''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("For Hire Professional Graphic Artist On:", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("www.Fiverr.com", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
@@ -777,17 +818,19 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.openSUSE.org", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Source Code Typed Into:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Windows EXE Executable Built With:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Code::Blocks'' Cross-Platform C++ I.D.E.", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.CodeBlocks.org", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Graphics Edited In:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''PixelNeo'' Windows Graphic Editor", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Genuine ''PixelNeo'' Windows Graphic Editor", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("https://visualneo.com/product/pixelneo", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(Free Linux Alternative: ''Krita'')", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Audio Edited In:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''GoldWave'' Windows Audio Editor", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Genuine ''GoldWave'' Windows Audio Editor", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.GoldWave.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(Free Linux Alternative: ''Audacity'')", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Video Game Built On:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("A ''JeZxLee'' Pro-Built Thin Desktop System", 255) == false)  return(false);
@@ -798,7 +841,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("- Intel Celeron 2GHz(2.42GHz OverClock) 4-Core CPU -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- Corsair 2 x 8GB(16GB Total) DDR3 RAM Memory -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- nVidia GeForce GT 1030 2GB GDDR5 PCIexpress GPU -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Solid State  Drive(OS/Apps) -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Solid State Drive(OS/Apps) -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive(Personal Data) -", 255) == false)  return(false);
 
     strcpy(textToDisplay, "Microsoft");
@@ -824,7 +867,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Support Game Beta Testers:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Big Thank You To All The People Who Helped Us:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''XaeL''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Blitz''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Blink''", 255) == false)  return(false);
@@ -841,6 +884,12 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Evi''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Zaphod77''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Sparks''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''rtrussell''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''AntTheAlchemist''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''icculus''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''sezero''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Zorg''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''slvn_''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
 
@@ -961,7 +1010,7 @@ bool Visuals::LoadFontsIntoMemory(void)
     }
 
     Font[6] = NULL;
-    if ( !(Font[6] = TTF_OpenFont("data/fonts/Font-02.ttf", 14)) )
+    if ( !(Font[6] = TTF_OpenFont("data/fonts/Font-02.ttf", 16)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;
@@ -970,6 +1019,14 @@ bool Visuals::LoadFontsIntoMemory(void)
 
     Font[7] = NULL;
     if ( !(Font[7] = TTF_OpenFont("data/fonts/Line-01.ttf", 18)) )
+    {
+        printf( "Error loading font: %s\n", TTF_GetError() );
+        CoreFailure = true;
+        return false;
+    }
+
+    Font[8] = NULL;
+    if ( !(Font[8] = TTF_OpenFont("data/fonts/Line-01.ttf", 22)) )
     {
         printf( "Error loading font: %s\n", TTF_GetError() );
         CoreFailure = true;

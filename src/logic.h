@@ -31,6 +31,7 @@ public:
     #define TimeAttack120Mode           3
     #define TwentyLineChallengeMode     4
     #define CrisisMode                  5
+    #define StoryMode                   6
     Uint8 GameMode;
 
     Uint8 MaxRotationArray[8];
@@ -50,6 +51,7 @@ public:
     {
         int Playfield[15][26];
         int PlayfieldBackup[15][26];
+        int PlayfieldAI[15][26];
 
         int PlayfieldStartX;
         int PlayfieldEndX;
@@ -83,6 +85,14 @@ public:
         int MovePieceHeight[15][5];
         int MovePlayfieldBoxEdges[15][5];
         int MoveTrappedHoles[15][5];
+        bool MovePieceCollision[15][5];
+        int MoveSetup4Line[15][5];
+        int MovePlayfieldTop;
+        int MovePlayfieldTotalHeight[15][5];
+        int MovePlayfieldBumbs[15][5];
+        int Stress;
+        int LocationOfPossible4Line;
+        int MoveTrappedHolesBefore[15][5];
 
         int BestMoveX;
         int BestRotation;
@@ -111,17 +121,22 @@ public:
 
     } PlayerData[NumberOfPlayers];
 
+    float Multiplier;
+    int MultiplierSelected;
+
     float PsychoBackgroundRotationOne;
     float PsychoBackgroundRotationTwo;
 
     bool CrisisModeOnePlayerLeftPlayfieldCleared;
 
-    int TotalCPUPlayerLines;
-    int NumberofCPUGames;
-    int TotalOneLines;
-    int TotalTwoLines;
-    int TotalThreeLines;
-    int TotalFourLines;
+    Uint32 TotalCPUPlayerLinesLast;
+    Uint32 TotalCPUPlayerLines;
+
+    Uint32 NumberofCPUGames;
+    Uint32 TotalOneLines;
+    Uint32 TotalTwoLines;
+    Uint32 TotalThreeLines;
+    Uint32 TotalFourLines;
 
     Uint32 PlayingGameFrameLock;
 
@@ -148,7 +163,7 @@ public:
     Uint8 BlockAttackTransparency[NumberOfPlayers];
 
     bool Crisis7BGMPlayed;
-    bool CrisisWon;
+    bool Won;
 
     bool GameWasJustPlayed;
 
@@ -169,19 +184,26 @@ public:
 	virtual ~Logic(void);
 
 	void InitializePieceData(void);
+
 	void ClearPlayfieldsWithCollisionDetection(void);
+
 	Uint8 GetRandomPiece(void);
 
     #define CollisionNotTrue            0
     #define CollisionWithPlayfield      1
 	int PieceCollision(void);
 	int PieceCollisionDown(void);
+	int PieceCollisionLeft(void);
+	int PieceCollisionRight(void);
 
-	#define Current		0
-	#define Next		1
-	#define DropShadow	2
+	#define Current		    0
+	#define Next		    1
+	#define DropShadow	    2
+    #define Temp            3
 	void AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow);
 	void DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow);
+
+    void UpdateThoughtDisplay(void);
 
     void SetupNewPiece(void);
 
@@ -210,7 +232,9 @@ public:
 
     bool CrisisModeClearPlayfield(void);
 
-    void ComputeComputerPlayerMove(void);
+    int UseOldAI = 1;
+    void ComputeComputerPlayerMoveOld(void);
+    void ComputeComputerPlayerMoveNew(void);
 };
 
 #endif
