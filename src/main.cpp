@@ -58,6 +58,8 @@ Beta2 Change List:
 (will feature story images from a paid graphic artist and a completely new music soundtrack!)
 - Optimized [Options] configuration screen.
 (thanks to "fogobogo" for spotting above on his RPi4!)
+- Added "Danger1" voice to "Story+Mode" game mode.
+(it's my voice - could not afford a voice actor)
 -
 
 

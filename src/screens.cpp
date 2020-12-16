@@ -2762,7 +2762,7 @@ const char* keyName;
         if (logic->PlayerData[2].PlayerInput != CPU && logic->PlayerData[2].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
         if (logic->PlayerData[3].PlayerInput != CPU && logic->PlayerData[3].PlayerStatus != GameOver)  logic->HumanStillAlive = true;
 
-        if (logic->HumanStillAlive == false && input->DEBUG == 0)
+        if (logic->HumanStillAlive == false && logic->GameOverTimer == 0 && input->DEBUG == 0)
         {
             logic->ContinueWatchingTimer++;
             if (logic->ContinueWatchingTimer > 20)
@@ -2800,6 +2800,21 @@ const char* keyName;
         ScreenIsDirty = true;
     }
 
+    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
+     && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
+    {
+       if (logic->GameOverTimer < 50)
+       {
+            if (logic->GameOverTimer == 1)  audio->PlayDigitalSoundFX(15 ,0);
+
+           logic->GameOverTimer++;
+       }
+       else
+       {
+          ScreenTransitionStatus = FadeOut;
+       }
+    }
+
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
         if (logic->PlayerData[logic->Player].PlayerStatus != FlashingCompletedLines
@@ -2810,9 +2825,9 @@ const char* keyName;
         }
     }
 
-    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
-        && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
-        ScreenTransitionStatus = FadeOut;
+//    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
+//        && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
+//        ScreenTransitionStatus = FadeOut;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
@@ -3118,7 +3133,17 @@ const char* keyName;
         }
     }
 
-    if (logic->PlayerData[1].PlayerStatus == GameOver)  ScreenTransitionStatus = FadeOut;
+    if (logic->PlayerData[1].PlayerStatus == GameOver)
+    {
+        if (logic->GameOverTimer < 50)
+        {
+            logic->GameOverTimer++;
+        }
+        else
+        {
+            ScreenTransitionStatus = FadeOut;
+        }
+    }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {

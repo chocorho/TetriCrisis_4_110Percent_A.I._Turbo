@@ -124,8 +124,8 @@ public:
     float Multiplier;
     int MultiplierSelected;
 
-    float PsychoBackgroundRotationOne;
-    float PsychoBackgroundRotationTwo;
+//    float PsychoBackgroundRotationOne;
+//    float PsychoBackgroundRotationTwo;
 
     bool CrisisModeOnePlayerLeftPlayfieldCleared;
 
@@ -171,6 +171,8 @@ public:
 
 	bool GameForfeit;
 
+    int GameOverTimer;
+
     int JoinInTimer;
 	int ContinueWatchingTimer;
 
@@ -196,6 +198,8 @@ public:
 	int PieceCollisionLeft(void);
 	int PieceCollisionRight(void);
 
+    int DangerRepeat;
+
 	#define Current		    0
 	#define Next		    1
 	#define DropShadow	    2
@@ -208,6 +212,8 @@ public:
     void SetupNewPiece(void);
 
 	void CheckForCompletedLines(void);
+
+    void CheckForDanger(void);
 
 	void MovePieceDown(bool Force);
     void MovePieceDownFast(void);

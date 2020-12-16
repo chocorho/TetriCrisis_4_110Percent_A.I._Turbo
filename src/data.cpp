@@ -116,7 +116,7 @@ int playerRank = 10;
         return;
     }
 
-    char nameClear[19] = { '\0' };
+    char nameClear[19] = { " " };//'\0' };
     for (int index = 0; index < 19; index++)
         HighScoresName[logic->GameMode][playerRank][index] = nameClear[index];
 

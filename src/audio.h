@@ -39,7 +39,7 @@ public:
     Uint8 MusicJukeboxMode;
     Uint8 CurrentMusicTrackPlaying;
 
-    #define SoundTotal      15
+    #define SoundTotal      16
     Mix_Chunk *SoundFX[SoundTotal];
     int SoundVolume;
 

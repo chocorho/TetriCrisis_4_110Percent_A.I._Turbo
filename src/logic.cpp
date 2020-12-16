@@ -733,6 +733,37 @@ int numberOfCompletedLines = 0;
 }
 
 //-------------------------------------------------------------------------------------------------
+void Logic::CheckForDanger(void)
+{
+bool inDanger = false;
+
+    for ( int y = 5; y < (5+4); y++ )
+    {
+        for (int x = 2; x < 12; x++)
+        {
+            if (PlayerData[Player].Playfield[x][y] > 10 && PlayerData[Player].Playfield[x][y] < 20)
+            {
+                inDanger = true;
+            }
+        }
+    }
+
+    if (inDanger == true)
+    {
+        if (DangerRepeat < 100)
+        {
+            DangerRepeat++;
+        }
+        else
+        {
+            DangerRepeat = 0;
+
+            audio->PlayDigitalSoundFX(15, 0);
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
 void Logic::MovePieceDown(bool Force)
 {
     if (Force == false)
@@ -1096,13 +1127,17 @@ void Logic::MovePieceRight(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::SetupForNewGame(void)
 {
-    PsychoBackgroundRotationOne = 0.0f;
-    PsychoBackgroundRotationTwo = 0.0f;
+    DangerRepeat = 0;
+
+//    PsychoBackgroundRotationOne = 0.0f;
+//    PsychoBackgroundRotationTwo = 0.0f;
 
     PlayersCanJoin = true;
     GameWasJustPlayed = true;
 
     GameForfeit = false;
+
+    GameOverTimer = 0;
 
     JoinInTimer = 0;
     ContinueWatchingTimer = 0;
@@ -1373,11 +1408,11 @@ void Logic::SetupForNewGame(void)
            }
         }
     }
-/*
+
 PlayerData[1].Score = 7777;
 PlayerData[1].Level = 6;
 PlayerData[1].Lines = 69;
-*/
+
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1989,6 +2024,7 @@ void Logic::RunTetriGameEngine(void)
 
                 if (playersAlive > 1)  PlayerData[Player].Score = 0;
             }
+            else if (GameMode == StoryMode)  CheckForDanger();
 
             if (BlockAttackTransparency[Player] > 0.0f)  BlockAttackTransparency[Player]-=5;
 		}
