@@ -1409,9 +1409,9 @@ void Logic::SetupForNewGame(void)
         }
     }
 
-PlayerData[1].Score = 7777;
-PlayerData[1].Level = 6;
-PlayerData[1].Lines = 69;
+//PlayerData[1].Score = 7777;
+//PlayerData[1].Level = 6;
+//PlayerData[1].Lines = 69;
 
 }
 
