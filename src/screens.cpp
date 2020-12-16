@@ -1065,13 +1065,16 @@ void Screens::DisplayNewGameOptionsScreen(void)
         float x = 401-10;
         for (int boxIndex = 0; boxIndex < 7; boxIndex++)
         {
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScreenX = x;
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScreenY = 345;
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScaleX = 1.8;
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScaleY = 1.8;
-            visuals->DrawSpriteOntoScreenBuffer( 202+boxIndex+(logic->TileSet*10) );
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScaleX = 1;
-            visuals->Sprites[202+boxIndex+(logic->TileSet*10)].ScaleY = 1;
+            int boxSetToShow = (logic->TileSet*10);
+            if (logic->GameMode == StoryMode)  boxSetToShow = 0;
+
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScreenX = x;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScreenY = 345;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1.8;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1.8;
+            visuals->DrawSpriteOntoScreenBuffer( 202+boxIndex+(boxSetToShow) );
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1;
 
             x+=30;
         }
@@ -2036,7 +2039,6 @@ const char* keyName;
         {
             visuals->DrawTextOntoScreenBuffer("You can change the keyboard controls in [Options]", visuals->Font[1]
                                              , 0, 360, JustifyCenter, 255, 255, 255, 0, 0, 0);
-
         }
     }
 
@@ -2674,7 +2676,6 @@ const char* keyName;
         {
             if (logic->PlayersCanJoin == true)
             {
-
                 if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDeviceOne != NULL)
                     || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDeviceTwo != NULL)
                     || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
@@ -2825,10 +2826,6 @@ const char* keyName;
         }
     }
 
-//    if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
-//        && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
-//        ScreenTransitionStatus = FadeOut;
-
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
         ScreenTransitionStatus = FadeAll;
@@ -2934,7 +2931,7 @@ const char* keyName;
                     else if (logic->PlayerData[player].Playfield[x][y] > 10
                              && logic->PlayerData[player].Playfield[x][y] < 20)
                     {
-                        int spriteIndex = 200 + (10*logic->TileSet);
+                        int spriteIndex = 200;
 
                         visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenX = boxScreenX;
                         visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenY = boxScreenY;
@@ -3872,7 +3869,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
 //    if (ScreenIsDirty == true)
     {
-
         if (logic->DontDisplayTestImages == false)
         {
             visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
@@ -3981,67 +3977,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
                                                       , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
                 }
             }
-/*
-            if (logic->PlayerData[0].PlayerStatus == GameOver)
-            {
-                visuals->Sprites[80].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
-                visuals->Sprites[80].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
-                visuals->Sprites[80].Transparency = 200;
-                visuals->Sprites[80].RedHue = 255;
-                visuals->Sprites[80].GreenHue = 0;
-                visuals->Sprites[80].BlueHue = 0;
-                visuals->DrawSpriteOntoScreenBuffer(80);
 
-                visuals->DrawTextOntoScreenBuffer("GAME OVER"
-                                          , visuals->Font[1], logic->PlayerData[0].PlayersPlayfieldScreenX
-                                          , 240, JustifyCenterOnPoint, 255, 255, 255, 90, 90, 90);
-            }
-
-            if (logic->PlayerData[1].PlayerStatus == GameOver)
-            {
-                visuals->Sprites[80].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-                visuals->Sprites[80].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-                visuals->Sprites[80].Transparency = 200;
-                visuals->Sprites[80].RedHue = 255;
-                visuals->Sprites[80].GreenHue = 255;
-                visuals->Sprites[80].BlueHue = 0;
-                visuals->DrawSpriteOntoScreenBuffer(80);
-
-                visuals->DrawTextOntoScreenBuffer("GAME OVER"
-                                          , visuals->Font[1], logic->PlayerData[1].PlayersPlayfieldScreenX
-                                          , 240, JustifyCenterOnPoint, 255, 255, 255, 90, 90, 90);
-            }
-
-            if (logic->PlayerData[2].PlayerStatus == GameOver)
-            {
-                visuals->Sprites[80].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
-                visuals->Sprites[80].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
-                visuals->Sprites[80].Transparency = 200;
-                visuals->Sprites[80].RedHue = 0;
-                visuals->Sprites[80].GreenHue = 255;
-                visuals->Sprites[80].BlueHue = 0;
-                visuals->DrawSpriteOntoScreenBuffer(80);
-
-                visuals->DrawTextOntoScreenBuffer("GAME OVER"
-                                          , visuals->Font[1], logic->PlayerData[2].PlayersPlayfieldScreenX
-                                          , 240, JustifyCenterOnPoint, 255, 255, 255, 90, 90, 90);
-            }
-
-            if (logic->PlayerData[3].PlayerStatus == GameOver)
-            {
-                visuals->Sprites[80].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
-                visuals->Sprites[80].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
-                visuals->Sprites[80].Transparency = 200;
-                visuals->Sprites[80].RedHue = 0;
-                visuals->Sprites[80].GreenHue = 0;
-                visuals->Sprites[80].BlueHue = 255;
-                visuals->DrawSpriteOntoScreenBuffer(80);
-
-                visuals->DrawTextOntoScreenBuffer("GAME OVER"
-                                          , visuals->Font[1], logic->PlayerData[3].PlayersPlayfieldScreenX
-                                          , 240, JustifyCenterOnPoint, 255, 255, 255, 90, 90, 90);
-            }
-*/
             for (int player = 0; player < NumberOfPlayers; player++)
             {
                 if (logic->PlayersCanJoin == true)

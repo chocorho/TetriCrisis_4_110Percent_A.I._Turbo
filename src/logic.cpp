@@ -1129,9 +1129,6 @@ void Logic::SetupForNewGame(void)
 {
     DangerRepeat = 0;
 
-//    PsychoBackgroundRotationOne = 0.0f;
-//    PsychoBackgroundRotationTwo = 0.0f;
-
     PlayersCanJoin = true;
     GameWasJustPlayed = true;
 
@@ -1409,10 +1406,12 @@ void Logic::SetupForNewGame(void)
         }
     }
 
-//PlayerData[1].Score = 7777;
-//PlayerData[1].Level = 6;
-//PlayerData[1].Lines = 69;
-
+    if (TestMode == true)
+    {
+        PlayerData[1].Score = 7777;
+        PlayerData[1].Level = 6;
+        PlayerData[1].Lines = 69;
+    }
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -2199,12 +2198,12 @@ void Logic::ComputeComputerPlayerMoveOld(void)
 
                 float testValue;
 
-                //--["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]---------------------------------------
+                //--JeZxLee's ["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]------------------------------
                 testValue = ( (3*PlayerData[Player].MoveTrappedHoles[posX][rot])
                             +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
                             +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
                             -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
-                //---------------------------------------["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]--
+                //------------------------------JeZxLee's ["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]--
 
                 if (PlayerData[Player].MoveCompletedLines[posX][rot] > 1)
                     testValue = ( 0 - (PlayerData[Player].MoveCompletedLines[posX][rot]*100) );

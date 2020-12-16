@@ -25,6 +25,8 @@ class Logic
 {
 public:
 
+    bool TestMode = true;
+
     #define OriginalMode                0
     #define TimeAttack30Mode            1
     #define TimeAttack60Mode            2
@@ -123,9 +125,6 @@ public:
 
     float Multiplier;
     int MultiplierSelected;
-
-//    float PsychoBackgroundRotationOne;
-//    float PsychoBackgroundRotationTwo;
 
     bool CrisisModeOnePlayerLeftPlayfieldCleared;
 

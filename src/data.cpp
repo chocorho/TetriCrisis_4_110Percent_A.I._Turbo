@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-f");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-Beta1a");
 
     ClearHighScores();
 
@@ -116,7 +116,7 @@ int playerRank = 10;
         return;
     }
 
-    char nameClear[19] = { " " };//'\0' };
+    char nameClear[19] = { " " };
     for (int index = 0; index < 19; index++)
         HighScoresName[logic->GameMode][playerRank][index] = nameClear[index];
 

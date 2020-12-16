@@ -151,7 +151,7 @@ public:
 
     int QueryJoysticksForAction(Uint8 joy, bool justButtons);
 
-   void GetAllUserInput(void);
+    void GetAllUserInput(void);
 
 };
 
