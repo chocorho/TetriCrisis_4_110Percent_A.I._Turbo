@@ -37,9 +37,9 @@ Visuals::Visuals(void)
 {
     CoreFailure = false;
 
-    ForceAspectRatio = false;//true;//false;
+    ForceAspectRatio = true;
 
-    FullScreenMode = false;
+    FullScreenMode = 0;
 
     FrameLock = 16;
     SystemTicks = SDL_GetTicks();
@@ -890,6 +890,9 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''sezero''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Zorg''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''slvn_''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Dominus''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
 

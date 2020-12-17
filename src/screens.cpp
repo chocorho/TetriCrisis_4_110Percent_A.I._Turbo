@@ -1481,17 +1481,23 @@ void Screens::DisplayOptionsScreen(void)
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 2)
             {
-                visuals->FullScreenMode = !visuals->FullScreenMode;
+                if (visuals->FullScreenMode > 0)  visuals->FullScreenMode--;
+                else  visuals->FullScreenMode = 1;
 
-                if (visuals->FullScreenMode == false)  SDL_SetWindowFullscreen(visuals->Window, 0);
-                else if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
+
+                if (visuals->FullScreenMode == 0)  SDL_SetWindowFullscreen(visuals->Window, 0);
+                else if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 2.5)
             {
-                visuals->FullScreenMode = !visuals->FullScreenMode;
+                if (visuals->FullScreenMode < 1)  visuals->FullScreenMode++;
+                else  visuals->FullScreenMode = 0;
 
-                if (visuals->FullScreenMode == false)  SDL_SetWindowFullscreen(visuals->Window, 0);
-                else if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+                if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
+
+                if (visuals->FullScreenMode == 0)  SDL_SetWindowFullscreen(visuals->Window, 0);
+                else if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 3)
             {
@@ -1652,10 +1658,10 @@ void Screens::DisplayOptionsScreen(void)
         visuals->DrawTextOntoScreenBuffer("Full Screen Mode:"
                                           , visuals->Font[0], 60, 160-15+3-7, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
-        if (visuals->FullScreenMode == false)
+        if (visuals->FullScreenMode == 0)
             visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 160-15+3-7, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
-        else if (visuals->FullScreenMode == true)
+        else if (visuals->FullScreenMode == 1)
             visuals->DrawTextOntoScreenBuffer("ON", visuals->Font[0], 60, 160-15+3-7, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
 

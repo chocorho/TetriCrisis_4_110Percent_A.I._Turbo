@@ -278,11 +278,20 @@ void Input::GetAllUserInput(void)
                     KeyOnKeyboardPressedByUser = -1;
                 break;
 
+            case SDL_MOUSEBUTTONDOWN:
+                MouseX = Event.button.x;
+                MouseY = Event.button.y;
+                break;
+
+
             default:
                 break;
         }
     }
-
+/*
+<slvn_> you get events with:  SDL_PollEvent(&evt);
+<slvn_> for type SDL_MOUSEBUTTONDOWN or SDL_MOUSEBUTTONUP, that would be evt.button.x/y
+*/
     bool usingCustomKeys = true;
     if (UserDefinedKeyButtonOne == -1
      || UserDefinedKeyButtonTwo == -1
@@ -343,7 +352,7 @@ void Input::GetAllUserInput(void)
     }
 //------------------------------------------------------------------------
     SDL_PumpEvents();
-    SDL_GetMouseState(&MouseX, &MouseY);
+//    SDL_GetMouseState(&MouseX, &MouseY);
 
     float tempX, tempXtwo;
     float tempY, tempYtwo;;
@@ -366,10 +375,13 @@ void Input::GetAllUserInput(void)
 
     if (visuals->WindowHeightCurrent != 480)
     {
-        tempY = visuals->WindowHeightCurrent;
-        tempYtwo = tempY / 480;
-        tempY = MouseY;
-        MouseY = (int)(tempY / tempYtwo);
+        if (visuals->ForceAspectRatio == false)
+        {
+            tempY = visuals->WindowHeightCurrent;
+            tempYtwo = tempY / 480;
+            tempY = MouseY;
+            MouseY = (int)(tempY / tempYtwo);
+        }
     }
 
     for (int index = 0; index < 2; index++)

@@ -76,16 +76,17 @@ Beta2 Change List:
 - Fixed an infrequent crash when game is over and a new high score is acheived.
 (Was new high score name setting to NULL then trying to be displayed on screen: title/high scores)
 
+- Implemented keep aspect ration for windowed and full screen mode.
+(special thanks to "slvn_" for their help with above!)
+
 -
 __________________________________________________________________________________________________
 Beta2 To Do List:
 
 
-- Fix aspect ratio resize of game window.
+- Start "Story+Mode" game mode storyboard image display system.
 
 - Test thoroughly for issues.
-
-- Start "Story+Mode" game mode storyboard image display system.
 
 -
 
@@ -151,7 +152,7 @@ int main( int argc, char* args[] )
 
     data->LoadHighScoresAndOptions();
 
-    if (visuals->FullScreenMode == true)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 

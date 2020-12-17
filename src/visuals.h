@@ -32,7 +32,7 @@ public:
 
     bool ForceAspectRatio;
 
-    bool FullScreenMode;
+    int FullScreenMode;
 
     SDL_Window *Window;
     int WindowWidthCurrent;
