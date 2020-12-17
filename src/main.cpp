@@ -170,7 +170,7 @@ int main( int argc, char* args[] )
         visuals->ProcessFramerate();
     }
     if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
-    else  printf("-----------------------------Main loop started-\n");
+    else  printf("-----------------------------Main loop ended-\n");
     //------------------------------------------------------------------------MAIN-LOOP-
 
     data->SaveHighScoresAndOptions();
