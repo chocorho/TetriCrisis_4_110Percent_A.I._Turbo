@@ -213,7 +213,7 @@ int windowHeight;
     {
         ScreenIsDirty = true;
 
-        if (ScreenToDisplay != PlayingGameScreen)
+//        if (ScreenToDisplay != PlayingGameScreen && ScreenToDisplay != PlayingStoryGameScreen)
         {
             if (input->DEBUG == true)
             {
@@ -2371,6 +2371,8 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeAll)
     {
+//        SDL_CaptureMouse(SDL_TRUE);
+
         logic->SetupForNewGame();
 
         visuals->FrameLock = logic->PlayingGameFrameLock;
@@ -2834,6 +2836,8 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
+//        SDL_CaptureMouse(SDL_FALSE);
+
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = HighScoresScreen;

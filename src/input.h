@@ -45,6 +45,7 @@ public:
     bool MouseButtonPressed[2];
     bool MouseButtonWasClicked[2];
     int MouseX, MouseY;
+    int MouseButtonClicked;
 
     #define Keyboard        0
     #define JoystickOne     1

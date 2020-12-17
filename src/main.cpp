@@ -74,12 +74,16 @@ Beta2 Change List:
 (it's my voice - could not afford a voice actor)
 
 - Fixed an infrequent crash when game is over and a new high score is acheived.
-(Was new high score name setting to NULL then trying to be displayed on screen: title/high scores)
+(was new high score name setting to NULL then trying to be displayed on screen: title/high scores)
 
 - Implemented keep aspect ration for windowed and full screen mode.
 (special thanks to "slvn_" for their help with above!)
 
+- Fixed in-game mouse control.
+(mouse input when playing is not ideal, but it's there as an option)
+
 -
+
 __________________________________________________________________________________________________
 Beta2 To Do List:
 

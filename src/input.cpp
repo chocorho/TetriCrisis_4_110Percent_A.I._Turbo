@@ -279,8 +279,18 @@ void Input::GetAllUserInput(void)
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
+                MouseButtonClicked = Event.button.clicks;
+
                 MouseX = Event.button.x;
                 MouseY = Event.button.y;
+                break;
+
+            case SDL_MOUSEMOTION:
+                if (screens->ScreenToDisplay == PlayingGameScreen || screens->ScreenToDisplay == PlayingStoryGameScreen)
+                {
+                    MouseX = Event.button.x;
+                    MouseY = Event.button.y;
+                }
                 break;
 
 
@@ -288,10 +298,7 @@ void Input::GetAllUserInput(void)
                 break;
         }
     }
-/*
-<slvn_> you get events with:  SDL_PollEvent(&evt);
-<slvn_> for type SDL_MOUSEBUTTONDOWN or SDL_MOUSEBUTTONUP, that would be evt.button.x/y
-*/
+
     bool usingCustomKeys = true;
     if (UserDefinedKeyButtonOne == -1
      || UserDefinedKeyButtonTwo == -1
@@ -352,37 +359,6 @@ void Input::GetAllUserInput(void)
     }
 //------------------------------------------------------------------------
     SDL_PumpEvents();
-//    SDL_GetMouseState(&MouseX, &MouseY);
-
-    float tempX, tempXtwo;
-    float tempY, tempYtwo;;
-    if (visuals->WindowWidthCurrent != 640)
-    {
-        if (visuals->ForceAspectRatio == false)
-        {
-            tempX = visuals->WindowWidthCurrent;
-            tempXtwo = tempX / 640;
-            tempX = MouseX;
-            MouseX = (int)(tempX / tempXtwo);
-        }
-        else if (visuals->ForceAspectRatio == true)
-        {
-
-            // STUCK HERE!!!
-
-        }
-    }
-
-    if (visuals->WindowHeightCurrent != 480)
-    {
-        if (visuals->ForceAspectRatio == false)
-        {
-            tempY = visuals->WindowHeightCurrent;
-            tempYtwo = tempY / 480;
-            tempY = MouseY;
-            MouseY = (int)(tempY / tempYtwo);
-        }
-    }
 
     for (int index = 0; index < 2; index++)
     {
