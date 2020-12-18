@@ -54,6 +54,9 @@ Beta3 Change List:
 - Implemented level up system in "Story+Mode".
 (requires more line clears after each level)
 
+- Fixed "Original Mode" ending at level 10, it's now never-ending.
+(try some of the other game modes for more fun!)
+
 -
 
 
