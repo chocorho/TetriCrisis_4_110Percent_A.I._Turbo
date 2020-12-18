@@ -51,13 +51,13 @@ Beta3 Change List:
 - Implemented display "Volume OFF" for music track/mode when music volume is set to OFF.
 (not sure why you would mute the music - it rocks!)
 
+- Implemented level up system in "Story+Mode".
+(requires more line clears after each level)
+
 -
 
 
 Beta3 To Do List:
-
-
-- Implement level up system in "Story+Mode".
 
 - Finalize music soundtrack.
 

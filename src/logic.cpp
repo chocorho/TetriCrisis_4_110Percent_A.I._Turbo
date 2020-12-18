@@ -1575,7 +1575,7 @@ bool thereWasACompletedLine = false;
                     if (PlayerData[2].PlayerStatus != GameOver)  playersAlive++;
                     if (PlayerData[3].PlayerStatus != GameOver)  playersAlive++;
 
-                    if (PlayerData[Player].Level < 9 && playersAlive == 1)
+                    if ( (GameMode == CrisisMode && PlayerData[Player].Level < 9 && playersAlive == 1) || (GameMode < CrisisMode) )
                     {
                         PlayerData[Player].Level++;
 
@@ -1597,7 +1597,7 @@ bool thereWasACompletedLine = false;
                         PlayerData[Player].TimeToDropPiece-=5;
                         audio->PlayDigitalSoundFX(8, 0);
                     }
-                    else if (PlayerData[Player].Level > 8)
+                    else if (PlayerData[Player].Level > 8 && GameMode == CrisisMode)
                     {
                         PlayerData[0].PlayerStatus = GameOver;
                         PlayerData[1].PlayerStatus = GameOver;
