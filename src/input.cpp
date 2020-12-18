@@ -339,7 +339,7 @@ void Input::GetAllUserInput(void)
 
         DelayAllUserInput = 30;
 
-        if (screens->ScreenToDisplay == PlayingGameScreen)
+        if (screens->ScreenToDisplay == PlayingGameScreen || screens->ScreenToDisplay == PlayingStoryGameScreen)
         {
             if (logic->HumanStillAlive == true)
             {
@@ -352,6 +352,7 @@ void Input::GetAllUserInput(void)
                     if (logic->PlayerData[index].PlayerStatus != GameOver)
                     {
                         logic->PlayerData[index].Score = 0;
+                        logic->PlayerData[index].PlayerStatus = GameOver;
                     }
                 }
             }

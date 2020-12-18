@@ -2956,6 +2956,8 @@ const char* keyName;
 
 //        audio->PlayMusic(26 , -1);
 
+        logic->HumanStillAlive = true;
+
         ScreenTransitionStatus = FadeIn;
     }
 
@@ -3247,7 +3249,7 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-        if (logic->PlayerData[1].PlayerStatus != GameOver)
+        if (logic->PlayerData[1].PlayerStatus != GameOver && logic->GameForfeit != true)
         {
             ScreenToDisplay = ShowStoryScreen;
 
