@@ -1127,7 +1127,7 @@ void Logic::MovePieceRight(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::SetupForNewGame(void)
 {
-    StoryShown = 0;
+    for (int index = 0; index < 10; index++)  StoryShown[index] = 0;
 
     DangerRepeat = 0;
 

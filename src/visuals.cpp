@@ -787,7 +787,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Video Game Made Possible Through Our Mentors:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Video Game Made Possible By Our Mentor's Teachings:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Garry Kitchen", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Andre' LaMothe", 255) == false)  return(false);
 
@@ -796,6 +796,9 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- Cross-Platform Open-Source -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Video Game Project Produced By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Video Game Project Directed By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);

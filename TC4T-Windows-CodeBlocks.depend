@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1608240862 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
+1608308528 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -407,7 +407,7 @@
 
 1608227626 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.h
 
-1608271046 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.h
+1608308742 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.h
 
 1608260670 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\input.cpp
 	<stdio.h>
@@ -438,7 +438,7 @@
 
 1607578654 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\interface.h
 
-1608259109 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.cpp
+1608308772 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\logic.cpp
 	<cstdlib>
 	<cfloat>
 	<stdio.h>
@@ -470,7 +470,7 @@
 
 1509896996 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\resources.rc
 
-1608265523 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
+1608309188 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
 	<stdio.h>
 	<cstring>
 	<iostream>
@@ -487,7 +487,7 @@
 	"logic.h"
 	"audio.h"
 
-1608253190 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
+1608306718 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"

@@ -25,9 +25,9 @@ class Logic
 {
 public:
 
-    bool TestMode = false;//true;
+    bool TestMode = true;//false;//true;
 
-    int StoryShown;
+    int StoryShown[10];
 
     #define OriginalMode                0
     #define TimeAttack30Mode            1

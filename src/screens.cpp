@@ -2278,9 +2278,16 @@ void Screens::DisplayAboutScreen(void)
             }
         }
 
-        visuals->Sprites[13].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50);
-        visuals->Sprites[14].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50 + 320 + 50);
-        visuals->Sprites[15].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50 + 320 + 50 + 385);
+        if (logic->GameMode == StoryMode && logic->Won == true)
+        {
+
+        }
+        else
+        {
+            visuals->Sprites[13].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50);
+            visuals->Sprites[14].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50 + 320 + 50);
+            visuals->Sprites[15].ScreenY = (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY + 240 + 50 + 320 + 50 + 385);
+        }
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -2303,23 +2310,30 @@ void Screens::DisplayAboutScreen(void)
         visuals->Sprites[index].ScreenY-=skip;
     }
 
-    visuals->Sprites[13].ScreenY-=skip;
-    visuals->Sprites[14].ScreenY-=skip;
-
-    if (visuals->Sprites[15].ScreenY > 240)
+    if (logic->GameMode == StoryMode && logic->Won == true)
     {
-        visuals->Sprites[15].ScreenY-=skip;
-    }
-    else if (ReviewShowDelay > 0)
-    {
-        ReviewShowDelay-=1;
+        if (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY < -40)  ScreenTransitionStatus = FadeOut;
     }
     else
     {
-        ReviewScale-=0.01;
-    }
+        visuals->Sprites[13].ScreenY-=skip;
+        visuals->Sprites[14].ScreenY-=skip;
 
-    if (ReviewScale < 0.0)  ScreenTransitionStatus = FadeOut;
+        if (visuals->Sprites[15].ScreenY > 240)
+        {
+            visuals->Sprites[15].ScreenY-=skip;
+        }
+        else if (ReviewShowDelay > 0)
+        {
+            ReviewShowDelay-=1;
+        }
+        else
+        {
+            ReviewScale-=0.01;
+        }
+
+        if (ReviewScale < 0.0)  ScreenTransitionStatus = FadeOut;
+    }
 
 //    if (ScreenIsDirty == true)
     {
@@ -2340,16 +2354,23 @@ void Screens::DisplayAboutScreen(void)
             visuals->DrawSpriteOntoScreenBuffer(2);
         }
 
-        visuals->Sprites[13].ScreenX = 320;
-        visuals->DrawSpriteOntoScreenBuffer(13);
+        if (logic->GameMode == StoryMode && logic->Won == true)
+        {
 
-        visuals->Sprites[14].ScreenX = 320;
-        visuals->DrawSpriteOntoScreenBuffer(14);
+        }
+        else
+        {
+            visuals->Sprites[13].ScreenX = 320;
+            visuals->DrawSpriteOntoScreenBuffer(13);
 
-        visuals->Sprites[15].ScreenX = 320;
-        visuals->Sprites[15].ScaleX = ReviewScale;
-        visuals->Sprites[15].ScaleY = ReviewScale;
-        visuals->DrawSpriteOntoScreenBuffer(15);
+            visuals->Sprites[14].ScreenX = 320;
+            visuals->DrawSpriteOntoScreenBuffer(14);
+
+            visuals->Sprites[15].ScreenX = 320;
+            visuals->Sprites[15].ScaleX = ReviewScale;
+            visuals->Sprites[15].ScaleY = ReviewScale;
+            visuals->DrawSpriteOntoScreenBuffer(15);
+        }
 
         for (  int index = 1100; index < ( (1100 + visuals->TotalNumberOfLoadedStaffTexts) ); index++  )
         {
@@ -2922,10 +2943,56 @@ void Screens::DisplayShowStoryScreen(void)
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
         int storyImageToShow = 90;
-        if (logic->PlayerData[1].Level == 9)  storyImageToShow = 93;
-        else if (logic->PlayerData[1].Level > 5)  storyImageToShow = 92;
-        else if (logic->PlayerData[1].Level > 2)  storyImageToShow = 91;
-        else  storyImageToShow = 90;
+        if (logic->PlayerData[1].Level == 0)
+        {
+            storyImageToShow = 90;
+            logic->StoryShown[0] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 1)
+        {
+            storyImageToShow = 90;
+            logic->StoryShown[1] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 2)
+        {
+            storyImageToShow = 90;
+            logic->StoryShown[2] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 3)
+        {
+            storyImageToShow = 91;
+            logic->StoryShown[3] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 4)
+        {
+            storyImageToShow = 91;
+            logic->StoryShown[4] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 5)
+        {
+            storyImageToShow = 91;
+            logic->StoryShown[5] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 6)
+        {
+            storyImageToShow = 92;
+            logic->StoryShown[6] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 7)
+        {
+            storyImageToShow = 92;
+            logic->StoryShown[7] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 8)
+        {
+            storyImageToShow = 92;
+            logic->StoryShown[8] = 1;
+        }
+        else if (logic->PlayerData[1].Level == 9)
+        {
+            storyImageToShow = 93;
+            logic->StoryShown[9] = 1;
+        }
 
         visuals->Sprites[storyImageToShow].ScreenX = 320;
         visuals->Sprites[storyImageToShow].ScreenY = 240;
@@ -2937,6 +3004,14 @@ void Screens::DisplayShowStoryScreen(void)
         ScreenTransitionStatus = FadeAll;
 
         if (logic->PlayerData[1].Level == 0)  audio->PlayMusic(26 , -1);
+        else if (logic->PlayerData[1].Level == 1)  audio->PlayMusic(26 , -1);
+        else if (logic->PlayerData[1].Level == 2)  audio->PlayMusic(26 , -1);
+        else if (logic->PlayerData[1].Level == 3)  audio->PlayMusic(27 , -1);
+        else if (logic->PlayerData[1].Level == 4)  audio->PlayMusic(27 , -1);
+        else if (logic->PlayerData[1].Level == 5)  audio->PlayMusic(27 , -1);
+        else if (logic->PlayerData[1].Level == 6)  audio->PlayMusic(28 , -1);
+        else if (logic->PlayerData[1].Level == 7)  audio->PlayMusic(28 , -1);
+        else if (logic->PlayerData[1].Level == 8)  audio->PlayMusic(28 , -1);
         else  audio->PlayMusic(29, -1);
 
         ScreenToDisplay = PlayingStoryGameScreen;
@@ -3225,27 +3300,21 @@ const char* keyName;
         }
     }
 
-    if (logic->PlayerData[1].Level == 3 && logic->StoryShown == 0)
+    if (logic->PlayerData[1].Level == 3 && logic->StoryShown[3] == 0)
     {
-        logic->StoryShown = 1;
+        logic->StoryShown[3] = 1;
         ScreenTransitionStatus = FadeOut;
     }
-    else if (logic->PlayerData[1].Level == 6 && logic->StoryShown == 1)
+    else if (logic->PlayerData[1].Level == 6 && logic->StoryShown[6] == 0)
     {
-        logic->StoryShown = 2;
+        logic->StoryShown[6] = 1;
         ScreenTransitionStatus = FadeOut;
     }
-    else if (logic->PlayerData[1].Level == 9 && logic->StoryShown == 2)
+    else if (logic->PlayerData[1].Level == 9 && logic->StoryShown[9] == 0)
     {
-        logic->StoryShown = 3;
+        logic->StoryShown[9] = 1;
         ScreenTransitionStatus = FadeOut;
     }
-
-
-
-
-
-
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
