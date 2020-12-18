@@ -735,26 +735,26 @@ void Screens::DisplayNewGameOptionsScreen(void)
             else
                 if (Mix_PlayingMusic() == 1)  Mix_HaltMusic();
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 1 && audio->MusicJukeboxMode == 0 && logic->GameMode != StoryMode)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 1 && audio->MusicJukeboxMode == 0 && logic->GameMode != StoryMode && audio->MusicVolume != 0)
         {
             if (logic->SelectedMusicTrack > 0)  logic->SelectedMusicTrack-=1;
             else  logic->SelectedMusicTrack = 18;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 1.5 && audio->MusicJukeboxMode == 0 && logic->GameMode != StoryMode)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 1.5 && audio->MusicJukeboxMode == 0 && logic->GameMode != StoryMode && audio->MusicVolume != 0)
         {
             if (logic->SelectedMusicTrack < 18)  logic->SelectedMusicTrack+=1;
             else  logic->SelectedMusicTrack = 0;
 
             audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 2 && logic->GameMode != StoryMode)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 2 && logic->GameMode != StoryMode && audio->MusicVolume != 0)
         {
             if (audio->MusicJukeboxMode > 0)  audio->MusicJukeboxMode-=1;
             else  audio->MusicJukeboxMode = 1;
         }
-        else if (interface->ArrowSetArrowSelectedByPlayer == 2.5 && logic->GameMode != StoryMode)
+        else if (interface->ArrowSetArrowSelectedByPlayer == 2.5 && logic->GameMode != StoryMode && audio->MusicVolume != 0)
         {
             if (audio->MusicJukeboxMode < 1)  audio->MusicJukeboxMode+=1;
             else  audio->MusicJukeboxMode = 0;
@@ -887,7 +887,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , 60, 105-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
 
-        if (logic->GameMode == StoryMode)
+        if (audio->MusicVolume == 0)
+            visuals->DrawTextOntoScreenBuffer("Volume OFF", visuals->Font[0]
+                                              , 60, 105-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->GameMode == StoryMode)
             visuals->DrawTextOntoScreenBuffer("Story BGM's", visuals->Font[0]
                                               , 60, 105-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
@@ -976,7 +980,11 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , 60, 145-15+3, JustifyLeft
                                           , 255, 255, 255, 1, 1, 1);
 
-        if (logic->GameMode == StoryMode)
+        if (audio->MusicVolume == 0)
+            visuals->DrawTextOntoScreenBuffer("Volume OFF", visuals->Font[0]
+                                              , 60, 145-15+3, JustifyRight
+                                              , 255, 255, 255, 1, 1, 1);
+        else if (logic->GameMode == StoryMode)
             visuals->DrawTextOntoScreenBuffer("Story", visuals->Font[0]
                                               , 60, 145-15+3, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);

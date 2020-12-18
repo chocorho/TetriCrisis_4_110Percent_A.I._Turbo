@@ -48,13 +48,20 @@ Beta3 Change List:
 - Created "Story+Mode" game mode storyboard image display system.
 (black and white sketches are temporary until artist finishes the work)
 
+- Implemented display "Volume OFF" for music track/mode when music volume is set to OFF.
+(not sure why you would mute the music - it rocks!)
+
 -
 
 
 Beta3 To Do List:
 
 
-- x
+- Implement level up system in "Story+Mode".
+
+- Finalize music soundtrack.
+
+- Finish "Story+Mode".
 
 - Test thoroughly for issues.
 
