@@ -25,7 +25,7 @@ class Logic
 {
 public:
 
-    bool TestMode = true;//false;//true;
+    bool TestMode = false;
 
     int StoryShown[10];
 

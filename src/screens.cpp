@@ -539,8 +539,7 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(1, 0);
     }
-
-    if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_t)
+    else if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_t)
     {
         ScreenToDisplay = TestComputerSkillScreen;
         ScreenTransitionStatus = FadeAll;
@@ -553,6 +552,16 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         audio->PlayMusic(0, -1);
 
         logic->PlayersCanJoin = false;
+
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(1, 0);
+    }
+    else if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_c)
+    {
+        logic->TestMode = true;
+
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(1, 0);
     }
 
     if (input->MouseButtonPressed[0] == true
