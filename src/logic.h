@@ -27,6 +27,9 @@ public:
 
     bool TestMode = false;
 
+    int StoryLevelAdvanceCounter;
+    int StoryLevelAdvanceValue;
+
     int StoryShown[10];
 
     #define OriginalMode                0

@@ -1127,6 +1127,9 @@ void Logic::MovePieceRight(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::SetupForNewGame(void)
 {
+    StoryLevelAdvanceValue = 10;
+    StoryLevelAdvanceCounter = StoryLevelAdvanceValue;
+
     for (int index = 0; index < 10; index++)  StoryShown[index] = 0;
 
     DangerRepeat = 0;
@@ -1564,66 +1567,74 @@ bool thereWasACompletedLine = false;
 
                 if (PlayerData[Player].TwentyLineCounter > 0)  PlayerData[Player].TwentyLineCounter--;
 
-				if (PlayerData[Player].Lines % 10 == 0)
+				if (GameMode != StoryMode && PlayerData[Player].Lines % 10 == 0)
 				{
-                    if (GameMode == CrisisMode || GameMode == StoryMode)
-                    {
-                        Uint8 playersAlive = 0;
-                        if (PlayerData[0].PlayerStatus != GameOver)  playersAlive++;
-                        if (PlayerData[1].PlayerStatus != GameOver)  playersAlive++;
-                        if (PlayerData[2].PlayerStatus != GameOver)  playersAlive++;
-                        if (PlayerData[3].PlayerStatus != GameOver)  playersAlive++;
+                    Uint8 playersAlive = 0;
+                    if (PlayerData[0].PlayerStatus != GameOver)  playersAlive++;
+                    if (PlayerData[1].PlayerStatus != GameOver)  playersAlive++;
+                    if (PlayerData[2].PlayerStatus != GameOver)  playersAlive++;
+                    if (PlayerData[3].PlayerStatus != GameOver)  playersAlive++;
 
-                        if (PlayerData[Player].Level < 9 && playersAlive == 1)
+                    if (PlayerData[Player].Level < 9 && playersAlive == 1)
+                    {
+                        PlayerData[Player].Level++;
+
+                        if (GameMode == CrisisMode && PlayerData[Player].Level == 7 && Crisis7BGMPlayed == false)
+                        {
+                            audio->PlayMusic(24, -1);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            audio->PlayDigitalSoundFX(12, 0);
+                            Crisis7BGMPlayed = true;
+                        }
+
+                        PlayerData[Player].TimeToDropPiece-=5;
+                        audio->PlayDigitalSoundFX(8, 0);
+                    }
+                    else if (PlayerData[Player].Level > 8)
+                    {
+                        PlayerData[0].PlayerStatus = GameOver;
+                        PlayerData[1].PlayerStatus = GameOver;
+                        PlayerData[2].PlayerStatus = GameOver;
+                        PlayerData[3].PlayerStatus = GameOver;
+
+                        PlayerData[Player].Level++;
+
+                        Won = true;
+                    }
+				}
+				else if (GameMode == StoryMode)
+				{
+
+                    if (PlayerData[Player].Level < 10)
+                    {
+                        StoryLevelAdvanceCounter--;
+                        if (StoryLevelAdvanceCounter == 0)
                         {
                             PlayerData[Player].Level++;
 
-                            if (GameMode == StoryMode)
-                            {
-                                if (PlayerData[1].Level == 9 && audio->CurrentMusicTrackPlaying != 29)  audio->PlayMusic(29, -1);
-
-
-
-
-
-
-                            }
-
-                            if (GameMode != StoryMode && PlayerData[Player].Level == 7 && Crisis7BGMPlayed == false)
-                            {
-                                audio->PlayMusic(24, -1);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                audio->PlayDigitalSoundFX(12, 0);
-                                Crisis7BGMPlayed = true;
-                            }
+                            StoryLevelAdvanceValue+=5;
+                            StoryLevelAdvanceCounter = StoryLevelAdvanceValue;
 
                             PlayerData[Player].TimeToDropPiece-=5;
                             audio->PlayDigitalSoundFX(8, 0);
                         }
-                        else if (PlayerData[Player].Level > 8)
-                        {
-                            PlayerData[0].PlayerStatus = GameOver;
-                            PlayerData[1].PlayerStatus = GameOver;
-                            PlayerData[2].PlayerStatus = GameOver;
-                            PlayerData[3].PlayerStatus = GameOver;
-
-                            PlayerData[Player].Level++;
-
-                            Won = true;
-                        }
                     }
-                    else
+
+                    if (PlayerData[Player].Level > 9)
                     {
-                        PlayerData[Player].Level++;
-                        if (PlayerData[Player].TimeToDropPiece > 3)  PlayerData[Player].TimeToDropPiece-=2;
-                        audio->PlayDigitalSoundFX(8, 0);
+                        PlayerData[0].PlayerStatus = GameOver;
+                        PlayerData[1].PlayerStatus = GameOver;
+                        PlayerData[2].PlayerStatus = GameOver;
+                        PlayerData[3].PlayerStatus = GameOver;
+
+                        Won = true;
                     }
 				}
 

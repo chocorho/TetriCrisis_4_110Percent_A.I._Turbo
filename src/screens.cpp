@@ -3292,6 +3292,10 @@ const char* keyName;
             }
         }
 
+        sprintf(visuals->VariableText, "%d", logic->StoryLevelAdvanceCounter);
+        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[1].PlayersPlayfieldScreenX
+                                          , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+
         ScreenIsDirty = true;
     }
 
