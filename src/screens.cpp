@@ -1589,14 +1589,14 @@ void Screens::DisplayOptionsScreen(void)
         }
     }
 
-    if (JoystickFlash < 320)
+    if ( JoystickFlash < (190+160+30) )
         JoystickFlash+=1;
     else
         JoystickFlash = 0;
 
     if (JoystickFlash == 0)
         ScreenIsDirty = true;
-    else if (JoystickFlash == 161)
+    else if (JoystickFlash == 191)
         ScreenIsDirty = true;
 
 //    if (ScreenIsDirty == true)
@@ -1777,13 +1777,13 @@ void Screens::DisplayOptionsScreen(void)
         }
         else
         {
-            if (JoystickFlash < 130)
+            if (JoystickFlash < 160)
             {
                 visuals->DrawTextOntoScreenBuffer("* Game Supports USB Joysticks - Go Grab Some & Party! *"
                                                   , visuals->Font[1]
                                                   , 0, 374, JustifyCenter, 255, 255, 255, 1, 1, 1);
             }
-            else if ( JoystickFlash > 160 && JoystickFlash < (160+130) )
+            else if ( JoystickFlash > 190 && JoystickFlash < (160+190) )
             {
                 visuals->DrawTextOntoScreenBuffer("* Requires Restart Of Game After Plugged In *"
                                                   , visuals->Font[1]
