@@ -38,6 +38,27 @@ ________________________________________________________________________________
 
 
 ***NOTE: Saved options and high scores will reset UNTIL: "Release Candidate"!!!
+
+Beta3 Change List:
+
+
+- Fixed "Story+Mode" clearing of playfield after playing for shortwhile.
+(should only happen in "Crisis+Mode")
+
+- Created "Story+Mode" game mode storyboard image display system.
+(black and white sketches are temporary until artist finishes the work)
+
+-
+
+
+Beta3 To Do List:
+
+
+- x
+
+- Test thoroughly for issues.
+
+
 __________________________________________________________________________________________________
 
 Beta2 Change List:
@@ -81,18 +102,6 @@ Beta2 Change List:
 
 - Fixed in-game mouse control.
 (mouse input when playing is not ideal, but it's there as an option)
-
--
-
-__________________________________________________________________________________________________
-Beta2 To Do List:
-
-
-- Start "Story+Mode" game mode storyboard image display system.
-
-- Test thoroughly for issues.
-
--
 
 _____________________________________________________________________________________________________________________________
 */

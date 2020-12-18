@@ -49,10 +49,11 @@ public:
     #define NewGameOptionsScreen        8
     #define PlayingGameScreen           9
     #define PlayingStoryGameScreen      10
-    #define TestComputerSkillScreen     11
-    #define NameInputKeyboardScreen     12
-    #define NameInputJoystickScreen     13
-    #define NameInputMouseScreen        14
+    #define ShowStoryScreen             11
+    #define TestComputerSkillScreen     12
+    #define NameInputKeyboardScreen     13
+    #define NameInputJoystickScreen     14
+    #define NameInputMouseScreen        15
     int ScreenToDisplay;
     int ScreenIsDirty;
 
@@ -82,6 +83,8 @@ public:
     void DisplayAboutScreen(void);
 
     void DisplayPlayingGameScreen(void);
+
+    void DisplayShowStoryScreen(void);
     void DisplayPlayingStoryGameScreen(void);
 
     void DisplayNameInputKeyboardScreen(void);

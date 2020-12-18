@@ -184,6 +184,10 @@ int windowHeight;
             DisplayPlayingStoryGameScreen();
             break;
 
+        case ShowStoryScreen:
+            DisplayShowStoryScreen();
+            break;
+
         case TestComputerSkillScreen:
             DisplayTestComputerSkillScreen();
             break;
@@ -1088,17 +1092,22 @@ void Screens::DisplayNewGameOptionsScreen(void)
         {
             SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
+            logic->SetupForNewGame();
+
             if (logic->GameMode < StoryMode)
                 ScreenToDisplay = PlayingGameScreen;
             else
-                ScreenToDisplay = PlayingStoryGameScreen;
+                ScreenToDisplay = ShowStoryScreen;//PlayingStoryGameScreen;
 
-            if (audio->MusicJukeboxMode == 0)
-                audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
-            else
-                audio->PlayMusic( (rand()%22 + 1 ), 0 );
+            if (logic->GameMode != StoryMode)
+            {
+                if (audio->MusicJukeboxMode == 0)
+                    audio->PlayMusic(1+logic->SelectedMusicTrack, -1);
+                else
+                    audio->PlayMusic( (rand()%22 + 1 ), 0 );
 
-            if (logic->SelectedBackground == 1)  Mix_PauseMusic();
+                if (logic->SelectedBackground == 1)  Mix_PauseMusic();
+            }
         }
         else
         {
@@ -2316,10 +2325,20 @@ void Screens::DisplayAboutScreen(void)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
 
-        visuals->Sprites[2].ScreenX = 320;
-        visuals->Sprites[2].ScreenY = 240;
-        visuals->Sprites[2].Transparency = 100;
-        visuals->DrawSpriteOntoScreenBuffer(2);
+        if (logic->Won == true && logic->GameMode == StoryMode)
+        {
+            visuals->Sprites[94].ScreenX = 320;
+            visuals->Sprites[94].ScreenY = 240;
+            visuals->Sprites[94].Transparency = 100;
+            visuals->DrawSpriteOntoScreenBuffer(94);
+        }
+        else
+        {
+            visuals->Sprites[2].ScreenX = 320;
+            visuals->Sprites[2].ScreenY = 240;
+            visuals->Sprites[2].Transparency = 100;
+            visuals->DrawSpriteOntoScreenBuffer(2);
+        }
 
         visuals->Sprites[13].ScreenX = 320;
         visuals->DrawSpriteOntoScreenBuffer(13);
@@ -2360,6 +2379,8 @@ void Screens::DisplayAboutScreen(void)
                 else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Mouse)
                     ScreenToDisplay = NameInputMouseScreen;
             }
+
+            logic->Won = false;
         }
     }
 }
@@ -2373,7 +2394,7 @@ const char* keyName;
     {
 //        SDL_CaptureMouse(SDL_TRUE);
 
-        logic->SetupForNewGame();
+//        logic->SetupForNewGame();
 
         visuals->FrameLock = logic->PlayingGameFrameLock;
 
@@ -2873,17 +2894,67 @@ const char* keyName;
 }
 
 //-------------------------------------------------------------------------------------------------
+void Screens::DisplayShowStoryScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        Mix_HaltMusic();
+
+        ScreenDisplayTimer = 750;
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
+    {
+        ScreenDisplayTimer = 0;
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(0, 0);
+    }
+
+    if (ScreenDisplayTimer > 0)  ScreenDisplayTimer--;
+    else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
+
+    if (ScreenIsDirty == true)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        int storyImageToShow = 90;
+        if (logic->PlayerData[1].Level == 9)  storyImageToShow = 93;
+        else if (logic->PlayerData[1].Level > 5)  storyImageToShow = 92;
+        else if (logic->PlayerData[1].Level > 2)  storyImageToShow = 91;
+        else  storyImageToShow = 90;
+
+        visuals->Sprites[storyImageToShow].ScreenX = 320;
+        visuals->Sprites[storyImageToShow].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(storyImageToShow);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+
+        if (logic->PlayerData[1].Level == 0)  audio->PlayMusic(26 , -1);
+        else  audio->PlayMusic(29, -1);
+
+        ScreenToDisplay = PlayingStoryGameScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
 void Screens::DisplayPlayingStoryGameScreen(void) // NOT FINISHED...
 {
 const char* keyName;
 
     if (ScreenTransitionStatus == FadeAll)
     {
-        logic->SetupForNewGame();
+//        logic->SetupForNewGame();
 
         visuals->FrameLock = logic->PlayingGameFrameLock;
 
-        audio->PlayMusic(26 , -1);
+//        audio->PlayMusic(26 , -1);
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -3152,47 +3223,77 @@ const char* keyName;
         }
     }
 
+    if (logic->PlayerData[1].Level == 3 && logic->StoryShown == 0)
+    {
+        logic->StoryShown = 1;
+        ScreenTransitionStatus = FadeOut;
+    }
+    else if (logic->PlayerData[1].Level == 6 && logic->StoryShown == 1)
+    {
+        logic->StoryShown = 2;
+        ScreenTransitionStatus = FadeOut;
+    }
+    else if (logic->PlayerData[1].Level == 9 && logic->StoryShown == 2)
+    {
+        logic->StoryShown = 3;
+        ScreenTransitionStatus = FadeOut;
+    }
+
+
+
+
+
+
+
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-        visuals->Sprites[201 + (10*logic->TileSet)].ScaleX = 1;
-
-        int spriteIndex;
-        for (  spriteIndex = ( 200 + (10*logic->TileSet) ); spriteIndex < ( 200 + (10*logic->TileSet) + 7 ); spriteIndex++  )
+        if (logic->PlayerData[1].PlayerStatus != GameOver)
         {
-            visuals->Sprites[spriteIndex].ScaleX = 1;
+            ScreenToDisplay = ShowStoryScreen;
+
+        }
+        else
+        {
+            visuals->Sprites[201 + (10*logic->TileSet)].ScaleX = 1;
+
+            int spriteIndex;
+            for (  spriteIndex = ( 200 + (10*logic->TileSet) ); spriteIndex < ( 200 + (10*logic->TileSet) + 7 ); spriteIndex++  )
+            {
+                visuals->Sprites[spriteIndex].ScaleX = 1;
+            }
+
+            ScreenToDisplay = HighScoresScreen;
+
+            data->CheckForNewHighScore();
+
+            if (data->PlayerRankOnGameOver < 10 && logic->GameForfeit == false)
+            {
+                if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
+                         || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
+                         || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
+                    ScreenToDisplay = NameInputJoystickScreen;
+                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
+                    ScreenToDisplay = NameInputKeyboardScreen;
+                else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Mouse)
+                    ScreenToDisplay = NameInputMouseScreen;
+            }
+
+            audio->PlayMusic(0, -1);
+
+            if (logic->Won == true)
+            {
+                ScreenToDisplay = AboutScreen;
+                audio->PlayMusic(30, -1);
+            }
+
+            SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+
+            visuals->FrameLock = 16;
+
+            visuals->ClearTextCache();
         }
 
         ScreenTransitionStatus = FadeAll;
-
-        ScreenToDisplay = HighScoresScreen;
-
-        data->CheckForNewHighScore();
-
-        if (data->PlayerRankOnGameOver < 10 && logic->GameForfeit == false)
-        {
-            if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickOne
-                     || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickTwo
-                     || logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == JoystickThree)
-                ScreenToDisplay = NameInputJoystickScreen;
-            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Keyboard)
-                ScreenToDisplay = NameInputKeyboardScreen;
-            else if (logic->PlayerData[data->PlayerWithHighestScore].PlayerInput == Mouse)
-                ScreenToDisplay = NameInputMouseScreen;
-        }
-
-        audio->PlayMusic(0, -1);
-
-        if (logic->Won == true)
-        {
-            ScreenToDisplay = AboutScreen;
-            audio->PlayMusic(28, -1);
-        }
-
-        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
-
-        visuals->FrameLock = 16;
-
-        visuals->ClearTextCache();
     }
 }
 

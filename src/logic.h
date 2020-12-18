@@ -27,6 +27,8 @@ public:
 
     bool TestMode = false;//true;
 
+    int StoryShown;
+
     #define OriginalMode                0
     #define TimeAttack30Mode            1
     #define TimeAttack60Mode            2

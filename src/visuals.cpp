@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-Beta2 - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-Beta3 - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -253,6 +253,31 @@ int textureHeight;
             case 81:
                 strcpy(filePath, "data/visuals/Playfield-Block-Attack.png");
                 break;
+
+
+
+            case 90:
+                strcpy(filePath, "data/story/Story1.png");
+                break;
+
+            case 91:
+                strcpy(filePath, "data/story/Story2.png");
+                break;
+
+            case 92:
+                strcpy(filePath, "data/story/Story3.png");
+                break;
+
+            case 93:
+                strcpy(filePath, "data/story/Story4.png");
+                break;
+
+            case 94:
+                strcpy(filePath, "data/story/Story5.png");
+                break;
+
+
+
 
             case 100:
                 strcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png");

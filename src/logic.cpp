@@ -1127,6 +1127,8 @@ void Logic::MovePieceRight(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::SetupForNewGame(void)
 {
+    StoryShown = 0;
+
     DangerRepeat = 0;
 
     PlayersCanJoin = true;
@@ -1576,6 +1578,17 @@ bool thereWasACompletedLine = false;
                         {
                             PlayerData[Player].Level++;
 
+                            if (GameMode == StoryMode)
+                            {
+                                if (PlayerData[1].Level == 9 && audio->CurrentMusicTrackPlaying != 29)  audio->PlayMusic(29, -1);
+
+
+
+
+
+
+                            }
+
                             if (GameMode != StoryMode && PlayerData[Player].Level == 7 && Crisis7BGMPlayed == false)
                             {
                                 audio->PlayMusic(24, -1);
@@ -1924,7 +1937,7 @@ void Logic::RunTetriGameEngine(void)
                            ||(Player == 2 && PlayerData[0].PlayerStatus == GameOver && PlayerData[1].PlayerStatus == GameOver && PlayerData[3].PlayerStatus == GameOver)
                            ||(Player == 3 && PlayerData[0].PlayerStatus == GameOver && PlayerData[1].PlayerStatus == GameOver && PlayerData[2].PlayerStatus == GameOver) )
                         {
-                            if (CrisisModeOnePlayerLeftPlayfieldCleared == false
+                            if ( GameMode == CrisisMode && CrisisModeOnePlayerLeftPlayfieldCleared == false
                                 && PlayersCanJoin == false && PlayerData[Player].PlayerStatus == PieceFalling)
                             {
                                 DeletePieceFromPlayfieldMemory(Current);
