@@ -242,6 +242,10 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/Review.png");
                 break;
 
+            case 17:
+                strcpy(filePath, "data/visuals/T-Crisis_PromoCover.png");
+                break;
+
             case 79:
                 strcpy(filePath, "data/visuals/PlayfieldStory.png");
                 break;

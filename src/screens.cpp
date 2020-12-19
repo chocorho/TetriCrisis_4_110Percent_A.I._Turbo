@@ -2303,7 +2303,7 @@ void Screens::DisplayAboutScreen(void)
             }
         }
 
-        if (logic->GameMode == StoryMode && logic->Won == true)
+        if ( (logic->GameMode == StoryMode || logic->GameMode == CrisisMode) && logic->Won == true )
         {
 
         }
@@ -2335,7 +2335,7 @@ void Screens::DisplayAboutScreen(void)
         visuals->Sprites[index].ScreenY-=skip;
     }
 
-    if (logic->GameMode == StoryMode && logic->Won == true)
+    if ( (logic->GameMode == StoryMode || logic->GameMode == CrisisMode) && logic->Won == true )
     {
         if (visuals->Sprites[1100+visuals->TotalNumberOfLoadedStaffTexts-1].ScreenY < -40)  ScreenTransitionStatus = FadeOut;
     }
@@ -2364,12 +2364,19 @@ void Screens::DisplayAboutScreen(void)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
 
-        if (logic->Won == true && logic->GameMode == StoryMode)
+        if (logic->GameMode == StoryMode && logic->Won == true)
         {
             visuals->Sprites[94].ScreenX = 320;
             visuals->Sprites[94].ScreenY = 240;
             visuals->Sprites[94].Transparency = 100;
             visuals->DrawSpriteOntoScreenBuffer(94);
+        }
+        else if (logic->GameMode == CrisisMode && logic->Won == true)
+        {
+            visuals->Sprites[17].ScreenX = 320;
+            visuals->Sprites[17].ScreenY = 240;
+            visuals->Sprites[17].Transparency = 100;
+            visuals->DrawSpriteOntoScreenBuffer(17);
         }
         else
         {
@@ -2379,7 +2386,7 @@ void Screens::DisplayAboutScreen(void)
             visuals->DrawSpriteOntoScreenBuffer(2);
         }
 
-        if (logic->GameMode == StoryMode && logic->Won == true)
+        if ( (logic->GameMode == StoryMode || logic->GameMode == CrisisMode) && logic->Won == true )
         {
 
         }
@@ -2443,6 +2450,8 @@ const char* keyName;
 //        logic->SetupForNewGame();
 
         visuals->FrameLock = logic->PlayingGameFrameLock;
+
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -2905,6 +2914,8 @@ const char* keyName;
     {
 //        SDL_CaptureMouse(SDL_FALSE);
 
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = HighScoresScreen;
@@ -3057,6 +3068,8 @@ const char* keyName;
 //        audio->PlayMusic(26 , -1);
 
         logic->HumanStillAlive = true;
+
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -3363,6 +3376,8 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+
         if (logic->PlayerData[1].PlayerStatus != GameOver && logic->GameForfeit != true)
         {
             ScreenToDisplay = ShowStoryScreen;
