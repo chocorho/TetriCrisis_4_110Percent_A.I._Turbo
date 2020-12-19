@@ -596,7 +596,7 @@ void Screens::DisplaySixteenBitSoftScreen(void)
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
         ScreenTransitionStatus = FadeAll;
 
@@ -609,6 +609,8 @@ void Screens::DisplayTitleScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
+
         int buttonStartY = 204;
         int buttonOffsetY = 43;
         interface->CreateButton( 1003, 0, buttonStartY );
@@ -673,6 +675,8 @@ void Screens::DisplayTitleScreen(void)
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
         ScreenTransitionStatus = FadeAll;
+
+        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
 
         if (interface->ButtonSelectedByPlayer == 1)  ScreenToDisplay = OptionsScreen;
         else if (interface->ButtonSelectedByPlayer == 2)  ScreenToDisplay = HowToPlayScreen;
@@ -1512,6 +1516,8 @@ void Screens::DisplayOptionsScreen(void)
 
                 if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
 
+                visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
                 if (visuals->FullScreenMode == 0)  SDL_SetWindowFullscreen(visuals->Window, 0);
                 else if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
             }
@@ -1521,6 +1527,8 @@ void Screens::DisplayOptionsScreen(void)
                 else  visuals->FullScreenMode = 0;
 
                 if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
+
+                visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
                 if (visuals->FullScreenMode == 0)  SDL_SetWindowFullscreen(visuals->Window, 0);
                 else if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);

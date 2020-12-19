@@ -266,6 +266,8 @@ void Input::GetAllUserInput(void)
             case SDL_WINDOWEVENT:
                 if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN)
                 {
+                    visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+                    SDL_RenderPresent(visuals->Renderer);
                     screens->ScreenIsDirty = true;
                     logic->GameDisplayChanged = true;
                 }

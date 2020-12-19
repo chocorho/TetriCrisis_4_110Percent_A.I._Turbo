@@ -57,12 +57,13 @@ Beta3 Change List:
 - Fixed "Original Mode" ending at level 10, it's now never-ending.
 (try some of the other game modes for more fun!)
 
+- Fixed full screen desktop screen curruption.
+
 -
 
 
 Beta3 To Do List:
 
-- Fix full screen desktop screen curruption.
 
 - Finalize music soundtrack.
 
@@ -177,8 +178,6 @@ int main( int argc, char* args[] )
 
     data->LoadHighScoresAndOptions();
 
-    if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-
     SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
     //-MAIN-LOOP------------------------------------------------------------------------
@@ -189,6 +188,14 @@ int main( int argc, char* args[] )
         visuals->CalculateFramerate();
         screens->ProcessScreenToDisplay();
         visuals->ProcessFramerate();
+
+        if (screens->ClearScreenWithBlackWhen1stRunInFullScreenMode == false)
+        {
+            screens->ClearScreenWithBlackWhen1stRunInFullScreenMode = true;
+            visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+            SDL_RenderPresent(visuals->Renderer);
+            if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+        }
     }
     if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
     else  printf("-----------------------------Main loop ended-\n");
