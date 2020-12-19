@@ -3053,6 +3053,22 @@ const char* keyName;
         ScreenTransitionStatus = FadeIn;
     }
 
+    if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+    {
+        logic->PlayerData[1].Level++;
+        if (logic->PlayerData[1].Level == 10)
+        {
+            logic->Won = true;
+            visuals->FrameLock = 16;
+            audio->PlayMusic(30, -1);
+            ScreenToDisplay = AboutScreen;
+        }
+
+        ScreenTransitionStatus = FadeAll;
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(1, 0);
+    }
+
     logic->RunTetriGameEngine();
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
