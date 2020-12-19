@@ -842,6 +842,11 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Neo's Kiss'' Graphical User Interface Core By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("Support Designers/Programmers/Testers:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''fogobogo''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Video Game Made On:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.openSUSE.org", 255) == false)  return(false);
@@ -889,11 +894,6 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Someone?", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Email: ''JeZxLee @ 16BitSoft'' To Help!", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("Support Designers/Programmers/Testers:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''fogobogo''", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Big Thank You To All The People Who Helped Us:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''XaeL''", 255) == false)  return(false);
