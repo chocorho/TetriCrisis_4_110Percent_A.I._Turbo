@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1607578654 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/audio.cpp
+1608389164 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -383,13 +383,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1607186392 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/audio.h
+1608241614 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/audio.h
 
-1607570146 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/screens.h
+1608391688 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/screens.h
 
-1607571264 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/visuals.h
+1608151458 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/visuals.h
 
-1607580922 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/data.cpp
+1608260066 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/data.cpp
 	<fstream>
 	<string.h>
 	"SDL.h"
@@ -402,13 +402,13 @@
 	"logic.h"
 	"visuals.h"
 
-1607579087 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/data.h
+1608065616 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/data.h
 
-1607190581 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/input.h
+1608413230 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/input.h
 
-1607374064 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/logic.h
+1608323192 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/logic.h
 
-1607552027 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/input.cpp
+1608423032 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/input.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -421,7 +421,7 @@
 	"audio.h"
 	"logic.h"
 
-1607578654 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/interface.cpp
+1608073250 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/interface.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -437,8 +437,10 @@
 
 1607578654 /home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/interface.h
 
-1607579836 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/logic.cpp
+1608327128 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/logic.cpp
 	<cstdlib>
+	<cfloat>
+	<stdio.h>
 	"SDL.h"
 	"SDL_image.h"
 	"SDL_mixer.h"
@@ -449,7 +451,7 @@
 	"input.h"
 	"visuals.h"
 
-1607581063 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/main.cpp
+1608424366 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -465,7 +467,7 @@
 	"data.h"
 	"logic.h"
 
-1607578654 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/screens.cpp
+1608424584 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/screens.cpp
 	<stdio.h>
 	<cstring>
 	<iostream>
@@ -482,7 +484,129 @@
 	"logic.h"
 	"audio.h"
 
-1607571312 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/visuals.cpp
+1608402028 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/visuals.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"screens.h"
+
+1608389164 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/audio.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"audio.h"
+	"screens.h"
+	"visuals.h"
+
+1608241614 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/audio.h
+
+1608391688 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/screens.h
+
+1608151458 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/visuals.h
+
+1608260066 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/data.cpp
+	<fstream>
+	<string.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"data.h"
+	"audio.h"
+	"input.h"
+	"logic.h"
+	"visuals.h"
+
+1608065616 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/data.h
+
+1608413230 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/input.h
+
+1608323192 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/logic.h
+
+1608423032 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/input.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1608073250 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/interface.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interface.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1607578654 /home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/interface.h
+
+1608327128 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/logic.cpp
+	<cstdlib>
+	<cfloat>
+	<stdio.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"logic.h"
+	"audio.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+
+1608474257 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/main.cpp
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"input.h"
+	"screens.h"
+	"interface.h"
+	"audio.h"
+	"data.h"
+	"logic.h"
+
+1608424584 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/screens.cpp
+	<stdio.h>
+	<cstring>
+	<iostream>
+	<cmath>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+	"interface.h"
+	"data.h"
+	"logic.h"
+	"audio.h"
+
+1608402028 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3joy/src/visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"

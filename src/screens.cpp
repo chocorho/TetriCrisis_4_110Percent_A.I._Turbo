@@ -49,7 +49,7 @@ Screens::Screens(void)
 {
     ScreenIsDirty = true;
 
-    if (input->JoystickDeviceOne != NULL)
+    if (input->JoystickDevices[0] != NULL)
         ScreenToDisplay = JoystickScreen;
     else
         ScreenToDisplay = SDLLogoScreen;
@@ -254,9 +254,7 @@ void Screens::DisplayJoystickScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
-        input->JoystickDisabled[0] = 1;
-        input->JoystickDisabled[1] = 1;
-        input->JoystickDisabled[2] = 1;
+        for (int index = 0; index < 3; index++)  input->JoystickDisabled[index] = 1;
 
         JoystickScreenDisplayTimer = 1000;
         ScreenTransitionStatus = FadeIn;
@@ -266,7 +264,6 @@ void Screens::DisplayJoystickScreen(void)
     else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
 
     int joyAction;
-
     joyAction = input->QueryJoysticksForAction(0, true);
     if (joyAction > 0)
         input->JoystickDisabled[0] = 0;
@@ -290,7 +287,7 @@ void Screens::DisplayJoystickScreen(void)
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
 
-        if (input->JoystickDeviceThree != NULL)
+        if (input->JoystickDevices[2] != NULL)
         {
             visuals->DrawTextOntoScreenBuffer("3 Joysticks Found!", visuals->Font[0]
                                               , 0, 10, JustifyCenter, 0, 255, 0, 0, 100, 0);
@@ -346,7 +343,7 @@ void Screens::DisplayJoystickScreen(void)
                                   , (640/2)+200, (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
             }
         }
-        else if (input->JoystickDeviceTwo != NULL)
+        else if (input->JoystickDevices[1] != NULL)
         {
             input->JoystickDisabled[2] = -1;
 
@@ -388,7 +385,7 @@ void Screens::DisplayJoystickScreen(void)
                                   , 640-(640*.30), (480/2)+20, JustifyCenterOnPoint, 0, 255, 0, 0, 100, 0);
             }
         }
-        else if (input->JoystickDeviceOne != NULL)
+        else if (input->JoystickDevices[0] != NULL)
         {
             input->JoystickDisabled[1] = -1;
             input->JoystickDisabled[2] = -1;
@@ -457,25 +454,25 @@ void Screens::DisplayJoystickScreen(void)
 
         if (input->JoystickDisabled[0] == 1)
         {
-            if (input->JoystickDeviceOne != NULL)
+            if (input->JoystickDevices[0] != NULL)
             {
-                printf("SDL2 Joystick #0 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceOne));
+                printf("SDL2 Joystick #0 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[0]));
             }
         }
 
         if (input->JoystickDisabled[1] == 1)
         {
-            if (input->JoystickDeviceTwo != NULL)
+            if (input->JoystickDevices[1] != NULL)
             {
-                printf("SDL2 Joystick #1 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceTwo));
+                printf("SDL2 Joystick #1 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[1]));
             }
         }
 
         if (input->JoystickDisabled[2] == 1)
         {
-            if (input->JoystickDeviceThree != NULL)
+            if (input->JoystickDevices[2] != NULL)
             {
-                printf("SDL2 Joystick #2 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDeviceThree));
+                printf("SDL2 Joystick #2 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[2]));
             }
         }
 
@@ -1265,11 +1262,11 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
         {
-            if (input->JoystickDeviceOne != NULL)
+            if (input->JoystickDevices[0] != NULL)
                 input->JoystickSetupProcess = Joy1SetupPressUP;
-            else if (input->JoystickDeviceTwo != NULL)
+            else if (input->JoystickDevices[1] != NULL)
                 input->JoystickSetupProcess = Joy2SetupPressUP;
-            else if (input->JoystickDeviceThree != NULL)
+            else if (input->JoystickDevices[2] != NULL)
                 input->JoystickSetupProcess = Joy3SetupPressUP;
             else
                 input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1344,7 +1341,7 @@ void Screens::DisplayOptionsScreen(void)
         {
             input->JoyButton2[0] = joyAction;
 
-            if (input->JoystickDeviceTwo)
+            if (input->JoystickDevices[1])
                 input->JoystickSetupProcess = Joy2SetupPressUP;
             else
                 input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1397,7 +1394,7 @@ void Screens::DisplayOptionsScreen(void)
         {
             input->JoyButton2[1] = joyAction;
 
-            if (input->JoystickDeviceThree)
+            if (input->JoystickDevices[2])
                 input->JoystickSetupProcess = Joy3SetupPressUP;
             else
                 input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1794,7 +1791,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 344-6, JustifyCenter
                                           , 255, 255, 255, 90, 90, 90);
 
-        if (input->JoystickDeviceOne != NULL || input->JoystickDeviceTwo != NULL || input->JoystickDeviceThree != NULL)
+        if (input->JoystickDevices[0] != NULL || input->JoystickDevices[1] != NULL || input->JoystickDevices[2] != NULL)
         {
             visuals->DrawTextOntoScreenBuffer("Press [F1] On Keyboard To Setup Joystick(s)"
                                               , visuals->Font[1]
@@ -2760,9 +2757,9 @@ const char* keyName;
         {
             if (logic->PlayersCanJoin == true)
             {
-                if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDeviceOne != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDeviceTwo != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
+                if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL)
+                    || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL)
+                    || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL)
                     || (logic->PlayerData[player].PlayerInput == Keyboard) || (logic->PlayerData[player].PlayerInput == Mouse) )
                 {
                     logic->JoinInTimer++;
@@ -4225,9 +4222,9 @@ void Screens::DisplayTestComputerSkillScreen(void)
                 if (logic->PlayersCanJoin == true)
                 {
 
-                    if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDeviceOne != NULL)
-                        || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDeviceTwo != NULL)
-                        || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDeviceThree != NULL)
+                    if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL)
+                        || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL)
+                        || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL)
                         || (logic->PlayerData[player].PlayerInput == Keyboard) )
                     {
                         if (logic->PlayerData[player].PlayerStatus == GameOver)

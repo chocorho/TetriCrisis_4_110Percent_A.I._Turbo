@@ -2,24 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="src/input.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/input.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11799" topLine="540" />
+			<Cursor1 position="4616" topLine="34" />
 		</Cursor>
 	</File>
-	<File name="src/audio.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/visuals.cpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10508" topLine="323" />
-		</Cursor>
-	</File>
-	<File name="src/screens.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2333" topLine="55" />
-		</Cursor>
-	</File>
-	<File name="src/audio.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1463" topLine="0" />
+			<Cursor1 position="23019" topLine="729" />
 		</Cursor>
 	</File>
 	<File name="src/logic.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,24 +17,34 @@
 			<Cursor1 position="4345" topLine="181" />
 		</Cursor>
 	</File>
+	<File name="src/audio.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1463" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="src/screens.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="168545" topLine="3655" />
+			<Cursor1 position="8243" topLine="250" />
 		</Cursor>
 	</File>
-	<File name="src/interface.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/visuals.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2692" topLine="53" />
+			<Cursor1 position="2936" topLine="85" />
 		</Cursor>
 	</File>
-	<File name="src/input.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/logic.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4752" topLine="123" />
+			<Cursor1 position="45128" topLine="1266" />
+		</Cursor>
+	</File>
+	<File name="src/audio.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10508" topLine="323" />
 		</Cursor>
 	</File>
 	<File name="src/main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1482" topLine="8" />
+			<Cursor1 position="3705" topLine="38" />
 		</Cursor>
 	</File>
 	<File name="src/data.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -54,27 +54,27 @@
 	</File>
 	<File name="src/data.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5538" topLine="119" />
+			<Cursor1 position="12317" topLine="300" />
 		</Cursor>
 	</File>
-	<File name="src/visuals.cpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/screens.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="23019" topLine="729" />
+			<Cursor1 position="2333" topLine="55" />
 		</Cursor>
 	</File>
 	<File name="src/interface.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="21090" topLine="512" />
+			<Cursor1 position="21090" topLine="509" />
 		</Cursor>
 	</File>
-	<File name="src/logic.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/input.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="45128" topLine="1266" />
+			<Cursor1 position="2400" topLine="47" />
 		</Cursor>
 	</File>
-	<File name="src/visuals.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/interface.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2936" topLine="88" />
+			<Cursor1 position="2692" topLine="50" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -59,13 +59,13 @@ Beta3 Change List:
 
 - Fixed full screen desktop screen curruption.
 
+- Implemented "hats" for joysticks.
+
 -
 
 
 Beta3 To Do List:
 
-
-- Implement "hats" for joysticks.
 
 - Finalize music soundtrack.
 
