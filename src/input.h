@@ -116,7 +116,7 @@ public:
     int JoyButton1[3];
     int JoyButton2[3];
 
-    Uint8 JoystickHat[3];// = SDL_JoystickGetHat(JoystickDeviceOne, 0);
+    Uint8 JoystickHat[3];
 
     #define Axis0       0
     #define Axis1       1
@@ -147,20 +147,18 @@ public:
     #define Button15    24
     #define Button16    25
 
-
-
     SDL_Joystick *JoystickDevices[3];
-/*
-	SDL_Joystick *JoystickDeviceOne;
-	SDL_Joystick *JoystickDeviceTwo;
-	SDL_Joystick *JoystickDeviceThree;
-*/
+
     int NumberOfJoyButtons[3];
     int NumberOfJoyAxises[3];
 
     int JoystickDisabled[3];
 
-    int QueryJoysticksForAction(Uint8 joy, bool justButtons);
+    #define BothJoystickAxisesAndButtons    0
+    #define JustJoystickAxises              1
+    #define JustJoystickButtons             2
+
+    int QueryJoysticksForAction(Uint8 joy, int buttonsOrAxis);
 
     void GetAllUserInput(void);
 

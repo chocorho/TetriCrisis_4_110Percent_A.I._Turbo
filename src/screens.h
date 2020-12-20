@@ -30,6 +30,8 @@ public:
 
     bool ClearScreenWithBlackWhen1stRunInFullScreenMode = false;
 
+    int joyAction = -1;
+
     Uint8 ScreenFadeTransparency;
     #define FadeIn          0
     #define FadeNone        1

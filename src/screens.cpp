@@ -254,6 +254,8 @@ void Screens::DisplayJoystickScreen(void)
 {
     if (ScreenTransitionStatus == FadeAll)
     {
+        input->DelayAllUserInput = 50;
+
         for (int index = 0; index < 3; index++)  input->JoystickDisabled[index] = 1;
 
         JoystickScreenDisplayTimer = 1000;
@@ -264,17 +266,26 @@ void Screens::DisplayJoystickScreen(void)
     else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
 
     int joyAction;
-    joyAction = input->QueryJoysticksForAction(0, true);
+    joyAction = input->QueryJoysticksForAction(0, JustJoystickButtons);
     if (joyAction > 0)
         input->JoystickDisabled[0] = 0;
 
-    joyAction = input->QueryJoysticksForAction(1, true);
+    joyAction = input->QueryJoysticksForAction(1, JustJoystickButtons);
     if (joyAction > 0)
         input->JoystickDisabled[1] = 0;
 
-    joyAction = input->QueryJoysticksForAction(2, true);
+    joyAction = input->QueryJoysticksForAction(2, JustJoystickButtons);
     if (joyAction > 0)
         input->JoystickDisabled[2] = 0;
+
+    if (input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN)
+    {
+        JoystickScreenDisplayTimer = 0;
+        input->DelayAllUserInput = 20;
+        audio->PlayDigitalSoundFX(0, 0);
+    }
 
     ScreenIsDirty = true;
     if (ScreenIsDirty == true)
@@ -294,13 +305,31 @@ void Screens::DisplayJoystickScreen(void)
 
             visuals->DrawTextOntoScreenBuffer("Press Joystick's Button To Activate!", visuals->Font[0]
                                               , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
-
+/*
+char temp[256];
+strcpy(visuals->VariableText, "# Joy Axises=");
+sprintf(temp, "%i", input->NumberOfJoyAxises[0]);
+strcat(visuals->VariableText, temp);
+visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
+                                 , (640/2)-200, (480/2)+20+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+strcpy(visuals->VariableText, "# Joy Buttons=");
+sprintf(temp, "%i", input->NumberOfJoyButtons[0]);
+strcat(visuals->VariableText, temp);
+visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
+                                 , (640/2)-200, (480/2)+20+40+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+strcpy(visuals->VariableText, "joyAction=");
+sprintf(temp, "%i", joyAction);
+strcat(visuals->VariableText, temp);
+visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
+                                 , (640/2)-200, (480/2)+20+40+40+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+*/
             if (input->JoystickDisabled[0] == 1)
             {
                 visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
                                   , (640/2)-200, (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
                 visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
                                   , (640/2)-200, (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
+
             }
             else
             {
@@ -1262,11 +1291,11 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
         {
-            if (input->JoystickDevices[0] != NULL)
+            if (input->JoystickDisabled[0] != 1)
                 input->JoystickSetupProcess = Joy1SetupPressUP;
-            else if (input->JoystickDevices[1] != NULL)
+            else if (input->JoystickDisabled[1] != 1)
                 input->JoystickSetupProcess = Joy2SetupPressUP;
-            else if (input->JoystickDevices[2] != NULL)
+            else if (input->JoystickDisabled[2] != 1)
                 input->JoystickSetupProcess = Joy3SetupPressUP;
             else
                 input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1275,7 +1304,7 @@ void Screens::DisplayOptionsScreen(void)
         {
             input->JoystickSetupProcess = JoySetupNotStarted;
 
-            for (int joy = 0; joy < 2; joy++)
+            for (int joy = 0; joy < 3; joy++)
             {
                 input->JoyUP[joy] = Axis1;
                 input->JoyDOWN[joy] = Axis1;
@@ -1287,72 +1316,340 @@ void Screens::DisplayOptionsScreen(void)
         }
     }
 
-    int joyAction = -1;
-    if (input->JoystickSetupProcess > Joy2SetupPressBUTTONTwo)
-        joyAction = input->QueryJoysticksForAction(2, false);
-    else if (input->JoystickSetupProcess > Joy1SetupPressBUTTONTwo)
-        joyAction = input->QueryJoysticksForAction(1, false);
-    else if (input->JoystickSetupProcess > JoySetupNotStarted)
-        joyAction = input->QueryJoysticksForAction(0, false);
-
-    if (joyAction > -1)
+    if (input->DelayAllUserInput == 0)
     {
         if (input->JoystickSetupProcess == Joy1SetupPressUP)
         {
-            input->JoyUP[0] = joyAction;
-            input->JoystickSetupProcess = Joy1SetupPressDOWN;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyUP[0] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy1SetupPressDOWN;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressDOWN)
         {
-            input->JoyDOWN[0] = joyAction;
-            input->JoystickSetupProcess = Joy1SetupPressLEFT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyDOWN[0] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy1SetupPressLEFT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressLEFT)
         {
-            input->JoyLEFT[0] = joyAction;
-            input->JoystickSetupProcess = Joy1SetupPressRIGHT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyLEFT[0] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy1SetupPressRIGHT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressRIGHT)
         {
-            input->JoyRIGHT[0] = joyAction;
-            input->JoystickSetupProcess = Joy1SetupPressBUTTONOne;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyRIGHT[0] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy1SetupPressBUTTONOne;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressBUTTONOne)
         {
-            input->JoyButton1[0] = joyAction;
-            input->JoystickSetupProcess = Joy1SetupPressBUTTONTwo;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyButton1[0] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy1SetupPressBUTTONTwo;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressBUTTONTwo)
         {
-            input->JoyButton2[0] = joyAction;
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(0, BothJoystickAxisesAndButtons);
 
-            if (input->JoystickDevices[1])
-                input->JoystickSetupProcess = Joy2SetupPressUP;
-            else
+            if (joyAction > -1)
+            {
+                input->JoyButton2[0] = joyAction;
+                joyAction = -1;
+
+                if (input->JoystickDisabled[1] != 1)
+                    input->JoystickSetupProcess = Joy2SetupPressUP;
+                else
+                    input->JoystickSetupProcess = JoySetupNotStarted;
+
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        else if (input->JoystickSetupProcess == Joy2SetupPressUP)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyUP[1] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy2SetupPressDOWN;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy2SetupPressDOWN)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyDOWN[1] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy2SetupPressLEFT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy2SetupPressLEFT)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyLEFT[1] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy2SetupPressRIGHT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy2SetupPressRIGHT)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyRIGHT[1] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy2SetupPressBUTTONOne;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONOne)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyButton1[1] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy2SetupPressBUTTONTwo;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONTwo)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(1, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyButton2[1] = joyAction;
+                joyAction = -1;
+
+                if (input->JoystickDisabled[2] != 1)
+                    input->JoystickSetupProcess = Joy3SetupPressUP;
+                else
+                    input->JoystickSetupProcess = JoySetupNotStarted;
+
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        else if (input->JoystickSetupProcess == Joy3SetupPressUP)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyUP[2] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy3SetupPressDOWN;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy3SetupPressDOWN)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyDOWN[2] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy3SetupPressLEFT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy3SetupPressLEFT)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyLEFT[2] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy3SetupPressRIGHT;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy3SetupPressRIGHT)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyRIGHT[2] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy3SetupPressBUTTONOne;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONOne)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyButton1[2] = joyAction;
+                joyAction = -1;
+                input->JoystickSetupProcess = Joy3SetupPressBUTTONTwo;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
+        }
+        else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONTwo)
+        {
+            joyAction = -1;
+            joyAction = input->QueryJoysticksForAction(2, BothJoystickAxisesAndButtons);
+
+            if (joyAction > -1)
+            {
+                input->JoyButton2[2] = joyAction;
+                joyAction = -1;
+
                 input->JoystickSetupProcess = JoySetupNotStarted;
 
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
+                audio->PlayDigitalSoundFX(0, 0);
+                input->DelayAllUserInput = 20;
+                ScreenIsDirty = true;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         else if (input->JoystickSetupProcess == Joy2SetupPressUP)
         {
             input->JoyUP[1] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy2SetupPressDOWN;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1361,6 +1658,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy2SetupPressDOWN)
         {
             input->JoyDOWN[1] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy2SetupPressLEFT;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1369,6 +1667,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy2SetupPressLEFT)
         {
             input->JoyLEFT[1] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy2SetupPressRIGHT;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1377,6 +1676,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy2SetupPressRIGHT)
         {
             input->JoyRIGHT[1] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy2SetupPressBUTTONOne;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1385,6 +1685,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONOne)
         {
             input->JoyButton1[1] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy2SetupPressBUTTONTwo;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1393,12 +1694,10 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONTwo)
         {
             input->JoyButton2[1] = joyAction;
+            joyAction = -1;
 
-            if (input->JoystickDevices[2])
-                input->JoystickSetupProcess = Joy3SetupPressUP;
-            else
-                input->JoystickSetupProcess = JoySetupNotStarted;
-
+            if (input->JoystickDisabled[2] != 1)  input->JoystickSetupProcess = Joy3SetupPressUP;
+            else  input->KeyboardSetupProcess = JoySetupNotStarted;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
             ScreenIsDirty = true;
@@ -1406,6 +1705,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressUP)
         {
             input->JoyUP[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy3SetupPressDOWN;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1414,6 +1714,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressDOWN)
         {
             input->JoyDOWN[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy3SetupPressLEFT;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1422,6 +1723,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressLEFT)
         {
             input->JoyLEFT[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy3SetupPressRIGHT;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1430,6 +1732,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressRIGHT)
         {
             input->JoyRIGHT[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy3SetupPressBUTTONOne;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1438,6 +1741,7 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONOne)
         {
             input->JoyButton1[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = Joy3SetupPressBUTTONTwo;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
@@ -1446,12 +1750,13 @@ void Screens::DisplayOptionsScreen(void)
         else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONTwo)
         {
             input->JoyButton2[2] = joyAction;
+            joyAction = -1;
             input->JoystickSetupProcess = JoySetupNotStarted;
             audio->PlayDigitalSoundFX(0, 0);
             input->DelayAllUserInput = 20;
             ScreenIsDirty = true;
         }
-    }
+*/    }
 
     if (input->JoystickSetupProcess == JoySetupNotStarted
      && input->KeyboardSetupProcess == KeyboardSetupNotStarted)
@@ -1791,7 +2096,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 344-6, JustifyCenter
                                           , 255, 255, 255, 90, 90, 90);
 
-        if (input->JoystickDevices[0] != NULL || input->JoystickDevices[1] != NULL || input->JoystickDevices[2] != NULL)
+        if (input->JoystickDisabled[0] != 1 || input->JoystickDisabled[1] != 1 || input->JoystickDisabled[2] != 1)
         {
             visuals->DrawTextOntoScreenBuffer("Press [F1] On Keyboard To Setup Joystick(s)"
                                               , visuals->Font[1]
@@ -1956,6 +2261,8 @@ void Screens::DisplayOptionsScreen(void)
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
+printf("--------------------------------------------------\n");
+
         if (logic->UseOldAI == 0)  logic->UseOldAI = 1;
 
         ScreenTransitionStatus = FadeAll;
