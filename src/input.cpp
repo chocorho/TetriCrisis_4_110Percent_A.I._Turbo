@@ -140,12 +140,11 @@ int returnValue = -1;
 
 	if (DelayAllUserInput > 0)  return(-1);
 
+    SDL_JoystickUpdate();
 	for (int joyIndex = 0; joyIndex < 3; joyIndex++)
     {
         if (joy == joyIndex && JoystickDevices[joyIndex] != NULL)
         {
-            SDL_JoystickUpdate();
-
             if (justButtons == false)
             {
                 for (int index = 0; index < NumberOfJoyAxises[joy]; index++)
@@ -349,12 +348,11 @@ void Input::GetAllUserInput(void)
 
 //------------------------------------------------------------------------
 
+    SDL_JoystickUpdate();
     for (int index = 0; index < 3; index++)
     {
         if (JoystickDisabled[index] == 0)
         {
-            SDL_JoystickUpdate();
-
             JoystickHat[index] = SDL_JoystickGetHat(JoystickDevices[index], 0);
             if (JoyLEFT[index] == Hat0 && JoystickHat[index] == SDL_HAT_LEFT)
             {
@@ -376,16 +374,16 @@ void Input::GetAllUserInput(void)
             Sint16 joystickXmovement = 0;
             if (JoyLEFT[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyLEFT[index]-8) )  JoystickDirectionHorizontal[JoystickOne-1+index] = LEFT;
-                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyRIGHT[index]-8) )  JoystickDirectionHorizontal[JoystickOne-1+index] = RIGHT;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyLEFT[index]-9) )  JoystickDirectionHorizontal[JoystickOne-1+index] = LEFT;
+                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyRIGHT[index]-9) )  JoystickDirectionHorizontal[JoystickOne-1+index] = RIGHT;
             }
             else joystickXmovement = SDL_JoystickGetAxis(JoystickDevices[index], JoyLEFT[index]);
 
             Sint16 joystickYmovement = 0;
             if (JoyUP[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyUP[index]-8) )  JoystickDirectionVertical[JoystickOne-1+index] = UP;
-                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyDOWN[index]-8) )  JoystickDirectionVertical[JoystickOne-1+index] = DOWN;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyUP[index]-9) )  JoystickDirectionVertical[JoystickOne-1+index] = UP;
+                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyDOWN[index]-9) )  JoystickDirectionVertical[JoystickOne-1+index] = DOWN;
             }
             else joystickYmovement = SDL_JoystickGetAxis(JoystickDevices[index], JoyUP[index]);
 
