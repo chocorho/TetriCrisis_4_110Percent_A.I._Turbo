@@ -523,51 +523,6 @@ void Logic::AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Logic::UpdateThoughtDisplay(void)
-{
-//	for (int player = 0; player < NumberOfPlayers; player++)
-	{
-        int value = 999;
-
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 1] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX ][ PlayerData[Player].PiecePlayfieldY ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 2] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+1 ][ PlayerData[Player].PiecePlayfieldY ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 3] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+2 ][ PlayerData[Player].PiecePlayfieldY ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 4] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY ] = value;
-
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 5] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX ][ PlayerData[Player].PiecePlayfieldY+1 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 6] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+1 ][ PlayerData[Player].PiecePlayfieldY+1 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 7] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+2 ][ PlayerData[Player].PiecePlayfieldY+1 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 8] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY+1 ] = value;
-
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [ 9] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX ][ PlayerData[Player].PiecePlayfieldY+2 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [10] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+1 ][ PlayerData[Player].PiecePlayfieldY+2 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [11] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+2 ][ PlayerData[Player].PiecePlayfieldY+2 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [12] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY+2 ] = value;
-
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [13] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX ][ PlayerData[Player].PiecePlayfieldY+3 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [14] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+1 ][ PlayerData[Player].PiecePlayfieldY+3 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [15] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+2 ][ PlayerData[Player].PiecePlayfieldY+3 ] = value;
-        if (PieceData [PlayerData[Player].Piece] [PlayerData[Player].PieceRotation] [16] == 1)
-            PlayerData[Player].PlayfieldAI[ PlayerData[Player].PiecePlayfieldX+3 ][ PlayerData[Player].PiecePlayfieldY+3 ] = value;
-	}
-}
-
-//-------------------------------------------------------------------------------------------------
 void Logic::DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow)
 {
     if (DisplayDropShadow == false && CurrentOrDropShadow == DropShadow)  return;

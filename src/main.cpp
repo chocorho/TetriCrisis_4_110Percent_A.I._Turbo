@@ -39,6 +39,19 @@ ________________________________________________________________________________
 
 ***NOTE: Saved options and high scores will reset UNTIL: "Release Candidate"!!!
 
+
+Release Candidate To Do List:
+
+
+- Finalize music soundtrack.
+
+- Finalize "Story+Mode".
+
+- Test thoroughly for issues.
+
+
+__________________________________________________________________________________________________
+
 Beta3 Change List:
 
 
@@ -64,16 +77,6 @@ Beta3 Change List:
 - Fixed window resize(larger/maximize) screen corruption at top-left.
 
 - Implemented first draft of animated intro and ending scenes in "Story+Mode".
-
-
-Beta3 To Do List:
-
-
-- Finalize music soundtrack.
-
-- Finalize "Story+Mode".
-
-- Test thoroughly for issues.
 
 
 __________________________________________________________________________________________________

@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-Beta3 - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' Beta3 - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -587,7 +587,6 @@ char temp[256];
             case 1009:
                 strcpy(filePath, "data/visuals/Button.png");
                 break;
-
 
             default:
                 break;

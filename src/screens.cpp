@@ -207,7 +207,6 @@ int windowHeight;
                 DisplayMarsExplodingScreen();
                 break;
 
-
             case TestComputerSkillScreen:
                 DisplayTestComputerSkillScreen();
                 break;
@@ -1789,7 +1788,7 @@ void Screens::DisplayOptionsScreen(void)
     else if (JoystickFlash == 191)
         ScreenIsDirty = 2;
 
-//    if (ScreenIsDirty > 0)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -3477,8 +3476,6 @@ void Screens::DisplayMarsExplodingScreen(void)
         ExplosionScale = 0.0;
         ExplosionTransparency = 0;
 
-//        audio->PlayDigitalSoundFX(16, 0);
-
         ScreenTransitionStatus = FadeIn;
     }
 
@@ -3716,18 +3713,7 @@ const char* keyName;
                 boxScreenX = ( logic->PlayerData[player].PlayersPlayfieldScreenX-57-(2*13) - 86 );
                 boxScreenY+=18;
             }
-/*
-            if (logic->PlayerData[player].PlayerStatus != GameOver)
-            {
-                if (logic->BlockAttackTransparency[player] > 0)
-                {
-                    visuals->Sprites[81].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
-                    visuals->Sprites[81].ScreenY = logic->PlayerData[player].PlayersPlayfieldScreenY;
-                    visuals->Sprites[81].Transparency = logic->BlockAttackTransparency[player];
-                    visuals->DrawSpriteOntoScreenBuffer(81);
-                }
-            }
-*/        }
+        }
 
         for (int player = 1; player < 2; player++)
         {
@@ -3940,7 +3926,7 @@ const char* keyName;
 
             if (logic->Won == true)
             {
-                ScreenToDisplay = MarsExplodingScreen;//AboutScreen;
+                ScreenToDisplay = MarsExplodingScreen;
                 audio->PlayMusic(30, -1);
             }
 
@@ -3991,7 +3977,7 @@ bool lastKeyWasNotAcceptable = false;
         input->DelayAllUserInput = 20;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = 2;//true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyOnKeyboardPressedByUser == SDLK_SPACE)
     {
