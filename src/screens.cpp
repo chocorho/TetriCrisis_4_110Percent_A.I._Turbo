@@ -195,6 +195,19 @@ int windowHeight;
                 DisplayShowStoryScreen();
                 break;
 
+            case FlyingFromEarthScreen:
+                DisplayFlyingFromEarthScreen();
+                break;
+
+            case FlyingToMarsScreen:
+                DisplayFlyingToMarsScreen();
+                break;
+
+            case MarsExplodingScreen:
+                DisplayMarsExplodingScreen();
+                break;
+
+
             case TestComputerSkillScreen:
                 DisplayTestComputerSkillScreen();
                 break;
@@ -2649,46 +2662,46 @@ const char* keyName;
 
         if (logic->PlayerData[0].PlayerStatus != GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 150;
-            visuals->Sprites[80].RedHue = 255;
-            visuals->Sprites[80].GreenHue = 0;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 150;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
         }
 
         if (logic->PlayerData[1].PlayerStatus != GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 150;
-            visuals->Sprites[80].RedHue = 255;
-            visuals->Sprites[80].GreenHue = 255;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 150;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
         }
 
         if (logic->PlayerData[2].PlayerStatus != GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 150;
-            visuals->Sprites[80].RedHue = 0;
-            visuals->Sprites[80].GreenHue = 255;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 150;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
         }
 
         if (logic->PlayerData[3].PlayerStatus != GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 150;
-            visuals->Sprites[80].RedHue = 0;
-            visuals->Sprites[80].GreenHue = 0;
-            visuals->Sprites[80].BlueHue = 255;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 150;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 255;
+            visuals->DrawSpriteOntoScreenBuffer(31);
         }
 
         float mouseScreenX = -999;
@@ -2752,10 +2765,10 @@ const char* keyName;
             {
                 if (logic->BlockAttackTransparency[player] > 0)
                 {
-                    visuals->Sprites[81].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
-                    visuals->Sprites[81].ScreenY = logic->PlayerData[player].PlayersPlayfieldScreenY;
-                    visuals->Sprites[81].Transparency = logic->BlockAttackTransparency[player];
-                    visuals->DrawSpriteOntoScreenBuffer(81);
+                    visuals->Sprites[32].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
+                    visuals->Sprites[32].ScreenY = logic->PlayerData[player].PlayersPlayfieldScreenY;
+                    visuals->Sprites[32].Transparency = logic->BlockAttackTransparency[player];
+                    visuals->DrawSpriteOntoScreenBuffer(32);
                 }
             }
 
@@ -2846,13 +2859,13 @@ const char* keyName;
 
         if (logic->PlayerData[0].PlayerStatus == GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
-            visuals->Sprites[80].RedHue = 255;
-            visuals->Sprites[80].GreenHue = 0;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 200;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
 
             visuals->DrawTextOntoScreenBuffer("GAME OVER"
                                       , visuals->Font[1], logic->PlayerData[0].PlayersPlayfieldScreenX
@@ -2861,13 +2874,13 @@ const char* keyName;
 
         if (logic->PlayerData[1].PlayerStatus == GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
-            visuals->Sprites[80].RedHue = 255;
-            visuals->Sprites[80].GreenHue = 255;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 200;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
 
             visuals->DrawTextOntoScreenBuffer("GAME OVER"
                                       , visuals->Font[1], logic->PlayerData[1].PlayersPlayfieldScreenX
@@ -2876,13 +2889,13 @@ const char* keyName;
 
         if (logic->PlayerData[2].PlayerStatus == GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
-            visuals->Sprites[80].RedHue = 0;
-            visuals->Sprites[80].GreenHue = 255;
-            visuals->Sprites[80].BlueHue = 0;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 200;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
 
             visuals->DrawTextOntoScreenBuffer("GAME OVER"
                                       , visuals->Font[1], logic->PlayerData[2].PlayersPlayfieldScreenX
@@ -2891,13 +2904,13 @@ const char* keyName;
 
         if (logic->PlayerData[3].PlayerStatus == GameOver)
         {
-            visuals->Sprites[80].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
-            visuals->Sprites[80].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
-            visuals->Sprites[80].Transparency = 200;
-            visuals->Sprites[80].RedHue = 0;
-            visuals->Sprites[80].GreenHue = 0;
-            visuals->Sprites[80].BlueHue = 255;
-            visuals->DrawSpriteOntoScreenBuffer(80);
+            visuals->Sprites[31].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].Transparency = 200;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 255;
+            visuals->DrawSpriteOntoScreenBuffer(31);
 
             visuals->DrawTextOntoScreenBuffer("GAME OVER"
                                       , visuals->Font[1], logic->PlayerData[3].PlayersPlayfieldScreenX
@@ -3107,10 +3120,11 @@ void Screens::DisplayShowStoryScreen(void)
         ScreenTransitionStatus = FadeIn;
     }
 
-    if (input->MouseButtonPressed[0] == true
+    if ( (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+       || input->MouseButtonPressed[0] == true
        || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
        || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
-       || input->JoystickButtonOne[Any] == ON)
+       || input->JoystickButtonOne[Any] == ON )
     {
         ScreenDisplayTimer = 0;
         input->DelayAllUserInput = 20;
@@ -3184,19 +3198,401 @@ void Screens::DisplayShowStoryScreen(void)
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
         ScreenTransitionStatus = FadeAll;
+        ScreenToDisplay = PlayingStoryGameScreen;
 
-        if (logic->PlayerData[1].Level == 0)  audio->PlayMusic(26 , -1);
-        else if (logic->PlayerData[1].Level == 1)  audio->PlayMusic(26 , -1);
-        else if (logic->PlayerData[1].Level == 2)  audio->PlayMusic(26 , -1);
-        else if (logic->PlayerData[1].Level == 3)  audio->PlayMusic(27 , -1);
-        else if (logic->PlayerData[1].Level == 4)  audio->PlayMusic(27 , -1);
-        else if (logic->PlayerData[1].Level == 5)  audio->PlayMusic(27 , -1);
-        else if (logic->PlayerData[1].Level == 6)  audio->PlayMusic(28 , -1);
-        else if (logic->PlayerData[1].Level == 7)  audio->PlayMusic(28 , -1);
-        else if (logic->PlayerData[1].Level == 8)  audio->PlayMusic(28 , -1);
-        else  audio->PlayMusic(29, -1);
+        if (logic->PlayerData[1].Level == 0)
+        {
+            audio->PlayMusic(26 , -1);
+            ScreenToDisplay = FlyingFromEarthScreen;
+        }
+        else if (logic->PlayerData[1].Level == 1)
+        {
+            audio->PlayMusic(26 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 2)
+        {
+            audio->PlayMusic(26 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 3)
+        {
+            audio->PlayMusic(27 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 4)
+        {
+            audio->PlayMusic(27 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 5)
+        {
+            audio->PlayMusic(27 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 6)
+        {
+            audio->PlayMusic(28 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 7)
+        {
+            audio->PlayMusic(28 , -1);
+        }
+        else if (logic->PlayerData[1].Level == 8)
+        {
+            audio->PlayMusic(28 , -1);
+        }
+        else
+        {
+            audio->PlayMusic(29, -1);
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayFlyingFromEarthScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        audio->PlayMusic(26 , -1);
+
+        IntroAnimationStep = 0;
+        PlanetX = (320);
+        PlanetY = (240);
+        PlanetScale = 0.0;
+        ShipX = (320-120-50);
+        ShipY = (240-90);
+        ShipScale = 0.0;
+
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (IntroAnimationStep == 0)
+    {
+        if (PlanetScale < 0.5 )
+        {
+            PlanetScale+=0.005;
+        }
+        else
+        {
+            IntroAnimationStep = 1;
+        }
+    }
+    else if (IntroAnimationStep == 1)
+    {
+        if ( PlanetX > (320-120-50) )  PlanetX-=1;
+        else  PlanetX = (320-120-50);
+
+        if ( PlanetY > (240-90) )  PlanetY-=1;
+        else  PlanetY = (240-90);
+
+        if ( PlanetX == (320-120-50) && PlanetY == (240-90) )
+        {
+            IntroAnimationStep = 2;
+            audio->PlayDigitalSoundFX(16, 0);
+        }
+    }
+    else if (IntroAnimationStep == 2)
+    {
+        if (ShipScale < 1.0 )
+        {
+            ShipScale+=0.005;
+        }
+        else  IntroAnimationStep = 3;
+    }
+    else if (IntroAnimationStep == 3)
+    {
+        PlanetX-=0.5;
+        PlanetY-=0.5;
+        PlanetScale-=0.05;
+
+        ShipX+=5.0;
+        ShipY+=5.0;
+
+        if (ShipY > 600)  IntroAnimationStep = 4;
+    }
+
+    if ( (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+       || IntroAnimationStep == 4
+       || input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
+    {
+        ScreenTransitionStatus = FadeOut;
+        input->DelayAllUserInput = 20;
+        if (IntroAnimationStep < 4)  audio->PlayDigitalSoundFX(0, 0);
+    }
+
+    ScreenIsDirty = 2;
+//    if (ScreenIsDirty > 0)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[39].ScreenX = 320;
+        visuals->Sprites[39].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(39);
+
+        visuals->Sprites[42].ScreenX = PlanetX;
+        visuals->Sprites[42].ScreenY = PlanetY;
+        visuals->Sprites[42].ScaleX = PlanetScale;
+        visuals->Sprites[42].ScaleY = PlanetScale;
+        visuals->DrawSpriteOntoScreenBuffer(42);
+
+        visuals->Sprites[43].ScreenX = ShipX;
+        visuals->Sprites[43].ScreenY = ShipY;
+        visuals->Sprites[43].ScaleX = ShipScale;
+        visuals->Sprites[43].ScaleY = ShipScale;
+        visuals->DrawSpriteOntoScreenBuffer(43);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+
+        ScreenToDisplay = FlyingToMarsScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayFlyingToMarsScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        IntroAnimationStep = 0;
+        PlanetX = (320+120);
+        PlanetY = (240-90);
+        PlanetScale = 0.0;
+        ShipX = (0-200);
+        ShipY = (480+200);
+        ShipScale = 1.0;
+
+        audio->PlayDigitalSoundFX(16, 0);
+
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (IntroAnimationStep == 0)
+    {
+        if ( ShipX < (100) )
+        {
+            ShipX+=2;
+            ShipY-=2;
+        }
+        else  IntroAnimationStep = 1;
+    }
+    else if (IntroAnimationStep == 1)
+    {
+        if (PlanetScale < 0.7)
+        {
+            PlanetScale+=0.005;
+        }
+        else
+        {
+            audio->PlayDigitalSoundFX(16, 0);
+            IntroAnimationStep = 2;
+        }
+    }
+    else if (IntroAnimationStep == 2)
+    {
+        if (ShipScale > 0.0)
+        {
+            ShipScale-=0.005;
+            ShipX+=1.7;
+            ShipY-=1.15;
+        }
+        else  IntroAnimationStep = 3;
+    }
+    else if (IntroAnimationStep == 3)
+    {
+        if (PlanetX > 320)  PlanetX-=1;
+        else  PlanetX = 320;
+
+        if (PlanetY < 240)  PlanetY+=1;
+        else  PlanetY = 240;
+
+        if (PlanetX == 320 && PlanetY == 240)
+        {
+            IntroAnimationStep = 4;
+        }
+    }
+    else if (IntroAnimationStep == 4)
+    {
+        if (PlanetScale > 0.0)
+        {
+            PlanetScale-=0.005;
+        }
+        else  IntroAnimationStep = 5;
+    }
+
+    if ( (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+       || IntroAnimationStep == 5
+       || input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
+    {
+        ScreenTransitionStatus = FadeOut;
+        input->DelayAllUserInput = 20;
+        if (IntroAnimationStep < 5)  audio->PlayDigitalSoundFX(0, 0);
+    }
+
+    ScreenIsDirty = 2;
+//    if (ScreenIsDirty > 0)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[39].ScreenX = 320;
+        visuals->Sprites[39].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(39);
+
+        visuals->Sprites[40].ScreenX = PlanetX;
+        visuals->Sprites[40].ScreenY = PlanetY;
+        visuals->Sprites[40].ScaleX = PlanetScale;
+        visuals->Sprites[40].ScaleY = PlanetScale;
+        visuals->DrawSpriteOntoScreenBuffer(40);
+
+        visuals->Sprites[41].ScreenX = ShipX;
+        visuals->Sprites[41].ScreenY = ShipY;
+        visuals->Sprites[41].ScaleX = ShipScale;
+        visuals->Sprites[41].ScaleY = ShipScale;
+        visuals->DrawSpriteOntoScreenBuffer(41);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = PlayingStoryGameScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayMarsExplodingScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        IntroAnimationStep = 0;
+        PlanetX = (320);
+        PlanetY = (240);
+        PlanetScale = 0.0;
+        ShipX = (320);
+        ShipY = (240);
+        ShipScale = 0.0;
+        ExplosionScale = 0.0;
+        ExplosionTransparency = 0;
+
+//        audio->PlayDigitalSoundFX(16, 0);
+
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (IntroAnimationStep == 0)
+    {
+        if ( PlanetScale < (1.0) )
+        {
+            PlanetScale+=0.005;
+        }
+        else
+        {
+            audio->PlayDigitalSoundFX(16, 0);
+            IntroAnimationStep = 1;
+        }
+    }
+    else if (IntroAnimationStep == 1)
+    {
+        if (ShipScale < 1.0)
+        {
+            ShipScale+=0.005;
+        }
+        else
+        {
+            IntroAnimationStep = 2;
+        }
+    }
+    else if (IntroAnimationStep == 2)
+    {
+        if ( PlanetScale > (0.0) )
+        {
+            PlanetScale-=0.005;
+        }
+        else
+        {
+            audio->PlayDigitalSoundFX(17, 0);
+            ExplosionTransparency = 255;
+            IntroAnimationStep = 3;
+        }
+    }
+    else if (IntroAnimationStep == 3)
+    {
+        if (ExplosionScale < 10)
+        {
+            ExplosionScale+=0.1;
+        }
+        else if (ExplosionTransparency > 0)
+        {
+            ExplosionTransparency-=1;
+        }
+        else
+        {
+            audio->PlayDigitalSoundFX(16, 0);
+            IntroAnimationStep = 4;
+        }
+    }
+    else if (IntroAnimationStep == 4)
+    {
+        if ( ShipX < (640+150) )
+        {
+            ShipX+=5;
+            ShipY+=5;
+        }
+        else
+        {
+            IntroAnimationStep = 5;
+        }
+    }
+
+    if ( (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+       || IntroAnimationStep == 5
+       || input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
+    {
+        ScreenTransitionStatus = FadeOut;
+        input->DelayAllUserInput = 20;
+        if (IntroAnimationStep < 5)  audio->PlayDigitalSoundFX(0, 0);
+    }
+
+    ScreenIsDirty = 2;
+//    if (ScreenIsDirty > 0)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[39].ScreenX = 320;
+        visuals->Sprites[39].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(39);
+
+        visuals->Sprites[40].ScreenX = PlanetX;
+        visuals->Sprites[40].ScreenY = PlanetY;
+        visuals->Sprites[40].ScaleX = PlanetScale;
+        visuals->Sprites[40].ScaleY = PlanetScale;
+        visuals->DrawSpriteOntoScreenBuffer(40);
+
+        visuals->Sprites[44].ScreenX = PlanetX;
+        visuals->Sprites[44].ScreenY = PlanetY;
+        visuals->Sprites[44].ScaleX = ExplosionScale;
+        visuals->Sprites[44].ScaleY = ExplosionScale;
+        visuals->Sprites[44].Transparency = ExplosionTransparency;
+        visuals->DrawSpriteOntoScreenBuffer(44);
+
+        visuals->Sprites[43].ScreenX = ShipX;
+        visuals->Sprites[43].ScreenY = ShipY;
+        visuals->Sprites[43].ScaleX = ShipScale;
+        visuals->Sprites[43].ScaleY = ShipScale;
+        visuals->DrawSpriteOntoScreenBuffer(43);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+
+        ScreenToDisplay = AboutScreen;
     }
 }
 
@@ -3224,7 +3620,7 @@ const char* keyName;
             logic->Won = true;
             visuals->FrameLock = 16;
             audio->PlayMusic(30, -1);
-            ScreenToDisplay = AboutScreen;
+            ScreenToDisplay = MarsExplodingScreen;//AboutScreen;
         }
 
         ScreenTransitionStatus = FadeAll;
@@ -3253,13 +3649,13 @@ const char* keyName;
 
         if (logic->PlayerData[1].PlayerStatus != GameOver)
         {
-            visuals->Sprites[79].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-            visuals->Sprites[79].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-            visuals->Sprites[79].Transparency = 150;
-            visuals->Sprites[79].RedHue = 255;
-            visuals->Sprites[79].GreenHue = 255;
-            visuals->Sprites[79].BlueHue = 255;
-            visuals->DrawSpriteOntoScreenBuffer(79);
+            visuals->Sprites[30].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
+            visuals->Sprites[30].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
+            visuals->Sprites[30].Transparency = 150;
+            visuals->Sprites[30].RedHue = 255;
+            visuals->Sprites[30].GreenHue = 255;
+            visuals->Sprites[30].BlueHue = 255;
+            visuals->DrawSpriteOntoScreenBuffer(30);
         }
 
         float mouseScreenX = -999;
@@ -3320,7 +3716,7 @@ const char* keyName;
                 boxScreenX = ( logic->PlayerData[player].PlayersPlayfieldScreenX-57-(2*13) - 86 );
                 boxScreenY+=18;
             }
-
+/*
             if (logic->PlayerData[player].PlayerStatus != GameOver)
             {
                 if (logic->BlockAttackTransparency[player] > 0)
@@ -3331,7 +3727,7 @@ const char* keyName;
                     visuals->DrawSpriteOntoScreenBuffer(81);
                 }
             }
-        }
+*/        }
 
         for (int player = 1; player < 2; player++)
         {
@@ -3370,13 +3766,13 @@ const char* keyName;
 
         if (logic->PlayerData[1].PlayerStatus == GameOver)
         {
-            visuals->Sprites[79].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-            visuals->Sprites[79].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-            visuals->Sprites[79].Transparency = 200;
-            visuals->Sprites[79].RedHue = 255;
-            visuals->Sprites[79].GreenHue = 255;
-            visuals->Sprites[79].BlueHue = 255;
-            visuals->DrawSpriteOntoScreenBuffer(79);
+            visuals->Sprites[30].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
+            visuals->Sprites[30].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
+            visuals->Sprites[30].Transparency = 200;
+            visuals->Sprites[30].RedHue = 255;
+            visuals->Sprites[30].GreenHue = 255;
+            visuals->Sprites[30].BlueHue = 255;
+            visuals->DrawSpriteOntoScreenBuffer(30);
 
             visuals->DrawTextOntoScreenBuffer("GAME OVER"
                                       , visuals->Font[1], logic->PlayerData[1].PlayersPlayfieldScreenX
@@ -3544,7 +3940,7 @@ const char* keyName;
 
             if (logic->Won == true)
             {
-                ScreenToDisplay = AboutScreen;
+                ScreenToDisplay = MarsExplodingScreen;//AboutScreen;
                 audio->PlayMusic(30, -1);
             }
 

@@ -321,6 +321,15 @@ void Audio::SetupAudio(void)
                 SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Danger.ogg");
                 break;
 
+            case 16:
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Thrust.ogg");
+                break;
+
+            case 17:
+                SoundFX[index] = Mix_LoadWAV("data/effects/SFX-Explosion.ogg");
+                break;
+
+
             default:
                 break;
         }

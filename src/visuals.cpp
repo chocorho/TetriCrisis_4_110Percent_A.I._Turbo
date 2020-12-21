@@ -246,16 +246,41 @@ int textureHeight;
                 strcpy(filePath, "data/visuals/T-Crisis_PromoCover.png");
                 break;
 
-            case 79:
+            case 30:
                 strcpy(filePath, "data/visuals/PlayfieldStory.png");
                 break;
 
-            case 80:
+            case 31:
                 strcpy(filePath, "data/visuals/Playfield.png");
                 break;
 
-            case 81:
+            case 32:
                 strcpy(filePath, "data/visuals/Playfield-Block-Attack.png");
+                break;
+
+
+            case 39:
+                strcpy(filePath, "data/story/BG-Space.png");
+                break;
+
+            case 40:
+                strcpy(filePath, "data/story/Mars.png");
+                break;
+
+            case 41:
+                strcpy(filePath, "data/story/ShipAway.png");
+                break;
+
+            case 42:
+                strcpy(filePath, "data/story/Earth.png");
+                break;
+
+            case 43:
+                strcpy(filePath, "data/story/ShipComing.png");
+                break;
+
+            case 44:
+                strcpy(filePath, "data/story/Explosion.png");
                 break;
 
 

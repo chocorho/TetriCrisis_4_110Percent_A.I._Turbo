@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1608389164 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
+1608566941 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"
@@ -384,13 +384,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1608241614 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.h
+1608566941 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\audio.h
 
-1608502346 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.h
+1608571129 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.h
 
 1608151458 c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.h
 
-1608508713 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.cpp
+1608569502 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\data.cpp
 	<fstream>
 	<string.h>
 	"SDL.h"
@@ -452,7 +452,7 @@
 	"input.h"
 	"visuals.h"
 
-1608512441 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\main.cpp
+1608578226 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\main.cpp
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -470,7 +470,7 @@
 
 1509896996 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\resources.rc
 
-1608512340 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
+1608578652 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\screens.cpp
 	<stdio.h>
 	<cstring>
 	<iostream>
@@ -487,7 +487,7 @@
 	"logic.h"
 	"audio.h"
 
-1608508585 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
+1608571965 source:c:\users\jlp\desktop\tc4t-linuxwin-retail3\src\visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"

@@ -63,7 +63,7 @@ Beta3 Change List:
 
 - Fixed window resize(larger/maximize) screen corruption at top-left.
 
--
+- Implemented first draft of animated intro and ending scenes in "Story+Mode".
 
 
 Beta3 To Do List:
@@ -71,7 +71,7 @@ Beta3 To Do List:
 
 - Finalize music soundtrack.
 
-- Finish "Story+Mode".
+- Finalize "Story+Mode".
 
 - Test thoroughly for issues.
 
