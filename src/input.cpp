@@ -242,6 +242,7 @@ void Input::GetAllUserInput(void)
                 if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN)
                 {
                     screens->ScreenIsDirty = 2;
+                    LastEventWasWindowResize = 2;
                     logic->GameDisplayChanged = true;
                 }
                 break;

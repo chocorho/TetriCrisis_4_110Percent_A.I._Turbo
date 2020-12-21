@@ -222,13 +222,21 @@ int windowHeight;
     {
         ScreenIsDirty = 2;
         input->LastEventWasWindowResize--;
+
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        SDL_SetRenderDrawColor(visuals->Renderer, 0, 0, 0, 255);
+        SDL_RenderClear(visuals->Renderer);
+
+        SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
+        SDL_RenderPresent(visuals->Renderer);
     }
 
     ApplyScreenFadeTransition();
 
     if (input->DEBUG == true || ScreenToDisplay == TestComputerSkillScreen)
     {
-        ScreenIsDirty = 2;//true;
+        ScreenIsDirty = 2;
 
 //        if (ScreenToDisplay != PlayingGameScreen && ScreenToDisplay != PlayingStoryGameScreen)
         {

@@ -61,13 +61,13 @@ Beta3 Change List:
 
 - Implemented "hats" for joysticks.
 
+- Fixed window resize(larger/maximize) screen corruption at top-left.
+
 -
 
 
 Beta3 To Do List:
 
-
-- Fix window resize screen corruption at top-left.
 
 - Finalize music soundtrack.
 
