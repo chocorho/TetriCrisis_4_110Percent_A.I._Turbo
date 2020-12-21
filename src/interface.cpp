@@ -157,7 +157,7 @@ void Interface::ProcessAllButtons(void)
         if (ButtonSelectedByKeyboard > MinButtonIndex)  ButtonSelectedByKeyboard--;
         else  ButtonSelectedByKeyboard = MaxButtonIndex;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 10;
         audio->PlayDigitalSoundFX(0, 0);
     }
@@ -166,7 +166,7 @@ void Interface::ProcessAllButtons(void)
         if (ButtonSelectedByKeyboard < MaxButtonIndex)  ButtonSelectedByKeyboard++;
         else  ButtonSelectedByKeyboard = MinButtonIndex;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 10;
         audio->PlayDigitalSoundFX(0, 0);
     }
@@ -184,7 +184,7 @@ void Interface::ProcessAllButtons(void)
         {
             ButtonGUIs[ButtonSelectedByKeyboard].Scale = 0.9;
             ButtonGUIs[ButtonSelectedByKeyboard].AnimationTimer = 10;
-            screens->ScreenIsDirty = true;
+            screens->ScreenIsDirty = 2;
             input->DelayAllUserInput = 50;
 
             logic->PlayerData[1].PlayerInput = Keyboard;
@@ -220,7 +220,7 @@ void Interface::ProcessAllButtons(void)
                     ButtonSelectedByKeyboard = ButtonGUIs[index].ScreenIndex;
                     ButtonGUIs[index].Scale = 0.9;
                     ButtonGUIs[index].AnimationTimer = 10;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
 
                     logic->PlayerData[1].PlayerInput = Keyboard;
@@ -245,7 +245,7 @@ void Interface::ProcessAllButtons(void)
                     ButtonSelectedByPlayer = ButtonSelectedByKeyboard;
                     screens->ScreenTransitionStatus = FadeOut;
                     ButtonGUIs[index].Scale = 1;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                 }
             }
         }
@@ -345,7 +345,7 @@ void Interface::ProcessAllArrowSets(void)
         if (ArrowSetSelectedByKeyboard > MinArrowSetIndex)  ArrowSetSelectedByKeyboard--;
         else  ArrowSetSelectedByKeyboard = MaxArrowSetIndex;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(0, 0);
     }
@@ -354,7 +354,7 @@ void Interface::ProcessAllArrowSets(void)
         if (ArrowSetSelectedByKeyboard < MaxArrowSetIndex)  ArrowSetSelectedByKeyboard++;
         else  ArrowSetSelectedByKeyboard = MinArrowSetIndex;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(0, 0);
     }
@@ -363,7 +363,7 @@ void Interface::ProcessAllArrowSets(void)
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].LeftArrowScale = 0.8;
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].AnimationTimer = 10;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(1, 0);
     }
@@ -372,7 +372,7 @@ void Interface::ProcessAllArrowSets(void)
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].RightArrowScale = 0.8;
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].AnimationTimer = 10;
 
-        screens->ScreenIsDirty = true;
+        screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(1, 0);
     }
@@ -391,7 +391,7 @@ void Interface::ProcessAllArrowSets(void)
                     ArrowSetSelectedByKeyboard = ArrowSetGUIs[index].LeftArrowScreenIndex;
                     ArrowSetGUIs[index].LeftArrowScale = 0.8;
                     ArrowSetGUIs[index].AnimationTimer = 10;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
                     audio->PlayDigitalSoundFX(1, 0);
                 }
@@ -403,7 +403,7 @@ void Interface::ProcessAllArrowSets(void)
                     ArrowSetSelectedByKeyboard = ArrowSetGUIs[index].LeftArrowScreenIndex;
                     ArrowSetGUIs[index].RightArrowScale = 0.8;
                     ArrowSetGUIs[index].AnimationTimer = 10;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
                     audio->PlayDigitalSoundFX(1, 0);
                 }
@@ -430,7 +430,7 @@ void Interface::ProcessAllArrowSets(void)
                 }
 
                 ArrowSetGUIs[index].AnimationTimer = -1;
-                screens->ScreenIsDirty = true;
+                screens->ScreenIsDirty = 2;
             }
         }
     }
@@ -499,7 +499,7 @@ void Interface::ProcessAllIcons(void)
                 {
                     IconGUIs[index].Scale = 0.9;
                     IconGUIs[index].AnimationTimer = 10;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
 
                     audio->PlayDigitalSoundFX(1, 0);
@@ -521,7 +521,7 @@ void Interface::ProcessAllIcons(void)
                 {
                     IconSelectedByPlayer = IconGUIs[index].ScreenIndex;
                     IconGUIs[index].Scale = 1;
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                 }
             }
         }

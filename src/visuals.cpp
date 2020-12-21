@@ -259,7 +259,6 @@ int textureHeight;
                 break;
 
 
-
             case 90:
                 strcpy(filePath, "data/story/Story1.png");
                 break;
@@ -279,8 +278,6 @@ int textureHeight;
             case 94:
                 strcpy(filePath, "data/story/Story5.png");
                 break;
-
-
 
 
             case 100:

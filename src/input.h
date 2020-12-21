@@ -34,6 +34,8 @@ public:
 
     SDL_Event Event;
 
+    int LastEventWasWindowResize = 0;
+
     SDL_Keycode KeyOnKeyboardPressedByUser;
 
     int DelayAllUserInput;

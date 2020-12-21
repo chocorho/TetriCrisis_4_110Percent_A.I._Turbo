@@ -47,6 +47,8 @@ Input::Input(void)
 
     DelayAllUserInput = 0;
 
+    LastEventWasWindowResize = 0;
+
     KeyOnKeyboardPressedByUser = -1;
 
     MouseButtonPressed[0] = false;
@@ -155,7 +157,6 @@ int returnValue = -1;
                     joyAxis = SDL_JoystickGetAxis(JoystickDevices[joyIndex], index);
                     if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
                     {
-//printf("Joy Axis %i Value %i \n", index, joyAxis);
                         if (joyAxis > -32768 && joyAxis < 32767)
                         {
                             DelayAllUserInput = 50;
@@ -240,9 +241,7 @@ void Input::GetAllUserInput(void)
             case SDL_WINDOWEVENT:
                 if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN)
                 {
-                    visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
-                    SDL_RenderPresent(visuals->Renderer);
-                    screens->ScreenIsDirty = true;
+                    screens->ScreenIsDirty = 2;
                     logic->GameDisplayChanged = true;
                 }
                 break;

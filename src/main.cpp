@@ -67,6 +67,8 @@ Beta3 Change List:
 Beta3 To Do List:
 
 
+- Fix window resize screen corruption at top-left.
+
 - Finalize music soundtrack.
 
 - Finish "Story+Mode".

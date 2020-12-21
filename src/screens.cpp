@@ -47,7 +47,7 @@ extern Audio* audio;
 //-------------------------------------------------------------------------------------------------
 Screens::Screens(void)
 {
-    ScreenIsDirty = true;
+    ScreenIsDirty = 2;
 
     if (input->JoystickDevices[0] != NULL)
         ScreenToDisplay = JoystickScreen;
@@ -77,7 +77,7 @@ void Screens::ApplyScreenFadeTransition(void)
         if ( ScreenFadeTransparency > (255/3) )
         {
             ScreenFadeTransparency -= (255/3);
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
         }
         else
         {
@@ -90,7 +90,7 @@ void Screens::ApplyScreenFadeTransition(void)
         if ( ScreenFadeTransparency < (255/3) )
         {
             ScreenFadeTransparency += (255/3);
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
         }
         else
         {
@@ -117,7 +117,12 @@ void Screens::ProcessScreenToDisplay(void)
 int windowWidth;
 int windowHeight;
 
-    if (input->DEBUG == true)  ScreenIsDirty = true;
+    if (input->DEBUG == true)  ScreenIsDirty = 2;
+
+    if (input->LastEventWasWindowResize > 0)
+    {
+        ScreenIsDirty = 2;
+    }
 
     SDL_GetWindowSize(visuals->Window, &windowWidth, &windowHeight);
     if (windowWidth != visuals->WindowWidthCurrent || windowHeight != visuals->WindowHeightCurrent)
@@ -127,7 +132,7 @@ int windowHeight;
 
         visuals->ClearTextCache();
 
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
 
     if (input->JoystickSetupProcess == JoySetupNotStarted
@@ -138,84 +143,92 @@ int windowHeight;
         interface->ProcessAllIcons();
     }
 
-    switch(ScreenToDisplay)
+    if (input->LastEventWasWindowResize == 0)
     {
-        case JoystickScreen:
-            DisplayJoystickScreen();
-            break;
+        switch(ScreenToDisplay)
+        {
+            case JoystickScreen:
+                DisplayJoystickScreen();
+                break;
 
-        case SDLLogoScreen:
-            DisplaySDLLogoScreen();
-            break;
+            case SDLLogoScreen:
+                DisplaySDLLogoScreen();
+                break;
 
-        case SixteenBitSoftScreen:
-            DisplaySixteenBitSoftScreen();
-            break;
+            case SixteenBitSoftScreen:
+                DisplaySixteenBitSoftScreen();
+                break;
 
-        case TitleScreen:
-            DisplayTitleScreen();
-            break;
+            case TitleScreen:
+                DisplayTitleScreen();
+                break;
 
-        case OptionsScreen:
-            DisplayOptionsScreen();
-            break;
+            case OptionsScreen:
+                DisplayOptionsScreen();
+                break;
 
-        case HowToPlayScreen:
-            DisplayHowToPlayScreen();
-            break;
+            case HowToPlayScreen:
+                DisplayHowToPlayScreen();
+                break;
 
-        case HighScoresScreen:
-            DisplayHighScoresScreen();
-            break;
+            case HighScoresScreen:
+                DisplayHighScoresScreen();
+                break;
 
-        case AboutScreen:
-            DisplayAboutScreen();
-            break;
+            case AboutScreen:
+                DisplayAboutScreen();
+                break;
 
-        case NewGameOptionsScreen:
-            DisplayNewGameOptionsScreen();
-            break;
+            case NewGameOptionsScreen:
+                DisplayNewGameOptionsScreen();
+                break;
 
-        case PlayingGameScreen:
-            DisplayPlayingGameScreen();
-            break;
+            case PlayingGameScreen:
+                DisplayPlayingGameScreen();
+                break;
 
-        case PlayingStoryGameScreen:
-            DisplayPlayingStoryGameScreen();
-            break;
+            case PlayingStoryGameScreen:
+                DisplayPlayingStoryGameScreen();
+                break;
 
-        case ShowStoryScreen:
-            DisplayShowStoryScreen();
-            break;
+            case ShowStoryScreen:
+                DisplayShowStoryScreen();
+                break;
 
-        case TestComputerSkillScreen:
-            DisplayTestComputerSkillScreen();
-            break;
+            case TestComputerSkillScreen:
+                DisplayTestComputerSkillScreen();
+                break;
 
-        case NameInputKeyboardScreen:
-            DisplayNameInputKeyboardScreen();
-            break;
+            case NameInputKeyboardScreen:
+                DisplayNameInputKeyboardScreen();
+                break;
 
-        case NameInputJoystickScreen:
-            DisplayNameInputJoystickScreen();
-            break;
+            case NameInputJoystickScreen:
+                DisplayNameInputJoystickScreen();
+                break;
 
-        case NameInputMouseScreen:
-            DisplayNameInputMouseScreen();
-            break;
+            case NameInputMouseScreen:
+                DisplayNameInputMouseScreen();
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
+
+        interface->DisplayAllButtonsOntoScreenBuffer();
+        interface->DisplayAllIconsOntoScreenBuffer();
     }
-
-    interface->DisplayAllButtonsOntoScreenBuffer();
-    interface->DisplayAllIconsOntoScreenBuffer();
+    else
+    {
+        ScreenIsDirty = 2;
+        input->LastEventWasWindowResize--;
+    }
 
     ApplyScreenFadeTransition();
 
     if (input->DEBUG == true || ScreenToDisplay == TestComputerSkillScreen)
     {
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;//true;
 
 //        if (ScreenToDisplay != PlayingGameScreen && ScreenToDisplay != PlayingStoryGameScreen)
         {
@@ -240,12 +253,15 @@ int windowHeight;
         }
     }
 
-    if (ScreenIsDirty > false)
+    if (ScreenIsDirty > 0)
     {
         if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
 
         SDL_RenderPresent(visuals->Renderer);
-        if (ScreenTransitionStatus != FadeIn && ScreenTransitionStatus != FadeOut)  ScreenIsDirty--;
+        if (ScreenTransitionStatus != FadeIn && ScreenTransitionStatus != FadeOut)
+        {
+            if (ScreenIsDirty > 0)  ScreenIsDirty--;
+        }
     }
 }
 
@@ -287,8 +303,8 @@ void Screens::DisplayJoystickScreen(void)
         audio->PlayDigitalSoundFX(0, 0);
     }
 
-    ScreenIsDirty = true;
-    if (ScreenIsDirty == true)
+    ScreenIsDirty = 2;
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -305,31 +321,13 @@ void Screens::DisplayJoystickScreen(void)
 
             visuals->DrawTextOntoScreenBuffer("Press Joystick's Button To Activate!", visuals->Font[0]
                                               , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
-/*
-char temp[256];
-strcpy(visuals->VariableText, "# Joy Axises=");
-sprintf(temp, "%i", input->NumberOfJoyAxises[0]);
-strcat(visuals->VariableText, temp);
-visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                 , (640/2)-200, (480/2)+20+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
-strcpy(visuals->VariableText, "# Joy Buttons=");
-sprintf(temp, "%i", input->NumberOfJoyButtons[0]);
-strcat(visuals->VariableText, temp);
-visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                 , (640/2)-200, (480/2)+20+40+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
-strcpy(visuals->VariableText, "joyAction=");
-sprintf(temp, "%i", joyAction);
-strcat(visuals->VariableText, temp);
-visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                 , (640/2)-200, (480/2)+20+40+40+40, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
-*/
+
             if (input->JoystickDisabled[0] == 1)
             {
                 visuals->DrawTextOntoScreenBuffer("Joystick #1", visuals->Font[0]
                                   , (640/2)-200, (480/2)-20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
                 visuals->DrawTextOntoScreenBuffer("NOT ACTIVE", visuals->Font[0]
                                   , (640/2)-200, (480/2)+20, JustifyCenterOnPoint, 255, 0, 0, 100, 0, 0);
-
             }
             else
             {
@@ -533,7 +531,7 @@ void Screens::DisplaySDLLogoScreen(void)
     if (ScreenDisplayTimer > 0)  ScreenDisplayTimer--;
     else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -603,7 +601,7 @@ void Screens::DisplaySixteenBitSoftScreen(void)
     if (ScreenDisplayTimer > 0)  ScreenDisplayTimer--;
     else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -649,7 +647,7 @@ void Screens::DisplayTitleScreen(void)
         ScreenTransitionStatus = FadeIn;
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -849,7 +847,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
         interface->ArrowSetArrowSelectedByPlayer = -1;
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -1144,7 +1142,7 @@ void Screens::DisplayNewGameOptionsScreen(void)
             if (logic->GameMode < StoryMode)
                 ScreenToDisplay = PlayingGameScreen;
             else
-                ScreenToDisplay = ShowStoryScreen;//PlayingStoryGameScreen;
+                ScreenToDisplay = ShowStoryScreen;
 
             if (logic->GameMode != StoryMode)
             {
@@ -1191,7 +1189,7 @@ void Screens::DisplayOptionsScreen(void)
 
     if (input->KeyOnKeyboardPressedByUser == SDLK_F2 && input->JoystickSetupProcess == JoySetupNotStarted)
     {
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         audio->PlayDigitalSoundFX(1, 0);
 
         if (input->KeyboardSetupProcess == KeyboardSetupNotStarted)
@@ -1220,7 +1218,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressTwo && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1230,7 +1228,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressUP && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1240,7 +1238,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressRIGHT && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1250,7 +1248,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressDOWN && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1260,7 +1258,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressLEFT && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1270,7 +1268,7 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyboardSetupProcess == KeyboardSetupPressPause && input->KeyOnKeyboardPressedByUser != SDLK_F2 && input->KeyOnKeyboardPressedByUser != SDLK_RETURN
              && input->KeyOnKeyboardPressedByUser != -1)
@@ -1280,13 +1278,13 @@ void Screens::DisplayOptionsScreen(void)
 
         audio->PlayDigitalSoundFX(1, 0);
         input->DelayAllUserInput = 20;
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
 
     if ( input->KeyOnKeyboardPressedByUser == SDLK_F1
         && input->KeyboardSetupProcess == KeyboardSetupNotStarted )
     {
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         audio->PlayDigitalSoundFX(1, 0);
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
@@ -1330,7 +1328,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy1SetupPressDOWN;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressDOWN)
@@ -1345,7 +1343,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy1SetupPressLEFT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressLEFT)
@@ -1360,7 +1358,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy1SetupPressRIGHT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressRIGHT)
@@ -1375,7 +1373,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy1SetupPressBUTTONOne;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressBUTTONOne)
@@ -1390,7 +1388,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy1SetupPressBUTTONTwo;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy1SetupPressBUTTONTwo)
@@ -1410,23 +1408,9 @@ void Screens::DisplayOptionsScreen(void)
 
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         else if (input->JoystickSetupProcess == Joy2SetupPressUP)
         {
             joyAction = -1;
@@ -1439,7 +1423,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy2SetupPressDOWN;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy2SetupPressDOWN)
@@ -1454,7 +1438,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy2SetupPressLEFT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy2SetupPressLEFT)
@@ -1469,7 +1453,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy2SetupPressRIGHT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy2SetupPressRIGHT)
@@ -1484,7 +1468,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy2SetupPressBUTTONOne;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONOne)
@@ -1499,7 +1483,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy2SetupPressBUTTONTwo;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONTwo)
@@ -1519,23 +1503,9 @@ void Screens::DisplayOptionsScreen(void)
 
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         else if (input->JoystickSetupProcess == Joy3SetupPressUP)
         {
             joyAction = -1;
@@ -1548,7 +1518,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy3SetupPressDOWN;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy3SetupPressDOWN)
@@ -1563,7 +1533,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy3SetupPressLEFT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy3SetupPressLEFT)
@@ -1578,7 +1548,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy3SetupPressRIGHT;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy3SetupPressRIGHT)
@@ -1593,7 +1563,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy3SetupPressBUTTONOne;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONOne)
@@ -1608,7 +1578,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoystickSetupProcess = Joy3SetupPressBUTTONTwo;
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
         else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONTwo)
@@ -1625,138 +1595,10 @@ void Screens::DisplayOptionsScreen(void)
 
                 audio->PlayDigitalSoundFX(0, 0);
                 input->DelayAllUserInput = 20;
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        else if (input->JoystickSetupProcess == Joy2SetupPressUP)
-        {
-            input->JoyUP[1] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy2SetupPressDOWN;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy2SetupPressDOWN)
-        {
-            input->JoyDOWN[1] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy2SetupPressLEFT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy2SetupPressLEFT)
-        {
-            input->JoyLEFT[1] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy2SetupPressRIGHT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy2SetupPressRIGHT)
-        {
-            input->JoyRIGHT[1] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy2SetupPressBUTTONOne;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONOne)
-        {
-            input->JoyButton1[1] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy2SetupPressBUTTONTwo;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy2SetupPressBUTTONTwo)
-        {
-            input->JoyButton2[1] = joyAction;
-            joyAction = -1;
-
-            if (input->JoystickDisabled[2] != 1)  input->JoystickSetupProcess = Joy3SetupPressUP;
-            else  input->KeyboardSetupProcess = JoySetupNotStarted;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressUP)
-        {
-            input->JoyUP[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy3SetupPressDOWN;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressDOWN)
-        {
-            input->JoyDOWN[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy3SetupPressLEFT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressLEFT)
-        {
-            input->JoyLEFT[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy3SetupPressRIGHT;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressRIGHT)
-        {
-            input->JoyRIGHT[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy3SetupPressBUTTONOne;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONOne)
-        {
-            input->JoyButton1[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = Joy3SetupPressBUTTONTwo;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-        else if (input->JoystickSetupProcess == Joy3SetupPressBUTTONTwo)
-        {
-            input->JoyButton2[2] = joyAction;
-            joyAction = -1;
-            input->JoystickSetupProcess = JoySetupNotStarted;
-            audio->PlayDigitalSoundFX(0, 0);
-            input->DelayAllUserInput = 20;
-            ScreenIsDirty = true;
-        }
-*/    }
+    }
 
     if (input->JoystickSetupProcess == JoySetupNotStarted
      && input->KeyboardSetupProcess == KeyboardSetupNotStarted)
@@ -1922,11 +1764,11 @@ void Screens::DisplayOptionsScreen(void)
         JoystickFlash = 0;
 
     if (JoystickFlash == 0)
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     else if (JoystickFlash == 191)
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
 
-//    if (ScreenIsDirty == true)
+//    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -2261,8 +2103,6 @@ void Screens::DisplayOptionsScreen(void)
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-printf("--------------------------------------------------\n");
-
         if (logic->UseOldAI == 0)  logic->UseOldAI = 1;
 
         ScreenTransitionStatus = FadeAll;
@@ -2282,7 +2122,7 @@ const char* keyName;
         ScreenTransitionStatus = FadeIn;
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -2428,11 +2268,11 @@ void Screens::DisplayHighScoresScreen(void)
     if (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_c)
     {
         data->ClearHighScores();
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         audio->PlayDigitalSoundFX(1, 0);
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -2664,7 +2504,7 @@ void Screens::DisplayAboutScreen(void)
         if (ReviewScale < 0.0)  ScreenTransitionStatus = FadeOut;
     }
 
-//    if (ScreenIsDirty == true)
+//    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
 
@@ -2713,7 +2553,7 @@ void Screens::DisplayAboutScreen(void)
             if (visuals->Sprites[index].ScreenY > -40 && visuals->Sprites[index].ScreenY < 640+40)  visuals->DrawSpriteOntoScreenBuffer(index);
         }
 
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
@@ -2749,10 +2589,6 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeAll)
     {
-//        SDL_CaptureMouse(SDL_TRUE);
-
-//        logic->SetupForNewGame();
-
         visuals->FrameLock = logic->PlayingGameFrameLock;
 
         SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
@@ -2797,7 +2633,7 @@ const char* keyName;
         }
     }
 
-//    if (ScreenIsDirty == true)
+//    if (ScreenIsDirty > 0)
     {
         visuals->Sprites[100+logic->SelectedBackground].ScreenX = 320;
         visuals->Sprites[100+logic->SelectedBackground].ScreenY = 240;
@@ -3186,7 +3022,7 @@ const char* keyName;
             }
         }
 
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
 
     if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
@@ -3216,8 +3052,6 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-//        SDL_CaptureMouse(SDL_FALSE);
-
         SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
 
         ScreenTransitionStatus = FadeAll;
@@ -3278,7 +3112,7 @@ void Screens::DisplayShowStoryScreen(void)
     if (ScreenDisplayTimer > 0)  ScreenDisplayTimer--;
     else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -3365,11 +3199,7 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeAll)
     {
-//        logic->SetupForNewGame();
-
         visuals->FrameLock = logic->PlayingGameFrameLock;
-
-//        audio->PlayMusic(26 , -1);
 
         logic->HumanStillAlive = true;
 
@@ -3407,7 +3237,7 @@ const char* keyName;
         }
     }
 
-//    if (ScreenIsDirty == true)
+//    if (ScreenIsDirty > 0)
     {
         visuals->Sprites[108].ScreenX = 320;
         visuals->Sprites[108].ScreenY = 240;
@@ -3596,17 +3426,6 @@ const char* keyName;
                 visuals->DrawTextOntoScreenBuffer("Mouse"
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
                                           , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
-/*
-            if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
-            {
-                for (int player = 0; player < NumberOfPlayers; player++)
-                {
-                    visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
-                    visuals->Sprites[155].ScreenY = 240;
-                    visuals->Sprites[155].Transparency = 0.10f;
-                    visuals->DrawSpriteOntoScreenBuffer(155);
-                }
-            }*/
         }
 
         if (logic->PAUSEgame == true && input->DEBUG != 1)
@@ -3637,7 +3456,7 @@ const char* keyName;
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[1].PlayersPlayfieldScreenX
                                           , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
 
     for (logic->Player = 1; logic->Player < 2; logic->Player++)
@@ -3768,7 +3587,7 @@ bool lastKeyWasNotAcceptable = false;
         input->DelayAllUserInput = 20;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;//true;
     }
     else if (input->KeyOnKeyboardPressedByUser == SDLK_SPACE)
     {
@@ -3781,7 +3600,7 @@ bool lastKeyWasNotAcceptable = false;
         input->DelayAllUserInput = 20;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (input->KeyOnKeyboardPressedByUser > -1)
     {
@@ -3809,11 +3628,11 @@ bool lastKeyWasNotAcceptable = false;
             input->DelayAllUserInput = 20;
 
             audio->PlayDigitalSoundFX(0, 0);
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
         }
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -3916,7 +3735,7 @@ bool lastKeyWasNotAcceptable = false;
         input->DelayAllUserInput = 20;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (interface->IconSelectedByPlayer == 63)
     {
@@ -3928,7 +3747,7 @@ bool lastKeyWasNotAcceptable = false;
         input->DelayAllUserInput = 20;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
     }
     else if (interface->IconSelectedByPlayer > -1 && interface->IconSelectedByPlayer < 63)
     {
@@ -3974,11 +3793,11 @@ bool lastKeyWasNotAcceptable = false;
             input->DelayAllUserInput = 20;
 
             audio->PlayDigitalSoundFX(0, 0);
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
         }
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -4088,7 +3907,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
                 }
 
                 audio->PlayDigitalSoundFX(0, 0);
-                ScreenIsDirty = true;
+                ScreenIsDirty = 2;
                 input->JoystickButtonOnePressed[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] = true;
             }
         }
@@ -4108,7 +3927,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
             data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = '\0';
 
             audio->PlayDigitalSoundFX(0, 0);
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
             input->JoystickButtonTwoPressed[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] = true;
         }
     }
@@ -4124,7 +3943,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         else  data->NameInputJoyCharY = 5;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         input->DelayAllUserInput = 6;
     }
     else if (input->JoystickDirectionVertical[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] == DOWN)
@@ -4133,7 +3952,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         else  data->NameInputJoyCharY = 0;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         input->DelayAllUserInput = 6;
     }
     else if (input->JoystickDirectionHorizontal[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] == LEFT)
@@ -4142,7 +3961,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         else  data->NameInputJoyCharX = 12;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         input->DelayAllUserInput = 6;
     }
     else if (input->JoystickDirectionHorizontal[logic->PlayerData[data->PlayerWithHighestScore].PlayerInput] == RIGHT)
@@ -4151,7 +3970,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         else  data->NameInputJoyCharX = 0;
 
         audio->PlayDigitalSoundFX(0, 0);
-        ScreenIsDirty = true;
+        ScreenIsDirty = 2;
         input->DelayAllUserInput = 6;
     }
 
@@ -4192,7 +4011,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         data->NameInputJoyChar = '/';
     }
 
-    if (ScreenIsDirty == true)
+    if (ScreenIsDirty > 0)
     {
         visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
 
@@ -4413,7 +4232,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
         }
     }
 
-//    if (ScreenIsDirty == true)
+//    if (ScreenIsDirty > 0)
     {
         if (logic->DontDisplayTestImages == false)
         {
@@ -4619,7 +4438,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
                                                   , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
             }
 
-            ScreenIsDirty = true;
+            ScreenIsDirty = 2;
         }
     }
 
@@ -4672,7 +4491,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
     }
 
-    ScreenIsDirty = true;
+    ScreenIsDirty = 2;
 
 //    if (logic->GameDisplayChanged == true)
     {
