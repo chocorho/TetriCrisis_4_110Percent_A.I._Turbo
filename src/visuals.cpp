@@ -880,6 +880,10 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Code::Blocks'' Cross-Platform C++ I.D.E.", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.CodeBlocks.org", 255) == false)  return(false);
 
+    if ( LoadStaffTextIntoMemory("Video Game Engine Performance Tested With:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Battle Encoder Shirase''' Free Windows Application", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("http://mion.faireal.net/BES/", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("Graphics Edited In:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Genuine ''PixelNeo'' Windows Graphic Editor", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("https://visualneo.com/product/pixelneo", 255) == false)  return(false);
