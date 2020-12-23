@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' Beta3 - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-RC - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -284,24 +284,25 @@ int textureHeight;
                 break;
 
 
-            case 90:
+            case 70:
                 strcpy(filePath, "data/story/Story1.png");
                 break;
 
-            case 91:
+            case 71:
                 strcpy(filePath, "data/story/Story2.png");
                 break;
 
-            case 92:
+            case 72:
                 strcpy(filePath, "data/story/Story3.png");
                 break;
 
-            case 93:
+            case 73:
                 strcpy(filePath, "data/story/Story4.png");
                 break;
 
-            case 94:
-                strcpy(filePath, "data/story/Story5.png");
+
+            case 75:
+                strcpy(filePath, "data/story/End1.png");
                 break;
 
 
@@ -838,7 +839,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Yiyuan Lee", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("X,XXX,XXX+ Average Lines Per Game!", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("(Not Ready Yet)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(Didn't Make It In Time, Sorry!)", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -863,6 +864,36 @@ sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("''Story+Mode'' Music Soundtrack By:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("EpicBattle by PeriTune", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("http://peritune.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Music promoted by https://www.free-stock-music.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Attribution 4.0 International (CC BY 4.0)", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://creativecommons.org/licenses/by/4.0/", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Defense Matrix by Vyra", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://soundcloud.com/vyramusic", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Music promoted by https://www.free-stock-music.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Creative Commons Attribution-ShareAlike 3.0 Unported", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://creativecommons.org/licenses/by-sa/3.0/deed.en_US", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Running In The Streets by Vyra", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://soundcloud.com/vyramusic", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Music promoted by https://www.free-stock-music.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Creative Commons Attribution-ShareAlike 3.0 Unported", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://creativecommons.org/licenses/by-sa/3.0/deed.en_US", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Dragon Slayer by Makai-Symphony", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://soundcloud.com/makai-symphony", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Music promoted by https://www.free-stock-music.com", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Creative Commons Attribution-ShareAlike 3.0 Unported", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("https://creativecommons.org/licenses/by-sa/3.0/deed.en_US", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Neo's Kiss'' Graphical User Interface Core By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -948,6 +979,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Zorg''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''slvn_''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Dominus''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Alienmilk''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 

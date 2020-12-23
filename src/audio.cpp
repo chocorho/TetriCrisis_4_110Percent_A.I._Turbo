@@ -222,7 +222,7 @@ void Audio::SetupAudio(void)
                 break;
 
             case 26:
-                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Story0-2.mod");
+                MusicTrack[index] = Mix_LoadMUS("data/music/BGM-Story0-2.ogg");
                 break;
 
             case 27:

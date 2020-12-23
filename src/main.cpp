@@ -17,7 +17,7 @@
     AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
-                                                     SDL 2.0.12
+                                                     SDL 2.0.14
                                            (SDL2_Image/SDL2_Mixer/SDL2_TTF)
                                          Cross-Platform / M.I.T. Open-Source
   _______ _______     ______   _______    _       _______          _           _______ _                                _
@@ -161,7 +161,12 @@ int main( int argc, char* args[] )
         printf( "Unable to initialize SDL2: %s\n", SDL_GetError() );
         return(1);
     }
-    else  printf("SDL2 initialized.\n");
+    else
+    {
+        SDL_version compiled;
+        SDL_VERSION(&compiled);
+        printf("SDL2 version %d.%d.%d initialized.\n", compiled.major, compiled.minor, compiled.patch);
+    }
 
     visuals = new Visuals();
 
