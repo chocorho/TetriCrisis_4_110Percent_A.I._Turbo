@@ -56,11 +56,12 @@ public:
     #define ShowStoryScreen             11
     #define FlyingFromEarthScreen       12
     #define FlyingToMarsScreen          13
-    #define MarsExplodingScreen         14
-    #define TestComputerSkillScreen     15
-    #define NameInputKeyboardScreen     16
-    #define NameInputJoystickScreen     17
-    #define NameInputMouseScreen        18
+    #define FlyingToBaseScreen          14
+    #define MarsExplodingScreen         15
+    #define TestComputerSkillScreen     16
+    #define NameInputKeyboardScreen     17
+    #define NameInputJoystickScreen     18
+    #define NameInputMouseScreen        19
     int ScreenToDisplay;
     int ScreenIsDirty;
 
@@ -102,8 +103,9 @@ public:
     float ShipScale;
     float ExplosionScale;
     float ExplosionTransparency;
-    void DisplayFlyingToMarsScreen(void);
     void DisplayFlyingFromEarthScreen(void);
+    void DisplayFlyingToMarsScreen(void);
+    void DisplayFlyingToBaseScreen(void);
     void DisplayMarsExplodingScreen(void);
 
     void DisplayPlayingStoryGameScreen(void);

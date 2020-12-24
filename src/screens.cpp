@@ -203,6 +203,10 @@ int windowHeight;
                 DisplayFlyingToMarsScreen();
                 break;
 
+            case FlyingToBaseScreen:
+                DisplayFlyingToBaseScreen();
+                break;
+
             case MarsExplodingScreen:
                 DisplayMarsExplodingScreen();
                 break;
@@ -3158,6 +3162,13 @@ void Screens::DisplayShowStoryScreen(void)
         }
 
         ScreenDisplayTimer = 350;
+
+        if (logic->PlayerData[1].Level == 6)
+        {
+            ScreenDisplayTimer = 0;
+            input->DelayAllUserInput = 20;
+        }
+
         ScreenTransitionStatus = FadeIn;
     }
 
@@ -3212,22 +3223,22 @@ void Screens::DisplayShowStoryScreen(void)
         }
         else if (logic->PlayerData[1].Level == 6)
         {
-            storyImageToShow = 72;
+            storyImageToShow = 73;
             logic->StoryShown[6] = 1;
         }
         else if (logic->PlayerData[1].Level == 7)
         {
-            storyImageToShow = 72;
+            storyImageToShow = 73;
             logic->StoryShown[7] = 1;
         }
         else if (logic->PlayerData[1].Level == 8)
         {
-            storyImageToShow = 72;
+            storyImageToShow = 73;
             logic->StoryShown[8] = 1;
         }
         else if (logic->PlayerData[1].Level == 9)
         {
-            storyImageToShow = 73;
+            storyImageToShow = 72;
             logic->StoryShown[9] = 1;
         }
 
@@ -3245,6 +3256,10 @@ void Screens::DisplayShowStoryScreen(void)
         {
 //            audio->PlayMusic(26 , -1);
             ScreenToDisplay = FlyingFromEarthScreen;
+        }
+        else if (logic->PlayerData[1].Level == 6)
+        {
+            ScreenToDisplay = FlyingToBaseScreen;
         }
     }
 }
@@ -3451,6 +3466,77 @@ void Screens::DisplayFlyingToMarsScreen(void)
         visuals->Sprites[40].ScaleX = PlanetScale;
         visuals->Sprites[40].ScaleY = PlanetScale;
         visuals->DrawSpriteOntoScreenBuffer(40);
+
+        visuals->Sprites[41].ScreenX = ShipX;
+        visuals->Sprites[41].ScreenY = ShipY;
+        visuals->Sprites[41].ScaleX = ShipScale;
+        visuals->Sprites[41].ScaleY = ShipScale;
+        visuals->DrawSpriteOntoScreenBuffer(41);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        ScreenTransitionStatus = FadeAll;
+
+        ScreenToDisplay = PlayingStoryGameScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayFlyingToBaseScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        IntroAnimationStep = 0;
+        ShipX = (0-200);
+        ShipY = (480+200);
+        ShipScale = 1.0;
+
+        audio->PlayDigitalSoundFX(16, 0);
+
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (IntroAnimationStep == 0)
+    {
+        if ( ShipX < (100-30) )
+        {
+            ShipX+=2;
+            ShipY-=2;
+        }
+        else  IntroAnimationStep = 1;
+    }
+    else if (IntroAnimationStep == 1)
+    {
+        if (ShipScale > 0.25)
+        {
+            ShipScale-=0.005;
+            ShipX+=1.7;
+            ShipY-=1.15;
+        }
+        else  IntroAnimationStep = 2;
+    }
+
+    if ( (input->ShiftKeyPressed == true && input->KeyOnKeyboardPressedByUser == SDLK_s)
+       || IntroAnimationStep == 2
+       || input->MouseButtonPressed[0] == true
+       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
+       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN
+       || input->JoystickButtonOne[Any] == ON)
+    {
+        ScreenTransitionStatus = FadeOut;
+        input->DelayAllUserInput = 20;
+        if (IntroAnimationStep < 5)  audio->PlayDigitalSoundFX(0, 0);
+    }
+
+    ScreenIsDirty = 2;
+//    if (ScreenIsDirty > 0)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->Sprites[73].ScreenX = 320;
+        visuals->Sprites[73].ScreenY = 240;
+        visuals->DrawSpriteOntoScreenBuffer(73);
 
         visuals->Sprites[41].ScreenX = ShipX;
         visuals->Sprites[41].ScreenY = ShipY;
