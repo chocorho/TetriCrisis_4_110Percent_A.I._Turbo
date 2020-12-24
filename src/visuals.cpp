@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' PRE-RC - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C. - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)

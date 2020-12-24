@@ -2640,14 +2640,6 @@ const char* keyName;
         {
             if (input->JoystickButtonOne[logic->PlayerData[player].PlayerInput] == ON
                 && logic->PlayerData[player].PlayerStatus == GameOver)  logic->PlayerData[player].PlayerStatus = NewPieceDropping;
-
-
-
-printf("1:%d / 2:%d / 3:%d / 4:%d\n", logic->PlayerData[0].PlayerInput, logic->PlayerData[1].PlayerInput, logic->PlayerData[2].PlayerInput, logic->PlayerData[3].PlayerInput);
-
-
-
-
         }
 
         for (int player = 0; player < NumberOfPlayers; player++)
@@ -3717,7 +3709,7 @@ const char* keyName;
             logic->Won = true;
             visuals->FrameLock = 16;
             audio->PlayMusic(30, -1);
-            ScreenToDisplay = MarsExplodingScreen;//AboutScreen;
+            ScreenToDisplay = MarsExplodingScreen;
         }
 
         ScreenTransitionStatus = FadeAll;
