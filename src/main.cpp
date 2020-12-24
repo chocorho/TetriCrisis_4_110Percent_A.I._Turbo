@@ -45,14 +45,15 @@ Release Candidate Change List:
 
 - Fixed multiple issues with joysticks.
 
+- Finalized "Story+Mode" game mode.
+
+
 
 
 Release Candidate To Do List:
 
 
 - Finalize music soundtrack.
-
-- Finalize "Story+Mode".
 
 - Test thoroughly for issues.
 
