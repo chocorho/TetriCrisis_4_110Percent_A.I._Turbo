@@ -2921,9 +2921,9 @@ const char* keyName;
         {
             if (logic->PlayersCanJoin == true)
             {
-                if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL)
-                    || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL)
+                if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL && input->JoystickDisabled[0] == 0)
+                    || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL && input->JoystickDisabled[1] == 0)
+                    || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL && input->JoystickDisabled[2] == 0)
                     || (logic->PlayerData[player].PlayerInput == Keyboard) || (logic->PlayerData[player].PlayerInput == Mouse) )
                 {
                     logic->JoinInTimer++;

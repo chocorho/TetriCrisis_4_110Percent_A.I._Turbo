@@ -43,7 +43,7 @@ ________________________________________________________________________________
 Release Candidate Change List:
 
 
-- Fixed an issue with joysticks.
+- Fixed multiple issues with joysticks.
 
 
 
