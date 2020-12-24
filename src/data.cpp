@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-Beta3c");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-ReleaseCandidate");
 
     ClearHighScores();
 

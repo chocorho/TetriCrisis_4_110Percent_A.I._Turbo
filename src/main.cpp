@@ -40,6 +40,13 @@ ________________________________________________________________________________
 ***NOTE: Saved options and high scores will reset UNTIL: "Release Candidate"!!!
 
 
+Release Candidate Change List:
+
+
+- Fixed an issue with joysticks.
+
+
+
 Release Candidate To Do List:
 
 
@@ -208,6 +215,7 @@ int main( int argc, char* args[] )
             SDL_RenderPresent(visuals->Renderer);
             if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
         }
+//printf("J0=%d, J1=%d, J2=%d\n", input->JoystickDisabled[0], input->JoystickDisabled[1], input->JoystickDisabled[2]);
     }
     if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
     else  printf("-----------------------------Main loop ended-\n");

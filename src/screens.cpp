@@ -1302,18 +1302,19 @@ void Screens::DisplayOptionsScreen(void)
     }
 
     if ( input->KeyOnKeyboardPressedByUser == SDLK_F1
-        && input->KeyboardSetupProcess == KeyboardSetupNotStarted )
+        && input->KeyboardSetupProcess == KeyboardSetupNotStarted
+        && (input->JoystickDisabled[0] == 0 || input->JoystickDisabled[1] == 0 || input->JoystickDisabled[2] == 0) )
     {
         ScreenIsDirty = 2;
         audio->PlayDigitalSoundFX(1, 0);
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
         {
-            if (input->JoystickDisabled[0] != 1)
+            if (input->JoystickDisabled[0] == 0)
                 input->JoystickSetupProcess = Joy1SetupPressUP;
-            else if (input->JoystickDisabled[1] != 1)
+            else if (input->JoystickDisabled[1] == 0)
                 input->JoystickSetupProcess = Joy2SetupPressUP;
-            else if (input->JoystickDisabled[2] != 1)
+            else if (input->JoystickDisabled[2] == 0)
                 input->JoystickSetupProcess = Joy3SetupPressUP;
             else
                 input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1421,7 +1422,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoyButton2[0] = joyAction;
                 joyAction = -1;
 
-                if (input->JoystickDisabled[1] != 1)
+                if (input->JoystickDisabled[1] == 0)
                     input->JoystickSetupProcess = Joy2SetupPressUP;
                 else
                     input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1516,7 +1517,7 @@ void Screens::DisplayOptionsScreen(void)
                 input->JoyButton2[1] = joyAction;
                 joyAction = -1;
 
-                if (input->JoystickDisabled[2] != 1)
+                if (input->JoystickDisabled[2] == 0)
                     input->JoystickSetupProcess = Joy3SetupPressUP;
                 else
                     input->JoystickSetupProcess = JoySetupNotStarted;
@@ -1958,7 +1959,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 344-6, JustifyCenter
                                           , 255, 255, 255, 90, 90, 90);
 
-        if (input->JoystickDisabled[0] != 1 || input->JoystickDisabled[1] != 1 || input->JoystickDisabled[2] != 1)
+        if (input->JoystickDisabled[0] == 0 || input->JoystickDisabled[1] == 0 || input->JoystickDisabled[2] == 0)
         {
             visuals->DrawTextOntoScreenBuffer("Press [F1] On Keyboard To Setup Joystick(s)"
                                               , visuals->Font[1]
