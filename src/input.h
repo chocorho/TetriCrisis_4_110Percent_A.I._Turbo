@@ -53,24 +53,24 @@ public:
     #define JoystickOne     1
     #define JoystickTwo     2
     #define JoystickThree   3
-    #define Any             4
-    #define CPU             5
-    #define Mouse           6
+    #define Mouse           4
+    #define Any             5
+    #define CPU             6
 
     #define CENTER      0
     #define UP          1
     #define RIGHT       3
     #define DOWN        5
     #define LEFT        7
-    Uint8 JoystickDirectionHorizontal[5];
-    Uint8 JoystickDirectionVertical[5];
+    Uint8 JoystickDirectionHorizontal[6];
+    Uint8 JoystickDirectionVertical[6];
 
     #define OFF         0
     #define ON          1
-    Uint8 JoystickButtonOne[5];
-    Uint8 JoystickButtonTwo[5];
-    bool JoystickButtonOnePressed[5];
-    bool JoystickButtonTwoPressed[5];
+    Uint8 JoystickButtonOne[6];
+    Uint8 JoystickButtonTwo[6];
+    bool JoystickButtonOnePressed[6];
+    bool JoystickButtonTwoPressed[6];
 
     #define JoySetupNotStarted          0
     #define Joy1SetupPressUP            1

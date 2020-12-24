@@ -1204,6 +1204,13 @@ void Logic::SetupForNewGame(void)
 
     if (screens->ScreenToDisplay != TestComputerSkillScreen)
     {
+
+
+
+//if (PlayerData[1].PlayerInput == JoystickOne)  SDL_Delay(9999);
+
+
+
         if (PlayerData[1].PlayerInput == Keyboard)
         {
             if (input->JoystickDisabled[0] == 0)  PlayerData[0].PlayerInput = JoystickOne;

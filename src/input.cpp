@@ -209,13 +209,17 @@ void Input::GetAllUserInput(void)
     MouseButtonPressed[0] = false;
     MouseButtonPressed[1] = false;
 
-    for (int index = 0; index < 5; index++)
+    for (int index = 0; index < 4; index++)
     {
         JoystickDirectionHorizontal[index] = CENTER;
         JoystickDirectionVertical[index] = CENTER;
         JoystickButtonOne[index] = OFF;
         JoystickButtonTwo[index] = OFF;
     }
+    JoystickDirectionHorizontal[Any] = CENTER;
+    JoystickDirectionVertical[Any] = CENTER;
+    JoystickButtonOne[Any] = OFF;
+    JoystickButtonTwo[Any] = OFF;
 
     for (int index = 0; index < 3; index++)  JoystickHat[0] = -1;
 
@@ -362,73 +366,73 @@ void Input::GetAllUserInput(void)
             JoystickHat[index] = SDL_JoystickGetHat(JoystickDevices[index], 0);
             if (JoyLEFT[index] == Hat0 && JoystickHat[index] == SDL_HAT_LEFT)
             {
-                JoystickDirectionHorizontal[JoystickOne-1+index] = LEFT;
+                JoystickDirectionHorizontal[JoystickOne+index] = LEFT;
             }
             if (JoyRIGHT[index] == Hat0 && JoystickHat[index] == SDL_HAT_RIGHT)
             {
-                JoystickDirectionHorizontal[JoystickOne-1+index] = RIGHT;
+                JoystickDirectionHorizontal[JoystickOne+index] = RIGHT;
             }
             if (JoyUP[index] == Hat0 && JoystickHat[index] == SDL_HAT_UP)
             {
-                JoystickDirectionVertical[JoystickOne-1+index] = UP;
+                JoystickDirectionVertical[JoystickOne+index] = UP;
             }
             if (JoyDOWN[index] == Hat0 && JoystickHat[index] == SDL_HAT_DOWN)
             {
-                JoystickDirectionVertical[JoystickOne-1+index] = DOWN;
+                JoystickDirectionVertical[JoystickOne+index] = DOWN;
             }
 
             Sint16 joystickXmovement = 0;
             if (JoyLEFT[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyLEFT[index]-9) )  JoystickDirectionHorizontal[JoystickOne-1+index] = LEFT;
-                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyRIGHT[index]-9) )  JoystickDirectionHorizontal[JoystickOne-1+index] = RIGHT;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyLEFT[index]-9) )  JoystickDirectionHorizontal[JoystickOne+index] = LEFT;
+                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyRIGHT[index]-9) )  JoystickDirectionHorizontal[JoystickOne+index] = RIGHT;
             }
             else joystickXmovement = SDL_JoystickGetAxis(JoystickDevices[index], JoyLEFT[index]);
 
             Sint16 joystickYmovement = 0;
             if (JoyUP[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyUP[index]-9) )  JoystickDirectionVertical[JoystickOne-1+index] = UP;
-                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyDOWN[index]-9) )  JoystickDirectionVertical[JoystickOne-1+index] = DOWN;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyUP[index]-9) )  JoystickDirectionVertical[JoystickOne+index] = UP;
+                else  if ( SDL_JoystickGetButton(JoystickDevices[index], JoyDOWN[index]-9) )  JoystickDirectionVertical[JoystickOne+index] = DOWN;
             }
             else joystickYmovement = SDL_JoystickGetAxis(JoystickDevices[index], JoyUP[index]);
 
             if ( joystickYmovement < (-32768*0.75) )
             {
-                JoystickDirectionVertical[JoystickOne-1+index] = UP;
+                JoystickDirectionVertical[JoystickOne+index] = UP;
             }
             else if ( joystickYmovement > (32767*0.75) )
             {
-                JoystickDirectionVertical[JoystickOne-1+index] = DOWN;
+                JoystickDirectionVertical[JoystickOne+index] = DOWN;
             }
 
             if ( joystickXmovement < (-32768*0.75) )
             {
-                JoystickDirectionHorizontal[JoystickOne-1+index] = LEFT;
+                JoystickDirectionHorizontal[JoystickOne+index] = LEFT;
             }
             else if ( joystickXmovement > (32767*0.75) )
             {
-                JoystickDirectionHorizontal[JoystickOne-1+index] = RIGHT;
+                JoystickDirectionHorizontal[JoystickOne+index] = RIGHT;
             }
 
             if (JoyButton1[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyButton1[index]-9) )  JoystickButtonOne[JoystickOne-1+index] = ON;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyButton1[index]-9) )  JoystickButtonOne[JoystickOne+index] = ON;
             }
             else
             {
                 Sint16 padAsButton = SDL_JoystickGetAxis(JoystickDevices[index], JoyButton1[index]);
-                if (padAsButton < (-32768*0.75))  JoystickButtonOne[JoystickOne-1+index] = ON;
+                if (padAsButton < (-32768*0.75))  JoystickButtonOne[JoystickOne+index] = ON;
             }
 
             if (JoyButton2[index] > Hat0)
             {
-                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyButton2[index]-9) )  JoystickButtonTwo[JoystickOne-1+index] = ON;
+                if ( SDL_JoystickGetButton(JoystickDevices[index], JoyButton2[index]-9) )  JoystickButtonTwo[JoystickOne+index] = ON;
             }
             else
             {
                 Sint16 padAsButton = SDL_JoystickGetAxis(JoystickDevices[index], JoyButton2[index]);
-                if (padAsButton < (-32768*0.75))  JoystickButtonTwo[JoystickOne-1+index] = ON;
+                if (padAsButton < (-32768*0.75))  JoystickButtonTwo[JoystickOne+index] = ON;
             }
         }
     }
