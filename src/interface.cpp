@@ -201,6 +201,10 @@ void Interface::ProcessAllButtons(void)
             {
                 logic->PlayerData[1].PlayerInput = JoystickThree;
             }
+            else if (input->JoystickButtonOne[JoystickFour] == ON)
+            {
+                logic->PlayerData[1].PlayerInput = JoystickFour;
+            }
 
             audio->PlayDigitalSoundFX(1, 0);
         }

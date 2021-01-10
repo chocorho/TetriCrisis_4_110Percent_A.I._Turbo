@@ -835,15 +835,15 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("100% Arcade Perfect To Home Conversion By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(Original Gameboy Version)", 255) == false)  return(false);
-
+/*
     if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Yiyuan Lee", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("X,XXX,XXX+ Average Lines Per Game!", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(Didn't Make It In Time, Sorry!)", 255) == false)  return(false);
-
+*/
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("100,000+ Average Lines Per Game!", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("32,000+ Average Lines Per Game!", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Lead Game Designer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -980,6 +980,11 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''slvn_''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Dominus''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Alienmilk''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''shachaf''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''sgibber2018''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''EvanR''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''demonicm1niac1''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''MrFlibble''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 

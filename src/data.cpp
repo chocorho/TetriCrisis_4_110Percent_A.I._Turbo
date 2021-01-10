@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-RC1");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail1j");
 
     ClearHighScores();
 
@@ -155,7 +155,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name1st[index];
 
                     HighScoresLevel[gameMode][loop] = 10;
-                    HighScoresScore[gameMode][loop] = 10000;
+                    HighScoresScore[gameMode][loop] = 5000;
                     break;
 
                 case 1:
@@ -163,7 +163,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name2nd[index];
 
                     HighScoresLevel[gameMode][loop] = 9;
-                    HighScoresScore[gameMode][loop] = 9000;
+                    HighScoresScore[gameMode][loop] = 4500;
                     break;
 
                 case 2:
@@ -171,7 +171,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name3rd[index];
 
                     HighScoresLevel[gameMode][loop] = 8;
-                    HighScoresScore[gameMode][loop] = 8000;
+                    HighScoresScore[gameMode][loop] = 4000;
                     break;
 
                 case 3:
@@ -179,7 +179,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name4th[index];
 
                     HighScoresLevel[gameMode][loop] = 7;
-                    HighScoresScore[gameMode][loop] = 7000;
+                    HighScoresScore[gameMode][loop] = 3500;
                     break;
 
                 case 4:
@@ -187,7 +187,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name5th[index];
 
                     HighScoresLevel[gameMode][loop] = 6;
-                    HighScoresScore[gameMode][loop] = 6000;
+                    HighScoresScore[gameMode][loop] = 3000;
                     break;
 
                 case 5:
@@ -195,7 +195,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name6th[index];
 
                     HighScoresLevel[gameMode][loop] = 5;
-                    HighScoresScore[gameMode][loop] = 5000;
+                    HighScoresScore[gameMode][loop] = 2500;
                     break;
 
                 case 6:
@@ -203,7 +203,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name7th[index];
 
                     HighScoresLevel[gameMode][loop] = 4;
-                    HighScoresScore[gameMode][loop] = 4000;
+                    HighScoresScore[gameMode][loop] = 2000;
                     break;
 
                 case 7:
@@ -211,7 +211,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name8th[index];
 
                     HighScoresLevel[gameMode][loop] = 3;
-                    HighScoresScore[gameMode][loop] = 3000;
+                    HighScoresScore[gameMode][loop] = 1500;
                     break;
 
                 case 8:
@@ -219,7 +219,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name9th[index];
 
                     HighScoresLevel[gameMode][loop] = 2;
-                    HighScoresScore[gameMode][loop] = 2000;
+                    HighScoresScore[gameMode][loop] = 1000;
                     break;
 
                 case 9:
@@ -227,7 +227,7 @@ char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
                         HighScoresName[gameMode][loop][index] = name10th[index];
 
                     HighScoresLevel[gameMode][loop] = 1;
-                    HighScoresScore[gameMode][loop] = 1000;
+                    HighScoresScore[gameMode][loop] = 500;
                     break;
 
                 default:
@@ -242,9 +242,10 @@ void Data::LoadHighScoresAndOptions(void)
 {
 char filename[256];
 fstream fileStream;
-char textBuffer[50];
+char textBuffer[100];
 char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);
 char *pref_path = NULL;
+char joystickNameTemp[4][100];
 
     if (base_path)
     {
@@ -328,7 +329,7 @@ char *pref_path = NULL;
         fileStream.getline (textBuffer, 30);
         input->UserDefinedKeyPause = (int)atoi(textBuffer);
 
-        for (int index = 0; index < 3; index++)
+        for (int index = 0; index < 4; index++)
         {
             fileStream.getline (textBuffer, 30);
             input->JoyUP[index] = (int)atoi(textBuffer);
@@ -373,6 +374,46 @@ char *pref_path = NULL;
             }
         }
 
+        for (int index = 0; index < 4; index++)
+        {
+            for (int indexTwo = 0; indexTwo < 100; indexTwo++)
+            {
+                joystickNameTemp[index][indexTwo] = char(NULL);
+            }
+
+            fileStream.getline (textBuffer, 100);
+
+            for (Uint8 indexThree = 0; indexThree < 100; indexThree++)
+            {
+                joystickNameTemp[index][indexThree] = textBuffer[indexThree];
+            }
+        }
+
+        if (  ( strcmp(joystickNameTemp[0], input->JoystickName[0]) != 0 )
+           || ( strcmp(joystickNameTemp[1], input->JoystickName[1]) != 0 )
+           || ( strcmp(joystickNameTemp[2], input->JoystickName[2]) != 0 )
+           || ( strcmp(joystickNameTemp[3], input->JoystickName[3]) != 0 )  )
+        {
+            for (int joy = 0; joy < 4; joy++)
+            {
+                input->JoyUP[joy] = Axis1;
+                input->JoyDOWN[joy] = Axis1;
+                input->JoyLEFT[joy] = Axis0;
+                input->JoyRIGHT[joy] = Axis0;
+                input->JoyButton1[joy] = Button0;
+                input->JoyButton2[joy] = Button1;
+            }
+
+            printf("* Joystick data not matched - joysticks reset!\n");
+        }
+        else
+        {
+            for (int index = 0; index < 4; index++)
+            {
+                strcpy(input->JoystickName[index], joystickNameTemp[index]);
+            }
+        }
+
         fileStream.close();
 	}
 }
@@ -382,7 +423,7 @@ void Data::SaveHighScoresAndOptions(void)
 {
 char filename[256];
 fstream fileStream;
-char textBuffer[50];
+char textBuffer[100];
 char *base_path = SDL_GetPrefPath("16BitSoftInc", DataVersionName);
 char *pref_path = NULL;
 
@@ -491,7 +532,7 @@ char *pref_path = NULL;
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-        for (int index = 0; index < 3; index++)
+        for (int index = 0; index < 4; index++)
         {
             sprintf(textBuffer, "%d", input->JoyUP[index]);
             fileStream<<textBuffer;
@@ -539,6 +580,13 @@ char *pref_path = NULL;
                 fileStream<<textBuffer;
                 fileStream<<"\n";
             }
+        }
+
+        for (int index = 0; index < 4; index++)
+        {
+            strcpy(textBuffer, input->JoystickName[index]);
+            fileStream<<textBuffer;
+            fileStream<<"\n";
         }
 
         fileStream.close();

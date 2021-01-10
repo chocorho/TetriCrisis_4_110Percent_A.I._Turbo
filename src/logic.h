@@ -64,7 +64,10 @@ public:
         int PlayfieldEndX;
 
         Uint8 Piece;
-        Uint8 PieceHistory[4];
+
+        int PieceBagIndex;
+        int PieceBag[2][8];
+        bool PieceSelectedAlready[8];
 
         Sint8 PieceMovementDelay;
         Uint8 PieceRotation;
@@ -87,19 +90,19 @@ public:
         bool PieceRotated1;
         bool PieceRotated2;
 
-        int MoveOneBlockCavernHoles[15][5];
-        int MoveCompletedLines[15][5];
-        int MovePieceHeight[15][5];
-        int MovePlayfieldBoxEdges[15][5];
-        int MoveTrappedHoles[15][5];
+        double MoveOneBlockCavernHoles[15][5];
+        double MoveCompletedLines[15][5];
+        double MovePieceHeight[15][5];
+        double MovePlayfieldBoxEdges[15][5];
+        double MoveTrappedHoles[15][5];
         bool MovePieceCollision[15][5];
-        int MoveSetup4Line[15][5];
-        int MovePlayfieldTop;
-        int MovePlayfieldTotalHeight[15][5];
-        int MovePlayfieldBumbs[15][5];
-        int Stress;
-        int LocationOfPossible4Line;
-        int MoveTrappedHolesBefore[15][5];
+        double MoveSetup4Line[15][5];
+        double MovePlayfieldTop[15][5];
+        double MovePlayfieldTotalHeight[15][5];
+        double MovePlayfieldBumbs[15][5];
+        double Stress;
+        double LocationOfPossible4Line;
+        double MoveTrappedHolesBefore[15][5];
 
         int BestMoveX;
         int BestRotation;
@@ -144,8 +147,6 @@ public:
 
     Uint32 PlayingGameFrameLock;
 
-    bool GameDisplayChanged;
-
     bool DisplayNextPiece;
     bool DisplayDropShadow;
     #define None            0
@@ -182,7 +183,7 @@ public:
 
     bool HumanStillAlive;
 
-	bool DontDisplayTestImages;
+	int DontDisplayTestImages;
 
     Uint8 TileSet;
 
@@ -193,7 +194,7 @@ public:
 
 	void ClearPlayfieldsWithCollisionDetection(void);
 
-	Uint8 GetRandomPiece(void);
+    void FillPieceBag(int player);
 
     #define CollisionNotTrue            0
     #define CollisionWithPlayfield      1

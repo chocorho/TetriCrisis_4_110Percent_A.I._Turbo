@@ -53,24 +53,25 @@ public:
     #define JoystickOne     1
     #define JoystickTwo     2
     #define JoystickThree   3
-    #define Mouse           4
-    #define Any             5
-    #define CPU             6
+    #define JoystickFour    4
+    #define Mouse           5
+    #define Any             6
+    #define CPU             7
 
     #define CENTER      0
     #define UP          1
     #define RIGHT       3
     #define DOWN        5
     #define LEFT        7
-    Uint8 JoystickDirectionHorizontal[6];
-    Uint8 JoystickDirectionVertical[6];
+    Uint8 JoystickDirectionHorizontal[7];
+    Uint8 JoystickDirectionVertical[7];
 
     #define OFF         0
     #define ON          1
-    Uint8 JoystickButtonOne[6];
-    Uint8 JoystickButtonTwo[6];
-    bool JoystickButtonOnePressed[6];
-    bool JoystickButtonTwoPressed[6];
+    Uint8 JoystickButtonOne[7];
+    Uint8 JoystickButtonTwo[7];
+    bool JoystickButtonOnePressed[7];
+    bool JoystickButtonTwoPressed[7];
 
     #define JoySetupNotStarted          0
     #define Joy1SetupPressUP            1
@@ -91,6 +92,12 @@ public:
     #define Joy3SetupPressRIGHT         16
     #define Joy3SetupPressBUTTONOne     17
     #define Joy3SetupPressBUTTONTwo     18
+    #define Joy4SetupPressUP            19
+    #define Joy4SetupPressDOWN          20
+    #define Joy4SetupPressLEFT          21
+    #define Joy4SetupPressRIGHT         22
+    #define Joy4SetupPressBUTTONOne     23
+    #define Joy4SetupPressBUTTONTwo     24
     int JoystickSetupProcess;
 
     #define KeyboardSetupNotStarted     0
@@ -103,6 +110,9 @@ public:
     #define KeyboardSetupPressPause     7
     int KeyboardSetupProcess;
 
+    int joystickToCheck = 0;
+    int joystickControl = 0;
+
     int UserDefinedKeyButtonOne;
     int UserDefinedKeyButtonTwo;
     int UserDefinedKeyUP;
@@ -111,14 +121,14 @@ public:
     int UserDefinedKeyLEFT;
     int UserDefinedKeyPause;
 
-    int JoyUP[3];
-    int JoyDOWN[3];
-    int JoyLEFT[3];
-    int JoyRIGHT[3];
-    int JoyButton1[3];
-    int JoyButton2[3];
+    int JoyUP[5];
+    int JoyDOWN[5];
+    int JoyLEFT[5];
+    int JoyRIGHT[5];
+    int JoyButton1[5];
+    int JoyButton2[5];
 
-    Uint8 JoystickHat[3];
+    Uint8 JoystickHat[4];
 
     #define Axis0       0
     #define Axis1       1
@@ -128,6 +138,8 @@ public:
     #define Axis5       5
     #define Axis6       6
     #define Axis7       7
+
+    bool JoystickAxisDisable[4][8];
 
     #define Hat0        8
 
@@ -149,12 +161,14 @@ public:
     #define Button15    24
     #define Button16    25
 
-    SDL_Joystick *JoystickDevices[3];
+    SDL_Joystick *JoystickDevices[4];
 
-    int NumberOfJoyButtons[3];
-    int NumberOfJoyAxises[3];
+    int NumberOfJoyButtons[4];
+    int NumberOfJoyAxises[4];
 
-    int JoystickDisabled[3];
+    int JoystickDisabled[4];
+
+    char JoystickName[4][100];
 
     #define BothJoystickAxisesAndButtons    0
     #define JustJoystickAxises              1

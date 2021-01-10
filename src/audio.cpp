@@ -354,6 +354,7 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
 
     if (musicIndex >= MusicTotal)  return;
 
+
     if (Mix_PlayingMusic() == 1)  Mix_HaltMusic();
 
     Mix_VolumeMusic(MusicVolume);
@@ -361,6 +362,8 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
     CurrentlySelectedMusicTrack = musicIndex;
 
     CurrentMusicTrackPlaying = musicIndex;
+
+    if (MusicVolume == 0)  return;
 
     if(Mix_PlayMusic(MusicTrack[musicIndex], loop)==-1)
     {

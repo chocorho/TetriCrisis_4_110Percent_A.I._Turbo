@@ -54,12 +54,17 @@ Input::Input(void)
     MouseButtonPressed[0] = false;
     MouseButtonPressed[1] = false;
 
-    for (int index = 0; index < 3; index++)
+    for (int index = 0; index < 4; index++)
     {
         JoystickDevices[index] = NULL;
         NumberOfJoyButtons[index] = 0;
         NumberOfJoyAxises[index] = 0;
         JoystickDisabled[index] = 1;
+
+        for (int indexTwo = 0; indexTwo < 8; indexTwo++)
+        {
+            JoystickAxisDisable[index][indexTwo] = true;
+        }
     }
 
     if (SDL_NumJoysticks() == 0)
@@ -68,35 +73,112 @@ Input::Input(void)
     }
     else
     {
+        Sint16 joyAxis = -1;
         if (SDL_NumJoysticks()>0)
         {
             JoystickDevices[0] = SDL_JoystickOpen(0);
             NumberOfJoyButtons[0] = SDL_JoystickNumButtons(JoystickDevices[0]);
+
             NumberOfJoyAxises[0] = SDL_JoystickNumAxes(JoystickDevices[0]);
+            for (int index = 0; index < NumberOfJoyAxises[0]; index++)
+            {
+                JoystickAxisDisable[0][index] = false;
+            }
+
+            for (int index = 0; index < NumberOfJoyAxises[0]; index++)
+            {
+                SDL_JoystickUpdate();
+                joyAxis = SDL_JoystickGetAxis(JoystickDevices[0], index);
+
+                if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
+                    JoystickAxisDisable[0][index] = true;
+            }
+
             printf("SDL2 Joystick #0 ''%s'' opened.\n", SDL_JoystickName(JoystickDevices[0]));
+            strcpy( JoystickName[0], SDL_JoystickName(JoystickDevices[0]) );
             JoystickDisabled[0] = 0;
         }
 
+        joyAxis = -1;
         if (SDL_NumJoysticks()>1)
         {
             JoystickDevices[1] = SDL_JoystickOpen(1);
             NumberOfJoyButtons[1] = SDL_JoystickNumButtons(JoystickDevices[1]);
+
             NumberOfJoyAxises[1] = SDL_JoystickNumAxes(JoystickDevices[1]);
+            for (int index = 0; index < NumberOfJoyAxises[1]; index++)
+            {
+                JoystickAxisDisable[1][index] = false;
+            }
+
+            for (int index = 0; index < NumberOfJoyAxises[1]; index++)
+            {
+                SDL_JoystickUpdate();
+                joyAxis = SDL_JoystickGetAxis(JoystickDevices[1], index);
+
+                if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
+                    JoystickAxisDisable[1][index] = true;
+            }
+
             printf("SDL2 Joystick #1 ''%s'' opened.\n", SDL_JoystickName(JoystickDevices[1]));
+            strcpy( JoystickName[1], SDL_JoystickName(JoystickDevices[1]) );
             JoystickDisabled[1] = 0;
         }
 
+        joyAxis = -1;
         if (SDL_NumJoysticks()>2)
         {
             JoystickDevices[2] = SDL_JoystickOpen(2);
             NumberOfJoyButtons[2] = SDL_JoystickNumButtons(JoystickDevices[2]);
+
             NumberOfJoyAxises[2] = SDL_JoystickNumAxes(JoystickDevices[2]);
+            for (int index = 0; index < NumberOfJoyAxises[2]; index++)
+            {
+                JoystickAxisDisable[2][index] = false;
+            }
+
+            for (int index = 0; index < NumberOfJoyAxises[2]; index++)
+            {
+                SDL_JoystickUpdate();
+                joyAxis = SDL_JoystickGetAxis(JoystickDevices[2], index);
+
+                if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
+                    JoystickAxisDisable[2][index] = true;
+            }
+
             printf("SDL2 Joystick #2 ''%s'' opened.\n", SDL_JoystickName(JoystickDevices[2]));
+            strcpy( JoystickName[2], SDL_JoystickName(JoystickDevices[2]) );
             JoystickDisabled[2] = 0;
+        }
+
+        joyAxis = -1;
+        if (SDL_NumJoysticks()>3)
+        {
+            JoystickDevices[3] = SDL_JoystickOpen(3);
+            NumberOfJoyButtons[3] = SDL_JoystickNumButtons(JoystickDevices[3]);
+
+            NumberOfJoyAxises[3] = SDL_JoystickNumAxes(JoystickDevices[3]);
+            for (int index = 0; index < NumberOfJoyAxises[3]; index++)
+            {
+                JoystickAxisDisable[3][index] = false;
+            }
+
+            for (int index = 0; index < NumberOfJoyAxises[3]; index++)
+            {
+                SDL_JoystickUpdate();
+                joyAxis = SDL_JoystickGetAxis(JoystickDevices[3], index);
+
+                if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
+                    JoystickAxisDisable[3][index] = true;
+            }
+
+            printf("SDL2 Joystick #3 ''%s'' opened.\n", SDL_JoystickName(JoystickDevices[3]));
+            strcpy( JoystickName[3], SDL_JoystickName(JoystickDevices[3]) );
+            JoystickDisabled[3] = 0;
         }
     }
 
-    for (int joy = 0; joy < 3; joy++)
+    for (int joy = 0; joy < 4; joy++)
     {
         JoyUP[joy] = Axis1;
         JoyDOWN[joy] = Axis1;
@@ -131,7 +213,7 @@ Input::Input(void)
 //-------------------------------------------------------------------------------------------------
 Input::~Input(void)
 {
-    for (int index = 0; index < 3; index++)
+    for (int index = 0; index < 4; index++)
     {
         if (JoystickDevices[index] != NULL)  SDL_JoystickClose(JoystickDevices[index]);
     }
@@ -144,7 +226,7 @@ int returnValue = -1;
 
 	if (DelayAllUserInput > 0)  return(-1);
 
-	for (int joyIndex = 0; joyIndex < 3; joyIndex++)
+	for (int joyIndex = 0; joyIndex < 4; joyIndex++)
     {
         if (joy == joyIndex && JoystickDevices[joy] != NULL)
         {
@@ -155,12 +237,14 @@ int returnValue = -1;
                     SDL_JoystickUpdate();
                     Sint16 joyAxis = 0;
                     joyAxis = SDL_JoystickGetAxis(JoystickDevices[joyIndex], index);
-                    if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
+
+                    if (JoystickAxisDisable[joyIndex][index] == false)
                     {
-                        if (joyAxis > -32768 && joyAxis < 32767)
+                        if ( joyAxis < (-32768*0.75) || joyAxis > (32767*0.75) )
                         {
                             DelayAllUserInput = 50;
                             returnValue = Axis0+index;
+
                             return(returnValue);
                         }
                     }
@@ -209,7 +293,7 @@ void Input::GetAllUserInput(void)
     MouseButtonPressed[0] = false;
     MouseButtonPressed[1] = false;
 
-    for (int index = 0; index < 4; index++)
+    for (int index = 0; index < 5; index++)
     {
         JoystickDirectionHorizontal[index] = CENTER;
         JoystickDirectionVertical[index] = CENTER;
@@ -221,7 +305,7 @@ void Input::GetAllUserInput(void)
     JoystickButtonOne[Any] = OFF;
     JoystickButtonTwo[Any] = OFF;
 
-    for (int index = 0; index < 3; index++)  JoystickHat[0] = -1;
+    for (int index = 0; index < 4; index++)  JoystickHat[0] = -1;
 
     if (DelayAllUserInput > 0)
     {
@@ -247,7 +331,6 @@ void Input::GetAllUserInput(void)
                 {
                     screens->ScreenIsDirty = 2;
                     LastEventWasWindowResize = 2;
-                    logic->GameDisplayChanged = true;
                 }
                 break;
 
@@ -319,12 +402,12 @@ void Input::GetAllUserInput(void)
 
         DelayAllUserInput = 30;
 
+        logic->GameForfeit = true;
+
         if (screens->ScreenToDisplay == PlayingGameScreen || screens->ScreenToDisplay == PlayingStoryGameScreen)
         {
             if (logic->HumanStillAlive == true)
             {
-                logic->GameForfeit = true;
-
                 for (int index = 0; index < 4; index++)
 
                 if (logic->PlayerData[index].PlayerInput != CPU)
@@ -359,7 +442,7 @@ void Input::GetAllUserInput(void)
 //------------------------------------------------------------------------
 
     SDL_JoystickUpdate();
-    for (int index = 0; index < 3; index++)
+    for (int index = 0; index < 4; index++)
     {
         if (JoystickDisabled[index] == 0)
         {
@@ -439,7 +522,7 @@ void Input::GetAllUserInput(void)
 
 //------------------------------------------------------------------------
 
-    for (int index = 0; index < 4; index++)
+    for (int index = 0; index < 5; index++)
     {
         if (JoystickDirectionHorizontal[Any] == CENTER)  JoystickDirectionHorizontal[Any] = JoystickDirectionHorizontal[index];
         if (JoystickDirectionVertical[Any] == CENTER)  JoystickDirectionVertical[Any] = JoystickDirectionVertical[index];
@@ -449,7 +532,7 @@ void Input::GetAllUserInput(void)
 
     if (screens->ScreenToDisplay != NameInputJoystickScreen)
     {
-        for (int index = 0; index < 4; index++)
+        for (int index = 0; index < 5; index++)
         {
             if (JoystickButtonOne[index] == ON)  JoystickButtonOnePressed[index] = true;
             else  JoystickButtonOnePressed[index] = false;

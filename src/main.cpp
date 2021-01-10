@@ -33,109 +33,15 @@ ________________________________________________________________________________
                                          "T-Crisis 4 110% A.I. Turbo Remix"
                                                Retail3 Version 4.5.6
 
+                                      Post Release Candidate / NOT Retail Yet!
+
                                                    Team 16BitSoft
 _____________________________________________________________________________________________________________________________
-
-
-***NOTE: Saved options and high scores will reset UNTIL: "Release Candidate"!!!
-
-
-Release Candidate Change List:
-
-
-- Fixed multiple issues with joysticks.
-
-- Finalized "Story+Mode" game mode.
-
-
-
-
-Release Candidate To Do List:
-
-
-- Finalize music soundtrack.
-
-- Test thoroughly for issues.
-
-
-__________________________________________________________________________________________________
-
-Beta3 Change List:
-
-
-- Fixed "Story+Mode" clearing of playfield after playing for shortwhile.
-(should only happen in "Crisis+Mode")
-
-- Created "Story+Mode" game mode storyboard image display system.
-(black and white sketches are temporary until artist finishes the work)
-
-- Implemented display "Volume OFF" for music track/mode when music volume is set to OFF.
-(not sure why you would mute the music - it rocks!)
-
-- Implemented level up system in "Story+Mode".
-(requires more line clears after each level)
-
-- Fixed "Original Mode" ending at level 10, it's now never-ending.
-(try some of the other game modes for more fun!)
-
-- Fixed full screen desktop screen curruption.
-
-- Implemented "hats" for joysticks.
-
-- Fixed window resize(larger/maximize) screen corruption at top-left.
-
-- Implemented first draft of animated intro and ending scenes in "Story+Mode".
-
-
-__________________________________________________________________________________________________
-
-Beta2 Change List:
-
-
-- Lowered default high scores.
-(in some modes the higher scores were impossible to beat)
-
-- Added "on-the-fly" average lines/game display to A.I. testing screen.
-([Shift]+[T] to activate on 16BitSoft screen)
-
-- Changed game window title to: "T-Crisis 4 110% A.I. Turbo Remix".
-(LOL - is the name long enough:)
-
-- Modified staff screen texts a little and added Palm T-Crisis images/review.
-(hope we did not forget anyone!)
-
-- Optimized the staff screen.
-(game runs 60FPS on an 11 year old 1.2GHz thin client)
-
-- Fixed total completed lines counter in A.I. testing screen.
-(game currently does about 100,000 completed lines per game)
-
-- Optimized and Added F.P.S. to A.I. testing screen.
-(pressing [T] key during test will toggle playfield display on/off)
-
-- Introduced "Story+Mode" game mode.
-(will feature story images from a paid graphic artist and a completely new music soundtrack!)
-
-- Optimized [Options] configuration screen.
-(thanks to "fogobogo" for spotting above on his RPi4!)
-
-- Added "Danger!" voice to "Story+Mode" game mode.
-(it's my voice - could not afford a voice actor)
-
-- Fixed an infrequent crash when game is over and a new high score is acheived.
-(was new high score name setting to NULL then trying to be displayed on screen: title/high scores)
-
-- Implemented keep aspect ration for windowed and full screen mode.
-(special thanks to "slvn_" for their help with above!)
-
-- Fixed in-game mouse control.
-(mouse input when playing is not ideal, but it's there as an option)
-
-_____________________________________________________________________________________________________________________________
 */
-#include <time.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstring>
+#include <time.h>
+#include <cstdlib>
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -191,6 +97,7 @@ int main( int argc, char* args[] )
     data = new Data();
 
     srand( (unsigned)time(NULL) ); // Place unique time seed into random number generator.
+
     logic = new Logic();
 
     audio = new Audio();
@@ -200,6 +107,8 @@ int main( int argc, char* args[] )
 
     SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
+    if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
     //-MAIN-LOOP------------------------------------------------------------------------
     printf("-Main loop started-----------------------------\n");
     while (visuals->CoreFailure != true && input->EXIT_Game != true)
@@ -208,16 +117,8 @@ int main( int argc, char* args[] )
         visuals->CalculateFramerate();
         screens->ProcessScreenToDisplay();
         visuals->ProcessFramerate();
-
-        if (screens->ClearScreenWithBlackWhen1stRunInFullScreenMode == false)
-        {
-            screens->ClearScreenWithBlackWhen1stRunInFullScreenMode = true;
-            visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
-            SDL_RenderPresent(visuals->Renderer);
-            if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-        }
-//printf("J0=%d, J1=%d, J2=%d\n", input->JoystickDisabled[0], input->JoystickDisabled[1], input->JoystickDisabled[2]);
     }
+
     if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
     else  printf("-----------------------------Main loop ended-\n");
     //------------------------------------------------------------------------MAIN-LOOP-

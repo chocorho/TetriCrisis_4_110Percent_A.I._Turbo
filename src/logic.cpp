@@ -17,10 +17,9 @@
     AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
-#include <cstdlib>
-#include <cfloat>
 #include <stdio.h>
+#include <cstring>
+#include <cstdlib>
 
 #include "SDL.h"
 #include "SDL_image.h"
@@ -45,6 +44,7 @@ Logic::Logic(void)
     GameMode = StoryMode;
 
     CPUPlayerEnabled = 2;
+    UseOldAI = 1;
 
     SelectedBackground = 0;
     SelectedMusicTrack = 2;
@@ -102,29 +102,6 @@ Logic::Logic(void)
     PieceDropStartHeight[5] = 4;
     PieceDropStartHeight[6] = 3;
     PieceDropStartHeight[7] = 5;
-
-	for (Uint8 player = 0; player < NumberOfPlayers; player++)
-	{
-		for (Uint8 indexTwo = 0; indexTwo < 4; indexTwo++)
-		{
-			PlayerData[player].PieceHistory[indexTwo] = ( rand()%7 + 1 );
-		}
-	}
-
-	for (Uint8 player = 0; player < NumberOfPlayers; player++)
-	{
-		for (Uint8 indexTwo = 0; indexTwo < 4; indexTwo++)
-		{
-			for (Uint8 indexThree = 0; indexThree < 4; indexThree++)
-			{
-				if (indexThree != indexTwo)
-				{
-					while (PlayerData[player].PieceHistory[indexTwo] == PlayerData[player].PieceHistory[indexThree])
-						PlayerData[player].PieceHistory[indexTwo] = ( rand()%7 + 1 );
-				}
-			}
-		}
-	}
 
     Player = 0;
 
@@ -317,26 +294,50 @@ void Logic::ClearPlayfieldsWithCollisionDetection(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-Uint8 Logic::GetRandomPiece(void)
+void Logic::FillPieceBag(int player)
 {
-	Uint8 random = PlayerData[Player].PieceHistory[0];
+bool done = false;
 
-	for (Uint8 index = 0; index < 3; index++)
-	{
-		PlayerData[Player].PieceHistory[index] = PlayerData[Player].PieceHistory[index+1];
-	}
+    PlayerData[player].PieceBagIndex = 1;
 
-	Uint8 numberOfTries = 0;
-	while ( (PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[0]
-	      || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[1]
-	      || PlayerData[Player].PieceHistory[3] == PlayerData[Player].PieceHistory[2])
-		  && (numberOfTries < 3) )
-	{
-		PlayerData[Player].PieceHistory[3] = ( rand()%7 + 1 );
-		numberOfTries++;
-	}
+    for (int index = 0; index < 8; index++)
+    {
+        PlayerData[player].PieceBag[0][index] = -1;
+        PlayerData[player].PieceSelectedAlready[index] = false;
+    }
 
-	return(random);
+    PlayerData[player].PieceBag[0][1] = ( rand()%7 + 1 );
+    PlayerData[player].PieceSelectedAlready[ PlayerData[player].PieceBag[0][1] ] = true;
+    while (done == false)
+    {
+        for (int x = 2; x < 8; x++)
+        {
+            int randomPieceToTry = ( rand()%7 + 1 );
+            if (PlayerData[player].PieceSelectedAlready[randomPieceToTry] == false)
+            {
+                PlayerData[player].PieceBag[0][x] = randomPieceToTry;
+                PlayerData[player].PieceSelectedAlready[randomPieceToTry] = true;
+
+                if (x == 7)  done = true;
+            }
+            else
+            {
+                x--;
+            }
+        }
+    }
+
+    PlayerData[player].NextPiece = PlayerData[player].PieceBag[0][2];
+    PlayerData[Player].PieceBagIndex = 1;
+
+//if (player == 1)
+//{
+//    for (int index = 1; index < 8; index++)
+//        printf("%i ", PlayerData[player].PieceBag[0][index]);
+//
+//    printf("-------------------------------------------------------------\n");
+//}
+
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -614,7 +615,19 @@ void Logic::SetupNewPiece(void)
 
 	PlayerData[Player].PiecePlayfieldY = 0;
 
-	PlayerData[Player].NextPiece = GetRandomPiece();
+    if (PlayerData[Player].PieceBagIndex < 7)
+    {
+        PlayerData[Player].Piece = PlayerData[Player].NextPiece;
+    	PlayerData[Player].NextPiece = PlayerData[Player].PieceBag[0][ PlayerData[Player].PieceBagIndex+1 ];
+        PlayerData[Player].PieceBagIndex++;
+    }
+    else if (PlayerData[Player].PieceBagIndex == 7)
+    {
+        PlayerData[Player].Piece = PlayerData[Player].NextPiece;
+        FillPieceBag(Player);
+    	PlayerData[Player].NextPiece = PlayerData[Player].PieceBag[0][ PlayerData[Player].PieceBagIndex ];
+        PlayerData[Player].PieceBagIndex = 1;
+    }
 
 	PlayerData[Player].PlayerStatus = NewPieceDropping;
 
@@ -632,8 +645,6 @@ void Logic::SetupNewPiece(void)
     PlayerData[Player].BestRotation = -1;
     PlayerData[Player].BestMoveCalculated = false;
     PlayerData[Player].MovedToBestMove = false;
-
-    GameDisplayChanged = true;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -692,28 +703,31 @@ void Logic::CheckForDanger(void)
 {
 bool inDanger = false;
 
-    for ( int y = 5; y < (5+4); y++ )
+    if (GameMode == StoryMode)
     {
-        for (int x = 2; x < 12; x++)
+        for ( int y = 5; y < (5+4); y++ )
         {
-            if (PlayerData[Player].Playfield[x][y] > 10 && PlayerData[Player].Playfield[x][y] < 20)
+            for (int x = 2; x < 12; x++)
             {
-                inDanger = true;
+                if (PlayerData[Player].Playfield[x][y] > 10 && PlayerData[Player].Playfield[x][y] < 20)
+                {
+                    inDanger = true;
+                }
             }
         }
-    }
 
-    if (inDanger == true)
-    {
-        if (DangerRepeat < 100)
+        if (inDanger == true)
         {
-            DangerRepeat++;
-        }
-        else
-        {
-            DangerRepeat = 0;
+            if (DangerRepeat < 100)
+            {
+                DangerRepeat++;
+            }
+            else
+            {
+                DangerRepeat = 0;
 
-            audio->PlayDigitalSoundFX(15, 0);
+                audio->PlayDigitalSoundFX(15, 0);
+            }
         }
     }
 }
@@ -725,7 +739,7 @@ void Logic::MovePieceDown(bool Force)
     {
         if (PlayerData[Player].PlayerInput == CPU)
         {
-            if (CPUPlayerEnabled == 1)
+            if (CPUPlayerEnabled == 1 || CPUPlayerEnabled == 6)
             {
                 PlayerData[Player].CPUFrame++;
                 if (PlayerData[Player].CPUFrame < 3)
@@ -734,7 +748,7 @@ void Logic::MovePieceDown(bool Force)
                 }
                 else  PlayerData[Player].CPUFrame = 0;
             }
-            else if (CPUPlayerEnabled == 2)
+            else if (CPUPlayerEnabled == 2 || CPUPlayerEnabled == 7)
             {
                 PlayerData[Player].CPUFrame++;
                 if (PlayerData[Player].CPUFrame < 2)
@@ -754,32 +768,32 @@ void Logic::MovePieceDown(bool Force)
 	{
         if (PlayersCanJoin == true && Player == 1 && GameMode != StoryMode)
         {
-            if (PlayerData[0].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[0].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[0].PlayerInput = CPU;
                 PlayerData[0].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[1].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[1].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[1].PlayerInput = CPU;
                 PlayerData[1].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[2].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[2].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[2].PlayerInput = CPU;
                 PlayerData[2].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[3].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[3].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[3].PlayerInput = CPU;
                 PlayerData[3].PlayerStatus = NewPieceDropping;
             }
 
             if ( CPUPlayerEnabled > 0
-                 && (PlayerData[0].PlayerInput == CPU || PlayerData[2].PlayerInput == CPU) )  audio->PlayDigitalSoundFX(13, 0);
+                 && (PlayerData[0].PlayerInput == CPU || PlayerData[2].PlayerInput == CPU || PlayerData[2].PlayerInput == CPU) )  audio->PlayDigitalSoundFX(13, 0);
 
             PlayersCanJoin = false;
         }
@@ -799,10 +813,6 @@ void Logic::MovePieceDown(bool Force)
             audio->PlayDigitalSoundFX(11, 0);
         }
 		else  CheckForCompletedLines();
-	}
-	else
-	{
-    	GameDisplayChanged = true;
 	}
 }
 
@@ -819,32 +829,32 @@ void Logic::MovePieceDownFast(void)
 	{
         if (PlayersCanJoin == true && Player == 1)
         {
-            if (PlayerData[0].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[0].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[0].PlayerInput = CPU;
                 PlayerData[0].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[1].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[1].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[1].PlayerInput = CPU;
                 PlayerData[1].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[2].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[2].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[2].PlayerInput = CPU;
                 PlayerData[2].PlayerStatus = NewPieceDropping;
             }
 
-            if (PlayerData[3].PlayerStatus == GameOver && CPUPlayerEnabled > 0)
+            if (PlayerData[3].PlayerStatus == GameOver && CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5)
             {
                 PlayerData[3].PlayerInput = CPU;
                 PlayerData[3].PlayerStatus = NewPieceDropping;
             }
 
-            if ( CPUPlayerEnabled > 0
-                 && (PlayerData[0].PlayerInput == CPU || PlayerData[2].PlayerInput == CPU) )  audio->PlayDigitalSoundFX(13, 0);
+            if ( CPUPlayerEnabled != 0 && CPUPlayerEnabled != 5
+                 && (PlayerData[0].PlayerInput == CPU || PlayerData[2].PlayerInput == CPU || PlayerData[3].PlayerInput == CPU) )  audio->PlayDigitalSoundFX(13, 0);
 
             PlayersCanJoin = false;
         }
@@ -864,10 +874,6 @@ void Logic::MovePieceDownFast(void)
             audio->PlayDigitalSoundFX(11, 0);
         }
 		else  CheckForCompletedLines();
-	}
-	else
-	{
-		GameDisplayChanged = true;
 	}
 }
 
@@ -888,8 +894,6 @@ void Logic::MovePieceDownFastDropAndDrag(void)
         PlayerData[Player].PiecePlayfieldY--;
 
         PlayerData[Player].PieceDropTimer = 0;
-
-        GameDisplayChanged = true;
     }
 }
 
@@ -902,8 +906,6 @@ bool Logic::RotatePieceCounterClockwise(void)
 	if (PieceCollision() == CollisionNotTrue)
 	{
 		if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(5, 0);
-
-		GameDisplayChanged = true;
 
         return(true);
 	}
@@ -928,8 +930,6 @@ bool Logic::RotatePieceClockwise(void)
 	if (PieceCollision() == CollisionNotTrue)
 	{
 		if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(5, 0);
-
-		GameDisplayChanged = true;
 
         return(true);
 	}
@@ -960,8 +960,6 @@ void Logic::MovePieceLeft(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -980,8 +978,6 @@ void Logic::MovePieceLeft(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -1000,8 +996,6 @@ void Logic::MovePieceLeft(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -1027,8 +1021,6 @@ void Logic::MovePieceRight(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -1047,8 +1039,6 @@ void Logic::MovePieceRight(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -1067,8 +1057,6 @@ void Logic::MovePieceRight(void)
 
             if (PieceCollision() == CollisionNotTrue)
             {
-                GameDisplayChanged = true;
-
                 if (ThinkRussianTimer == 0 && PlayerData[Player].PlayerInput != CPU)  audio->PlayDigitalSoundFX(2, 0);
             }
             else
@@ -1099,9 +1087,9 @@ void Logic::SetupForNewGame(void)
     JoinInTimer = 0;
     ContinueWatchingTimer = 0;
 
-    HumanStillAlive = false;
+    HumanStillAlive = true;
 
-    DontDisplayTestImages = false;
+    DontDisplayTestImages = 0;
 
     if (SelectedBackground == 1)
     {
@@ -1157,11 +1145,17 @@ void Logic::SetupForNewGame(void)
 	{
 		Player = player;
 
-		PlayerData[player].Piece = GetRandomPiece();
+        FillPieceBag(player);
+        PlayerData[player].Piece = PlayerData[player].PieceBag[0][PlayerData[player].PieceBagIndex];
+        PlayerData[player].PieceBagIndex = 1;
+        PlayerData[player].NextPiece = PlayerData[player].PieceBag[0][PlayerData[player].PieceBagIndex];
+
+        PlayerData[player].Piece = PlayerData[player].NextPiece;
+        PlayerData[player].PieceBagIndex = 2;
+        PlayerData[player].NextPiece = PlayerData[player].PieceBag[0][PlayerData[player].PieceBagIndex];
+
 		PlayerData[player].PieceMovementDelay = 0;
 		PlayerData[player].PieceRotation = 1;
-
-		PlayerData[player].NextPiece = GetRandomPiece();
 
 		PlayerData[player].PieceDropTimer = 0;
 		PlayerData[player].TimeToDropPiece = 47;
@@ -1210,7 +1204,7 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[0].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[0].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[0].PlayerStatus = NewPieceDropping;
                 else  PlayerData[0].PlayerStatus = GameOver;
             }
 
@@ -1218,7 +1212,7 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[2].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[2].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[2].PlayerStatus = NewPieceDropping;
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
@@ -1237,7 +1231,7 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[2].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[2].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[2].PlayerStatus = NewPieceDropping;
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
@@ -1257,7 +1251,7 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[2].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[2].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[2].PlayerStatus = NewPieceDropping;
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
@@ -1276,7 +1270,7 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[2].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[2].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[2].PlayerStatus = NewPieceDropping;
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
@@ -1284,7 +1278,27 @@ void Logic::SetupForNewGame(void)
             else
             {
                 PlayerData[3].PlayerInput = CPU;
-                if (CPUPlayerEnabled != false)  PlayerData[3].PlayerStatus = NewPieceDropping;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[3].PlayerStatus = NewPieceDropping;
+                else  PlayerData[3].PlayerStatus = GameOver;
+            }
+        }
+        else if (PlayerData[1].PlayerInput == JoystickFour)
+        {
+            PlayerData[0].PlayerInput = Keyboard;
+
+            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
+            else
+            {
+                PlayerData[2].PlayerInput = CPU;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[2].PlayerStatus = NewPieceDropping;
+                else  PlayerData[2].PlayerStatus = GameOver;
+            }
+
+            if (input->JoystickDisabled[1] == 0)  PlayerData[3].PlayerInput = JoystickTwo;
+            else
+            {
+                PlayerData[3].PlayerInput = CPU;
+                if (CPUPlayerEnabled != 0  && CPUPlayerEnabled != 4)  PlayerData[3].PlayerStatus = NewPieceDropping;
                 else  PlayerData[3].PlayerStatus = GameOver;
             }
         }
@@ -1306,6 +1320,7 @@ void Logic::SetupForNewGame(void)
             {
                 PlayerData[player].PlayerInput = CPU;
                 PlayerData[player].PlayerStatus = GameOver;
+                PlayersCanJoin = false;
             }
         }
     }
@@ -1340,8 +1355,6 @@ void Logic::SetupForNewGame(void)
 
     Won = false;
     CrisisModeOnePlayerLeftPlayfieldCleared = false;
-
-    GameDisplayChanged = true;
 
     if (NewGameGarbageHeight > 0 && GameMode != StoryMode)
     {
@@ -1478,8 +1491,6 @@ int numberOfCompletedLines = 0;
             }
         }
 	}
-
-	GameDisplayChanged = true;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1542,10 +1553,6 @@ bool thereWasACompletedLine = false;
                             audio->PlayDigitalSoundFX(12, 0);
                             audio->PlayDigitalSoundFX(12, 0);
                             audio->PlayDigitalSoundFX(12, 0);
-                            audio->PlayDigitalSoundFX(12, 0);
-                            audio->PlayDigitalSoundFX(12, 0);
-                            audio->PlayDigitalSoundFX(12, 0);
-                            audio->PlayDigitalSoundFX(12, 0);
                             Crisis7BGMPlayed = true;
                         }
 
@@ -1594,7 +1601,6 @@ bool thereWasACompletedLine = false;
 				}
 
 				audio->PlayDigitalSoundFX(6, 0);
-				GameDisplayChanged = true;
 			}
 		}
 	}
@@ -1668,7 +1674,6 @@ int TEMP_Player = Player;
         }
     }
 
-	GameDisplayChanged = true;
     Player = TEMP_Player;
 }
 
@@ -1714,7 +1719,6 @@ bool Logic::AddAnIncompleteLineToPlayfieldCrisisMode(void)
         else  PlayerData[Player].Playfield[x][23] = 0;
     }
 
-    GameDisplayChanged = true;
     return(true);
 }
 
@@ -1738,8 +1742,6 @@ void Logic::RunTetriGameEngine(void)
         input->DelayAllUserInput = 20;
 
 		audio->PlayDigitalSoundFX(0, 0);
-
-        GameDisplayChanged = true;
 	}
 
     if (ThinkRussianTimer > 0)  ThinkRussianTimer--;
@@ -1784,8 +1786,6 @@ void Logic::RunTetriGameEngine(void)
                         if (DisplayNextPiece == true)  AddPieceToPlayfieldMemory(Next);
                         PlayerData[Player].PlayerStatus = PieceFalling;
                     }
-
-                    GameDisplayChanged = true;
                 }
                 else if (PlayerData[Player].PlayerStatus == PieceFalling)
                 {
@@ -2002,7 +2002,7 @@ void Logic::RunTetriGameEngine(void)
 
                 if (playersAlive > 1)  PlayerData[Player].Score = 0;
             }
-            else if (GameMode == StoryMode)  CheckForDanger();
+            else if (GameMode == StoryMode && Player == 1)  CheckForDanger();
 
             if (BlockAttackTransparency[Player] > 0.0f)  BlockAttackTransparency[Player]-=5;
 		}
@@ -2035,8 +2035,6 @@ bool returnValue = false;
 		}
     }
 
-    if (returnValue == true)  GameDisplayChanged = true;
-
     return(returnValue);
 }
 
@@ -2056,7 +2054,7 @@ void Logic::ComputeComputerPlayerMoveOld(void)
                 PlayerData[Player].MoveOneBlockCavernHoles[indexX][indexRot] = 0;
                 PlayerData[Player].MoveCompletedLines[indexX][indexRot] = 0;
                 PlayerData[Player].MovePieceHeight[indexX][indexRot] = 0;
-                PlayerData[Player].MovePlayfieldBoxEdges[indexX][indexRot] = 999999999;
+                PlayerData[Player].MovePlayfieldBoxEdges[indexX][indexRot] = 0;
                 PlayerData[Player].MoveTrappedHoles[indexX][indexRot] = 0;
             }
         }
@@ -2153,10 +2151,11 @@ void Logic::ComputeComputerPlayerMoveOld(void)
                     }
 
                     DeletePieceFromPlayfieldMemory(Current);
+                    PlayerData[Player].MovePieceCollision[pieceTestX][rotationTest] = false;
                 }
                 else
                 {
-                    PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = 99999;
+                    PlayerData[Player].MovePieceCollision[pieceTestX][rotationTest] = true;
                 }
 
                 PlayerData[Player].PieceRotation = TEMP_PieceRotation;
@@ -2167,25 +2166,28 @@ void Logic::ComputeComputerPlayerMoveOld(void)
 
         PlayerData[Player].BestMoveX = -1;
         PlayerData[Player].BestRotation = -1;
-        int bestValue;
-        bestValue = 999999;
+        double bestValue;
+        bestValue = 99999;
         for (int posX = (PlayerData[Player].PlayfieldStartX-1); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1)
         {
             for (int rot = 1; rot <= MaxRotationArray[ PlayerData[Player].Piece ]; rot+=1)
             {
                 PlayerData[Player].MovePieceHeight[posX][rot]+=PlayerData[Player].MoveCompletedLines[posX][rot];
 
-                float testValue;
+                double testValue = 100000;
 
                 //--JeZxLee's ["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]------------------------------
-                testValue = ( (3*PlayerData[Player].MoveTrappedHoles[posX][rot])
-                            +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
-                            +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
-                            -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
+                if (PlayerData[Player].MovePieceCollision[posX][rot] == false)
+                {
+                    testValue = ( (Multiplier*PlayerData[Player].MoveTrappedHoles[posX][rot])
+                                +(1*PlayerData[Player].MoveOneBlockCavernHoles[posX][rot])
+                                +(1*PlayerData[Player].MovePlayfieldBoxEdges[posX][rot])
+                                -(1*PlayerData[Player].MovePieceHeight[posX][rot]) );
+                }
                 //------------------------------JeZxLee's ["Gift Of Sight" Tetris(R) A.I. Algorithm ~100,000+]--
 
                 if (PlayerData[Player].MoveCompletedLines[posX][rot] > 1)
-                    testValue = ( 0 - (PlayerData[Player].MoveCompletedLines[posX][rot]*100) );
+                    testValue = ( testValue - (PlayerData[Player].MoveCompletedLines[posX][rot]*10) );
 
                 if (testValue <= bestValue)
                 {
@@ -2210,19 +2212,21 @@ void Logic::ComputeComputerPlayerMoveOld(void)
             MovePieceRight();
         else if (PlayerData[Player].PieceRotation == PlayerData[Player].BestRotation)
         {
-            if (CPUPlayerEnabled != 4)  MovePieceDown(true);
+            if (CPUPlayerEnabled != 4 && CPUPlayerEnabled != 9)  MovePieceDown(true);
             PlayerData[Player].MovedToBestMove = true;
+
+//            PlayerData[Player].BestMoveCalculated = false;
         }
     }
     else
     {
-        if (CPUPlayerEnabled != 4)  MovePieceDown(false);
+        if (CPUPlayerEnabled != 4 && CPUPlayerEnabled != 9)  MovePieceDown(false);
         else  MovePieceDownFast();
     }
 }
 
 //-------------------------------------------------------------------------------------------------
-void Logic::ComputeComputerPlayerMoveNew(void) // BROKEN - NOT WORKING...
+void Logic::ComputeComputerPlayerMoveNew(void) // Not working properly?
 {
     if (PlayerData[Player].PlayerStatus != PieceFalling)  return;
 
@@ -2252,117 +2256,127 @@ void Logic::ComputeComputerPlayerMoveNew(void) // BROKEN - NOT WORKING...
                 if (PieceCollision() == CollisionNotTrue)
                 {
                     int posY;
-                    for (posY = PlayerData[Player].PiecePlayfieldY; posY < 24; posY+=1)
+                    for (posY = PlayerData[Player].PiecePlayfieldY; posY < 24; posY++)
                     {
-                        PlayerData[Player].PiecePlayfieldY  = posY;
+                        PlayerData[Player].PiecePlayfieldY = posY;
                         if (PieceCollision() != CollisionNotTrue)
                         {
                             PlayerData[Player].PiecePlayfieldY = posY-1;
-                            PlayerData[Player].MovePieceHeight[pieceTestX][rotationTest] = PlayerData[Player].PiecePlayfieldY;
                             posY = 100;
                         }
                     }
 
                     AddPieceToPlayfieldMemory(Current);
-
-                    PlayerData[Player].MovePlayfieldTotalHeight[pieceTestX][rotationTest] = 0.0;
-                    int heightColumnTotal;
-                    bool columnSizeDone;
-                    for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1 )
+//=================================================================================================================================================================
+                    PlayerData[Player].MovePlayfieldTotalHeight[pieceTestX][rotationTest] = 0;
+                    for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX); posX++ )
                     {
-                        heightColumnTotal = 0;
-                        columnSizeDone = false;
-                        for (int posY = 5; posY < 24; posY+=1)
+                        for (int posY = 5; posY < 24; posY++)
                         {
                             if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
                             {
-                                if (columnSizeDone == false)
-                                {
-                                    PlayerData[Player].MovePlayfieldTotalHeight[pieceTestX][rotationTest]+=(19-heightColumnTotal);
-                                    columnSizeDone = true;
-                                }
-                            }
-                            else  heightColumnTotal++;
-                        }
-                    }
 
-                    PlayerData[Player].MoveCompletedLines[pieceTestX][rotationTest] = 0;
-                    PlayerData[Player].MovePlayfieldBoxEdges[pieceTestX][rotationTest] = 0;
-                    for (int posY = 5; posY < 24; posY+=1)
-                    {
-                        int boxTotal;
-                        boxTotal = 0;
-                        for ( int posX = (PlayerData[Player].PlayfieldStartX-1); posX < PlayerData[Player].PlayfieldEndX; posX+=1 )
-                        {
-                            if ( (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
-                                || PlayerData[Player].Playfield[posX][posY] == 255 )
-                            {
-                                if (PlayerData[Player].Playfield[posX][posY] != 255)  boxTotal+=1;
+//if (posY <= PlayerData[Player].MovePlayfieldTop[pieceTestX][rotationTest])
+//    PlayerData[Player].MovePlayfieldTop[pieceTestX][rotationTest] = posY;// = ( (23-posY) + 1 );// posY;
 
-                                if (PlayerData[Player].Playfield[posX][(posY-1)] == 0)
-                                    PlayerData[Player].MovePlayfieldBoxEdges[pieceTestX][rotationTest]+=1;
+                                PlayerData[Player].MovePlayfieldTotalHeight[pieceTestX][rotationTest]+=( (23-posY) + 1);
 
-                                if (PlayerData[Player].Playfield[posX][(posY+1)] == 0)
-                                    PlayerData[Player].MovePlayfieldBoxEdges[pieceTestX][rotationTest]+=1;
-
-                                if (PlayerData[Player].Playfield[(posX-1)][posY] == 0)
-                                    PlayerData[Player].MovePlayfieldBoxEdges[pieceTestX][rotationTest]+=1;
-
-                                if (PlayerData[Player].Playfield[(posX+1)][posY] == 0)
-                                    PlayerData[Player].MovePlayfieldBoxEdges[pieceTestX][rotationTest]+=1;
-                            }
-                        }
-
-                        if (boxTotal == 10)  PlayerData[Player].MoveCompletedLines[pieceTestX][rotationTest]+=1;
-                    }
-
-                    PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = 0;
-                    float numberOfEmpties = 0;
-                    for ( int posX = PlayerData[Player].PlayfieldStartX; posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1 )
-                    {
-                        for ( int posY = 5; posY < 24; posY+=1 )
-                        {
-                            if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
-                            {
-                                int posYtest = (posY+1);
-                                while (PlayerData[Player].Playfield[posX][posYtest] == 0)
-                                {
-                                    numberOfEmpties+=1;
-
-                                    posYtest++;
-                                }
-                                posY = posYtest;
-                            }
-                        }
-                    }
-                    PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = numberOfEmpties;
-
-                    PlayerData[Player].MovePlayfieldBumbs[pieceTestX][rotationTest] = 0.0;
-                    float columnValue[10];
-                    int columnValueIndex = 0;
-                    for (int index = 0; index < 10; index++)
-                    {
-                        columnValue[index] = 0.0;
-                    }
-
-                    for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1 )
-                    {
-                        for (int posY = 5; posY < 24; posY+=1)
-                        {
-                            if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
-                            {
-                                columnValue[columnValueIndex]+=posY;
                                 posY = 999;
                             }
                         }
+                    }
+
+//if (Player == 0)  printf("X=%i/Rot=%i/TotHeight=%f \n", pieceTestX, rotationTest, PlayerData[Player].MovePlayfieldTop[pieceTestX][rotationTest]);
+
+//PlayerData[Player].MovePlayfieldTop[pieceTestX][rotationTest] = ( (23-PlayerData[Player].MovePlayfieldTop[pieceTestX][rotationTest]) + 1);
+
+//if (Player == 0)  printf("X=%i/Rot=%i/TotHeight=%f \n", pieceTestX, rotationTest, PlayerData[Player].MovePlayfieldTotalHeight[pieceTestX][rotationTest]);
+
+//if (Player == 0)  printf("-----------------------------------------\n");
+//=================================================================================================================================================================
+                    PlayerData[Player].MoveCompletedLines[pieceTestX][rotationTest] = 0;
+                    for (int posY = 5; posY < 24; posY++)
+                    {
+                        int boxTotal;
+                        boxTotal = 0;
+                        for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX); posX++ )
+                        {
+
+//if (PlayerData[Player].Playfield[posX][posY] == 255)  SDL_Delay(99999);
+
+                            if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
+                            {
+                                boxTotal+=1;
+                            }
+                        }
+
+                        if (boxTotal == 10)  PlayerData[Player].MoveCompletedLines[pieceTestX][rotationTest]++;
+                    }
+//=================================================================================================================================================================
+                    PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest] = 0;
+                    for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX); posX++ )
+                    {
+                        for ( int posY = 5; posY < 23; posY++ )
+                        {
+
+//if (PlayerData[Player].Playfield[posX][posY] == 255)  SDL_Delay(99999);
+
+                            if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
+                            {
+                                for ( int tempY = (1+posY); tempY < 24; tempY++)
+                                {
+                                    if (PlayerData[Player].Playfield[posX][tempY] == 0)
+                                    {
+                                        PlayerData[Player].MoveTrappedHoles[pieceTestX][rotationTest]++;
+
+                                    }
+                                }
+
+                                posY = 999;
+                            }
+                        }
+                    }
+//=================================================================================================================================================================
+                    PlayerData[Player].MovePlayfieldBumbs[pieceTestX][rotationTest] = 0;
+                    int columnValue[10];
+                    int columnValueIndex = 0;
+                    for (int index = 0; index < 10; index++)
+                    {
+                        columnValue[index] = 0;
+                    }
+
+                    for ( int posX = (PlayerData[Player].PlayfieldStartX); posX < (PlayerData[Player].PlayfieldEndX); posX++ )
+                    {
+                        for (int posY = 5; posY < 24; posY++)
+                        {
+
+//if (PlayerData[Player].Playfield[posX][posY] == 255)  SDL_Delay(99999);
+
+                            if (PlayerData[Player].Playfield[posX][posY] > 10 && PlayerData[Player].Playfield[posX][posY] < 20)
+                            {
+                                columnValue[columnValueIndex] = ( (23-posY) + 1);//( (24-posY) );
+
+                                posY = 999;
+                            }
+                        }
+
+//if (Player == 0)  printf("X=%i,Rot=%iCval=%i \n", posX, rotationTest, columnValue[columnValueIndex]);
+
                         columnValueIndex++;
                     }
 
-                    for (int index = 1; index < 10; index+=1)
+                    for (int index = 1; index < 10; index++)
                     {
                         PlayerData[Player].MovePlayfieldBumbs[pieceTestX][rotationTest]+=(columnValue[index-1]-columnValue[index]);
+
+//if (Player == 0)  printf("X=%i / Rot=%i / index=%i / Value(-1)=%i / Value=%i / Bumps=%f \n", pieceTestX, rotationTest, index, columnValue[index-1], columnValue[index], PlayerData[Player].MovePlayfieldBumbs[pieceTestX][rotationTest]);
+
                     }
 
+//if (Player == 0)  printf("X=%i,Rot=%i,Bumps=%f \n", pieceTestX, rotationTest, PlayerData[Player].MovePlayfieldBumbs[pieceTestX][rotationTest]);
+
+//if (Player == 0)  printf("==============================================================\n");
+//=================================================================================================================================================================
                     DeletePieceFromPlayfieldMemory(Current);
 
                     PlayerData[Player].MovePieceCollision[pieceTestX][rotationTest] = false;
@@ -2380,44 +2394,39 @@ void Logic::ComputeComputerPlayerMoveNew(void) // BROKEN - NOT WORKING...
 
         PlayerData[Player].BestMoveX = -1;
         PlayerData[Player].BestRotation = -1;
-        float bestValue;
-        bestValue = 9999;
-        for (int posX = (PlayerData[Player].PlayfieldStartX-1); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1)
+        double bestValue;
+        bestValue = -9999;
+        for (int posX = (PlayerData[Player].PlayfieldStartX-2); posX < (PlayerData[Player].PlayfieldEndX-1); posX+=1)
         {
             for (int rot = 1; rot <= MaxRotationArray[ PlayerData[Player].Piece ]; rot+=1)
             {
-                float testValue;
-                testValue = 99999;
+                double testValue;
+                testValue = 0;
 
                 //--[Yiyuan Lee's "Tetris AI – The (Near) Perfect Bot" Tetris(R) A.I. Algorithm ~???,???+]------
                 if (PlayerData[Player].MovePieceCollision[posX][rot] == false)
                 {
-                    testValue =+( (-0.510066*PlayerData[Player].MovePlayfieldTotalHeight[posX][rot])
-                               +(0.76066*PlayerData[Player].MoveCompletedLines[posX][rot])
-                               +(-0.35663*PlayerData[Player].MoveTrappedHoles[posX][rot])
-                               +(-0.184483*PlayerData[Player].MovePlayfieldBumbs[posX][rot]) );
+                    testValue+=(-0.510066*PlayerData[Player].MovePlayfieldTotalHeight[posX][rot]);
+                    testValue+=(0.76066*PlayerData[Player].MoveCompletedLines[posX][rot]);
+                    testValue+=(-0.35663*PlayerData[Player].MoveTrappedHoles[posX][rot]);
+                    testValue+=(-0.184483*PlayerData[Player].MovePlayfieldBumbs[posX][rot]);
+                //------[Yiyuan Lee's "Tetris AI – The (Near) Perfect Bot" Tetris(R) A.I. Algorithm ~???,???+]--
 
-if (Player == 0)  printf("bestValue: %i %i %f | H:%i CL:%i TH:%i PB:%i \n", posX, rot, testValue
-, PlayerData[Player].MovePlayfieldTotalHeight[posX][rot], PlayerData[Player].MoveCompletedLines[posX][rot]
-, PlayerData[Player].MoveTrappedHoles[posX][rot], PlayerData[Player].MovePlayfieldBumbs[posX][rot] );
-                }
+                    if (testValue > bestValue)
+                    {
+                        bestValue = testValue;
+                        PlayerData[Player].BestMoveX = posX;
+                        PlayerData[Player].BestRotation = rot;
 
-                //--[Yiyuan Lee's "Tetris AI – The (Near) Perfect Bot" Tetris(R) A.I. Algorithm ~???,???+]------
-
-
-                if (testValue <= bestValue)
-                {
-                    bestValue = testValue;
-                    PlayerData[Player].BestMoveX = posX;
-                    PlayerData[Player].BestRotation = rot;
-
-                    PlayerData[Player].MovedToBestMove = false;
+                        PlayerData[Player].MovedToBestMove = false;
+                    }
                 }
             }
         }
-
-if (Player == 0)  printf("----------------------------------------------------\n");
-
+/*
+if (Player == 0)  printf("\n");
+if (Player == 0)  printf("X = %i, Rot = %i", PlayerData[Player].BestMoveX, PlayerData[Player].BestRotation);
+*/
         PlayerData[Player].BestMoveCalculated = true;
     }
 
@@ -2434,14 +2443,16 @@ if (Player == 0)  printf("----------------------------------------------------\n
         {
             if ( PieceCollisionDown() == CollisionWithPlayfield)  PlayerData[Player].MovedToBestMove = true;
 
-            if (CPUPlayerEnabled != 4)  MovePieceDown(true);
+            if (CPUPlayerEnabled != 4 && CPUPlayerEnabled != 9)  MovePieceDown(true);
+
+            PlayerData[Player].MovedToBestMove = true;
 
 //            PlayerData[Player].BestMoveCalculated = false;
         }
     }
     else
     {
-        if (CPUPlayerEnabled != 4)  MovePieceDown(false);
+        if (CPUPlayerEnabled != 4 && CPUPlayerEnabled != 9)  MovePieceDown(false);
         else  MovePieceDownFast();
     }
 }

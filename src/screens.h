@@ -28,8 +28,6 @@ public:
 	Screens(void);
 	virtual ~Screens(void);
 
-    bool ClearScreenWithBlackWhen1stRunInFullScreenMode = false;
-
     int joyAction = -1;
 
     Uint8 ScreenFadeTransparency;
