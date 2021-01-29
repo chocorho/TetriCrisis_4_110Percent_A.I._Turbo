@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -52,6 +52,8 @@ Interface::Interface(void)
         ButtonGUIs[index].AnimationTimer = -1;
     }
 
+    NumberOfButtonsOnScreen = 0;
+
     for (int index = 0; index < NumberOfArrowSets; index++)
     {
         ArrowSetGUIs[index].LeftArrowScreenIndex = -1;
@@ -60,6 +62,8 @@ Interface::Interface(void)
         ArrowSetGUIs[index].ScreenY = -100;
         ArrowSetGUIs[index].AnimationTimer = -1;
     }
+
+    NumberOfArrowSetsOnScreen = 0;
 
     for (int index = 0; index < NumberOfIcons; index++)
     {
@@ -97,6 +101,8 @@ void Interface::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY)
             index = NumberOfButtons;
         }
     }
+
+    NumberOfButtonsOnScreen++;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -152,7 +158,7 @@ void Interface::ProcessAllButtons(void)
             MaxButtonIndex = ButtonGUIs[index].ScreenIndex;
     }
 
-    if (input->JoystickDirectionVertical[Any] == UP)
+    if (input->JoystickDirectionVertical[Any] == UP && NumberOfButtonsOnScreen > 1)
     {
         if (ButtonSelectedByKeyboard > MinButtonIndex)  ButtonSelectedByKeyboard--;
         else  ButtonSelectedByKeyboard = MaxButtonIndex;
@@ -161,7 +167,7 @@ void Interface::ProcessAllButtons(void)
         input->DelayAllUserInput = 10;
         audio->PlayDigitalSoundFX(0, 0);
     }
-    else if (input->JoystickDirectionVertical[Any] == DOWN)
+    else if (input->JoystickDirectionVertical[Any] == DOWN && NumberOfButtonsOnScreen > 1)
     {
         if (ButtonSelectedByKeyboard < MaxButtonIndex)  ButtonSelectedByKeyboard++;
         else  ButtonSelectedByKeyboard = MinButtonIndex;
@@ -267,6 +273,8 @@ void Interface::DestroyAllButtons(void)
         ButtonGUIs[index].ScreenY = -100;
         ButtonGUIs[index].AnimationTimer = -1;
     }
+
+    NumberOfButtonsOnScreen = 0;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -288,6 +296,8 @@ void Interface::CreateArrowSet(float ScreenIndex, int ScreenY)
             index = NumberOfArrowSets;
         }
     }
+
+    NumberOfArrowSetsOnScreen++;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -344,7 +354,7 @@ void Interface::ProcessAllArrowSets(void)
             MaxArrowSetIndex = ArrowSetGUIs[index].LeftArrowScreenIndex;
     }
 
-    if (input->JoystickDirectionVertical[Any] == UP)
+    if (input->JoystickDirectionVertical[Any] == UP && NumberOfArrowSetsOnScreen > 1)
     {
         if (ArrowSetSelectedByKeyboard > MinArrowSetIndex)  ArrowSetSelectedByKeyboard--;
         else  ArrowSetSelectedByKeyboard = MaxArrowSetIndex;
@@ -353,7 +363,7 @@ void Interface::ProcessAllArrowSets(void)
         input->DelayAllUserInput = 20;
         audio->PlayDigitalSoundFX(0, 0);
     }
-    else if (input->JoystickDirectionVertical[Any] == DOWN)
+    else if (input->JoystickDirectionVertical[Any] == DOWN && NumberOfArrowSetsOnScreen > 1)
     {
         if (ArrowSetSelectedByKeyboard < MaxArrowSetIndex)  ArrowSetSelectedByKeyboard++;
         else  ArrowSetSelectedByKeyboard = MinArrowSetIndex;
@@ -452,6 +462,8 @@ void Interface::DestroyAllArrowSets(void)
         ArrowSetGUIs[index].ScreenY = -100;
         ArrowSetGUIs[index].AnimationTimer = -1;
     }
+
+    NumberOfArrowSetsOnScreen = 0;
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/TC4T-LinuxWin-Retail3" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/DoubleClickThisToRun" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="TC4T-LinuxWin-Retail3" prefix_auto="1" extension_auto="1" />
+				<Option output="DoubleClickThisToRun" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../TC4T-WinLinux-Retail1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />

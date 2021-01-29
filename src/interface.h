@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -38,6 +38,8 @@ public:
         Sint16 AnimationTimer;
     } ButtonGUIs[NumberOfButtons];
 
+    int NumberOfButtonsOnScreen;
+
     Uint8 ButtonSelectedByKeyboard;
     Sint8 ButtonSelectedByPlayer;
 
@@ -50,6 +52,8 @@ public:
         int ScreenY;
         Sint16 AnimationTimer;
     } ArrowSetGUIs[NumberOfArrowSets];
+
+    int NumberOfArrowSetsOnScreen;
 
     Uint8 ArrowSetSelectedByKeyboard;
     float ArrowSetArrowSelectedByPlayer;

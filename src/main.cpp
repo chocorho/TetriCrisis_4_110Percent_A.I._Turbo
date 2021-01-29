@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -17,7 +17,7 @@
     AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
-                                                     SDL 2.0.14
+                                                    SDL 2.0.14
                                            (SDL2_Image/SDL2_Mixer/SDL2_TTF)
                                          Cross-Platform / M.I.T. Open-Source
   _______ _______     ______   _______    _       _______          _           _______ _                                _

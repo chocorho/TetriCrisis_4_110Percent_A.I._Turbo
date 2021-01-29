@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail1j");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail1l");
 
     ClearHighScores();
 
@@ -65,6 +65,9 @@ void Data::CheckForNewHighScore(void)
 {
 int playerRank = 10;
 
+    for (int index = 0; index < 4; index++)
+        if (logic->PlayerData[index].PlayerInput == CPU)  logic->PlayerData[index].Score = 0;
+
     if (logic->PlayerData[0].Score >= logic->PlayerData[1].Score
         && logic->PlayerData[0].Score >= logic->PlayerData[2].Score
         && logic->PlayerData[0].Score >= logic->PlayerData[3].Score)  PlayerWithHighestScore = 0;
@@ -80,7 +83,6 @@ int playerRank = 10;
     if (logic->PlayerData[3].Score >= logic->PlayerData[0].Score
         && logic->PlayerData[3].Score >= logic->PlayerData[1].Score
         && logic->PlayerData[3].Score >= logic->PlayerData[2].Score)  PlayerWithHighestScore = 3;
-
 
     if (logic->PlayerData[PlayerWithHighestScore].PlayerInput == CPU)  return;
 

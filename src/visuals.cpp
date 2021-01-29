@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C. - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C.#2 - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -985,6 +985,10 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''EvanR''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''demonicm1niac1''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''MrFlibble''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''qeed''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''slvr''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Terlisimo''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''tvault''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 

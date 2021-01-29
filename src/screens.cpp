@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -251,7 +251,7 @@ int windowHeight;
 
     ApplyScreenFadeTransition();
 
-    if (input->DEBUG == true || ScreenToDisplay == TestComputerSkillScreen)
+    if (input->DEBUG == true)
     {
         ScreenIsDirty = 2;
 
@@ -2828,14 +2828,17 @@ const char* keyName;
     if (logic->PlayerData[0].PlayerStatus == GameOver && logic->PlayerData[1].PlayerStatus == GameOver
      && logic->PlayerData[2].PlayerStatus == GameOver && logic->PlayerData[3].PlayerStatus == GameOver)
     {
-       if (logic->GameOverTimer < 50)
-       {
-           logic->GameOverTimer++;
-       }
-       else
-       {
-          ScreenTransitionStatus = FadeOut;
-       }
+        if (logic->GameOverTimer < 50)
+        {
+            logic->GameOverTimer++;
+        }
+        else
+        {
+            int averageLines = ( (logic->PlayerData[0].Lines + logic->PlayerData[2].Lines + logic->PlayerData[3].Lines) / 3 );
+            printf("Average Lines Per Game = %i\n", averageLines);
+
+            ScreenTransitionStatus = FadeOut;
+        }
     }
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
@@ -4436,17 +4439,15 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         logic->GameMode = OriginalMode;
 
-        if (logic->UseOldAI == 1)  logic->CPUPlayerEnabled = 2;
-        else if (logic->UseOldAI == 0)  logic->CPUPlayerEnabled = 7;
+        if (logic->UseOldAI == 1)  logic->CPUPlayerEnabled = 0;//1;
+        else if (logic->UseOldAI == 0)  logic->CPUPlayerEnabled = 5;//6;
 
         audio->MusicVolume = 0;
         audio->SoundVolume = 0;
 
         logic->SetupForNewGame();
 
-        logic->Multiplier = 3.0;
-
-        visuals->FrameLock = 1;
+        visuals->FrameLock = 5;
 
         input->DelayAllUserInput = 20;
 
@@ -4454,6 +4455,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
     }
 
     logic->RunTetriGameEngine();
+
+//visuals->FrameLock = 0;
 
     if (input->KeyOnKeyboardPressedByUser == SDLK_t)
     {
@@ -4468,7 +4471,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
         if (logic->DontDisplayTestImages == 0)
         {
-            visuals->FrameLock = 1;
+            visuals->FrameLock = 5;
         }
         else if (logic->DontDisplayTestImages == 1)
         {
@@ -4488,7 +4491,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
         logic->SetupForNewGame();
 
         logic->TotalCPUPlayerLines = 0;
-        logic->TotalCPUPlayerLinesLast = 0;
         logic->NumberofCPUGames = 4;
         logic->TotalOneLines = 0;
         logic->TotalTwoLines = 0;
@@ -4506,7 +4508,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
         logic->SetupForNewGame();
 
         logic->TotalCPUPlayerLines = 0;
-        logic->TotalCPUPlayerLinesLast = 0;
         logic->NumberofCPUGames = 4;
         logic->TotalOneLines = 0;
         logic->TotalTwoLines = 0;
@@ -4700,12 +4701,11 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
     char temp[256];
 
-    visuals->DrawTextOntoScreenBuffer("[t] = Toggle Speed!", visuals->Font[7]
+    if (logic->DontDisplayTestImages != 1)  visuals->DrawTextOntoScreenBuffer("[t] = Toggle Speed!", visuals->Font[7]
                                       , 0, 90, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
     if (logic->DontDisplayTestImages == 0)
     {
-
         visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[7]
                                           , 0, 90+22, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
@@ -4740,17 +4740,18 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
     logic->TotalCPUPlayerLines = ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) );
 
-    if (logic->TotalCPUPlayerLinesLast < logic->TotalCPUPlayerLines || logic->DontDisplayTestImages != 1)
-    {
-        logic->TotalCPUPlayerLinesLast = logic->TotalCPUPlayerLines;
+    int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
 
-        int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
+    if (logic->DontDisplayTestImages != 1)
+    {
+
         strcpy(visuals->VariableText, "Average Lines/Game: ");
         sprintf(temp, "%d", averageLinesPerGame);
         strcat(visuals->VariableText, temp);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 170
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
     }
+//    else if ( (averageLinesPerGame % 100) == 0 )  printf("%i\n", averageLinesPerGame);
 
     ScreenIsDirty = 2;
 
@@ -4771,6 +4772,30 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         if (logic->PlayerData[logic->Player].PlayerStatus == GameOver)
         {
+/*
+          printf("Average Lines %i\n", averageLinesPerGame);
+          printf("-----------------------------------------------\n");
+
+if (averageLinesPerGame > logic->BestTotalLinesPerGame)
+{
+    logic->BestMovePieceHeight = logic->ValMovePieceHeight;
+    logic->BestMoveTrappedHoles = logic->ValMoveTrappedHoles;
+    logic->BestMoveOneBlockCavernHoles = logic->ValMoveOneBlockCavernHoles;
+    logic->BestMovePlayfieldBoxEdges = logic->ValMovePlayfieldBoxEdges;
+    logic->BestMoveCompletedLines = logic->ValMoveCompletedLines;
+
+    logic->BestTotalLinesPerGame = averageLinesPerGame;
+}
+          logic->SetupForNewGame();
+
+          logic->TotalCPUPlayerLines = 0;
+          logic->NumberofCPUGames = 4;
+          logic->TotalOneLines = 0;
+          logic->TotalTwoLines = 0;
+          logic->TotalThreeLines = 0;
+          logic->TotalFourLines = 0;
+*/
+
             logic->NumberofCPUGames++;
 
             for (int y = 0; y < 26; y++)
@@ -4797,11 +4822,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
             logic->PlayerData[logic->Player].PieceBagIndex = 2;
             logic->PlayerData[logic->Player].NextPiece = logic->PlayerData[logic->Player].PieceBag[0][logic->PlayerData[logic->Player].PieceBagIndex];
 
-//            logic->PlayerData[logic->Player].Piece = logic->GetRandomPiece();
             logic->PlayerData[logic->Player].PieceMovementDelay = 0;
             logic->PlayerData[logic->Player].PieceRotation = 1;
-
-//            logic->PlayerData[logic->Player].NextPiece = logic->GetRandomPiece();
 
             logic->PlayerData[logic->Player].PlayerStatus = NewPieceDropping;
 
@@ -4818,6 +4840,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
             logic->PlayerData[logic->Player].DropBonus = 0;
             logic->PlayerData[logic->Player].Level = 0;
             logic->PlayerData[logic->Player].Lines = 0;
+
         }
     }
 

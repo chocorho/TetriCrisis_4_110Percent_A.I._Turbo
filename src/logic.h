@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Team 16BitSoft
+    Copyright 2021 Team 16BitSoft
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software
     and associated documentation files (the "Software"), to deal in the Software without
@@ -90,19 +90,20 @@ public:
         bool PieceRotated1;
         bool PieceRotated2;
 
-        double MoveOneBlockCavernHoles[15][5];
-        double MoveCompletedLines[15][5];
-        double MovePieceHeight[15][5];
-        double MovePlayfieldBoxEdges[15][5];
-        double MoveTrappedHoles[15][5];
+        float MovePieceHeight[15][5];
+        float MoveTrappedHoles[15][5];
+        float MoveOneBlockCavernHoles[15][5];
+        float MovePlayfieldBoxEdges[15][5];
+        float MoveCompletedLines[15][5];
+
         bool MovePieceCollision[15][5];
-        double MoveSetup4Line[15][5];
-        double MovePlayfieldTop[15][5];
-        double MovePlayfieldTotalHeight[15][5];
-        double MovePlayfieldBumbs[15][5];
-        double Stress;
-        double LocationOfPossible4Line;
-        double MoveTrappedHolesBefore[15][5];
+        int MoveSetup4Line[15][5];
+        int MovePlayfieldTop[15][5];
+        int MovePlayfieldTotalHeight[15][5];
+        int MovePlayfieldBumbs[15][5];
+        int Stress;
+        int LocationOfPossible4Line;
+        int MoveTrappedHolesBefore[15][5];
 
         int BestMoveX;
         int BestRotation;
@@ -131,12 +132,24 @@ public:
 
     } PlayerData[NumberOfPlayers];
 
+    float ValMovePieceHeight;
+    float ValMoveTrappedHoles;
+    float ValMoveOneBlockCavernHoles;
+    float ValMovePlayfieldBoxEdges;
+    float ValMoveCompletedLines;
+
+    float BestMovePieceHeight;
+    float BestMoveTrappedHoles;
+    float BestMoveOneBlockCavernHoles;
+    float BestMovePlayfieldBoxEdges;
+    float BestMoveCompletedLines;
+    int BestTotalLinesPerGame;
+
     float Multiplier;
     int MultiplierSelected;
 
     bool CrisisModeOnePlayerLeftPlayfieldCleared;
 
-    Uint32 TotalCPUPlayerLinesLast;
     Uint32 TotalCPUPlayerLines;
 
     Uint32 NumberofCPUGames;
