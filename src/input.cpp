@@ -44,6 +44,7 @@ Input::Input(void)
     DEBUG = false;
 
     EXIT_Game = false;
+    ShowJobScreen = false;
 
     DelayAllUserInput = 0;
 
@@ -322,7 +323,9 @@ void Input::GetAllUserInput(void)
         switch (Event.type)
         {
             case SDL_QUIT:
-                EXIT_Game = true;
+//                EXIT_Game = true;
+                ShowJobScreen = true;
+                screens->ScreenTransitionStatus = FadeOut;
                 return;
                 break;
 

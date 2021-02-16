@@ -28,7 +28,7 @@ public:
 	Interface(void);
 	virtual ~Interface(void);
 
-    #define NumberOfButtons     7
+    #define NumberOfButtons     8
     struct ButtonGUI
     {
         Uint16 SpriteIndex;

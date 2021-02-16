@@ -60,6 +60,7 @@ public:
     #define NameInputKeyboardScreen     17
     #define NameInputJoystickScreen     18
     #define NameInputMouseScreen        19
+    #define GiveMeJobScreen             20
     int ScreenToDisplay;
     int ScreenIsDirty;
 
@@ -113,6 +114,8 @@ public:
     void DisplayNameInputJoystickScreen(void);
 
     void DisplayTestComputerSkillScreen(void);
+
+    void DisplayGiveMeJobScreen(void);
 };
 
 #endif

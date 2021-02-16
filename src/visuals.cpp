@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
 SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C.#2 - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C.#3 - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -589,6 +589,10 @@ char temp[256];
                 strcpy(filePath, "data/visuals/Button.png");
                 break;
 
+            case 1010:
+                strcpy(filePath, "data/visuals/Button.png");
+                break;
+
             default:
                 break;
         }
@@ -620,6 +624,8 @@ char temp[256];
             else if (index == 1007)  strcpy(buttonText, "About\0");
             else if (index == 1008)  strcpy(buttonText, "Exit\0");
             else if (index == 1009)  strcpy(buttonText, "Back\0");
+            else if (index == 1010)  strcpy(buttonText, "Send Email\0");
+
 
             if ( index == (1020+26) )  indexOffset = 0;
             else if ( index == (1020+26+26) ) indexOffset = 0;
@@ -989,6 +995,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''slvr''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Terlisimo''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''tvault''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''Daniel_Gibson''", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 

@@ -354,7 +354,6 @@ void Audio::PlayMusic(Uint8 musicIndex, int loop)
 
     if (musicIndex >= MusicTotal)  return;
 
-
     if (Mix_PlayingMusic() == 1)  Mix_HaltMusic();
 
     Mix_VolumeMusic(MusicVolume);

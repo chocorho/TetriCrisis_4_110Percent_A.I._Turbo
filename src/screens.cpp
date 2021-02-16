@@ -56,7 +56,6 @@ Screens::Screens(void)
 
     ScreenFadeTransparency = 255;
     ScreenTransitionStatus = FadeAll;
-
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -224,6 +223,10 @@ int windowHeight;
 
             case NameInputMouseScreen:
                 DisplayNameInputMouseScreen();
+                break;
+
+            case GiveMeJobScreen:
+                DisplayGiveMeJobScreen();
                 break;
 
             default:
@@ -470,6 +473,8 @@ void Screens::DisplayJoystickScreen(void)
         }
 
         ScreenToDisplay = SDLLogoScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -511,6 +516,8 @@ void Screens::DisplaySDLLogoScreen(void)
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = SixteenBitSoftScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -591,6 +598,8 @@ void Screens::DisplaySixteenBitSoftScreen(void)
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = TitleScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -666,13 +675,11 @@ void Screens::DisplayTitleScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
 
-//        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
-
         if (interface->ButtonSelectedByPlayer == 1)  ScreenToDisplay = OptionsScreen;
         else if (interface->ButtonSelectedByPlayer == 2)  ScreenToDisplay = HowToPlayScreen;
         else if (interface->ButtonSelectedByPlayer == 3)  ScreenToDisplay = HighScoresScreen;
         else if (interface->ButtonSelectedByPlayer == 4)  ScreenToDisplay = AboutScreen;
-        else if (interface->ButtonSelectedByPlayer == 5)  input->EXIT_Game = true;
+        else if (interface->ButtonSelectedByPlayer == 5)  ScreenToDisplay = GiveMeJobScreen;
         else if (interface->ButtonSelectedByPlayer == 0)
         {
             if (logic->GameMode < StoryMode)
@@ -680,6 +687,8 @@ void Screens::DisplayTitleScreen(void)
             else
                 ScreenToDisplay = NewGameOptionsScreen;
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -1125,6 +1134,8 @@ void Screens::DisplayNewGameOptionsScreen(void)
             ScreenToDisplay = TitleScreen;
             audio->PlayMusic(0, -1);
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -1897,6 +1908,8 @@ void Screens::DisplayOptionsScreen(void)
 
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -2020,6 +2033,8 @@ const char* keyName;
     {
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -2188,6 +2203,8 @@ void Screens::DisplayHighScoresScreen(void)
     {
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -2369,6 +2386,8 @@ void Screens::DisplayAboutScreen(void)
 
             logic->Won = false;
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -2853,8 +2872,6 @@ const char* keyName;
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
-//        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
-
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = HighScoresScreen;
@@ -2881,11 +2898,11 @@ const char* keyName;
             audio->PlayMusic(25, -1);
         }
 
-//        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
-
         visuals->FrameLock = 16;
 
         visuals->ClearTextCache();
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3042,6 +3059,8 @@ void Screens::DisplayShowStoryScreen(void)
             ScreenToDisplay = TitleScreen;
             audio->PlayMusic(0, -1);
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3151,6 +3170,8 @@ void Screens::DisplayFlyingFromEarthScreen(void)
             ScreenToDisplay = TitleScreen;
             audio->PlayMusic(0, -1);
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3270,6 +3291,8 @@ void Screens::DisplayFlyingToMarsScreen(void)
             ScreenToDisplay = TitleScreen;
             audio->PlayMusic(0, -1);
         }
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3341,6 +3364,8 @@ void Screens::DisplayFlyingToBaseScreen(void)
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = PlayingStoryGameScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3473,6 +3498,8 @@ void Screens::DisplayMarsExplodingScreen(void)
         ScreenTransitionStatus = FadeAll;
 
         ScreenToDisplay = AboutScreen;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3781,8 +3808,6 @@ const char* keyName;
         visuals->FrameLock = 16;
         visuals->ClearTextCache();
 
-//        SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
-
         if (logic->PlayerData[1].PlayerStatus != GameOver && logic->GameForfeit != true)
         {
             ScreenToDisplay = ShowStoryScreen;
@@ -3819,8 +3844,6 @@ const char* keyName;
                 ScreenToDisplay = MarsExplodingScreen;
                 audio->PlayMusic(30, -1);
             }
-
-//            SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
         }
         else
         {
@@ -3829,6 +3852,8 @@ const char* keyName;
         }
 
         ScreenTransitionStatus = FadeAll;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -3964,6 +3989,8 @@ bool lastKeyWasNotAcceptable = false;
         if (data->NameInputArayIndex == 0)  data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = ' ';
 
         logic->Won = false;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -4125,6 +4152,8 @@ bool lastKeyWasNotAcceptable = false;
         if (data->NameInputArayIndex == 0)  data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = ' ';
 
         logic->Won = false;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -4429,6 +4458,8 @@ void Screens::DisplayNameInputJoystickScreen(void)
         logic->Won = false;
 
         input->DelayAllUserInput = 20;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -4439,8 +4470,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         logic->GameMode = OriginalMode;
 
-        if (logic->UseOldAI == 1)  logic->CPUPlayerEnabled = 0;//1;
-        else if (logic->UseOldAI == 0)  logic->CPUPlayerEnabled = 5;//6;
+        if (logic->UseOldAI == 1)  logic->CPUPlayerEnabled = 2;
+        else if (logic->UseOldAI == 0)  logic->CPUPlayerEnabled = 7;
 
         audio->MusicVolume = 0;
         audio->SoundVolume = 0;
@@ -4455,8 +4486,6 @@ void Screens::DisplayTestComputerSkillScreen(void)
     }
 
     logic->RunTetriGameEngine();
-
-//visuals->FrameLock = 0;
 
     if (input->KeyOnKeyboardPressedByUser == SDLK_t)
     {
@@ -4741,6 +4770,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
     logic->TotalCPUPlayerLines = ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) );
 
     int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
+    printf("Average Lines = %i \n", averageLinesPerGame);
 
     if (logic->DontDisplayTestImages != 1)
     {
@@ -4751,10 +4781,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 170
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
     }
-//    else if ( (averageLinesPerGame % 100) == 0 )  printf("%i\n", averageLinesPerGame);
 
     ScreenIsDirty = 2;
-
 //    if (logic->GameDisplayChanged == true)
     {
         for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
@@ -4795,7 +4823,6 @@ if (averageLinesPerGame > logic->BestTotalLinesPerGame)
           logic->TotalThreeLines = 0;
           logic->TotalFourLines = 0;
 */
-
             logic->NumberofCPUGames++;
 
             for (int y = 0; y < 26; y++)
@@ -4846,6 +4873,97 @@ if (averageLinesPerGame > logic->BestTotalLinesPerGame)
 
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
+        ScreenTransitionStatus = FadeAll;
+
+        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+void Screens::DisplayGiveMeJobScreen(void)
+{
+    if (ScreenTransitionStatus == FadeAll)
+    {
+        if (Mix_PlayingMusic() == 1)  Mix_HaltMusic();
+
+        interface->CreateButton( 1010, 0, 417 );
+        interface->CreateButton( 1008, 1, 457 );
+
+        interface->ButtonSelectedByKeyboard = 1;
+
+        input->DelayAllUserInput = 100;
+
+        ScreenTransitionStatus = FadeIn;
+    }
+
+    if (ScreenIsDirty > 0)
+    {
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
+
+        visuals->DrawTextOntoScreenBuffer("The programmer/tester of this video game", visuals->Font[3]
+                                  , 0, 1, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("is currently looking for employment:", visuals->Font[3]
+                                  , 0, 1+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 1+26+40;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+        visuals->DrawTextOntoScreenBuffer("INTERESTED IN:", visuals->Font[3]
+                                  , 0, 1+26+20+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("- Entry-level QA Tester/Programmer position -", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("- Work-from-home(telecommute) -", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("- Part-time schedule(20 hours a week max) -", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("- $15 an hour salary -", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 1+26+20+26+26+26+26+26+26+40;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+
+        visuals->DrawTextOntoScreenBuffer("Click on [Send Email] button below to contact me!", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26+26+26+40+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("(will open email client with my email address)", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26+26+26+40+26+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->DrawTextOntoScreenBuffer("Thank you in advance!", visuals->Font[3]
+                                  , 0, 1+26+20+26+26+26+26+26+26+40+26+26+26+10, JustifyCenter, 255, 255, 255, 1, 1, 1);
+
+        visuals->Sprites[7].ScreenX = 320;
+        visuals->Sprites[7].ScreenY = 385;
+        visuals->Sprites[7].BlueHue = 0;
+        visuals->DrawSpriteOntoScreenBuffer(7);
+    }
+
+    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
+    {
+        if (interface->ButtonSelectedByPlayer == 0)
+        {
+            if (visuals->ForceAspectRatio == true)  SDL_RenderSetLogicalSize(visuals->Renderer, 640, 480);
+            if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, 0);
+
+            #ifdef __unix__
+                system( "xdg-open 'mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity'" );
+            #elif defined(_WIN32)
+//                ShellExecute(NULL, "open", "mailto:Admin@FallenAngelSoftware.com ? subject=Possible Employment Opportunity", NULL , NULL, SW_SHOWNORMAL);
+                SDL_OpenURL("mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity");
+            #endif
+        }
+
+        visuals->Sprites[7].BlueHue = 255;
+
+        input->EXIT_Game = true;
         ScreenTransitionStatus = FadeAll;
     }
 }
