@@ -4934,7 +4934,7 @@ void Screens::DisplayGiveMeJobScreen(void)
         visuals->DrawTextOntoScreenBuffer("Click on [Send Email] button below to contact me!", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26+26+40+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("(will open email client with my email address)", visuals->Font[3]
+        visuals->DrawTextOntoScreenBuffer("(will open contact webpage in default browser)", visuals->Font[3]//(will open email client with my email address)", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26+26+40+26+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Thank you in advance!", visuals->Font[3]
@@ -4954,10 +4954,10 @@ void Screens::DisplayGiveMeJobScreen(void)
             if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, 0);
 
             #ifdef __unix__
-                system( "xdg-open 'mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity'" );
+                system( "xdg-open 'https://fallenangelsoftware.com/contact.html'");//mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity'" );
             #elif defined(_WIN32)
 //                ShellExecute(NULL, "open", "mailto:Admin@FallenAngelSoftware.com ? subject=Possible Employment Opportunity", NULL , NULL, SW_SHOWNORMAL);
-                SDL_OpenURL("mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity");
+                SDL_OpenURL("https://fallenangelsoftware.com/contact.html");//("mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity");
             #endif
         }
 
