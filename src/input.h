@@ -131,51 +131,48 @@ public:
 
     Uint8 JoystickHat[4];
 
-    #define Axis0       0
-    #define Axis1       1
-    #define Axis2       2
-    #define Axis3       3
-    #define Axis4       4
-    #define Axis5       5
-    #define Axis6       6
-    #define Axis7       7
+    #define JoyNotPressed   -1
 
-    bool JoystickAxisDisable[4][8];
+    #define Axis0           0
+    #define Axis1           1
+    #define Axis2           2
+    #define Axis3           3
+    #define Axis4           4
+    #define Axis5           5
+    #define Axis6           6
+    #define Axis7           7
 
-    #define Hat0        8
+    #define Hat0            8
 
-    #define Button0     9
-    #define Button1     10
-    #define Button2     11
-    #define Button3     12
-    #define Button4     13
-    #define Button5     14
-    #define Button6     15
-    #define Button7     16
-    #define Button8     17
-    #define Button9     18
-    #define Button10    19
-    #define Button11    20
-    #define Button12    21
-    #define Button13    22
-    #define Button14    23
-    #define Button15    24
-    #define Button16    25
+    #define Button0         9
+    #define Button1         10
+    #define Button2         11
+    #define Button3         12
+    #define Button4         13
+    #define Button5         14
+    #define Button6         15
+    #define Button7         16
+    #define Button8         17
+    #define Button9         18
+    #define Button10        19
+    #define Button11        20
+    #define Button12        21
+    #define Button13        22
+    #define Button14        23
+    #define Button15        24
+    #define Button16        25
 
     SDL_Joystick *JoystickDevices[4];
 
     int NumberOfJoyButtons[4];
+    int NumberOfJoyHats[4];
     int NumberOfJoyAxises[4];
 
-    int JoystickDisabled[4];
+    bool JoystickDisabled[4];
 
     char JoystickName[4][100];
 
-    #define BothJoystickAxisesAndButtons    0
-    #define JustJoystickAxises              1
-    #define JustJoystickButtons             2
-
-    int QueryJoysticksForAction(Uint8 joy, int buttonsOrAxis);
+    int QueryJoysticksForAction(Uint8 joy);
 
     void GetAllUserInput(void);
 

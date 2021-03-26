@@ -49,9 +49,9 @@ Screens::Screens(void)
 {
     ScreenIsDirty = 2;
 
-    if (input->JoystickDevices[0] != NULL)
-        ScreenToDisplay = JoystickScreen;
-    else
+//    if (input->JoystickDevices[0] != NULL)
+//        ScreenToDisplay = JoystickScreen;
+//    else
         ScreenToDisplay = SDLLogoScreen;
 
     ScreenFadeTransparency = 255;
@@ -145,10 +145,6 @@ int windowHeight;
     {
         switch(ScreenToDisplay)
         {
-            case JoystickScreen:
-                DisplayJoystickScreen();
-                break;
-
             case SDLLogoScreen:
                 DisplaySDLLogoScreen();
                 break;
@@ -287,194 +283,6 @@ int windowHeight;
         {
             if (ScreenIsDirty > 0)  ScreenIsDirty--;
         }
-    }
-}
-
-//-------------------------------------------------------------------------------------------------
-void Screens::DisplayJoystickScreen(void)
-{
-    if (ScreenTransitionStatus == FadeAll)
-    {
-        input->DelayAllUserInput = 50;
-
-        for (int index = 0; index < 4; index++)  input->JoystickDisabled[index] = 1;
-
-        JoystickScreenDisplayTimer = 1000;
-        ScreenTransitionStatus = FadeIn;
-    }
-
-    int numberOfJoysticks = 0;
-    for (int index = 0; index < 4; index++)
-    {
-        if (input->JoystickDevices[index] != NULL)  numberOfJoysticks = (index+1);
-    }
-
-    if (JoystickScreenDisplayTimer > 0)  JoystickScreenDisplayTimer--;
-    else if (ScreenTransitionStatus != FadeIn)  ScreenTransitionStatus = FadeOut;
-
-    int joyAction;
-    joyAction = input->QueryJoysticksForAction(0, JustJoystickButtons);
-    if (joyAction > 0)
-        input->JoystickDisabled[0] = 0;
-
-    joyAction = input->QueryJoysticksForAction(1, JustJoystickButtons);
-    if (joyAction > 0)
-        input->JoystickDisabled[1] = 0;
-
-    joyAction = input->QueryJoysticksForAction(2, JustJoystickButtons);
-    if (joyAction > 0)
-        input->JoystickDisabled[2] = 0;
-
-    joyAction = input->QueryJoysticksForAction(3, JustJoystickButtons);
-    if (joyAction > 0)
-        input->JoystickDisabled[3] = 0;
-
-    if (input->MouseButtonPressed[0] == true
-       || input->KeyOnKeyboardPressedByUser == SDLK_SPACE
-       || input->KeyOnKeyboardPressedByUser == SDLK_RETURN)
-    {
-        JoystickScreenDisplayTimer = 0;
-        input->DelayAllUserInput = 20;
-        audio->PlayDigitalSoundFX(0, 0);
-    }
-
-    ScreenIsDirty = 2;
-    if (ScreenIsDirty > 0)
-    {
-        visuals->ClearScreenBufferWithColor(0, 0, 0, 255);
-
-        visuals->Sprites[7].ScreenX = 320;
-        visuals->Sprites[7].ScreenY = 7-6+30+10;
-        visuals->Sprites[7].RedHue = 0;
-        visuals->Sprites[7].BlueHue = 0;
-        visuals->DrawSpriteOntoScreenBuffer(7);
-
-        char temp[256];
-        strcpy(visuals->VariableText, " ");
-        sprintf(temp, "%i", numberOfJoysticks);
-        strcat(visuals->VariableText, temp);
-        strcat(visuals->VariableText, " Joystick(s) Found! ");
-        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
-                                          , 0, 6, JustifyCenter, 0, 255, 0, 0, 100, 0);
-
-        visuals->DrawTextOntoScreenBuffer("Press Joystick Button(s) To Activate!", visuals->Font[0]
-                                          , 0, 6+50, JustifyCenter, 0, 255, 0, 0, 100, 0);
-
-        float screenX = ( 640 - (640*0.75) );
-        float screenY = ( 480 - (480*0.75) );
-        Uint8 red = 255;
-        Uint8 green = 0;
-        for (int index = 0; index < 4; index++)
-        {
-            if (input->JoystickDevices[index] != NULL)
-            {
-                if (input->JoystickDisabled[index] == 1)
-                {
-                    red = 255;
-                    green = 0;
-                    visuals->DrawTextOntoScreenBuffer("Not Active!", visuals->Font[0], screenX, screenY+35, JustifyCenterOnPoint, red, green, 0, 0, 0, 0);
-                }
-                else if (input->JoystickDisabled[index] == 0)
-                {
-                    red = 0;
-                    green = 255;
-                    visuals->DrawTextOntoScreenBuffer("Active!", visuals->Font[0], screenX, screenY+35, JustifyCenterOnPoint, red, green, 0, 0, 0, 0);
-                }
-
-                strcpy(visuals->VariableText, "Joystick #");
-                sprintf(temp, "%i", 1+index);
-                strcat(visuals->VariableText, temp);
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], screenX, screenY, JustifyCenterOnPoint, red, green, 0, 0, 0, 0);
-            }
-
-            if (index == 0)
-            {
-                screenX = ( 640 - (640*0.25) );
-                screenY = ( 480 - (480*0.75) );
-            }
-            else if (index == 1)
-            {
-                screenX = ( 640 - (640*0.25) );
-                screenY = ( 480 - (480*0.3) );
-            }
-            else if (index == 2)
-            {
-                screenX = ( 640 - (640*0.75) );
-                screenY = ( 480 - (480*0.3) );
-            }
-        }
-
-        visuals->Sprites[7].ScreenX = 320;
-        visuals->Sprites[7].ScreenY = 404-6+30+10;
-        visuals->Sprites[7].RedHue = 0;
-        visuals->Sprites[7].BlueHue = 0;
-        visuals->DrawSpriteOntoScreenBuffer(7);
-
-        int percent = floor( (JoystickScreenDisplayTimer/1000)*10 );
-        sprintf(visuals->VariableText, "%d", percent);
-        visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 450
-                                          , JustifyCenter, 255, 255, 0, 100, 100, 0);
-    }
-
-    if ( (numberOfJoysticks == 1) && (input->JoystickDisabled[0] == 0) )
-    {
-        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
-    }
-    else if ( (numberOfJoysticks == 2) && (input->JoystickDisabled[0] == 0) && (input->JoystickDisabled[1] == 0) )
-    {
-        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
-    }
-    else if ( (numberOfJoysticks == 3) && (input->JoystickDisabled[0] == 0) && (input->JoystickDisabled[1] == 0) && (input->JoystickDisabled[2] == 0) )
-    {
-        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
-    }
-    else if ( (numberOfJoysticks == 4) && (input->JoystickDisabled[0] == 0) && (input->JoystickDisabled[1] == 0) && (input->JoystickDisabled[2] == 0) && (input->JoystickDisabled[3] == 0) )
-    {
-        if (JoystickScreenDisplayTimer > 100)  JoystickScreenDisplayTimer = 100;
-    }
-
-    if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
-    {
-        ScreenTransitionStatus = FadeAll;
-
-        visuals->Sprites[7].RedHue = 255;
-        visuals->Sprites[7].BlueHue = 255;
-
-        if (input->JoystickDisabled[0] == 1)
-        {
-            if (input->JoystickDevices[0] != NULL)
-            {
-                printf("SDL2 Joystick #0 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[0]));
-            }
-        }
-
-        if (input->JoystickDisabled[1] == 1)
-        {
-            if (input->JoystickDevices[1] != NULL)
-            {
-                printf("SDL2 Joystick #1 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[1]));
-            }
-        }
-
-        if (input->JoystickDisabled[2] == 1)
-        {
-            if (input->JoystickDevices[2] != NULL)
-            {
-                printf("SDL2 Joystick #2 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[2]));
-            }
-        }
-
-        if (input->JoystickDisabled[3] == 1)
-        {
-            if (input->JoystickDevices[3] != NULL)
-            {
-                printf("SDL2 Joystick #3 ''%s'' disabled.\n", SDL_JoystickName(input->JoystickDevices[3]));
-            }
-        }
-
-        ScreenToDisplay = SDLLogoScreen;
-
-        if (input->ShowJobScreen == true)  ScreenToDisplay = GiveMeJobScreen;
     }
 }
 
@@ -1142,6 +950,8 @@ void Screens::DisplayNewGameOptionsScreen(void)
 //-------------------------------------------------------------------------------------------------
 void Screens::DisplayOptionsScreen(void)
 {
+    joyAction = -1;
+
     if (ScreenTransitionStatus == FadeAll)
     {
         JoystickFlash = 0;
@@ -1260,7 +1070,7 @@ void Screens::DisplayOptionsScreen(void)
 
     if ( input->KeyOnKeyboardPressedByUser == SDLK_F1
         && input->KeyboardSetupProcess == KeyboardSetupNotStarted
-        && (input->JoystickDisabled[0] == 0 || input->JoystickDisabled[1] == 0 || input->JoystickDisabled[2] == 0 || input->JoystickDisabled[3] ==0) )
+        && (input->JoystickDisabled[0] == false || input->JoystickDisabled[1] == false || input->JoystickDisabled[2] == false || input->JoystickDisabled[3] == false) )
     {
         ScreenIsDirty = 2;
         audio->PlayDigitalSoundFX(1, 0);
@@ -1270,22 +1080,22 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->JoystickSetupProcess == JoySetupNotStarted)
         {
-            if (input->JoystickDisabled[0] == 0)
+            if (input->JoystickDisabled[0] == false)
             {
                 input->JoystickSetupProcess = Joy1SetupPressUP;
                 input->joystickToCheck = 0;
             }
-            else if (input->JoystickDisabled[1] == 0)
+            else if (input->JoystickDisabled[1] == false)
             {
                 input->JoystickSetupProcess = Joy2SetupPressUP;
                 input->joystickToCheck = 1;
             }
-            else if (input->JoystickDisabled[2] == 0)
+            else if (input->JoystickDisabled[2] == false)
             {
                 input->JoystickSetupProcess = Joy3SetupPressUP;
                 input->joystickToCheck = 2;
             }
-            else if (input->JoystickDisabled[3] == 0)
+            else if (input->JoystickDisabled[3] == false)
             {
                 input->JoystickSetupProcess = Joy4SetupPressUP;
                 input->joystickToCheck = 3;
@@ -1294,6 +1104,8 @@ void Screens::DisplayOptionsScreen(void)
             {
                 input->JoystickSetupProcess = JoySetupNotStarted;
             }
+
+            joySetup = input->JoystickSetupProcess;
         }
         else
         {
@@ -1311,87 +1123,80 @@ void Screens::DisplayOptionsScreen(void)
         }
     }
 
-    if (input->DelayAllUserInput == 0)
+    if (joySetup == input->JoystickSetupProcess)
     {
-        for ( int joySetup = Joy1SetupPressUP; (joySetup < Joy4SetupPressBUTTONTwo+1); joySetup++)
+        joyAction = -1;
+        joyAction = input->QueryJoysticksForAction(input->joystickToCheck);
+        if (joyAction > JoyNotPressed)
         {
-            if (joySetup == input->JoystickSetupProcess)
+            if (input->joystickControl == 0)  input->JoyUP[input->joystickToCheck] = joyAction;
+            else if (input->joystickControl == 1)  input->JoyDOWN[input->joystickToCheck] = joyAction;
+            else if (input->joystickControl == 2)  input->JoyLEFT[input->joystickToCheck] = joyAction;
+            else if (input->joystickControl == 3)  input->JoyRIGHT[input->joystickToCheck] = joyAction;
+            else if (input->joystickControl == 4)  input->JoyButton1[input->joystickToCheck] = joyAction;
+            else if (input->joystickControl == 5)  input->JoyButton2[input->joystickToCheck] = joyAction;
+
+            joySetup++;
+
+            if (input->joystickControl < 5)
             {
-                joyAction = -1;
-                joyAction = input->QueryJoysticksForAction(input->joystickToCheck, BothJoystickAxisesAndButtons);
+                input->JoystickSetupProcess++;
 
-                if (joyAction > -1)
+                input->joystickControl++;
+            }
+            else
+            {
+                input->joystickToCheck++;
+
+                if (input->joystickToCheck == 1)
                 {
-                    if (input->joystickControl == 0)  input->JoyUP[input->joystickToCheck] = joyAction;
-                    else if (input->joystickControl == 1)  input->JoyDOWN[input->joystickToCheck] = joyAction;
-                    else if (input->joystickControl == 2)  input->JoyLEFT[input->joystickToCheck] = joyAction;
-                    else if (input->joystickControl == 3)  input->JoyRIGHT[input->joystickToCheck] = joyAction;
-                    else if (input->joystickControl == 4)  input->JoyButton1[input->joystickToCheck] = joyAction;
-                    else if (input->joystickControl == 5)  input->JoyButton2[input->joystickToCheck] = joyAction;
-
-                    joyAction = -1;
-
-                    if (input->joystickControl < 5)
+                    if (input->JoystickDisabled[input->joystickToCheck] == false)
                     {
-                        input->JoystickSetupProcess++;
-
-                        input->joystickControl++;
+                        input->JoystickSetupProcess = Joy2SetupPressUP;
+                        input->joystickControl = 0;
                     }
                     else
                     {
                         input->joystickToCheck++;
-
-                        if (input->joystickToCheck == 1)
-                        {
-                            if (input->JoystickDisabled[input->joystickToCheck]== 0)
-                            {
-                                input->JoystickSetupProcess = Joy2SetupPressUP;
-                                input->joystickControl = 0;
-                            }
-                            else
-                            {
-                                input->joystickToCheck++;
-                            }
-                        }
-
-                        if (input->joystickToCheck == 2)
-                        {
-                            if (input->JoystickDisabled[input->joystickToCheck] == 0)
-                            {
-                                input->JoystickSetupProcess = Joy3SetupPressUP;
-                                input->joystickControl = 0;
-                            }
-                            else
-                            {
-                                input->joystickToCheck++;
-                            }
-                        }
-
-                        if (input->joystickToCheck == 3)
-                        {
-                            if (input->JoystickDisabled[input->joystickToCheck] == 0)
-                            {
-                                input->JoystickSetupProcess = Joy4SetupPressUP;
-                                input->joystickControl = 0;
-                            }
-                            else
-                            {
-                                input->joystickToCheck++;
-                            }
-                        }
-
-                        if (input->joystickToCheck > 3)
-                        {
-                            input->JoystickSetupProcess = JoySetupNotStarted;
-                            joySetup = 999;
-                        }
                     }
+                }
 
-                    audio->PlayDigitalSoundFX(0, 0);
-                    input->DelayAllUserInput = 20;
-                    ScreenIsDirty = 2;
+                if (input->joystickToCheck == 2)
+                {
+                    if (input->JoystickDisabled[input->joystickToCheck] == false)
+                    {
+                        input->JoystickSetupProcess = Joy3SetupPressUP;
+                        input->joystickControl = 0;
+                    }
+                    else
+                    {
+                        input->joystickToCheck++;
+                    }
+                }
+
+                if (input->joystickToCheck == 3)
+                {
+                    if (input->JoystickDisabled[input->joystickToCheck] == false)
+                    {
+                        input->JoystickSetupProcess = Joy4SetupPressUP;
+                        input->joystickControl = 0;
+                    }
+                    else
+                    {
+                        input->joystickToCheck++;
+                    }
+                }
+
+                if (input->joystickToCheck > 3)
+                {
+                    input->JoystickSetupProcess = JoySetupNotStarted;
+                    joySetup = 999;
                 }
             }
+
+            audio->PlayDigitalSoundFX(0, 0);
+            input->DelayAllUserInput = 25;
+            ScreenIsDirty = 2;
         }
     }
 
@@ -1708,7 +1513,7 @@ void Screens::DisplayOptionsScreen(void)
                                           , visuals->Font[3], 0, 344-6, JustifyCenter
                                           , 255, 255, 255, 90, 90, 90);
 
-        if (input->JoystickDisabled[0] == 0 || input->JoystickDisabled[1] == 0 || input->JoystickDisabled[2] == 0 || input->JoystickDisabled[3] == 0)
+        if (input->JoystickDisabled[0] == false || input->JoystickDisabled[1] == false || input->JoystickDisabled[2] == false || input->JoystickDisabled[3] == false)
         {
             visuals->DrawTextOntoScreenBuffer("Press [F1] On Keyboard To Setup Joystick(s)"
                                               , visuals->Font[1]
@@ -2711,9 +2516,9 @@ const char* keyName;
             {
                 if (logic->PlayersCanJoin == true)
                 {
-                    if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL && input->JoystickDisabled[0] == 0)
-                        || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL && input->JoystickDisabled[1] == 0)
-                        || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL && input->JoystickDisabled[2] == 0)
+                    if ( (logic->PlayerData[player].PlayerInput == JoystickOne && input->JoystickDevices[0] != NULL && input->JoystickDisabled[0] == false)
+                        || (logic->PlayerData[player].PlayerInput == JoystickTwo && input->JoystickDevices[1] != NULL && input->JoystickDisabled[1] == false)
+                        || (logic->PlayerData[player].PlayerInput == JoystickThree && input->JoystickDevices[2] != NULL && input->JoystickDisabled[2] == false)
                         || (logic->PlayerData[player].PlayerInput == Keyboard) || (logic->PlayerData[player].PlayerInput == Mouse) )
                     {
                         logic->JoinInTimer++;
@@ -4891,7 +4696,7 @@ void Screens::DisplayGiveMeJobScreen(void)
 
         interface->ButtonSelectedByKeyboard = 1;
 
-        input->DelayAllUserInput = 100;
+        input->DelayAllUserInput = 50;
 
         ScreenTransitionStatus = FadeIn;
     }
@@ -4920,7 +4725,7 @@ void Screens::DisplayGiveMeJobScreen(void)
         visuals->DrawTextOntoScreenBuffer("- Work-from-home(telecommute) -", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("- Part-time schedule(20 hours a week max) -", visuals->Font[3]
+        visuals->DrawTextOntoScreenBuffer("- Part-time schedule(15 hours a week max) -", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("- $15 an hour salary -", visuals->Font[3]
@@ -4934,7 +4739,7 @@ void Screens::DisplayGiveMeJobScreen(void)
         visuals->DrawTextOntoScreenBuffer("Click on [Send Email] button below to contact me!", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26+26+40+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("(will open contact webpage in default browser)", visuals->Font[3]//(will open email client with my email address)", visuals->Font[3]
+        visuals->DrawTextOntoScreenBuffer("(will open contact webpage in default browser)", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26+26+40+26+26-10, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("Thank you in advance!", visuals->Font[3]
@@ -4954,10 +4759,9 @@ void Screens::DisplayGiveMeJobScreen(void)
             if (visuals->FullScreenMode == 1)  SDL_SetWindowFullscreen(visuals->Window, 0);
 
             #ifdef __unix__
-                system( "xdg-open 'https://fallenangelsoftware.com/contact.html'");//mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity'" );
+                system( "xdg-open 'https://fallenangelsoftware.com/contact.html'");
             #elif defined(_WIN32)
-//                ShellExecute(NULL, "open", "mailto:Admin@FallenAngelSoftware.com ? subject=Possible Employment Opportunity", NULL , NULL, SW_SHOWNORMAL);
-                SDL_OpenURL("https://fallenangelsoftware.com/contact.html");//("mailto:Admin@FallenAngelSoftware.com?subject=Possible Employment Opportunity");
+                SDL_OpenURL("https://fallenangelsoftware.com/contact.html");
             #endif
         }
 

@@ -40,7 +40,6 @@ public:
 
     float JoystickScreenDisplayTimer;
 
-    #define JoystickScreen              0
     #define SDLLogoScreen               1
     #define SixteenBitSoftScreen        2
     #define TitleScreen                 3
@@ -68,8 +67,6 @@ public:
 
     void ProcessScreenToDisplay(void);
 
-    void DisplayJoystickScreen(void);
-
     void DisplaySDLLogoScreen(void);
 
     void DisplaySixteenBitSoftScreen(void);
@@ -79,6 +76,7 @@ public:
     void DisplayNewGameOptionsScreen(void);
 
     int JoystickFlash;
+    int joySetup;
     void DisplayOptionsScreen(void);
 
     void DisplayHowToPlayScreen(void);

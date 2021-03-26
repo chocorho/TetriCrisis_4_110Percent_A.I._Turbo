@@ -1192,7 +1192,7 @@ void Logic::SetupForNewGame(void)
     {
         if (PlayerData[1].PlayerInput == Keyboard)
         {
-            if (input->JoystickDisabled[0] == 0)  PlayerData[0].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == false)  PlayerData[0].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[0].PlayerInput = CPU;
@@ -1200,7 +1200,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[0].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[1] == 0)  PlayerData[2].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == false)  PlayerData[2].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1208,7 +1208,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == false)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1219,7 +1219,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDisabled[1] == 0)  PlayerData[2].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == false)  PlayerData[2].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1227,7 +1227,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == false)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1239,7 +1239,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == false)  PlayerData[2].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1247,7 +1247,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[2] == 0)  PlayerData[3].PlayerInput = JoystickThree;
+            if (input->JoystickDisabled[2] == false)  PlayerData[3].PlayerInput = JoystickThree;
             else
             {
                 PlayerData[3].PlayerInput = Mouse;
@@ -1258,7 +1258,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == false)  PlayerData[2].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1266,7 +1266,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[1] == 0)  PlayerData[3].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == false)  PlayerData[3].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[3].PlayerInput = CPU;
@@ -1278,7 +1278,7 @@ void Logic::SetupForNewGame(void)
         {
             PlayerData[0].PlayerInput = Keyboard;
 
-            if (input->JoystickDisabled[0] == 0)  PlayerData[2].PlayerInput = JoystickOne;
+            if (input->JoystickDisabled[0] == false)  PlayerData[2].PlayerInput = JoystickOne;
             else
             {
                 PlayerData[2].PlayerInput = CPU;
@@ -1286,7 +1286,7 @@ void Logic::SetupForNewGame(void)
                 else  PlayerData[2].PlayerStatus = GameOver;
             }
 
-            if (input->JoystickDisabled[1] == 0)  PlayerData[3].PlayerInput = JoystickTwo;
+            if (input->JoystickDisabled[1] == false)  PlayerData[3].PlayerInput = JoystickTwo;
             else
             {
                 PlayerData[3].PlayerInput = CPU;
