@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail1l");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail13d");
 
     ClearHighScores();
 
@@ -84,7 +84,12 @@ int playerRank = 10;
         && logic->PlayerData[3].Score >= logic->PlayerData[1].Score
         && logic->PlayerData[3].Score >= logic->PlayerData[2].Score)  PlayerWithHighestScore = 3;
 
-    if (logic->PlayerData[PlayerWithHighestScore].PlayerInput == CPU)  return;
+    if (logic->PlayerData[PlayerWithHighestScore].Score < 1 || logic->PlayerData[PlayerWithHighestScore].PlayerInput == CPU)
+    {
+        PlayerWithHighestScore = 255;
+        PlayerRankOnGameOver = 10;
+        return;
+    }
 
     for (int rank = 0; rank < 10; rank++)
     {

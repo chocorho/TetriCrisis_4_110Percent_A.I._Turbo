@@ -107,8 +107,8 @@ void Audio::SetupAudio(void)
     }
     else printf("SDL2_Mixer initialized.\n");
 
-    Mix_AllocateChannels(16);
-    for (int channel = 0; channel < 16; channel++)
+    Mix_AllocateChannels(32);
+    for (int channel = 0; channel < 32; channel++)
     {
         Mix_Volume(channel, SoundVolume);
     }
@@ -381,7 +381,7 @@ void Audio::PlayDigitalSoundFX(Uint8 soundIndex, int loops)
 
     if (SoundVolume == 0)  return;
 
-    for (int index = 1; index < 16; index++)
+    for (int index = 1; index < 32; index++)
         Mix_Volume( index, SoundVolume );
 
     for (int indexTwo = 0; indexTwo < SoundTotal; indexTwo++)

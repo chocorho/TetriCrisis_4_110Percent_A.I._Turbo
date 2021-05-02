@@ -137,7 +137,7 @@ void Visuals::ProcessFramerate(void)
 //-------------------------------------------------------------------------------------------------
 bool Visuals::InitializeWindow(void)
 {
-SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
+    SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
     Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C.#3 - By Team 16BitSoft"
@@ -819,7 +819,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Video Game Made Possible By Our Mentor's Teachings:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Video Game Made Possible By Our Mentors:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Garry Kitchen", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Andre' LaMothe", 255) == false)  return(false);
 
@@ -870,6 +870,10 @@ sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
+
+    if ( LoadStaffTextIntoMemory("Win ''Crisis+Mode'' BGM:", 0) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''No Easy Way out'' - Robert Tepper", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("Cover by ''Minniva'' Feat Quentin Cornet", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Story+Mode'' Music Soundtrack By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);

@@ -31,11 +31,43 @@ ________________________________________________________________________________
 .............................................................................................................................
 
                                          "T-Crisis 4 110% A.I. Turbo Remix"
-                                               Retail3 Version 4.5.6
 
-                                      Post Release Candidate / NOT Retail Yet!
+                                           Retail3 Version 4.5.6 NOT Final
 
                                                    Team 16BitSoft
+_____________________________________________________________________________________________________________________________
+
+DONE(From "TC4T-Linux-Windows3b"):
+
+* [Options] - Music Volume adjustments no longer resets currently playing music song track(not a bug, just annoying)
+
+* [Linux/Win?] - No longer must minimize/restore game window after game's window lost focus(BUG)
+
+* [New Game Options] - Changing "Game Mode" no longer resets the currently playing music song track(not a bug, just annoying)
+
+* [About Screen] - Added credit to win "Crisis+Mode" staff scroll background music creator
+
+* [Linux?/Win] - [ESC] in single player "Crisis+Mode" no longer results in "OU!" in 10th High Score - USB gamepad?(BUG)
+
+* [ALL] - No BGM music playing on title screens? - After music volume set to OFF and then changing to a percent(ie: 100%) (BUG)
+
+* [Linux/Win] - Gamepads not working properly?(BUG)
+
+* [ALL] - Sound FX buffer overruns: (1) "Crisis+Mode" Level 7 / (2) "Crisis+Mode" attack block(BUGS)
+
+* [ALL] - Allow 4 gamepad play(BUG)
+
+*
+
+
+TO DO:
+
+* [ALL] - CPU can't win(?)
+
+* [Linux/Win?] - Main menu unresponsive?(BUG)
+
+* [ALL] - Fix new A.I. -
+
 _____________________________________________________________________________________________________________________________
 */
 #include <stdio.h>
@@ -84,7 +116,9 @@ int main( int argc, char* args[] )
 
     visuals = new Visuals();
 
+    SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
     if ( visuals->InitializeWindow() != true ) visuals->CoreFailure = true;
+
     if ( visuals->LoadFontsIntoMemory() != true )  visuals->CoreFailure = true;
     if ( visuals->LoadSpritesAndInitialize() != true )  visuals->CoreFailure = true;
 

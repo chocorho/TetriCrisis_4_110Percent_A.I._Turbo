@@ -61,8 +61,8 @@ public:
     struct Sprite
     {
         SDL_Texture *Texture;
-        int ScreenX;
-        int ScreenY;
+        float ScreenX;
+        float ScreenY;
         float ScaleX;
         float ScaleY;
         double RotationDegree;

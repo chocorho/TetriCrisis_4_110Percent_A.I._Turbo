@@ -31,7 +31,6 @@ public:
     bool DEBUG;
 
     bool EXIT_Game;
-    bool ShowJobScreen;
 
     SDL_Event Event;
 

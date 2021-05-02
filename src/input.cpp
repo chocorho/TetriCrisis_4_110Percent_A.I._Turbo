@@ -44,7 +44,6 @@ Input::Input(void)
     DEBUG = false;
 
     EXIT_Game = false;
-    ShowJobScreen = false;
 
     DelayAllUserInput = 0;
 
@@ -137,7 +136,7 @@ int returnValue = JoyNotPressed;
 
 	if (DelayAllUserInput > 0)  return(returnValue);
 
-    if (JoystickDevices[joy] != NULL)
+    if (JoystickDisabled[joy] != true)
     {
         if (NumberOfJoyAxises[joy] > 0)
         {
@@ -148,10 +147,7 @@ int returnValue = JoyNotPressed;
 
                 if ( joyAxis < (-32768/2) || joyAxis > (32767/2) )
                 {
-                    DelayAllUserInput = 50;
                     returnValue = Axis0+index;
-
-                    return(returnValue);
                 }
             }
         }
@@ -162,22 +158,18 @@ int returnValue = JoyNotPressed;
             if (JoystickHat[joy] == SDL_HAT_LEFT)
             {
                 returnValue = Hat0;
-                return(returnValue);
             }
             else if (JoystickHat[joy] == SDL_HAT_RIGHT)
             {
                 returnValue = Hat0;
-                return(returnValue);
             }
             else if (JoystickHat[joy] == SDL_HAT_UP)
             {
                 returnValue = Hat0;
-                return(returnValue);
             }
             else if (JoystickHat[joy] == SDL_HAT_DOWN)
             {
                 returnValue = Hat0;
-                return(returnValue);
             }
         }
 
@@ -186,7 +178,6 @@ int returnValue = JoyNotPressed;
             if ( SDL_JoystickGetButton(JoystickDevices[joy], index) )
             {
                 returnValue = Button0+index;
-                return(returnValue);
             }
         }
     }
@@ -233,14 +224,13 @@ void Input::GetAllUserInput(void)
         switch (Event.type)
         {
             case SDL_QUIT:
-//                EXIT_Game = true;
-                ShowJobScreen = true;
+                EXIT_Game = true;
                 screens->ScreenTransitionStatus = FadeOut;
                 return;
                 break;
 
             case SDL_WINDOWEVENT:
-                if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN)
+                if (Event.window.event == SDL_WINDOWEVENT_RESIZED || Event.window.event == SDL_WINDOWEVENT_SHOWN || Event.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
                 {
                     screens->ScreenIsDirty = 2;
                     LastEventWasWindowResize = 2;
@@ -356,7 +346,7 @@ void Input::GetAllUserInput(void)
     {
         for (int index = 0; index < 4; index++)
         {
-            if (JoystickDisabled[index] == false && NumberOfJoyHats[index] > 0)
+            if (JoystickDisabled[index] == false)
             {
                 JoystickHat[index] = SDL_JoystickGetHat(JoystickDevices[index], 0);
                 if (JoyUP[index] == Hat0 && JoystickHat[index] == SDL_HAT_UP)
