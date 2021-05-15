@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail13d");
+	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail-3Final");
 
     ClearHighScores();
 
@@ -280,9 +280,6 @@ char joystickNameTemp[4][100];
 		logic->CPUPlayerEnabled = (int)atoi(textBuffer);
 
 		fileStream.getline (textBuffer, 30);
-		logic->UseOldAI = (int)atoi(textBuffer);
-
-		fileStream.getline (textBuffer, 30);
 		logic->PlayingGameFrameLock = (int)atoi(textBuffer);
 
 		fileStream.getline (textBuffer, 30);
@@ -460,10 +457,6 @@ char *pref_path = NULL;
 		fileStream<<"\n";
 
 		sprintf(textBuffer, "%d", logic->CPUPlayerEnabled);
-		fileStream<<textBuffer;
-		fileStream<<"\n";
-
-		sprintf(textBuffer, "%d", logic->UseOldAI);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 

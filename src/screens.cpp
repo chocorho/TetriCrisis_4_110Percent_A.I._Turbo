@@ -890,6 +890,12 @@ void Screens::DisplayNewGameOptionsScreen(void)
         }
     }
 
+    if (input->MouseButtonPressed[2] == true)
+    {
+        input->DelayAllUserInput = 20;
+        ScreenTransitionStatus = FadeOut;
+    }
+
     if (ScreenTransitionStatus == FadeOut && ScreenFadeTransparency == 255)
     {
         ScreenTransitionStatus = FadeAll;
@@ -1250,22 +1256,16 @@ void Screens::DisplayOptionsScreen(void)
                 if (logic->CPUPlayerEnabled > 0)  logic->CPUPlayerEnabled--;
                 else
                 {
-                    logic->CPUPlayerEnabled = 9;
+                    logic->CPUPlayerEnabled = 4;
                 }
-
-                if (logic->CPUPlayerEnabled < 5)  logic->UseOldAI = 1;
-                else  logic->UseOldAI = 0;
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 3.5)
             {
-                if (logic->CPUPlayerEnabled < 9)  logic->CPUPlayerEnabled++;
+                if (logic->CPUPlayerEnabled < 4)  logic->CPUPlayerEnabled++;
                 else
                 {
                     logic->CPUPlayerEnabled = 0;
                 }
-
-                if (logic->CPUPlayerEnabled < 5)  logic->UseOldAI = 1;
-                else  logic->UseOldAI = 0;
             }
             else if (interface->ArrowSetArrowSelectedByPlayer == 4)
             {
@@ -1410,18 +1410,6 @@ void Screens::DisplayOptionsScreen(void)
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 4)
             visuals->DrawTextOntoScreenBuffer("Turbo!(old)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->CPUPlayerEnabled == 6)
-            visuals->DrawTextOntoScreenBuffer("Slow(New)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->CPUPlayerEnabled == 7)
-            visuals->DrawTextOntoScreenBuffer("Medium(New)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->CPUPlayerEnabled == 8)
-            visuals->DrawTextOntoScreenBuffer("Fast(New)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
-                                              , 255, 255, 255, 1, 1, 1);
-        else if (logic->CPUPlayerEnabled == 9)
-            visuals->DrawTextOntoScreenBuffer("Turbo!(New)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else
             visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15+3-10, JustifyRight
@@ -1672,12 +1660,6 @@ void Screens::DisplayOptionsScreen(void)
     {
         input->KeyboardSetupProcess = KeyboardSetupNotStarted;
         input->JoystickSetupProcess = JoySetupNotStarted;
-
-        if (logic->CPUPlayerEnabled > 4)
-        {
-            logic->CPUPlayerEnabled-=5;
-            logic->UseOldAI = 1;
-        }
 
         ScreenTransitionStatus = FadeAll;
         ScreenToDisplay = TitleScreen;
@@ -2573,12 +2555,15 @@ const char* keyName;
 
             if (logic->HumanStillAlive == false && logic->GameOverTimer == 0 && input->DEBUG == 0)
             {
+                logic->AllHumansDeadExitTimer++;
+                if (logic->AllHumansDeadExitTimer > 150)  ScreenTransitionStatus = FadeOut;
+
                 logic->ContinueWatchingTimer++;
                 if (logic->ContinueWatchingTimer > 20)
                     logic->ContinueWatchingTimer = 0;
 
                 if (logic->ContinueWatchingTimer < 15)
-                    visuals->DrawTextOntoScreenBuffer("Continue Watching Or Press [Esc] On Keyboard To Exit!"
+                    visuals->DrawTextOntoScreenBuffer("No Human Players Left Playing, Exiting Game!"
                                                     , visuals->Font[1], 320, 260, JustifyCenter, 255, 255, 255, 1, 1, 1);
             }
         }
@@ -4217,15 +4202,14 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         logic->GameMode = OriginalMode;
 
-        if (logic->UseOldAI == 1)  logic->CPUPlayerEnabled = 2;
-        else if (logic->UseOldAI == 0)  logic->CPUPlayerEnabled = 7;
+        logic->CPUPlayerEnabled = 3;
 
         audio->MusicVolume = 0;
         audio->SoundVolume = 0;
 
         logic->SetupForNewGame();
 
-        visuals->FrameLock = 5;
+        visuals->FrameLock = 16;
 
         input->DelayAllUserInput = 20;
 
@@ -4238,25 +4222,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
     {
         input->DelayAllUserInput = 20;
 
-        if (logic->DontDisplayTestImages < 2)
-            logic->DontDisplayTestImages++;
-        else
-            logic->DontDisplayTestImages = 0;
-
-        visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
-
-        if (logic->DontDisplayTestImages == 0)
-        {
-            visuals->FrameLock = 5;
-        }
-        else if (logic->DontDisplayTestImages == 1)
-        {
-            visuals->FrameLock = 0;
-        }
-        else if (logic->DontDisplayTestImages == 2)
-        {
-            visuals->FrameLock = (16*4);
-        }
+        if (visuals->FrameLock == 16)  visuals->FrameLock = 0;
+        else  visuals->FrameLock = 16;
     }
     else if (input->KeyOnKeyboardPressedByUser == SDLK_MINUS)
     {
@@ -4295,6 +4262,8 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
+        logic->PlayerData[logic->Player].TimeToDropPiece = 47;
+
         if (logic->PlayerData[logic->Player].PlayerStatus != FlashingCompletedLines
             && logic->PlayerData[logic->Player].PlayerStatus != ClearingCompletedLines)
         {
@@ -4304,184 +4273,173 @@ void Screens::DisplayTestComputerSkillScreen(void)
         }
     }
 
-    if (ScreenIsDirty > 0)
+    if (visuals->FrameLock > 0)
     {
-        if (logic->DontDisplayTestImages != 1)
+        visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
+
+        if (logic->PlayerData[0].PlayerStatus != GameOver)
         {
-            visuals->ClearScreenBufferWithColor(0, 0, 0, 0);
-
-            if (logic->PlayerData[0].PlayerStatus != GameOver)
-            {
-                visuals->Sprites[31].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
-                visuals->Sprites[31].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
-                visuals->Sprites[31].RedHue = 255;
-                visuals->Sprites[31].GreenHue = 0;
-                visuals->Sprites[31].BlueHue = 0;
-                visuals->Sprites[31].Transparency = 255;
-                visuals->DrawSpriteOntoScreenBuffer(31);
-            }
-
-            if (logic->PlayerData[1].PlayerStatus != GameOver)
-            {
-                visuals->Sprites[31].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
-                visuals->Sprites[31].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
-                visuals->Sprites[31].RedHue = 255;
-                visuals->Sprites[31].GreenHue = 255;
-                visuals->Sprites[31].BlueHue = 0;
-                visuals->DrawSpriteOntoScreenBuffer(31);
-            }
-
-            if (logic->PlayerData[2].PlayerStatus != GameOver)
-            {
-                visuals->Sprites[31].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
-                visuals->Sprites[31].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
-                visuals->Sprites[31].RedHue = 0;
-                visuals->Sprites[31].GreenHue = 255;
-                visuals->Sprites[31].BlueHue = 0;
-                visuals->DrawSpriteOntoScreenBuffer(31);
-            }
-
-            if (logic->PlayerData[3].PlayerStatus != GameOver)
-            {
-                visuals->Sprites[31].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
-                visuals->Sprites[31].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
-                visuals->Sprites[31].RedHue = 0;
-                visuals->Sprites[31].GreenHue = 0;
-                visuals->Sprites[31].BlueHue = 255;
-                visuals->DrawSpriteOntoScreenBuffer(31);
-            }
-
-            for (int player = 0; player < NumberOfPlayers; player++)
-            {
-                float boxScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX-57;
-                float boxScreenY = logic->PlayerData[player].PlayersPlayfieldScreenY-212;
-
-                for (int y = 0; y < 26; y++)
-                {
-                    for (int x = 2; x < 12; x++)
-                    {
-                        if (logic->PlayerData[player].Playfield[x][y] == 1)
-                        {
-                            visuals->Sprites[201 + (10*logic->TileSet)].ScreenX = boxScreenX;
-                            visuals->Sprites[201 + (10*logic->TileSet)].ScreenY = boxScreenY;
-                            visuals->Sprites[201 + (10*logic->TileSet)].Transparency = 70;
-                            visuals->DrawSpriteOntoScreenBuffer(201 + (10*logic->TileSet));
-                        }
-                        else if (logic->PlayerData[player].Playfield[x][y] > 10
-                                 && logic->PlayerData[player].Playfield[x][y] < 20)
-                        {
-                            int spriteIndex = 200 + (10*logic->TileSet);
-
-                            visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenX = boxScreenX;
-                            visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenY = boxScreenY;
-                            visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].Transparency = 255;
-                            visuals->DrawSpriteOntoScreenBuffer(spriteIndex-9+logic->PlayerData[player].Playfield[x][y]);
-
-                        }
-                        else if (logic->PlayerData[player].Playfield[x][y] > 20
-                                 && logic->PlayerData[player].Playfield[x][y] < 30)
-                        {
-                            visuals->Sprites[201 + (10*logic->TileSet)].ScreenX = boxScreenX;
-                            visuals->Sprites[201 + (10*logic->TileSet)].ScreenY = boxScreenY;
-                            visuals->Sprites[201 + (10*logic->TileSet)].Transparency = 255;
-                            visuals->DrawSpriteOntoScreenBuffer(201 + (10*logic->TileSet));
-                        }
-
-                        if (logic->PlayerData[player].PlayfieldAI[x][y] == 999)
-                        {
-                            visuals->Sprites[200 + (10*logic->TileSet)].ScreenX = boxScreenX;
-                            visuals->Sprites[200 + (10*logic->TileSet)].ScreenY = boxScreenY;
-                            visuals->DrawSpriteOntoScreenBuffer(200 + (10*logic->TileSet));
-                        }
-
-                        boxScreenX+=13;
-                    }
-
-                    boxScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX-57;
-                    boxScreenY+=18;
-                }
-
-                if (logic->GameMode == TimeAttack30Mode || logic->GameMode == TimeAttack60Mode || logic->GameMode == TimeAttack120Mode)
-                {
-                    Uint32 taTimer = logic->TimeAttackTimer / 200;
-                    sprintf(visuals->VariableText, "%d", taTimer);
-                    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                                      , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
-                }
-                else if (logic->GameMode == TwentyLineChallengeMode)
-                {
-                    sprintf(visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
-                    visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                                      , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
-                }
-            }
-
-            for (int player = 0; player < NumberOfPlayers; player++)
-            {
-                #ifdef _WIN32
-                    sprintf(visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
-                #else
-                    sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
-                #endif
-
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
-                                                  , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2
-                                                  , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
-
-                sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
-                                                  , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-1+6
-                                                  , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
-
-                sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
-                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
-                                                  , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-1+6
-                                                  , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
-            }
-
-            for (int player = 0; player < NumberOfPlayers; player++)
-            {
-                visuals->DrawTextOntoScreenBuffer("C.P.U."
-                                          , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
-                                          , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
-
-                if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
-                {
-                    for (int player = 0; player < NumberOfPlayers; player++)
-                    {
-                        visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
-                        visuals->Sprites[155].ScreenY = 240;
-                        visuals->Sprites[155].Transparency = 0.20f;
-                        visuals->DrawSpriteOntoScreenBuffer(155);
-                    }
-                }
-            }
-
-            if (logic->PAUSEgame == true && input->DEBUG != 1)
-            {
-                visuals->Sprites[0].ScreenX = 320;
-                visuals->Sprites[0].ScreenY = 240;
-                visuals->Sprites[0].Transparency = 0.85;
-                visuals->DrawSpriteOntoScreenBuffer(0);
-
-                visuals->DrawTextOntoScreenBuffer("G A M E   P A U S E D", visuals->Font[0]
-                                                  , 0, 225, JustifyCenter, 255, 255, 255, 90, 90, 90);
-
-                visuals->DrawTextOntoScreenBuffer("(Press [SpaceBar] On Keyboard To Continue!)", visuals->Font[1]
-                                                  , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
-            }
-
-            ScreenIsDirty = 2;
+            visuals->Sprites[31].ScreenX = logic->PlayerData[0].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[0].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->Sprites[31].Transparency = 255;
+            visuals->DrawSpriteOntoScreenBuffer(31);
         }
-    }
 
-    char temp[256];
+        if (logic->PlayerData[1].PlayerStatus != GameOver)
+        {
+            visuals->Sprites[31].ScreenX = logic->PlayerData[1].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[1].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].RedHue = 255;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
+        }
 
-    if (logic->DontDisplayTestImages != 1)  visuals->DrawTextOntoScreenBuffer("[t] = Toggle Speed!", visuals->Font[7]
-                                      , 0, 90, JustifyCenter, 255, 255, 255, 0, 0, 0);
+        if (logic->PlayerData[2].PlayerStatus != GameOver)
+        {
+            visuals->Sprites[31].ScreenX = logic->PlayerData[2].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[2].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 255;
+            visuals->Sprites[31].BlueHue = 0;
+            visuals->DrawSpriteOntoScreenBuffer(31);
+        }
 
-    if (logic->DontDisplayTestImages == 0)
-    {
+        if (logic->PlayerData[3].PlayerStatus != GameOver)
+        {
+            visuals->Sprites[31].ScreenX = logic->PlayerData[3].PlayersPlayfieldScreenX;
+            visuals->Sprites[31].ScreenY = logic->PlayerData[3].PlayersPlayfieldScreenY;
+            visuals->Sprites[31].RedHue = 0;
+            visuals->Sprites[31].GreenHue = 0;
+            visuals->Sprites[31].BlueHue = 255;
+            visuals->DrawSpriteOntoScreenBuffer(31);
+        }
+
+        for (int player = 0; player < NumberOfPlayers; player++)
+        {
+            float boxScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX-57;
+            float boxScreenY = logic->PlayerData[player].PlayersPlayfieldScreenY-212;
+
+            for (int y = 0; y < 26; y++)
+            {
+                for (int x = 2; x < 12; x++)
+                {
+                    if (logic->PlayerData[player].Playfield[x][y] == 1)
+                    {
+                        visuals->Sprites[201 + (10*logic->TileSet)].ScreenX = boxScreenX;
+                        visuals->Sprites[201 + (10*logic->TileSet)].ScreenY = boxScreenY;
+                        visuals->Sprites[201 + (10*logic->TileSet)].Transparency = 70;
+                        visuals->DrawSpriteOntoScreenBuffer(201 + (10*logic->TileSet));
+                    }
+                    else if (logic->PlayerData[player].Playfield[x][y] > 10
+                             && logic->PlayerData[player].Playfield[x][y] < 20)
+                    {
+                        int spriteIndex = 200 + (10*logic->TileSet);
+
+                        visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenX = boxScreenX;
+                        visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].ScreenY = boxScreenY;
+                        visuals->Sprites[spriteIndex-9+logic->PlayerData[player].Playfield[x][y]].Transparency = 255;
+                        visuals->DrawSpriteOntoScreenBuffer(spriteIndex-9+logic->PlayerData[player].Playfield[x][y]);
+
+                    }
+                    else if (logic->PlayerData[player].Playfield[x][y] > 20
+                             && logic->PlayerData[player].Playfield[x][y] < 30)
+                    {
+                        visuals->Sprites[201 + (10*logic->TileSet)].ScreenX = boxScreenX;
+                        visuals->Sprites[201 + (10*logic->TileSet)].ScreenY = boxScreenY;
+                        visuals->Sprites[201 + (10*logic->TileSet)].Transparency = 255;
+                        visuals->DrawSpriteOntoScreenBuffer(201 + (10*logic->TileSet));
+                    }
+
+                    if (logic->PlayerData[player].PlayfieldAI[x][y] == 999)
+                    {
+                        visuals->Sprites[200 + (10*logic->TileSet)].ScreenX = boxScreenX;
+                        visuals->Sprites[200 + (10*logic->TileSet)].ScreenY = boxScreenY;
+                        visuals->DrawSpriteOntoScreenBuffer(200 + (10*logic->TileSet));
+                    }
+
+                    boxScreenX+=13;
+                }
+
+                boxScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX-57;
+                boxScreenY+=18;
+            }
+
+            if (logic->GameMode == TimeAttack30Mode || logic->GameMode == TimeAttack60Mode || logic->GameMode == TimeAttack120Mode)
+            {
+                Uint32 taTimer = logic->TimeAttackTimer / 200;
+                sprintf(visuals->VariableText, "%d", taTimer);
+                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
+                                                  , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+            }
+            else if (logic->GameMode == TwentyLineChallengeMode)
+            {
+                sprintf(visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
+                visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
+                                                  , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+            }
+        }
+
+        for (int player = 0; player < NumberOfPlayers; player++)
+        {
+            #ifdef _WIN32
+                sprintf(visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
+            #else
+                sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
+            #endif
+
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[5]
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2
+                                              , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+
+            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-1+6
+                                              , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+
+            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
+            visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
+                                              , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-1+6
+                                              , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
+        }
+
+        for (int player = 0; player < NumberOfPlayers; player++)
+        {
+            visuals->DrawTextOntoScreenBuffer("C.P.U."
+                                      , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
+                                      , 460, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
+
+            if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
+            {
+                for (int player = 0; player < NumberOfPlayers; player++)
+                {
+                    visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
+                    visuals->Sprites[155].ScreenY = 240;
+                    visuals->Sprites[155].Transparency = 0.20f;
+                    visuals->DrawSpriteOntoScreenBuffer(155);
+                }
+            }
+        }
+
+        if (logic->PAUSEgame == true && input->DEBUG != 1)
+        {
+            visuals->Sprites[0].ScreenX = 320;
+            visuals->Sprites[0].ScreenY = 240;
+            visuals->Sprites[0].Transparency = 0.85;
+            visuals->DrawSpriteOntoScreenBuffer(0);
+
+            visuals->DrawTextOntoScreenBuffer("G A M E   P A U S E D", visuals->Font[0]
+                                              , 0, 225, JustifyCenter, 255, 255, 255, 90, 90, 90);
+
+            visuals->DrawTextOntoScreenBuffer("(Press [SpaceBar] On Keyboard To Continue!)", visuals->Font[1]
+                                              , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
+        }
+
+        char temp[256];
+
         visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[7]
                                           , 0, 90+22, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
@@ -4512,24 +4470,23 @@ void Screens::DisplayTestComputerSkillScreen(void)
         strcat(visuals->VariableText, temp);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 195
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
-    }
 
-    logic->TotalCPUPlayerLines = ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) );
+        visuals->DrawTextOntoScreenBuffer("Press [T] On Keyboard To Toggle Speed!", visuals->Font[7]
+                                          , 0, 195+25, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
-    int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
-    printf("Average Lines = %i \n", averageLinesPerGame);
+        logic->TotalCPUPlayerLines = ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) );
 
-    if (logic->DontDisplayTestImages != 1)
-    {
+        int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
+        printf("Average Lines = %i \n", averageLinesPerGame);
 
-        strcpy(visuals->VariableText, "Average Lines/Game: ");
+        strcpy(visuals->VariableText, "Average Lines Per Game: ");
         sprintf(temp, "%d", averageLinesPerGame);
         strcat(visuals->VariableText, temp);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 170
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
-    }
 
-    ScreenIsDirty = 2;
+        ScreenIsDirty = 2;
+    }
 
     for (logic->Player = 0; logic->Player < NumberOfPlayers; logic->Player++)
     {
@@ -4549,7 +4506,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
 
             for (int y = 0; y < 26; y++)
                 for (int x = 0; x < 15; x++)
-                    logic->PlayerData[logic->Player].Playfield[x][y] = 255; // Collision detection value
+                    logic->PlayerData[logic->Player].Playfield[x][y] = 255; /* Collision detection value */
 
             for (int y = 2; y < 5; y++)
                 for (int x = 5; x < 9; x++)

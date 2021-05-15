@@ -758,3 +758,127 @@
 	"visuals.h"
 	"screens.h"
 
+1619563028 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/audio.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"audio.h"
+	"screens.h"
+	"visuals.h"
+
+1613865344 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/audio.h
+
+1620841228 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/screens.h
+
+1619277590 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/visuals.h
+
+1619364132 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/data.cpp
+	<fstream>
+	<string.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"data.h"
+	"audio.h"
+	"input.h"
+	"logic.h"
+	"visuals.h"
+
+1613865344 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/data.h
+
+1621013469 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/input.h
+
+1620962338 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/logic.h
+
+1621013500 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/input.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1613865344 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/interface.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interface.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1613865344 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/interface.h
+
+1620962346 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/logic.cpp
+	<stdio.h>
+	<cstring>
+	<cstdlib>
+	<float.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"logic.h"
+	"audio.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+
+1621017907 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/main.cpp
+	<stdio.h>
+	<cstring>
+	<time.h>
+	<cstdlib>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"input.h"
+	"screens.h"
+	"interface.h"
+	"audio.h"
+	"data.h"
+	"logic.h"
+
+1621013918 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/screens.cpp
+	<stdio.h>
+	<cstring>
+	<iostream>
+	<cmath>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+	"interface.h"
+	"data.h"
+	"logic.h"
+	"audio.h"
+
+1621012601 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/visuals.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"screens.h"
+

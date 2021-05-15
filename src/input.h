@@ -44,8 +44,8 @@ public:
 
     SDL_Keymod KeyModState;
 
-    bool MouseButtonPressed[2];
-    bool MouseButtonWasClicked[2];
+    bool MouseButtonPressed[3];
+    bool MouseButtonWasClicked[3];
     int MouseX, MouseY;
     int MouseButtonClicked;
 

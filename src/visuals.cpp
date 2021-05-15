@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
     SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' R.C.#3 - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' Retail3 Final - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -841,12 +841,7 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("100% Arcade Perfect To Home Conversion By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("(Original Gameboy Version)", 255) == false)  return(false);
-/*
-    if ( LoadStaffTextIntoMemory("''Near Perfect'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("Yiyuan Lee", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("X,XXX,XXX+ Average Lines Per Game!", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("(Didn't Make It In Time, Sorry!)", 255) == false)  return(false);
-*/
+
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("32,000+ Average Lines Per Game!", 255) == false)  return(false);
@@ -1370,5 +1365,3 @@ bool sentenceIsInCache = false;
     SDL_FreeSurface(text);
     SDL_FreeSurface(textOutline);
 }
-
-//-------------------------------------------------------------------------------------------------

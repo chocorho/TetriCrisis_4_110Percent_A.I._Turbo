@@ -90,13 +90,14 @@ public:
         bool PieceRotated1;
         bool PieceRotated2;
 
+        bool MovePieceCollision[15][5];
+
         float MovePieceHeight[15][5];
         float MoveTrappedHoles[15][5];
         float MoveOneBlockCavernHoles[15][5];
         float MovePlayfieldBoxEdges[15][5];
         float MoveCompletedLines[15][5];
 
-        bool MovePieceCollision[15][5];
         int MoveSetup4Line[15][5];
         int MovePlayfieldTop[15][5];
         int MovePlayfieldTotalHeight[15][5];
@@ -195,8 +196,7 @@ public:
 	int ContinueWatchingTimer;
 
     bool HumanStillAlive;
-
-	int DontDisplayTestImages;
+    int AllHumansDeadExitTimer;
 
     Uint8 TileSet;
 
@@ -256,9 +256,7 @@ public:
 
     bool CrisisModeClearPlayfield(void);
 
-    int UseOldAI = 1;
-    void ComputeComputerPlayerMoveOld(void);
-    void ComputeComputerPlayerMoveNew(void);
+    void ComputeComputerPlayerMove(void);
 };
 
 #endif

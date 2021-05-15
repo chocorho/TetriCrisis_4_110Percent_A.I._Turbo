@@ -17,7 +17,7 @@
     AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
-                                                    SDL 2.0.14
+                                                     SDL 2.0.14
                                            (SDL2_Image/SDL2_Mixer/SDL2_TTF)
                                          Cross-Platform / M.I.T. Open-Source
   _______ _______     ______   _______    _       _______          _           _______ _                                _
@@ -29,13 +29,26 @@ ________________________________________________________________________________
                                                                                                        (_____|Version 3.0
                                            2-Dimensional Video Game Engine
 .............................................................................................................................
+                                                      JeZxLee's
 
                                          "T-Crisis 4 110% A.I. Turbo Remix"
 
-                                           Retail3 Version 4.5.6 NOT Final
+                                            Retail3 Version 4.5.6 Final
 
                                                    Team 16BitSoft
 _____________________________________________________________________________________________________________________________
+
+FINAL DONE(From "TC4T-Linux-Windows3c"):
+
+* [ALL] - CPU can't win(not a bug, just annoying)
+
+* [ALL] - Right-click mouse can exit new game options screen back to title screen
+
+* [ALL] - Original A.I. fixed / new A.I. not needed
+
+* [ALL] - Source code cleaned
+
+
 
 DONE(From "TC4T-Linux-Windows3b"):
 
@@ -56,17 +69,6 @@ DONE(From "TC4T-Linux-Windows3b"):
 * [ALL] - Sound FX buffer overruns: (1) "Crisis+Mode" Level 7 / (2) "Crisis+Mode" attack block(BUGS)
 
 * [ALL] - Allow 4 gamepad play(BUG)
-
-*
-
-
-TO DO:
-
-* [ALL] - CPU can't win(?)
-
-* [Linux/Win?] - Main menu unresponsive?(BUG)
-
-* [ALL] - Fix new A.I. -
 
 _____________________________________________________________________________________________________________________________
 */
@@ -130,7 +132,7 @@ int main( int argc, char* args[] )
 
     data = new Data();
 
-    srand( (unsigned)time(NULL) ); // Place unique time seed into random number generator.
+    srand( (unsigned)time(NULL) ); /* Place unique time seed into random number generator. */
 
     logic = new Logic();
 
@@ -143,7 +145,7 @@ int main( int argc, char* args[] )
 
     if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
-    //-MAIN-LOOP------------------------------------------------------------------------
+    /*-MAIN-LOOP------------------------------------------------------------------------*/
     printf("-Main loop started-----------------------------\n");
     while (visuals->CoreFailure != true && input->EXIT_Game != true)
     {
@@ -152,10 +154,9 @@ int main( int argc, char* args[] )
         screens->ProcessScreenToDisplay();
         visuals->ProcessFramerate();
     }
-
     if (visuals->CoreFailure == true)  printf("*****ERROR: Game crashed in Main loop*****\n");
     else  printf("-----------------------------Main loop ended-\n");
-    //------------------------------------------------------------------------MAIN-LOOP-
+    /*------------------------------------------------------------------------MAIN-LOOP-*/
 
     data->SaveHighScoresAndOptions();
 
@@ -172,4 +173,5 @@ int main( int argc, char* args[] )
     return(0);
 }
 
-// "A 110% By Team 16BitSoft!"
+/*                           TM */
+/* "A 110% By Team 16BitSoft!"  */

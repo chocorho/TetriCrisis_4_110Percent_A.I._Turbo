@@ -194,6 +194,7 @@ void Input::GetAllUserInput(void)
 
     MouseButtonPressed[0] = false;
     MouseButtonPressed[1] = false;
+    MouseButtonPressed[2] = false;
 
     for (int index = 0; index < 5; index++)
     {
@@ -327,7 +328,7 @@ void Input::GetAllUserInput(void)
 
 //------------------------------------------------------------------------
 
-    for (int index = 0; index < 2; index++)
+    for (int index = 0; index < 3; index++)
     {
         if ( SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(index+1) )
         {
