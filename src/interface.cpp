@@ -83,7 +83,7 @@ Interface::~Interface(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY)
+void Interface::CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, float ScreenY)
 {
     ButtonSelectedByKeyboard = 0;
     ButtonSelectedByPlayer = -1;
@@ -112,7 +112,7 @@ void Interface::DisplayAllButtonsOntoScreenBuffer(void)
     {
         if (ButtonGUIs[index].ScreenIndex != -1)
         {
-            visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].ScreenX = 320;
+            visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].ScreenX = 320.0f;
             visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].ScreenY = ButtonGUIs[index].ScreenY;
             visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].ScaleX = ButtonGUIs[index].Scale;
             visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].ScaleY = ButtonGUIs[index].Scale;
@@ -188,7 +188,7 @@ void Interface::ProcessAllButtons(void)
         }
         else
         {
-            ButtonGUIs[ButtonSelectedByKeyboard].Scale = 0.9;
+            ButtonGUIs[ButtonSelectedByKeyboard].Scale = 0.9f;
             ButtonGUIs[ButtonSelectedByKeyboard].AnimationTimer = 10;
             screens->ScreenIsDirty = 2;
             input->DelayAllUserInput = 50;
@@ -228,7 +228,7 @@ void Interface::ProcessAllButtons(void)
                    && (  input->MouseX < ( 320 + (visuals->Sprites[ ButtonGUIs[index].SpriteIndex ].TextureWidthOriginal / 2) )  )   )
                 {
                     ButtonSelectedByKeyboard = ButtonGUIs[index].ScreenIndex;
-                    ButtonGUIs[index].Scale = 0.9;
+                    ButtonGUIs[index].Scale = 0.9f;
                     ButtonGUIs[index].AnimationTimer = 10;
                     screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
@@ -278,7 +278,7 @@ void Interface::DestroyAllButtons(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateArrowSet(float ScreenIndex, int ScreenY)
+void Interface::CreateArrowSet(float ScreenIndex, float ScreenY)
 {
     ArrowSetSelectedByKeyboard = 0;
     ArrowSetArrowSelectedByPlayer = -1;
@@ -346,8 +346,8 @@ void Interface::ProcessAllArrowSets(void)
 
     if (thereIsArrowSet == false)  return;
 
-    Sint8 MinArrowSetIndex = 0;
-    Sint8 MaxArrowSetIndex = -1;
+    float MinArrowSetIndex = 0.0f;
+    float MaxArrowSetIndex = -1.0f;
     for (int index = 0; index < NumberOfArrowSets; index++)
     {
         if (ArrowSetGUIs[index].LeftArrowScreenIndex > MaxArrowSetIndex)
@@ -357,7 +357,7 @@ void Interface::ProcessAllArrowSets(void)
     if (input->JoystickDirectionVertical[Any] == UP && NumberOfArrowSetsOnScreen > 1)
     {
         if (ArrowSetSelectedByKeyboard > MinArrowSetIndex)  ArrowSetSelectedByKeyboard--;
-        else  ArrowSetSelectedByKeyboard = MaxArrowSetIndex;
+        else  ArrowSetSelectedByKeyboard = (Uint8)MaxArrowSetIndex;
 
         screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
@@ -366,7 +366,7 @@ void Interface::ProcessAllArrowSets(void)
     else if (input->JoystickDirectionVertical[Any] == DOWN && NumberOfArrowSetsOnScreen > 1)
     {
         if (ArrowSetSelectedByKeyboard < MaxArrowSetIndex)  ArrowSetSelectedByKeyboard++;
-        else  ArrowSetSelectedByKeyboard = MinArrowSetIndex;
+        else  ArrowSetSelectedByKeyboard = (Uint8)MinArrowSetIndex;
 
         screens->ScreenIsDirty = 2;
         input->DelayAllUserInput = 20;
@@ -374,7 +374,7 @@ void Interface::ProcessAllArrowSets(void)
     }
     else if (input->JoystickDirectionHorizontal[Any] == LEFT)
     {
-        ArrowSetGUIs[ArrowSetSelectedByKeyboard].LeftArrowScale = 0.8;
+        ArrowSetGUIs[ArrowSetSelectedByKeyboard].LeftArrowScale = 0.8f;
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].AnimationTimer = 10;
 
         screens->ScreenIsDirty = 2;
@@ -383,7 +383,7 @@ void Interface::ProcessAllArrowSets(void)
     }
     else if (input->JoystickDirectionHorizontal[Any] == RIGHT)
     {
-        ArrowSetGUIs[ArrowSetSelectedByKeyboard].RightArrowScale = 0.8;
+        ArrowSetGUIs[ArrowSetSelectedByKeyboard].RightArrowScale = 0.8f;
         ArrowSetGUIs[ArrowSetSelectedByKeyboard].AnimationTimer = 10;
 
         screens->ScreenIsDirty = 2;
@@ -402,8 +402,8 @@ void Interface::ProcessAllArrowSets(void)
                    && ( input->MouseX > (320-295-23) )
                    && ( input->MouseX < (320-295+23) )  )
                 {
-                    ArrowSetSelectedByKeyboard = ArrowSetGUIs[index].LeftArrowScreenIndex;
-                    ArrowSetGUIs[index].LeftArrowScale = 0.8;
+                    ArrowSetSelectedByKeyboard = (Uint8)ArrowSetGUIs[index].LeftArrowScreenIndex;
+                    ArrowSetGUIs[index].LeftArrowScale = 0.8f;
                     ArrowSetGUIs[index].AnimationTimer = 10;
                     screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
@@ -414,8 +414,8 @@ void Interface::ProcessAllArrowSets(void)
                    && ( input->MouseX > (320+295-25) )
                    && ( input->MouseX < (320+295+25) )  )
                 {
-                    ArrowSetSelectedByKeyboard = ArrowSetGUIs[index].LeftArrowScreenIndex;
-                    ArrowSetGUIs[index].RightArrowScale = 0.8;
+                    ArrowSetSelectedByKeyboard = (Uint8)ArrowSetGUIs[index].LeftArrowScreenIndex;
+                    ArrowSetGUIs[index].RightArrowScale = 0.8f;
                     ArrowSetGUIs[index].AnimationTimer = 10;
                     screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;
@@ -440,7 +440,7 @@ void Interface::ProcessAllArrowSets(void)
                 else if (ArrowSetGUIs[index].RightArrowScale < 1)
                 {
                     ArrowSetGUIs[index].RightArrowScale = 1;
-                    ArrowSetArrowSelectedByPlayer = (float)ArrowSetSelectedByKeyboard+0.5;
+                    ArrowSetArrowSelectedByPlayer = (float)ArrowSetSelectedByKeyboard+0.5f;
                 }
 
                 ArrowSetGUIs[index].AnimationTimer = -1;
@@ -467,7 +467,7 @@ void Interface::DestroyAllArrowSets(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Interface::CreateIcon(Sint16 spriteIndex, int screenX, int screenY)
+void Interface::CreateIcon(Sint16 spriteIndex, float screenX, float screenY)
 {
     IconGUIs[NumberOfIconsOnScreen].SpriteIndex = spriteIndex;
     IconGUIs[NumberOfIconsOnScreen].ScreenIndex = NumberOfIconsOnScreen;
@@ -513,7 +513,7 @@ void Interface::ProcessAllIcons(void)
                    && (  input->MouseX > ( IconGUIs[index].ScreenX - (visuals->Sprites[ IconGUIs[index].SpriteIndex ].TextureWidthOriginal / 2) )  )
                    && (  input->MouseX < ( IconGUIs[index].ScreenX + (visuals->Sprites[ IconGUIs[index].SpriteIndex ].TextureWidthOriginal / 2) )  )   )
                 {
-                    IconGUIs[index].Scale = 0.9;
+                    IconGUIs[index].Scale = 0.9f;
                     IconGUIs[index].AnimationTimer = 10;
                     screens->ScreenIsDirty = 2;
                     input->DelayAllUserInput = 20;

@@ -42,6 +42,65 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Logic::Logic(void)
 {
+    ValMovePieceHeight = 0.0f;
+    ValMoveTrappedHoles = 0.0f;
+    ValMoveOneBlockCavernHoles = 0.0f;
+    ValMovePlayfieldBoxEdges = 0.0f;
+    ValMoveCompletedLines = 0.0f;
+
+    TimeAttackTimer = 0;
+
+    for (int index = 0; index < 10; index++)
+    {
+        StoryShown[index] = -1;
+    }
+
+    StoryLevelAdvanceCounter = -1;
+    StoryLevelAdvanceValue = -1;
+    
+    PlayersCanJoin = false;
+
+    Uint8 piece, rotation, box;
+    for (piece = 0; piece < 8; piece++)
+        for (rotation = 0; rotation < 5; rotation++)
+            for (box = 0; box < 17; box++)
+                PieceData[piece][rotation][box] = 0;
+
+    Multiplier = 0.0f;
+    MultiplierSelected = -1;
+
+    JoinInTimer = -1;
+
+    HumanStillAlive = false;
+    
+    GameOverTimer = -1;
+
+    GameForfeit = false;
+    
+    DangerRepeat = -1;
+
+    CrisisModeTimer = -1;
+
+    CrisisModeOnePlayerLeftPlayfieldCleared = false;
+    
+    Crisis7BGMPlayed = false;
+
+    ContinueWatchingTimer = -1;
+
+    for (int index = 0; index < 4; index++)
+    {
+        BlockAttackTransparency[index] = 255;
+    }
+
+    BestMovePieceHeight = 0.0f;
+    BestMoveTrappedHoles = 0.0f;
+    BestMoveOneBlockCavernHoles = 0.0f;
+    BestMovePlayfieldBoxEdges = 0.0f;
+    BestMoveCompletedLines = 0.0f;
+    BestTotalLinesPerGame = -1;
+
+    AllHumansDeadExitTimer = -1;
+
     GameMode = StoryMode;
 
     CPUPlayerEnabled = 2;
@@ -872,7 +931,7 @@ void Logic::MovePieceDownFast(void)
 //-------------------------------------------------------------------------------------------------
 void Logic::MovePieceDownFastDropAndDrag(void)
 {
-    if (PieceCollisionDown() == true)
+    if (PieceCollisionDown() == CollisionWithPlayfield)
     {
     }
     else
@@ -1335,11 +1394,11 @@ void Logic::SetupForNewGame(void)
         PlayerData[1].Lines = 69;
     }
 
-    ValMovePieceHeight = 0.90;
-    ValMoveTrappedHoles = 2.36;
-    ValMoveOneBlockCavernHoles = 0.20;
-    ValMovePlayfieldBoxEdges = 1.38;
-    ValMoveCompletedLines = 1.87;
+    ValMovePieceHeight = 0.90f;
+    ValMoveTrappedHoles = 2.36f;
+    ValMoveOneBlockCavernHoles = 0.20f;
+    ValMovePlayfieldBoxEdges = 1.38f;
+    ValMoveCompletedLines = 1.87f;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1583,7 +1642,7 @@ int TEMP_Player = Player;
                     }
                 }
 
-                if (PieceCollisionDown() == true)  MovePieceDown(true);
+                if (PieceCollisionDown() == CollisionWithPlayfield)  MovePieceDown(true);
 
                 if (PlayerData[Player].PlayerStatus != FlashingCompletedLines
                     && PlayerData[Player].PlayerStatus != ClearingCompletedLines)
@@ -1647,7 +1706,7 @@ bool Logic::AddAnIncompleteLineToPlayfieldCrisisMode(void)
         }
     }
 
-    if (PieceCollisionDown() == true)  MovePieceDown(true);
+    if (PieceCollisionDown() == CollisionWithPlayfield)  MovePieceDown(true);
 
     for (int y = 5; y < 23; y++)
 	    for (int x = 2; x < 12; x++)
@@ -1734,7 +1793,7 @@ void Logic::RunTetriGameEngine(void)
                         MovePieceDown(true);
                     else
                     {
-                        if (DisplayNextPiece == true)  AddPieceToPlayfieldMemory(Next);
+                        if (DisplayNextPiece == 1)  AddPieceToPlayfieldMemory(Next);
                         PlayerData[Player].PlayerStatus = PieceFalling;
                     }
                 }

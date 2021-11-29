@@ -34,7 +34,7 @@ public:
         Uint16 SpriteIndex;
         Sint8 ScreenIndex;
         float Scale;
-        int ScreenY;
+        float ScreenY;
         Sint16 AnimationTimer;
     } ButtonGUIs[NumberOfButtons];
 
@@ -49,7 +49,7 @@ public:
         float LeftArrowScreenIndex;
         float LeftArrowScale;
         float RightArrowScale;
-        int ScreenY;
+        float ScreenY;
         Sint16 AnimationTimer;
     } ArrowSetGUIs[NumberOfArrowSets];
 
@@ -63,8 +63,8 @@ public:
     {
         Sint16 SpriteIndex;
         Sint8 ScreenIndex;
-        int ScreenX;
-        int ScreenY;
+        float ScreenX;
+        float ScreenY;
         Sint16 AnimationTimer;
         float Scale;
     } IconGUIs[NumberOfIcons];
@@ -72,17 +72,17 @@ public:
     int NumberOfIconsOnScreen;
     Sint8 IconSelectedByPlayer;
 
-    void CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, int ScreenY);
+    void CreateButton(Uint16 SpriteIndex, Uint8 ScreenIndex, float ScreenY);
     void DisplayAllButtonsOntoScreenBuffer(void);
     void ProcessAllButtons(void);
     void DestroyAllButtons(void);
 
-    void CreateArrowSet(float ScreenIndex, int ScreenY);
+    void CreateArrowSet(float ScreenIndex, float ScreenY);
     void DisplayAllArrowSetsOntoScreenBuffer(void);
     void ProcessAllArrowSets(void);
     void DestroyAllArrowSets(void);
 
-    void CreateIcon(Sint16 spriteIndex, int iconScreenX, int iconScreenY);
+    void CreateIcon(Sint16 spriteIndex, float iconScreenX, float iconScreenY);
     void DisplayAllIconsOntoScreenBuffer(void);
     void ProcessAllIcons(void);
     void DestroyAllIcons(void);

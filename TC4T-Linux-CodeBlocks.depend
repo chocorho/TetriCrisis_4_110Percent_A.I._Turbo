@@ -10,6 +10,8 @@
 	"screens.h"
 	"visuals.h"
 
+1621012601 "
+
 1608634421 /usr/include/SDL2//SDL.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
@@ -45,6 +47,8 @@
 	"SDL_misc.h"
 	"begin_code.h"
 	"close_code.h"
+
+1608634421 e.h"
 
 1608634421 /usr/include/SDL2//SDL_main.h
 	"SDL_stdinc.h"
@@ -83,6 +87,8 @@
 1608634421 /usr/include/SDL2//SDL_config.h
 	"SDL_platform.h"
 	<stdarg.h>
+
+1608634421 
 
 1608634421 /usr/include/SDL2//SDL_platform.h
 	"AvailabilityMacros.h"
@@ -239,8 +245,12 @@
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
+1608634421 ode.h"
+
 1608634421 /usr/include/SDL2//SDL_scancode.h
 	"SDL_stdinc.h"
+
+1608634421 c.h"
 
 1608634421 /usr/include/SDL2//SDL_mouse.h
 	"SDL_stdinc.h"
@@ -267,6 +277,8 @@
 1608634421 /usr/include/SDL2//SDL_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
+
+1608634421 .h"
 
 1608634421 /usr/include/SDL2//SDL_gesture.h
 	"SDL_stdinc.h"
@@ -425,6 +437,8 @@
 	"screens.h"
 	"audio.h"
 	"logic.h"
+
+1621013918 
 
 1610655472 source:/home/jlp/Desktop/TC4T-LinuxWin-Retail3/src/interface.cpp
 	<stdio.h>
@@ -873,6 +887,522 @@
 	"audio.h"
 
 1621012601 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo-master/src/visuals.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"screens.h"
+
+1637990084 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/audio.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"audio.h"
+	"screens.h"
+	"visuals.h"
+
+1633921174 /usr/include/SDL2//SDL.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_metal.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"SDL_locale.h"
+	"SDL_misc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	<sal.h>
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_config.h
+	"SDL_platform.h"
+	<stdarg.h>
+
+1633921174 /usr/include/SDL2//SDL_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//begin_code.h
+
+1633921174 /usr/include/SDL2//close_code.h
+
+1633921174 /usr/include/SDL2//SDL_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<sys/cpuinline.h>
+	<mbarrier.h>
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_endian.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<endian.h>
+	<endian.h>
+	<sys/endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<arm_neon.h>
+	<altivec.h>
+	<arm_neon.h>
+	<armintr.h>
+	<arm_neon.h>
+	<arm64intr.h>
+	<arm64_neon.h>
+	<mm3dnow.h>
+	<immintrin.h>
+	<mmintrin.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1633921174 /usr/include/SDL2//SDL_scancode.h
+	"SDL_stdinc.h"
+
+1633921174 /usr/include/SDL2//SDL_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_sensor.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1633921174 /usr/include/SDL2//SDL_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_metal.h
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_locale.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1633921174 /usr/include/SDL2//SDL_misc.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1589876519 /usr/include/SDL2//SDL_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1631503333 /usr/include/SDL2//SDL_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1589877714 /usr/include/SDL2//SDL_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/audio.h
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/screens.h
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/visuals.h
+
+1637992950 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/data.cpp
+	<fstream>
+	<string.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"data.h"
+	"audio.h"
+	"input.h"
+	"logic.h"
+	"visuals.h"
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/data.h
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/input.h
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/logic.h
+
+1637988215 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/input.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1630736466 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/interface.cpp
+	<stdio.h>
+	<cstring>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"interface.h"
+	"input.h"
+	"visuals.h"
+	"screens.h"
+	"audio.h"
+	"logic.h"
+
+1630736466 /home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/interface.h
+
+1630736466 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/logic.cpp
+	<stdio.h>
+	<cstring>
+	<cstdlib>
+	<float.h>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"logic.h"
+	"audio.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+
+1637987090 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/main.cpp
+	<stdio.h>
+	<cstring>
+	<time.h>
+	<cstdlib>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"visuals.h"
+	"input.h"
+	"screens.h"
+	"interface.h"
+	"audio.h"
+	"data.h"
+	"logic.h"
+
+1637993108 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/screens.cpp
+	<stdio.h>
+	<cstring>
+	<iostream>
+	<cmath>
+	"SDL.h"
+	"SDL_image.h"
+	"SDL_mixer.h"
+	"SDL_ttf.h"
+	"screens.h"
+	"input.h"
+	"visuals.h"
+	"interface.h"
+	"data.h"
+	"logic.h"
+	"audio.h"
+
+1637991901 source:/home/jlp/Desktop/TetriCrisis_4_110Percent_A.I._Turbo.git/src/visuals.cpp
 	<stdio.h>
 	<cstring>
 	"SDL.h"

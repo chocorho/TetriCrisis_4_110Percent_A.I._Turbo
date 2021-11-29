@@ -140,7 +140,7 @@ bool Visuals::InitializeWindow(void)
     SDL_Surface* windowIcon = SDL_LoadBMP("data/visuals/icon.bmp");
 
     Window = NULL;
-    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' Retail3 Final - By Team 16BitSoft"
+    Window = SDL_CreateWindow("''T-Crisis 4 110% A.I. Turbo Remix'' Retail3 Final PM - By Team 16BitSoft"
                                  , SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
     if (Window == NULL)
@@ -194,152 +194,152 @@ int textureHeight;
 
     for (int index = 0; index < NumberOfSprites; index++)
     {
-        strcpy(filePath, "~");
+        SDL_strlcpy(filePath, "~", sizeof filePath);
 
         switch(index)
         {
             case 0:
-                strcpy(filePath, "data/visuals/Screen-Fade-Black-Box.png");
+                SDL_strlcpy(filePath, "data/visuals/Screen-Fade-Black-Box.png", sizeof filePath);
                 break;
 
             case 1:
-                strcpy(filePath, "data/visuals/16BitSoft-Logo.png");
+                SDL_strlcpy(filePath, "data/visuals/16BitSoft-Logo.png", sizeof filePath);
                 break;
 
             case 2:
-                strcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png", sizeof filePath);
                 break;
 
             case 3:
-                strcpy(filePath, "data/visuals/T-C-4a-Logo.png");
+                SDL_strlcpy(filePath, "data/visuals/T-C-4a-Logo.png", sizeof filePath);
                 break;
 
             case 4:
-                strcpy(filePath, "data/visuals/Keyboard-Controls.png");
+                SDL_strlcpy(filePath, "data/visuals/Keyboard-Controls.png", sizeof filePath);
                 break;
 
             case 7:
-                strcpy(filePath, "data/visuals/Line.png");
+                SDL_strlcpy(filePath, "data/visuals/Line.png", sizeof filePath);
                 break;
 
             case 9:
-                strcpy(filePath, "data/visuals/SDL-Logo.png");
+                SDL_strlcpy(filePath, "data/visuals/SDL-Logo.png", sizeof filePath);
                 break;
 
             case 10:
-                strcpy(filePath, "data/visuals/SDL2-Logo.png");
+                SDL_strlcpy(filePath, "data/visuals/SDL2-Logo.png", sizeof filePath);
                 break;
 
             case 13:
-                strcpy(filePath, "data/visuals/TC1Palm-Title.png");
+                SDL_strlcpy(filePath, "data/visuals/TC1Palm-Title.png", sizeof filePath);
                 break;
 
             case 14:
-                strcpy(filePath, "data/visuals/TC1Palm-InGame.png");
+                SDL_strlcpy(filePath, "data/visuals/TC1Palm-InGame.png", sizeof filePath);
                 break;
 
             case 15:
-                strcpy(filePath, "data/visuals/Review.png");
+                SDL_strlcpy(filePath, "data/visuals/Review.png", sizeof filePath);
                 break;
 
             case 17:
-                strcpy(filePath, "data/visuals/T-Crisis_PromoCover.png");
+                SDL_strlcpy(filePath, "data/visuals/T-Crisis_PromoCover.png", sizeof filePath);
                 break;
 
             case 30:
-                strcpy(filePath, "data/visuals/PlayfieldStory.png");
+                SDL_strlcpy(filePath, "data/visuals/PlayfieldStory.png", sizeof filePath);
                 break;
 
             case 31:
-                strcpy(filePath, "data/visuals/Playfield.png");
+                SDL_strlcpy(filePath, "data/visuals/Playfield.png", sizeof filePath);
                 break;
 
             case 32:
-                strcpy(filePath, "data/visuals/Playfield-Block-Attack.png");
+                SDL_strlcpy(filePath, "data/visuals/Playfield-Block-Attack.png", sizeof filePath);
                 break;
 
 
             case 39:
-                strcpy(filePath, "data/story/BG-Space.png");
+                SDL_strlcpy(filePath, "data/story/BG-Space.png", sizeof filePath);
                 break;
 
             case 40:
-                strcpy(filePath, "data/story/Mars.png");
+                SDL_strlcpy(filePath, "data/story/Mars.png", sizeof filePath);
                 break;
 
             case 41:
-                strcpy(filePath, "data/story/ShipAway.png");
+                SDL_strlcpy(filePath, "data/story/ShipAway.png", sizeof filePath);
                 break;
 
             case 42:
-                strcpy(filePath, "data/story/Earth.png");
+                SDL_strlcpy(filePath, "data/story/Earth.png", sizeof filePath);
                 break;
 
             case 43:
-                strcpy(filePath, "data/story/ShipComing.png");
+                SDL_strlcpy(filePath, "data/story/ShipComing.png", sizeof filePath);
                 break;
 
             case 44:
-                strcpy(filePath, "data/story/Explosion.png");
+                SDL_strlcpy(filePath, "data/story/Explosion.png", sizeof filePath);
                 break;
 
 
             case 70:
-                strcpy(filePath, "data/story/Story1.png");
+                SDL_strlcpy(filePath, "data/story/Story1.png", sizeof filePath);
                 break;
 
             case 71:
-                strcpy(filePath, "data/story/Story2.png");
+                SDL_strlcpy(filePath, "data/story/Story2.png", sizeof filePath);
                 break;
 
             case 72:
-                strcpy(filePath, "data/story/Story3.png");
+                SDL_strlcpy(filePath, "data/story/Story3.png", sizeof filePath);
                 break;
 
             case 73:
-                strcpy(filePath, "data/story/Story4.png");
+                SDL_strlcpy(filePath, "data/story/Story4.png", sizeof filePath);
                 break;
 
 
             case 75:
-                strcpy(filePath, "data/story/End1.png");
+                SDL_strlcpy(filePath, "data/story/End1.png", sizeof filePath);
                 break;
 
 
             case 100:
-                strcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-SaintBasilsCathedral.png", sizeof filePath);
                 break;
 
             case 101:
-                strcpy(filePath, "data/visuals/BG-MIG31.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-MIG31.png", sizeof filePath);
                 break;
 
             case 102:
-                strcpy(filePath, "data/visuals/BG-GT-R.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-GT-R.png", sizeof filePath);
                 break;
 
             case 103:
-                strcpy(filePath, "data/visuals/BG-NY.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-NY.png", sizeof filePath);
                 break;
 
             case 104:
-                strcpy(filePath, "data/visuals/BG-Van-Gogh.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-Van-Gogh.png", sizeof filePath);
                 break;
 
             case 105:
-                strcpy(filePath, "data/visuals/BG-Kittens.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-Kittens.png", sizeof filePath);
                 break;
 
             case 106:
-                strcpy(filePath, "data/visuals/BG-Psycho.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-Psycho.png", sizeof filePath);
                 break;
 
             case 108:
-                strcpy(filePath, "data/visuals/BG-Story.png");
+                SDL_strlcpy(filePath, "data/visuals/BG-Story.png", sizeof filePath);
                 break;
 
             case 155:
-                strcpy(filePath, "data/visuals/Crack.png");
+                SDL_strlcpy(filePath, "data/visuals/Crack.png", sizeof filePath);
                 break;
 
 
@@ -541,63 +541,63 @@ char temp[256];
 
     for ( int index = 999; index < (1010+65+10); index++ )
     {
-        strcpy(filePath, "~");
+        SDL_strlcpy(filePath, "~", sizeof filePath);
 
         switch(index)
         {
             case 999:
-                strcpy(filePath, "data/visuals/Letter-Tile.png");
+                SDL_strlcpy(filePath, "data/visuals/Letter-Tile.png", sizeof filePath);
                 break;
 
             case 1000:
-                strcpy(filePath, "data/visuals/Button-Selector-Left.png");
+                SDL_strlcpy(filePath, "data/visuals/Button-Selector-Left.png", sizeof filePath);
                 break;
 
             case 1001:
-                strcpy(filePath, "data/visuals/Button-Selector-Right.png");
+                SDL_strlcpy(filePath, "data/visuals/Button-Selector-Right.png", sizeof filePath);
                 break;
 
             case 1002:
-                strcpy(filePath, "data/visuals/Selector-Line.png");
+                SDL_strlcpy(filePath, "data/visuals/Selector-Line.png", sizeof filePath);
                 break;
 
             case 1003:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1004:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1005:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1006:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1007:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1008:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1009:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             case 1010:
-                strcpy(filePath, "data/visuals/Button.png");
+                SDL_strlcpy(filePath, "data/visuals/Button.png", sizeof filePath);
                 break;
 
             default:
                 break;
         }
 
-        if (index > 1019)  strcpy(filePath, "data/visuals/Letter-Tile.png");
+        if (index > 1019)  SDL_strlcpy(filePath, "data/visuals/Letter-Tile.png", sizeof filePath);
 
         if (filePath[0] != '~')
         {
@@ -615,16 +615,16 @@ char temp[256];
         {
             char buttonText[64];
 
-            strcpy(buttonText, " \0");
+            SDL_strlcpy(buttonText, " \0", sizeof buttonText);
 
-            if      (index == 1003)  strcpy(buttonText, "START!\0");
-            else if (index == 1004)  strcpy(buttonText, "Options\0");
-            else if (index == 1005)  strcpy(buttonText, "How To Play\0");
-            else if (index == 1006)  strcpy(buttonText, "High Scores\0");
-            else if (index == 1007)  strcpy(buttonText, "About\0");
-            else if (index == 1008)  strcpy(buttonText, "Exit\0");
-            else if (index == 1009)  strcpy(buttonText, "Back\0");
-            else if (index == 1010)  strcpy(buttonText, "Send Email\0");
+            if      (index == 1003)  SDL_strlcpy(buttonText, "START!\0", sizeof buttonText);
+            else if (index == 1004)  SDL_strlcpy(buttonText, "Options\0", sizeof buttonText);
+            else if (index == 1005)  SDL_strlcpy(buttonText, "How To Play\0", sizeof buttonText);
+            else if (index == 1006)  SDL_strlcpy(buttonText, "High Scores\0", sizeof buttonText);
+            else if (index == 1007)  SDL_strlcpy(buttonText, "About\0", sizeof buttonText);
+            else if (index == 1008)  SDL_strlcpy(buttonText, "Exit\0", sizeof buttonText);
+            else if (index == 1009)  SDL_strlcpy(buttonText, "Back\0", sizeof buttonText);
+            else if (index == 1010)  SDL_strlcpy(buttonText, "Send Email\0", sizeof buttonText);
 
 
             if ( index == (1020+26) )  indexOffset = 0;
@@ -632,38 +632,38 @@ char temp[256];
 
             if ( index > 1019 && index < (1020+26) )
             {
-                sprintf( temp, "%c", (65+indexOffset) );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (65+indexOffset) );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
             else if ( index > (1020+25) && index < (1020+26+26) )
             {
-                sprintf( temp, "%c", (97+indexOffset) );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (97+indexOffset) );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
             else if ( index > (1020+25+25) && index < (1020+26+26+10) )
             {
-                sprintf( temp, "%c", (48+indexOffset) );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (48+indexOffset) );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
             else if ( index == (1020+26+26+10) )
             {
-                sprintf( temp, "%c", 43 );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", 43 );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
             else if ( index == (1020+26+26+10+1) )
             {
-                sprintf( temp, "%c", 95 );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", 95 );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
             else if ( index == (1020+26+26+10+1+1) )
             {
-                sprintf( temp, "%c", 60 );
-                strcpy(buttonText, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", 60 );
+                SDL_strlcpy(buttonText, temp, sizeof buttonText);
                 indexOffset++;
             }
 
@@ -806,16 +806,16 @@ bool Visuals::PreloadStaffTextsIntoMemory(void)
 char textToDisplay[100];
 char *copyright = new char[2];
 char *reg = new char[2];
-sprintf(copyright, "%c", 0xA9);
-sprintf(reg, "%c", 0xAE);
+SDL_snprintf (copyright, sizeof copyright, "%c", 0xA9);
+SDL_snprintf (reg, sizeof reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory(" ", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''T-Crisis 4 110% A.I. Turbo Remix''", 0) == false)  return(false);
-    strcpy(textToDisplay, "Team 16BitSoft");
+    SDL_strlcpy(textToDisplay, "Team 16BitSoft", sizeof textToDisplay);
     if ( LoadStaffTextIntoMemory(textToDisplay, 255) == false)  return(false);
 
-    strcpy(textToDisplay, "Original");
-    strcat(textToDisplay, " Video Game Concept By:");
+    SDL_strlcpy(textToDisplay, "Original", sizeof textToDisplay);
+    SDL_strlcat(textToDisplay, " Video Game Concept By:", sizeof textToDisplay);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Alexey Pajitnov", 255) == false)  return(false);
 
@@ -828,6 +828,11 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("(SDL2_Image / SDL2_Mixer / SDL2_TTF)", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- Cross-Platform Open-Source -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.LibSDL.org", 255) == false)  return(false);
+
+    if (LoadStaffTextIntoMemory("Video Game Made On:", 0) == false)  return(false);
+    if (LoadStaffTextIntoMemory(" Genuine ''Manjaro KDE 64Bit'' Linux O.S.", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("www.Manjaro.org", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("(Real Programmers Use Linux!)", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Video Game Project Produced By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -844,7 +849,7 @@ sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory("''Gift Of Sight'' Artificial Intelligence Core Programmer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("32,000+ Average Lines Per Game!", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("(32,000+ Average Lines Per Game!)", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Lead Game Designer:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
@@ -865,10 +870,6 @@ sprintf(reg, "%c", 0xAE);
 
     if ( LoadStaffTextIntoMemory("Lead Music Composer/Remixer / Sound Editor:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''D.J. Fading Twilight''", 255) == false)  return(false);
-
-    if ( LoadStaffTextIntoMemory("Win ''Crisis+Mode'' BGM:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("''No Easy Way out'' - Robert Tepper", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("Cover by ''Minniva'' Feat Quentin Cornet", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''Story+Mode'' Music Soundtrack By:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("------------------------------------------------------------------------------", 255) == false)  return(false);
@@ -908,10 +909,6 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
 
-    if ( LoadStaffTextIntoMemory("Video Game Made On:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("www.openSUSE.org", 255) == false)  return(false);
-
     if ( LoadStaffTextIntoMemory("Windows EXE Executable Built With:", 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Code::Blocks'' Cross-Platform C++ I.D.E.", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("www.CodeBlocks.org", 255) == false)  return(false);
@@ -931,20 +928,20 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("(Free Linux Alternative: ''Audacity'')", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("Video Game Built On:", 0) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("A ''JeZxLee'' Pro-Built Thin Desktop System", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- Desktop Code Name: ''BumbleBee'' -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- Genuine ''openSUSE Tumbleweed KDE 64Bit'' Linux O.S. -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- 300 Watt Power Supply -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- ASRock Q1900M Motherboard -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- Intel Celeron 2GHz(2.42GHz OverClock) 4-Core CPU -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- Corsair 2 x 8GB(16GB Total) DDR3 RAM Memory -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- nVidia GeForce GT 1030 2GB GDDR5 PCIexpress GPU -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Solid State Drive(OS/Apps) -", 255) == false)  return(false);
-    if ( LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive(Personal Data) -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("A Hyper - Custom ''JeZxLee'' Pro - Built Desktop", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Desktop Code Name: ''Optimus Prime'' -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Genuine ''Manjaro KDE 64Bit'' Linux O.S. -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Corsair 750watt Modular Power Supply -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- GIGABYTE GA-970A-DS3P 2.0 AM3+ Motherboard -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- AMD FX 3.5GHz[4GHz Turbo] 8-Core CPU -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Corsair 32GB DDR3 RAM Memory -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- nVidia GeForce GTX 970TT 4GB GDDR5 GPU -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Hard Drive[OS/Apps] -", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive(Personal Data) -", 255) == false)  return(false);
 
-    strcpy(textToDisplay, "Microsoft");
-    strcat(textToDisplay, " Windows");
-    strcat(textToDisplay, " Technical Advisors:");
+    SDL_strlcpy(textToDisplay, "Microsoft", sizeof textToDisplay);
+    SDL_strlcat(textToDisplay, " Windows", sizeof textToDisplay);
+    SDL_strlcat(textToDisplay, " Technical Advisors:", sizeof textToDisplay);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daotheman''", 255) == false)  return(false);
@@ -953,9 +950,9 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''JeZxLee''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''mattmatteh''", 255) == false)  return(false);
 
-    strcpy(textToDisplay, "Apple");
-    strcat(textToDisplay, " macOS");
-    strcat(textToDisplay, " Technical Advisors:");
+    SDL_strlcpy(textToDisplay, "Apple", sizeof textToDisplay);
+    SDL_strlcat(textToDisplay, " macOS", sizeof textToDisplay);
+    SDL_strlcat(textToDisplay, " Technical Advisors:", sizeof textToDisplay);
     if ( LoadStaffTextIntoMemory(textToDisplay, 0) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Someone?", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("Email: ''JeZxLee @ 16BitSoft'' To Help!", 255) == false)  return(false);
@@ -996,6 +993,11 @@ sprintf(reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''tvault''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daniel_Gibson''", 255) == false)  return(false);
 
+    if (LoadStaffTextIntoMemory("''Petruska''", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("''meklu''", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("''sjr''", 255) == false)  return(false);
+    if (LoadStaffTextIntoMemory("''chozorho''", 255) == false)  return(false);
+
     if ( LoadStaffTextIntoMemory("You!", 255) == false)  return(false);
 
     if ( LoadStaffTextIntoMemory("''A 110% By Team 16BitSoft!''", 0) == false)  return(false);
@@ -1031,15 +1033,18 @@ int textureHeight;
         winHeightFixed = 1;
     }
 
-    destinationRect.x = ( Sprites[index].ScreenX * (winWidthFixed) )
-                        - (  ( (textureWidth * Sprites[index].ScaleX) * (winWidthFixed) ) / 2  );
-    destinationRect.y = ( Sprites[index].ScreenY * (winHeightFixed) )
-                        - (  ( (textureHeight * Sprites[index].ScaleY) * (winHeightFixed) ) / 2  );
-    destinationRect.w = textureWidth * Sprites[index].ScaleX * (winWidthFixed);
-    destinationRect.h = textureHeight * Sprites[index].ScaleY * (winHeightFixed);
+    destinationRect.x = (int)(( Sprites[index].ScreenX * (winWidthFixed) )
+                        - (  ( (textureWidth * Sprites[index].ScaleX) * (winWidthFixed) ) / 2  ));
+    destinationRect.y = (int)(( Sprites[index].ScreenY * (winHeightFixed) )
+                        - (  ( (textureHeight * Sprites[index].ScaleY) * (winHeightFixed) ) / 2  ));
+    destinationRect.w = (int)(textureWidth * Sprites[index].ScaleX * (winWidthFixed));
+    destinationRect.h = (int)(textureHeight * Sprites[index].ScaleY * (winHeightFixed));
 
     SDL_SetTextureColorMod(Sprites[index].Texture, Sprites[index].RedHue, Sprites[index].GreenHue, Sprites[index].BlueHue);
-    SDL_SetTextureAlphaMod(Sprites[index].Texture, Sprites[index].Transparency);
+    if (SDL_SetTextureAlphaMod(Sprites[index].Texture, Sprites[index].Transparency) != 0)
+    {
+        printf("Transparency not working?: %s\n", SDL_GetError());
+    }
 
     if (Sprites[index].FlipX == false && Sprites[index].FlipY == false)
     {
@@ -1184,7 +1189,7 @@ void Visuals::ClearTextCache(void)
 }
 
 //-------------------------------------------------------------------------------------------------
-void Visuals::DrawTextOntoScreenBuffer(const char *textToDisplay, TTF_Font *font, int posX, int posY
+void Visuals::DrawTextOntoScreenBuffer(const char *textToDisplay, TTF_Font *font, float posX, float posY
                                        , Uint8 XJustification, Uint8 textRed, Uint8 textGreen, Uint8 textBlue
                                        , Uint8 outlineRed, Uint8 outlineGreen, Uint8 outlineBlue)
 {
@@ -1247,10 +1252,10 @@ bool sentenceIsInCache = false;
         TextCacheGreen[TextCacheCurrentIndex] = textGreen;
         TextCacheBlue[TextCacheCurrentIndex] = textBlue;
 
-        text = TTF_RenderText_Solid(font, textToDisplay, textColor);
+        text = TTF_RenderText_Blended(font, textToDisplay, textColor);
         textOutline = TTF_RenderText_Solid(font, textToDisplay, outlineColor);
 
-        strcpy(TextCachedText[TextCacheCurrentIndex], textToDisplay);
+        SDL_strlcpy(TextCachedText[TextCacheCurrentIndex], textToDisplay, sizeof TextCachedText[TextCacheCurrentIndex]);
 
         TextCachedScreenX[TextCacheCurrentIndex] = posX;
         TextCachedScreenY[TextCacheCurrentIndex] = posY;
@@ -1321,17 +1326,17 @@ bool sentenceIsInCache = false;
 
     if (sentenceIsInCache == false)
     {
-        destinationRect.x = (posX * winWidthFixed) - ( (text->w * winWidthFixed) / 2 );
-        destinationRect.y = (posY * winHeightFixed) - (winHeightFixed / 2) + 3;
-        destinationRect.w = text->w * (winWidthFixed);
-        destinationRect.h = text->h * (winHeightFixed);
+        destinationRect.x = (int)((posX * winWidthFixed) - ( (text->w * winWidthFixed) / 2 ));
+        destinationRect.y = (int)((posY * winHeightFixed) - (winHeightFixed / 2) + 3);
+        destinationRect.w = (int)(text->w * (winWidthFixed));
+        destinationRect.h = (int)(text->h * (winHeightFixed));
     }
     else
     {
-        destinationRect.x = (posX * winWidthFixed) - ( (TextCachedWidth[textCacheCheckIndex] * winWidthFixed) / 2 );
-        destinationRect.y = (posY * winHeightFixed) - (winHeightFixed / 2) + 3;
-        destinationRect.w = TextCachedWidth[textCacheCheckIndex] * (winWidthFixed);
-        destinationRect.h = TextCachedHeight[textCacheCheckIndex] * (winHeightFixed);
+        destinationRect.x = (int)((posX * winWidthFixed) - ( (TextCachedWidth[textCacheCheckIndex] * winWidthFixed) / 2 ));
+        destinationRect.y = (int)((posY * winHeightFixed) - (winHeightFixed / 2) + 3);
+        destinationRect.w = (int)(TextCachedWidth[textCacheCheckIndex] * (winWidthFixed));
+        destinationRect.h = (int)(TextCachedHeight[textCacheCheckIndex] * (winHeightFixed));
     }
 
     destinationOutlineRect.x = destinationRect.x;

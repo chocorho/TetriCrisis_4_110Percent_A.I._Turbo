@@ -17,7 +17,7 @@
     AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
-                                                     SDL 2.0.14
+                                                     SDL 2.0.16
                                            (SDL2_Image/SDL2_Mixer/SDL2_TTF)
                                          Cross-Platform / M.I.T. Open-Source
   _______ _______     ______   _______    _       _______          _           _______ _                                _
@@ -26,17 +26,27 @@ ________________________________________________________________________________
  | | (_  |  | |(_____)  __  /    | | | | | |  _ \   | | | | |/ ___)  _ \ / _ \| |     |  _ \(____ |/ ___) _  | ___ |/ _  |
  | |___) |  | |      | |  \ \    | | | | | | | | |  | | |_| | |   | |_) ) |_| | |_____| | | / ___ | |  ( (_| | ____( (_| |
   \_____/   |_|      |_|   |_|   |_|\___/|_|_| |_|  |_|____/|_|   |____/ \___/ \______)_| |_\_____|_|   \___ |_____)\____|
-                                                                                                       (_____|Version 3.0
+                                                                                                       (_____|Version 3.1
                                            2-Dimensional Video Game Engine
 .............................................................................................................................
                                                       JeZxLee's
 
                                          "T-Crisis 4 110% A.I. Turbo Remix"
 
-                                            Retail3 Version 4.5.6 Final
+                                       Retail3 Version 4.5.6 Final Postmortem
 
                                                    Team 16BitSoft
 _____________________________________________________________________________________________________________________________
+
+FINAL DONE POSTMORTEM(From "TC4T-Linux-WindowsR3"):
+
+* [ALL] - Fixed source code to be compatible with Microsoft Visual Studio 2019 while still being Linux compatible
+
+* [Linux] - Fixed Windows EXE version of game not running on Linux WINE
+
+* [ALL] - Improved draw quality of TTF text
+
+
 
 FINAL DONE(From "TC4T-Linux-Windows3c"):
 
@@ -103,8 +113,18 @@ int main( int argc, char* args[] )
 {
     printf("''GT-R Twin TurboCharged'' game engine started!\n");
     argc = argc; args = args;
-
-    if ( SDL_Init(SDL_INIT_EVERYTHING) != 0 )
+/*
+SDL_INIT_TIMER: timer subsystem
+SDL_INIT_AUDIO : audio subsystem
+SDL_INIT_VIDEO : video subsystem; automatically initializes the events subsystem
+SDL_INIT_JOYSTICK : joystick subsystem; automatically initializes the events subsystem
+SDL_INIT_HAPTIC : haptic(force feedback) subsystem
+SDL_INIT_GAMECONTROLLER : controller subsystem; automatically initializes the joystick subsystem
+SDL_INIT_EVENTS : events subsystem
+SDL_INIT_EVERYTHING : all of the above subsystems
+SDL_INIT_NOPARACHUTE : compatibility; this flag is ignored
+*/
+    if ( SDL_Init(SDL_INIT_TIMER|SDL_INIT_AUDIO|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK|SDL_INIT_HAPTIC|SDL_INIT_GAMECONTROLLER|SDL_INIT_EVENTS) != 0 )
     {
         printf( "Unable to initialize SDL2: %s\n", SDL_GetError() );
         return(1);
@@ -119,6 +139,7 @@ int main( int argc, char* args[] )
     visuals = new Visuals();
 
     SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
     if ( visuals->InitializeWindow() != true ) visuals->CoreFailure = true;
 
     if ( visuals->LoadFontsIntoMemory() != true )  visuals->CoreFailure = true;
@@ -140,8 +161,6 @@ int main( int argc, char* args[] )
     audio->SetupAudio();
 
     data->LoadHighScoresAndOptions();
-
-    SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
     if (visuals->FullScreenMode == 1 || visuals->FullScreenMode == 3)  SDL_SetWindowFullscreen(visuals->Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 

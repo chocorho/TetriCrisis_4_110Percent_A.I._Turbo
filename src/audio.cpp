@@ -37,6 +37,10 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Audio::Audio(void)
 {
+    SDL_strlcpy(Mix_Init_Error, "0", sizeof Mix_Init_Error);
+
+    CurrentMusicTrackPlaying = 0;
+
     MusicVolume = 64;
     SoundVolume = 64;
     CurrentlySelectedMusicTrack = 0;
@@ -78,8 +82,7 @@ Audio::~Audio(void)
 //-------------------------------------------------------------------------------------------------
 void Audio::SetupAudio(void)
 {
-    strcpy(Mix_Init_Error, "SDL2_Mixer: OK");
-
+    SDL_strlcpy(Mix_Init_Error, "SDL2_Mixer: OK", sizeof Mix_Init_Error);
     int flags = MIX_INIT_OGG|MIX_INIT_MOD;
 
     int initted = Mix_Init(flags);
@@ -88,8 +91,8 @@ void Audio::SetupAudio(void)
         printf("Mix_Init: Failed to init required ogg and mod support!\n");
         printf("Mix_Init: %s\n", Mix_GetError());
 
-        strcpy(Mix_Init_Error, "SDL2_Mixer ERROR: ");
-        strcat( Mix_Init_Error, Mix_GetError() );
+        SDL_strlcpy(Mix_Init_Error, "SDL2_Mixer ERROR: ", sizeof Mix_Init_Error);
+        SDL_strlcat(Mix_Init_Error, Mix_GetError(), sizeof Mix_Init_Error);
 
         AudioWorking = false;
         return;
@@ -99,8 +102,8 @@ void Audio::SetupAudio(void)
     {
         printf("ERROR: SDL2_Mixer init failed: %s\n", Mix_GetError());
 
-        strcpy(Mix_Init_Error, "SDL2_Mixer ERROR: ");
-        strcat( Mix_Init_Error, Mix_GetError() );
+        SDL_strlcpy(Mix_Init_Error, "SDL2_Mixer ERROR: ", sizeof Mix_Init_Error);
+        SDL_strlcat(Mix_Init_Error, Mix_GetError(), sizeof Mix_Init_Error);
 
         AudioWorking = false;
         return;

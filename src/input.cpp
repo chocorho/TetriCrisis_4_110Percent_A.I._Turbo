@@ -82,7 +82,7 @@ Input::Input(void)
                 if (NumberOfJoyAxises[joyIndex] > 3)  NumberOfJoyAxises[joyIndex] = 3;
                 printf("SDL2 Joystick #%i #Axis=%i, #Buttons=%i, #Hats=%i\n", joyIndex, NumberOfJoyAxises[joyIndex], NumberOfJoyButtons[joyIndex], NumberOfJoyHats[joyIndex]);
 
-                strcpy( JoystickName[joyIndex], SDL_JoystickName(JoystickDevices[joyIndex]) );
+                SDL_strlcpy(JoystickName[joyIndex], SDL_JoystickName(JoystickDevices[joyIndex]), sizeof JoystickName[joyIndex]);
                 JoystickDisabled[joyIndex] = false;
             }
         }

@@ -42,7 +42,7 @@ extern Visuals* visuals;
 //-------------------------------------------------------------------------------------------------
 Data::Data(void)
 {
-	strcpy(DataVersionName, "T-Crisis4-SDL2-Retail-3Final");
+	SDL_strlcpy(DataVersionName, "T-Crisis4-SDL2-Retail-3FinalPM", sizeof DataVersionName);
 
     ClearHighScores();
 
@@ -99,7 +99,7 @@ int playerRank = 10;
 
             for (int index = 9; index > rank; index--)
             {
-                strcpy(HighScoresName[logic->GameMode][index], HighScoresName[logic->GameMode][index-1]);
+                SDL_strlcpy(HighScoresName[logic->GameMode][index], HighScoresName[logic->GameMode][index-1], sizeof HighScoresName[logic->GameMode][index]);
                 HighScoresLevel[logic->GameMode][index] = HighScoresLevel[logic->GameMode][index-1];
                 HighScoresScore[logic->GameMode][index] = HighScoresScore[logic->GameMode][index-1];
             }
@@ -107,7 +107,7 @@ int playerRank = 10;
             char erase[20];
             for (int letter = 0; letter < 20; letter++)  erase[letter] = '\0';
             for (int letterTwo = 0; letterTwo < 20; letterTwo++)  HighScoresName[logic->GameMode][rank][letterTwo] = '\0';
-            strcpy(HighScoresName[logic->GameMode][rank], erase);
+            SDL_strlcpy(HighScoresName[logic->GameMode][rank], erase, sizeof HighScoresName[logic->GameMode][rank]);
 
             HighScoresLevel[logic->GameMode][rank] = logic->PlayerData[PlayerWithHighestScore].Level;
             HighScoresScore[logic->GameMode][rank] = logic->PlayerData[PlayerWithHighestScore].Score;
@@ -142,7 +142,7 @@ char name4th[19]  = { 'D', 'a', 'o', 't', 'h', 'e', 'm', 'a', 'n', '\0' };
 char name5th[19]  = { 'm', 'a', 't', 't', 'm', 'a', 't', 't', 'e', 'h', '\0' };
 char name6th[19]  = { 'S', 'D', 'L', '2', '\0' };
 char name7th[19]  = { 'D', 'J', ' ', 'F', 'a', 'd', 'i', 'n', 'g', ' ', 'T', 'w', 'i', 'l', 'i', 'g', 'h', 't', '\0' };
-char name8th[19]  = { 'o', 'p', 'e', 'n', 'S', 'U', 'S', 'E', '\0' };
+char name8th[19]  = { 'M', 'a', 'n', 'j', 'a', 'r', 'o', ' ', 'L', 'i', 'n', 'u', 'x', '\0' };
 char name9th[19]  = { 'C', 'o', 'd', 'e', 'B', 'l', 'o', 'c', 'k', 's', '\0' };
 char name10th[19] = { 'Y', 'o', 'u', '!', '\0' };
 
@@ -261,8 +261,8 @@ char joystickNameTemp[4][100];
     }
     else  return;
 
-	strcpy(filename, pref_path);
-	strcat(filename, "T-Crisis4-Data-Retail4_5_6");
+	SDL_strlcpy(filename, pref_path, sizeof filename);
+	SDL_strlcat(filename, "T-Crisis4-Data-Retail4_5_6", sizeof filename);
 
 	fileStream.open (filename, fstream::in);
 	if (fileStream.is_open())
@@ -414,7 +414,7 @@ char joystickNameTemp[4][100];
         {
             for (int index = 0; index < 4; index++)
             {
-                strcpy(input->JoystickName[index], joystickNameTemp[index]);
+                SDL_strlcpy(input->JoystickName[index], joystickNameTemp[index], sizeof input->JoystickName[index]);
             }
         }
 
@@ -438,123 +438,123 @@ char *pref_path = NULL;
     }
     else  return;
 
-	strcpy(filename, pref_path);
-	strcat(filename, "T-Crisis4-Data-Retail4_5_6");
+	SDL_strlcpy(filename, pref_path, sizeof filename);
+	SDL_strlcat(filename, "T-Crisis4-Data-Retail4_5_6", sizeof filename);
 
 	fileStream.open (filename, fstream::out);
 	if (fileStream.is_open())
 	{
-		sprintf(textBuffer, "%d", audio->MusicVolume);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", audio->MusicVolume);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", audio->SoundVolume);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", audio->SoundVolume);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", visuals->FullScreenMode);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", visuals->FullScreenMode);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->CPUPlayerEnabled);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->CPUPlayerEnabled);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->PlayingGameFrameLock);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->PlayingGameFrameLock);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->DelayAutoShift);
+		SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->DelayAutoShift);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->GameMode);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->GameMode);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->SelectedMusicTrack);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->SelectedMusicTrack);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", audio->MusicJukeboxMode);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", audio->MusicJukeboxMode);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->SelectedBackground);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->SelectedBackground);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->NewGameGarbageHeight);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->NewGameGarbageHeight);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->PressingUPAction);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->PressingUPAction);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->DisplayNextPiece);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->DisplayNextPiece);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->DisplayDropShadow);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->DisplayDropShadow);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", logic->TileSet);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", logic->TileSet);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyButtonOne);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyButtonOne);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyButtonTwo);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyButtonTwo);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyUP);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyUP);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyRIGHT);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyRIGHT);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyDOWN);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyDOWN);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyLEFT);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyLEFT);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
-		sprintf(textBuffer, "%d", input->UserDefinedKeyPause);
+        SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->UserDefinedKeyPause);
 		fileStream<<textBuffer;
 		fileStream<<"\n";
 
         for (int index = 0; index < 4; index++)
         {
-            sprintf(textBuffer, "%d", input->JoyUP[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyUP[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
 
-            sprintf(textBuffer, "%d", input->JoyDOWN[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyDOWN[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
 
-            sprintf(textBuffer, "%d", input->JoyLEFT[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyLEFT[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
 
-            sprintf(textBuffer, "%d", input->JoyRIGHT[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyRIGHT[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
 
-            sprintf(textBuffer, "%d", input->JoyButton1[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyButton1[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
 
-            sprintf(textBuffer, "%d", input->JoyButton2[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, "%d", input->JoyButton2[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
         }
@@ -563,16 +563,16 @@ char *pref_path = NULL;
         {
             for (Uint8 rank = 0; rank < 10; rank++)
             {
-                strcpy(textBuffer, HighScoresName[gameMode][rank]);
+                SDL_snprintf (textBuffer, sizeof textBuffer, HighScoresName[gameMode][rank]);
                 fileStream<<textBuffer;
                 fileStream<<"\n";
 
-                sprintf(textBuffer, "%d", HighScoresLevel[gameMode][rank]);
+                SDL_snprintf (textBuffer, sizeof textBuffer, "%d", HighScoresLevel[gameMode][rank]);
                 fileStream<<textBuffer;
                 fileStream<<"\n";
 
                 #ifdef _WIN32
-                    sprintf(textBuffer, "%I64u", (Uint32)HighScoresScore[gameMode][rank]);
+                    SDL_snprintf (textBuffer, sizeof textBuffer, "%I64u", (long long)HighScoresScore[gameMode][rank]);
                 #else
                     sprintf(textBuffer, "%lu", HighScoresScore[gameMode][rank]);
                 #endif
@@ -584,7 +584,7 @@ char *pref_path = NULL;
 
         for (int index = 0; index < 4; index++)
         {
-            strcpy(textBuffer, input->JoystickName[index]);
+            SDL_snprintf (textBuffer, sizeof textBuffer, input->JoystickName[index]);
             fileStream<<textBuffer;
             fileStream<<"\n";
         }

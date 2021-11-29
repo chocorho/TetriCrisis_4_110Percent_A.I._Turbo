@@ -99,7 +99,7 @@ public:
     float ShipY;
     float ShipScale;
     float ExplosionScale;
-    float ExplosionTransparency;
+    int ExplosionTransparency;
     void DisplayFlyingFromEarthScreen(void);
     void DisplayFlyingToMarsScreen(void);
     void DisplayFlyingToBaseScreen(void);

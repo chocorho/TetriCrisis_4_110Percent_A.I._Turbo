@@ -103,8 +103,8 @@ public:
     SDL_Texture *TextTexture[NumberOfTextsCached];
     SDL_Texture *TextOutlineTexture[NumberOfTextsCached];
     char TextCachedText[NumberOfTextsCached][64];
-    int TextCachedScreenX[NumberOfTextsCached];
-    int TextCachedScreenY[NumberOfTextsCached];
+    float TextCachedScreenX[NumberOfTextsCached];
+    float TextCachedScreenY[NumberOfTextsCached];
     int TextCachedWidth[NumberOfTextsCached];
     int TextCachedHeight[NumberOfTextsCached];
     Uint8 TextCacheRed[NumberOfTextsCached];
@@ -115,7 +115,7 @@ public:
     void UnloadFontsFromMemory(void);
 
     void ClearTextCache(void);
-    void DrawTextOntoScreenBuffer(const char *textToDisplay, TTF_Font *font, int posX, int posY
+    void DrawTextOntoScreenBuffer(const char *textToDisplay, TTF_Font *font, float posX, float posY
                                  , Uint8 XJustification, Uint8 textRed, Uint8 textGreen, Uint8 textBlue
                                  , Uint8 outlineRed, Uint8 outlineGreen, Uint8 outlineBlue);
 };

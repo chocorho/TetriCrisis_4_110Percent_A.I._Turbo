@@ -31,22 +31,22 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="SDL-2_0_14/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
-			<Add directory="SDL-2_0_14/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2" />
-			<Add directory="SDL-2_0_14/SDL2_net-2.0.1/x86_64-w64-mingw32/include/SDL2" />
-			<Add directory="SDL-2_0_14/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2" />
-			<Add directory="SDL-2_0_14/SDL2-2.0.14/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_image-2.0.5/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_mixer-2.0.4/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_net-2.0.1/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_ttf-2.0.15/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2-2.0.16/x86_64-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
 			<Add option="-lSDL2_ttf" />
 			<Add option="-lSDL2_mixer" />
 			<Add option="-lSDL2_image" />
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
-			<Add directory="SDL-2_0_14/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
-			<Add directory="SDL-2_0_14/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib" />
-			<Add directory="SDL-2_0_14/SDL2_net-2.0.1/x86_64-w64-mingw32/lib" />
-			<Add directory="SDL-2_0_14/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib" />
-			<Add directory="SDL-2_0_14/SDL2-2.0.14/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_mixer-2.0.4/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_net-2.0.1/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2_ttf-2.0.15/x86_64-w64-mingw32/lib" />
+			<Add directory="SDL-2_0_16/MinGW/SDL2-2.0.16/x86_64-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="src/Icon.ico" />
 		<Unit filename="src/audio.cpp" />

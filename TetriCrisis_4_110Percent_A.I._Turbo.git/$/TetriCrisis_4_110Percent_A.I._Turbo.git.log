@@ -1,0 +1,134 @@
+﻿  audio.cpp
+  data.cpp
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\data.cpp(575,58): warning C4477: 'sprintf_s' : format string '%I64u' requires an argument of type 'unsigned __int64', but variadic argument 1 has type 'Uint32'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\data.cpp(575,58): message : consider using '%u' in the format string
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\data.cpp(575,58): message : consider using '%I32u' in the format string
+  input.cpp
+  interface.cpp
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(116,90): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(124,67): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(130,67): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(191,61): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(231,50): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(313,69): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(321,65): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(327,65): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(354,51): warning C4244: '=': conversion from 'float' to 'Sint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(377,70): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(386,71): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(405,69): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(406,61): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(417,69): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(418,62): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(443,86): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(491,86): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(492,86): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\interface.cpp(516,48): warning C4305: '=': truncation from 'double' to 'float'
+  logic.cpp
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(875,33): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1338,30): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1339,31): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1340,38): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1341,36): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1342,33): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1586,45): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\logic.cpp(1650,33): warning C4805: '==': unsafe mix of type 'int' and type 'bool' in operation
+  main.cpp
+  screens.cpp
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(579,22): warning C4804: '>': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(579,52): warning C4804: '-=': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(584,22): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(584,52): warning C4804: '+=': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(589,22): warning C4804: '>': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(589,53): warning C4804: '-=': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(594,22): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(594,53): warning C4804: '+=': unsafe use of type 'bool' in operation
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(883,71): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(884,71): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1504,67): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1504,61): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1504,55): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1504,49): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1552,67): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1552,61): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1552,55): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(1552,49): warning C4244: 'argument': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2057,30): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2314,117): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2320,117): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2354,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2354,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2356,118): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2356,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2406,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2421,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2436,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2451,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2473,122): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2489,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2494,98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2499,98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2507,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2511,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2515,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2519,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2523,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2528,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2533,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2542,58): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2831,31): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2856,29): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2864,26): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2952,31): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2964,29): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2965,23): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2966,24): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(2987,31): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3069,29): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3070,23): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3071,24): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3135,31): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3147,29): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3158,31): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3171,32): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3226,45): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3402,114): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3402,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3404,118): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3404,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3419,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3432,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3437,101): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3442,101): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3450,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3454,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3458,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3462,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3467,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3472,88): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(3501,104): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4230,63): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4247,62): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4375,117): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4381,117): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4395,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4400,98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4405,98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4412,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4421,58): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\screens.cpp(4431,48): warning C4244: '=': conversion from 'double' to 'Uint8', possible loss of data
+  visuals.cpp
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1035,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1037,25): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1038,62): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1039,63): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1324,52): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1325,76): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1326,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1327,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1331,52): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1332,76): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1333,66): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\src\visuals.cpp(1334,67): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  TetriCrisis_4_110Percent_A.I._Turbo.git.vcxproj -> C:\Users\JLP\Desktop\TetriCrisis_4_110Percent_A.I._Turbo.git\TetriCrisis_4_110Percent_A.I._Turbo.git.exe

@@ -254,19 +254,19 @@ int windowHeight;
         if (input->DEBUG == true)
         {
             char temp[256];
-            strcpy(visuals->VariableText, "(");
-            sprintf(temp, "%i", input->MouseX);
-            strcat(visuals->VariableText, temp);
-            strcat(visuals->VariableText, ",");
-            sprintf(temp, "%i", input->MouseY);
-            strcat(visuals->VariableText, temp);
-            strcat(visuals->VariableText, ")");
+            SDL_strlcpy(visuals->VariableText, "(", sizeof visuals->VariableText);
+            SDL_snprintf (temp, sizeof temp, "%i", input->MouseX);
+            SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, ",", sizeof visuals->VariableText);
+            SDL_snprintf (temp, sizeof temp, "%i", input->MouseY);
+            SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, ")", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 3, 440
                                               , JustifyLeft, 255, 255, 255, 0, 0, 0);
         }
 
-        sprintf(visuals->VariableText, "%d", visuals->AverageFPS);
-        strcat(visuals->VariableText, "/60");
+        SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", visuals->AverageFPS);
+//        SDL_strlcat(visuals->VariableText, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 3, 460
                                           , JustifyLeft, 255, 255, 255, 0, 0, 0);
     }
@@ -411,8 +411,8 @@ void Screens::DisplayTitleScreen(void)
     {
         SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" );
 
-        int buttonStartY = 204;
-        int buttonOffsetY = 43;
+        float buttonStartY = 204.0f;
+        float buttonOffsetY = 43.0f;
         interface->CreateButton( 1003, 0, buttonStartY );
         interface->CreateButton( 1004, 1, buttonStartY + (buttonOffsetY*1) );
         interface->CreateButton( 1005, 2, buttonStartY + (buttonOffsetY*2) );
@@ -446,17 +446,17 @@ void Screens::DisplayTitleScreen(void)
                                           , 585, 96+6+4, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
         char temp[256];
-        strcpy(visuals->VariableText, "''");
-        strcat(visuals->VariableText, data->HighScoresName[logic->GameMode][0]);
-        strcat(visuals->VariableText, "'' Scored: ");
+        SDL_strlcpy(visuals->VariableText, "''", sizeof visuals->VariableText);
+        SDL_strlcat(visuals->VariableText, data->HighScoresName[logic->GameMode][0], sizeof visuals->VariableText);
+        SDL_strlcat(visuals->VariableText, "'' Scored: ", sizeof visuals->VariableText);
 
         #ifdef _WIN32
-            sprintf(temp, "%I64u", data->HighScoresScore[logic->GameMode][0]);
+            SDL_snprintf (temp, sizeof temp, "%I64u", data->HighScoresScore[logic->GameMode][0]);
         #else
             sprintf(temp, "%lu", data->HighScoresScore[logic->GameMode][0]);
         #endif
 
-        strcat(visuals->VariableText, temp);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
 
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 0, 135+16
                                           , JustifyCenter, 255, 255, 0, 1, 1, 1);
@@ -828,8 +828,8 @@ void Screens::DisplayNewGameOptionsScreen(void)
                                           , 255, 255, 255, 1, 1, 1);
 
         char temp[256];
-        sprintf(temp, "%d", logic->NewGameGarbageHeight);
-        strcpy(visuals->VariableText, temp);
+		SDL_snprintf(temp, sizeof temp, "%d", logic->NewGameGarbageHeight);
+        SDL_strlcpy(visuals->VariableText, temp, sizeof visuals->VariableText);
 
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0]
                                           , 60, 225-15+3, JustifyRight
@@ -872,19 +872,19 @@ void Screens::DisplayNewGameOptionsScreen(void)
         visuals->Sprites[7].BlueHue = 0;
         visuals->DrawSpriteOntoScreenBuffer(7);
 
-        float x = 401-10;
+        float x = 390.0f;
         for (int boxIndex = 0; boxIndex < 7; boxIndex++)
         {
             int boxSetToShow = (logic->TileSet*10);
             if (logic->GameMode == StoryMode)  boxSetToShow = 0;
 
             visuals->Sprites[202+boxIndex+(boxSetToShow)].ScreenX = x;
-            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScreenY = 345;
-            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1.8;
-            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1.8;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScreenY = 346.0f;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1.8f;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1.8f;
             visuals->DrawSpriteOntoScreenBuffer( 202+boxIndex+(boxSetToShow) );
-            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1;
-            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleX = 1.0f;
+            visuals->Sprites[202+boxIndex+(boxSetToShow)].ScaleY = 1.0f;
 
             x+=30;
         }
@@ -1501,7 +1501,7 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->KeyboardSetupProcess > KeyboardSetupNotStarted)
         {
-            visuals->ClearScreenBufferWithColor(0.0f, 0.0f, 0.0f, 1.0f);
+            visuals->ClearScreenBufferWithColor(0, 0, 0, 1);
 
             if (input->KeyboardSetupProcess == KeyboardSetupPressOne)
                 visuals->DrawTextOntoScreenBuffer("Press key on keyboard for [ROTATE1] now!"
@@ -1549,7 +1549,7 @@ void Screens::DisplayOptionsScreen(void)
 
         if (input->JoystickSetupProcess > JoySetupNotStarted)
         {
-            visuals->ClearScreenBufferWithColor(0.0f, 0.0f, 0.0f, 1.0f);
+            visuals->ClearScreenBufferWithColor(0, 0, 0, 1);
 
             if (input->JoystickSetupProcess == Joy1SetupPressUP)
                 visuals->DrawTextOntoScreenBuffer("Press [UP] on joystick #1 now!"
@@ -1727,51 +1727,51 @@ const char* keyName;
                                               , 0, 50, JustifyCenter, 255, 255, 255, 90, 90, 1);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyUP);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Special UP Action");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Special UP Action", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyRIGHT);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Move Piece Right");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Move Piece Right", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(1*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyDOWN);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Move Piece Down");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Move Piece Down", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(2*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyLEFT);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Move Piece Left");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Move Piece Left", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(3*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyPause);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Pause");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Pause", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(4*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyButtonOne);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Rotate Clockwise");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Rotate Clockwise", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(5*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
 
             keyName = SDL_GetKeyName(input->UserDefinedKeyButtonTwo);
-            strcpy(visuals->VariableText, "[ ");
-            strcat(visuals->VariableText, keyName);
-            strcat(visuals->VariableText, " ] = Rotate Counter Clockwise");
+            SDL_strlcpy(visuals->VariableText, "[ ", sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+            SDL_strlcat(visuals->VariableText, " ] = Rotate Counter Clockwise", sizeof visuals->VariableText);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[3]
                                               , 0, 50+70+(6*40), JustifyCenter, 255, 255, 255, 0, 0, 0);
         }
@@ -1900,8 +1900,8 @@ void Screens::DisplayHighScoresScreen(void)
         visuals->DrawTextOntoScreenBuffer("9.", visuals->Font[1], 1, 352+4, JustifyLeft, 150, 150, 150, 1, 1, 1);
         visuals->DrawTextOntoScreenBuffer("10.", visuals->Font[1], 1, 382+4, JustifyLeft, 150, 150, 150, 1, 1, 1);
 
-        int rankY = 112;
-        int offsetY = 30;
+        float rankY = 112.0f;
+        float offsetY = 30.0f;
 
         for (Uint8 index = 0; index < 10; index++)
         {
@@ -1927,13 +1927,13 @@ void Screens::DisplayHighScoresScreen(void)
             }
             else
             {
-                sprintf(visuals->VariableText, "%d", data->HighScoresLevel[logic->GameMode][index]);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", data->HighScoresLevel[logic->GameMode][index]);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], 420-30, rankY
                                                   , JustifyLeft, 255, greenBlueColorValue, greenBlueColorValue, 1, 1, 1);
             }
 
             #ifdef _WIN32
-                sprintf(visuals->VariableText, "%I64u", data->HighScoresScore[logic->GameMode][index]);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%I64u", data->HighScoresScore[logic->GameMode][index]);
             #else
                 sprintf(visuals->VariableText, "%lu", data->HighScoresScore[logic->GameMode][index]);
             #endif
@@ -2054,7 +2054,7 @@ void Screens::DisplayAboutScreen(void)
         }
         else
         {
-            ReviewScale-=0.01;
+            ReviewScale-=0.01f;
         }
 
         if (ReviewScale < 0.0)  ScreenTransitionStatus = FadeOut;
@@ -2310,13 +2310,13 @@ const char* keyName;
             if (logic->GameMode == TimeAttack30Mode || logic->GameMode == TimeAttack60Mode || logic->GameMode == TimeAttack120Mode)
             {
                 Uint32 taTimer = logic->TimeAttackTimer / 200;
-                sprintf(visuals->VariableText, "%d", taTimer);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", taTimer);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[player].PlayersPlayfieldScreenX
                                                   , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
             else if (logic->GameMode == TwentyLineChallengeMode)
             {
-                sprintf(visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[player].PlayersPlayfieldScreenX
                                                   , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
@@ -2480,7 +2480,7 @@ const char* keyName;
         for (int player = 0; player < NumberOfPlayers; player++)
         {
             #ifdef _WIN32
-                sprintf(visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
             #else
                 sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
             #endif
@@ -2489,12 +2489,12 @@ const char* keyName;
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2+1
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Lines);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Level);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -2533,17 +2533,17 @@ const char* keyName;
                                           , visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
                                           , 460+3, JustifyCenterOnPoint, 255, 255, 255, 0, 0, 0);
 
-            if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
+/*            if (logic->GameMode == CrisisMode && logic->Crisis7BGMPlayed == true)
             {
                 for (int player = 0; player < NumberOfPlayers; player++)
                 {
                     visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
                     visuals->Sprites[155].ScreenY = 240;
-                    visuals->Sprites[155].Transparency = 0.10f;
+                    visuals->Sprites[155].Transparency = 128;// 0.10;
                     visuals->DrawSpriteOntoScreenBuffer(155);
                 }
             }
-        }
+ */       }
 
         if (logic->PAUSEgame == false)
         {
@@ -2583,10 +2583,10 @@ const char* keyName;
                                                   , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
             else
             {
-                strcpy(visuals->VariableText, "(Press [");
+                SDL_strlcpy(visuals->VariableText, "(Press [", sizeof visuals->VariableText);
                 keyName = SDL_GetKeyName(input->UserDefinedKeyPause);
-                strcat(visuals->VariableText, keyName);
-                strcat(visuals->VariableText, "] On Keyboard To Continue!)");
+                SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+                SDL_strlcat(visuals->VariableText, "] On Keyboard To Continue!)", sizeof visuals->VariableText);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
                                                   , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
             }
@@ -2828,7 +2828,7 @@ void Screens::DisplayFlyingFromEarthScreen(void)
     {
         if (PlanetScale < 0.5 )
         {
-            PlanetScale+=0.005;
+            PlanetScale+=0.005f;
         }
         else
         {
@@ -2853,7 +2853,7 @@ void Screens::DisplayFlyingFromEarthScreen(void)
     {
         if (ShipScale < 1.0 )
         {
-            ShipScale+=0.005;
+            ShipScale+=0.005f;
         }
         else  IntroAnimationStep = 3;
     }
@@ -2861,7 +2861,7 @@ void Screens::DisplayFlyingFromEarthScreen(void)
     {
         PlanetX-=0.5;
         PlanetY-=0.5;
-        PlanetScale-=0.05;
+        PlanetScale-=0.05f;
 
         ShipX+=5.0;
         ShipY+=5.0;
@@ -2949,7 +2949,7 @@ void Screens::DisplayFlyingToMarsScreen(void)
     {
         if (PlanetScale < 0.7)
         {
-            PlanetScale+=0.005;
+            PlanetScale+=0.005f;
         }
         else
         {
@@ -2961,9 +2961,9 @@ void Screens::DisplayFlyingToMarsScreen(void)
     {
         if (ShipScale > 0.0)
         {
-            ShipScale-=0.005;
-            ShipX+=1.7;
-            ShipY-=1.15;
+            ShipScale-=0.005f;
+            ShipX+=1.7f;
+            ShipY-=1.15f;
         }
         else  IntroAnimationStep = 3;
     }
@@ -2984,7 +2984,7 @@ void Screens::DisplayFlyingToMarsScreen(void)
     {
         if (PlanetScale > 0.0)
         {
-            PlanetScale-=0.005;
+            PlanetScale-=0.005f;
         }
         else  IntroAnimationStep = 5;
     }
@@ -3066,9 +3066,9 @@ void Screens::DisplayFlyingToBaseScreen(void)
     {
         if (ShipScale > 0.25)
         {
-            ShipScale-=0.005;
-            ShipX+=1.7;
-            ShipY-=1.15;
+            ShipScale-=0.005f;
+            ShipX+=1.7f;
+            ShipY-=1.15f;
         }
         else  IntroAnimationStep = 2;
     }
@@ -3132,7 +3132,7 @@ void Screens::DisplayMarsExplodingScreen(void)
     {
         if ( PlanetScale < (1.0) )
         {
-            PlanetScale+=0.005;
+            PlanetScale+=0.005f;
         }
         else
         {
@@ -3144,7 +3144,7 @@ void Screens::DisplayMarsExplodingScreen(void)
     {
         if (ShipScale < 1.0)
         {
-            ShipScale+=0.005;
+            ShipScale+=0.005f;
         }
         else
         {
@@ -3155,7 +3155,7 @@ void Screens::DisplayMarsExplodingScreen(void)
     {
         if ( PlanetScale > (0.0) )
         {
-            PlanetScale-=0.005;
+            PlanetScale-=0.005f;
         }
         else
         {
@@ -3168,7 +3168,7 @@ void Screens::DisplayMarsExplodingScreen(void)
     {
         if (ExplosionScale < 10)
         {
-            ExplosionScale+=0.1;
+            ExplosionScale+=0.1f;
         }
         else if (ExplosionTransparency > 0)
         {
@@ -3423,7 +3423,7 @@ const char* keyName;
         for (int player = 1; player < 2; player++)
         {
             #ifdef _WIN32
-                sprintf(visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
             #else
                 sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
             #endif
@@ -3432,12 +3432,12 @@ const char* keyName;
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2+1
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Lines);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX-59-58, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Level);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX+59+58, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -3488,16 +3488,16 @@ const char* keyName;
                                                   , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
             else
             {
-                strcpy(visuals->VariableText, "(Press [");
+                SDL_strlcpy(visuals->VariableText, "(Press [", sizeof visuals->VariableText);
                 keyName = SDL_GetKeyName(input->UserDefinedKeyPause);
-                strcat(visuals->VariableText, keyName);
-                strcat(visuals->VariableText, "] On Keyboard To Continue!)");
+                SDL_strlcat(visuals->VariableText, keyName, sizeof visuals->VariableText);
+                SDL_strlcat(visuals->VariableText, "] On Keyboard To Continue!)", sizeof visuals->VariableText);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[1]
                                                   , 0, 265, JustifyCenter, 255, 255, 255, 90, 90, 90);
             }
         }
 
-        sprintf(visuals->VariableText, "%d", logic->StoryLevelAdvanceCounter);
+        SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->StoryLevelAdvanceCounter);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6], logic->PlayerData[1].PlayersPlayfieldScreenX
                                           , 440+5, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
@@ -3745,8 +3745,8 @@ bool lastKeyWasNotAcceptable = false;
 
         data->NameInputArayIndex = 0;
 
-        int screenY = 250;
-        int screenX = 63;
+        float screenY = 250;
+        float screenX = 63;
         int index = -1;
         for (int y = 0; y < 5; y++)
         {
@@ -3806,24 +3806,24 @@ bool lastKeyWasNotAcceptable = false;
             }
             else if (interface->IconSelectedByPlayer > -1 && interface->IconSelectedByPlayer < 13+13)
             {
-                sprintf( temp, "%c", (65+interface->IconSelectedByPlayer) );
-                strcpy(charToAccept, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (65+interface->IconSelectedByPlayer) );
+                SDL_strlcpy(charToAccept, temp, sizeof charToAccept);
                 data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
                 data->NameInputArayIndex++;
                 lastKeyWasNotAcceptable = true;
             }
             else if (interface->IconSelectedByPlayer > 13+13-1 && interface->IconSelectedByPlayer < 13+13+13+13)
             {
-                sprintf( temp, "%c", (97+(interface->IconSelectedByPlayer-26)) );
-                strcpy(charToAccept, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (97+(interface->IconSelectedByPlayer-26)) );
+                SDL_strlcpy(charToAccept, temp, sizeof charToAccept);
                 data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
                 data->NameInputArayIndex++;
                 lastKeyWasNotAcceptable = true;
             }
             else if (interface->IconSelectedByPlayer > 13+13+13+13-1 && interface->IconSelectedByPlayer < 13+13+13+13+11)
             {
-                sprintf( temp, "%c", (48+(interface->IconSelectedByPlayer-26-26)) );
-                strcpy(charToAccept, temp);
+                SDL_snprintf ( temp, sizeof temp, "%c", (48+(interface->IconSelectedByPlayer-26-26)) );
+                SDL_strlcpy(charToAccept, temp, sizeof charToAccept);
                 data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver][data->NameInputArayIndex] = charToAccept[0];
                 data->NameInputArayIndex++;
                 lastKeyWasNotAcceptable = true;
@@ -4093,10 +4093,10 @@ void Screens::DisplayNameInputJoystickScreen(void)
             visuals->DrawTextOntoScreenBuffer(data->HighScoresName[logic->GameMode][data->PlayerRankOnGameOver],
                                               visuals->Font[0], 0, 190, JustifyCenter, 255, 255, 0, 1, 1, 1);
 
-        int x = 45;
+        float x = 45;
         for (char alphaNumeral = 'A'; alphaNumeral < 'N'; alphaNumeral++)
         {
-            sprintf(visuals->VariableText, "%c", alphaNumeral);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%c", alphaNumeral);
 
             if (alphaNumeral == data->NameInputJoyChar)
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], x, 239, JustifyCenterOnPoint, 255, 1, 1, 1, 1, 1);
@@ -4108,7 +4108,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         x = 45;
         for (char alphaNumeral = 'N'; alphaNumeral < '['; alphaNumeral++)
         {
-            sprintf(visuals->VariableText, "%c", alphaNumeral);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%c", alphaNumeral);
 
             if (alphaNumeral == data->NameInputJoyChar)
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], x, 269, JustifyCenterOnPoint, 255, 1, 1, 1, 1, 1);
@@ -4120,7 +4120,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         x = 45;
         for (char alphaNumeral = 'a'; alphaNumeral < 'n'; alphaNumeral++)
         {
-            sprintf(visuals->VariableText, "%c", alphaNumeral);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%c", alphaNumeral);
 
             if (alphaNumeral == data->NameInputJoyChar)
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], x, 299, JustifyCenterOnPoint, 255, 1, 1, 1, 1, 1);
@@ -4132,7 +4132,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         x = 45;
         for (char alphaNumeral = 'n'; alphaNumeral < '{'; alphaNumeral++)
         {
-            sprintf(visuals->VariableText, "%c", alphaNumeral);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%c", alphaNumeral);
 
             if (alphaNumeral == data->NameInputJoyChar)
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], x, 329, JustifyCenterOnPoint, 255, 1, 1, 1, 1, 1);
@@ -4144,7 +4144,7 @@ void Screens::DisplayNameInputJoystickScreen(void)
         x = 45;
         for (char alphaNumeral = '0'; alphaNumeral < ':'; alphaNumeral++)
         {
-            sprintf(visuals->VariableText, "%c", alphaNumeral);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%c", alphaNumeral);
 
             if (alphaNumeral == data->NameInputJoyChar)
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[0], x, 359, JustifyCenterOnPoint, 255, 1, 1, 1, 1, 1);
@@ -4227,7 +4227,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
     }
     else if (input->KeyOnKeyboardPressedByUser == SDLK_MINUS)
     {
-        if (logic->Multiplier > -10)  logic->Multiplier-=0.025;
+        if (logic->Multiplier > -10)  logic->Multiplier-=0.025f;
 
         printf("Value: %f\n", logic->Multiplier);
 
@@ -4244,7 +4244,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
     }
     else if (input->KeyOnKeyboardPressedByUser == SDLK_EQUALS)
     {
-        if (logic->Multiplier < 10)  logic->Multiplier+=0.025;
+        if (logic->Multiplier < 10)  logic->Multiplier+=0.025f;
 
         printf("Value: %f\n", logic->Multiplier);
 
@@ -4371,13 +4371,13 @@ void Screens::DisplayTestComputerSkillScreen(void)
             if (logic->GameMode == TimeAttack30Mode || logic->GameMode == TimeAttack60Mode || logic->GameMode == TimeAttack120Mode)
             {
                 Uint32 taTimer = logic->TimeAttackTimer / 200;
-                sprintf(visuals->VariableText, "%d", taTimer);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", taTimer);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
                                                   , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
             else if (logic->GameMode == TwentyLineChallengeMode)
             {
-                sprintf(visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].TwentyLineCounter);
                 visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[2], logic->PlayerData[player].PlayersPlayfieldScreenX
                                                   , 440, JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
             }
@@ -4386,7 +4386,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
         for (int player = 0; player < NumberOfPlayers; player++)
         {
             #ifdef _WIN32
-                sprintf(visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
+                SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%I64u", logic->PlayerData[player].Score);
             #else
                 sprintf(visuals->VariableText, "%lu", logic->PlayerData[player].Score);
             #endif
@@ -4395,12 +4395,12 @@ void Screens::DisplayTestComputerSkillScreen(void)
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX, 9-2
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Lines);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Lines);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX-59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
 
-            sprintf(visuals->VariableText, "%d", logic->PlayerData[player].Level);
+            SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", logic->PlayerData[player].Level);
             visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[6]
                                               , logic->PlayerData[player].PlayersPlayfieldScreenX+59, 62-1+6
                                               , JustifyCenterOnPoint, 255, 255, 255, 1, 1, 1);
@@ -4418,7 +4418,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
                 {
                     visuals->Sprites[155].ScreenX = logic->PlayerData[player].PlayersPlayfieldScreenX;
                     visuals->Sprites[155].ScreenY = 240;
-                    visuals->Sprites[155].Transparency = 0.20f;
+                    visuals->Sprites[155].Transparency = 128;// 0.20f;
                     visuals->DrawSpriteOntoScreenBuffer(155);
                 }
             }
@@ -4428,7 +4428,7 @@ void Screens::DisplayTestComputerSkillScreen(void)
         {
             visuals->Sprites[0].ScreenX = 320;
             visuals->Sprites[0].ScreenY = 240;
-            visuals->Sprites[0].Transparency = 0.85;
+            visuals->Sprites[0].Transparency = 128;// 0.85;
             visuals->DrawSpriteOntoScreenBuffer(0);
 
             visuals->DrawTextOntoScreenBuffer("G A M E   P A U S E D", visuals->Font[0]
@@ -4443,31 +4443,31 @@ void Screens::DisplayTestComputerSkillScreen(void)
         visuals->DrawTextOntoScreenBuffer("A.I. TEST", visuals->Font[7]
                                           , 0, 90+22, JustifyCenter, 255, 255, 255, 0, 0, 0);
 
-        strcpy(visuals->VariableText, "Number Of Games: ");
-        sprintf(temp, "%d", logic->NumberofCPUGames);
-        strcat(visuals->VariableText, temp);
+        SDL_strlcpy(visuals->VariableText, "Number Of Games: ", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->NumberofCPUGames);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 130
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
 
-        strcpy(visuals->VariableText, "Number Of Lines: ");
+        SDL_strlcpy(visuals->VariableText, "Number Of Lines: ", sizeof visuals->VariableText);
         logic->TotalCPUPlayerLines = ( logic->TotalOneLines+(2*logic->TotalTwoLines)+(3*logic->TotalThreeLines)+(4*logic->TotalFourLines) );
-        sprintf(temp, "%d", logic->TotalCPUPlayerLines);
-        strcat(visuals->VariableText, temp);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->TotalCPUPlayerLines);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 150
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
 
-        strcpy(visuals->VariableText, "Completed Lines: 1=");
-        sprintf(temp, "%d", logic->TotalOneLines);
-        strcat(visuals->VariableText, temp);
-        strcat(visuals->VariableText, " 2=");
-        sprintf(temp, "%d", logic->TotalTwoLines);
-        strcat(visuals->VariableText, temp);
-        strcat(visuals->VariableText, " 3=");
-        sprintf(temp, "%d", logic->TotalThreeLines);
-        strcat(visuals->VariableText, temp);
-        strcat(visuals->VariableText, " 4=");
-        sprintf(temp, "%d", logic->TotalFourLines);
-        strcat(visuals->VariableText, temp);
+        SDL_strlcpy(visuals->VariableText, "Completed Lines: 1=", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->TotalOneLines);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
+        SDL_strlcat(visuals->VariableText, " 2=", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->TotalTwoLines);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
+        SDL_strlcat(visuals->VariableText, " 3=", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->TotalThreeLines);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
+        SDL_strlcat(visuals->VariableText, " 4=", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", logic->TotalFourLines);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 195
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
 
@@ -4479,9 +4479,9 @@ void Screens::DisplayTestComputerSkillScreen(void)
         int averageLinesPerGame = logic->TotalCPUPlayerLines / logic->NumberofCPUGames;
         printf("Average Lines = %i \n", averageLinesPerGame);
 
-        strcpy(visuals->VariableText, "Average Lines Per Game: ");
-        sprintf(temp, "%d", averageLinesPerGame);
-        strcat(visuals->VariableText, temp);
+        SDL_strlcpy(visuals->VariableText, "Average Lines Per Game: ", sizeof visuals->VariableText);
+        SDL_snprintf (temp, sizeof temp, "%d", averageLinesPerGame);
+        SDL_strlcat(visuals->VariableText, temp, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 0, 170
                                           , JustifyCenter, 255, 255, 255, 0, 0, 0);
 
@@ -4591,13 +4591,13 @@ void Screens::DisplayGiveMeJobScreen(void)
         visuals->DrawTextOntoScreenBuffer("INTERESTED IN:", visuals->Font[3]
                                   , 0, 1+26+20+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("- Entry-level QA Tester/Programmer position -", visuals->Font[3]
+        visuals->DrawTextOntoScreenBuffer("- Entry-level QA Tester/Programmer positions -", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("- Work-from-home(telecommute) -", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
-        visuals->DrawTextOntoScreenBuffer("- Part-time schedule(15 hours a week max) -", visuals->Font[3]
+        visuals->DrawTextOntoScreenBuffer("- Part-time schedule(18 hours a week max) -", visuals->Font[3]
                                   , 0, 1+26+20+26+26+26+26+26, JustifyCenter, 255, 255, 255, 1, 1, 1);
 
         visuals->DrawTextOntoScreenBuffer("- $15 an hour salary -", visuals->Font[3]

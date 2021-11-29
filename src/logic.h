@@ -161,8 +161,8 @@ public:
 
     Uint32 PlayingGameFrameLock;
 
-    bool DisplayNextPiece;
-    bool DisplayDropShadow;
+    Uint8 DisplayNextPiece;
+    Uint8 DisplayDropShadow;
     #define None            0
     #define Fall            1
     #define Rotate          2
@@ -225,8 +225,6 @@ public:
 	void AddPieceToPlayfieldMemory(int TempOrCurrentOrNextOrDropShadow);
 	void DeletePieceFromPlayfieldMemory(int CurrentOrDropShadow);
 
-    void UpdateThoughtDisplay(void);
-
     void SetupNewPiece(void);
 
 	void CheckForCompletedLines(void);
@@ -242,8 +240,6 @@ public:
 	void MovePieceRight(void);
 
 	void SetupForNewGame(void);
-
-	void DisplayTetriScreenOntoScreenBuffer(void);
 
 	void FlashCompletedLines(void);
 	void ClearCompletedLines(void);
