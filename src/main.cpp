@@ -18,6 +18,7 @@
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 _____________________________________________________________________________________________________________________________
                                                      SDL 2.0.16
+                                               (SDL 2.0.18 RC Windows)
                                            (SDL2_Image/SDL2_Mixer/SDL2_TTF)
                                          Cross-Platform / M.I.T. Open-Source
   _______ _______     ______   _______    _       _______          _           _______ _                                _
@@ -45,6 +46,8 @@ FINAL DONE POSTMORTEM(From "TC4T-Linux-WindowsR3"):
 * [Linux] - Fixed Windows EXE version of game not running on Linux WINE
 
 * [ALL] - Improved draw quality of TTF text
+
+* [Windows] - Placed SDL2.0.18 Release Candidate under the hood of the Windows version
 
 
 
@@ -113,17 +116,7 @@ int main( int argc, char* args[] )
 {
     printf("''GT-R Twin TurboCharged'' game engine started!\n");
     argc = argc; args = args;
-/*
-SDL_INIT_TIMER: timer subsystem
-SDL_INIT_AUDIO : audio subsystem
-SDL_INIT_VIDEO : video subsystem; automatically initializes the events subsystem
-SDL_INIT_JOYSTICK : joystick subsystem; automatically initializes the events subsystem
-SDL_INIT_HAPTIC : haptic(force feedback) subsystem
-SDL_INIT_GAMECONTROLLER : controller subsystem; automatically initializes the joystick subsystem
-SDL_INIT_EVENTS : events subsystem
-SDL_INIT_EVERYTHING : all of the above subsystems
-SDL_INIT_NOPARACHUTE : compatibility; this flag is ignored
-*/
+
     if ( SDL_Init(SDL_INIT_TIMER|SDL_INIT_AUDIO|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK|SDL_INIT_HAPTIC|SDL_INIT_GAMECONTROLLER|SDL_INIT_EVENTS) != 0 )
     {
         printf( "Unable to initialize SDL2: %s\n", SDL_GetError() );
@@ -134,6 +127,12 @@ SDL_INIT_NOPARACHUTE : compatibility; this flag is ignored
         SDL_version compiled;
         SDL_VERSION(&compiled);
         printf("SDL2 version %d.%d.%d initialized.\n", compiled.major, compiled.minor, compiled.patch);
+    }
+
+    if ( SDL_Init(SDL_INIT_SENSOR) != 0 )
+    {
+        SDL_Log("SDL_Init() failed: %s\n", SDL_GetError());
+        printf( "Unable to initialize SDL2 sensor: %s\n", SDL_GetError() );
     }
 
     visuals = new Visuals();

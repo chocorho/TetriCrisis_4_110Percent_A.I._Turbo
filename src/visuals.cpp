@@ -992,6 +992,8 @@ SDL_snprintf (reg, sizeof reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("''Terlisimo''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''tvault''", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("''Daniel_Gibson''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''slouken''", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("''sezero''", 255) == false)  return(false);
 
     if (LoadStaffTextIntoMemory("''Petruska''", 255) == false)  return(false);
     if (LoadStaffTextIntoMemory("''meklu''", 255) == false)  return(false);

@@ -266,7 +266,6 @@ int windowHeight;
         }
 
         SDL_snprintf (visuals->VariableText, sizeof visuals->VariableText, "%d", visuals->AverageFPS);
-//        SDL_strlcat(visuals->VariableText, sizeof visuals->VariableText);
         visuals->DrawTextOntoScreenBuffer(visuals->VariableText, visuals->Font[7], 3, 460
                                           , JustifyLeft, 255, 255, 255, 0, 0, 0);
     }
@@ -1400,16 +1399,16 @@ void Screens::DisplayOptionsScreen(void)
                                           , 255, 255, 255, 1, 1, 1);
 
         if (logic->CPUPlayerEnabled == 1)
-            visuals->DrawTextOntoScreenBuffer("Slow(Old)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Slow Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 2)
-            visuals->DrawTextOntoScreenBuffer("Medium(old)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Medium Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 3)
-            visuals->DrawTextOntoScreenBuffer("Fast(old)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Fast Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else if (logic->CPUPlayerEnabled == 4)
-            visuals->DrawTextOntoScreenBuffer("Turbo!(old)", visuals->Font[0], 60, 215-15+3-10, JustifyRight
+            visuals->DrawTextOntoScreenBuffer("Turbo! Speed", visuals->Font[0], 60, 215-15+3-10, JustifyRight
                                               , 255, 255, 255, 1, 1, 1);
         else
             visuals->DrawTextOntoScreenBuffer("OFF", visuals->Font[0], 60, 215-15+3-10, JustifyRight
@@ -2028,6 +2027,10 @@ void Screens::DisplayAboutScreen(void)
     }
 
     float skip = 1.5f;
+
+    if (logic->GameMode == CrisisMode && logic->Won == true)  skip = 0.82f;
+    else if (logic->GameMode == StoryMode && logic->Won == true)  skip = 0.82f;
+
     if (input->JoystickDirectionVertical[Keyboard] == UP)  skip = 13;
 
     for (int index = 1100; index < (1100+visuals->TotalNumberOfLoadedStaffTexts); index++)
