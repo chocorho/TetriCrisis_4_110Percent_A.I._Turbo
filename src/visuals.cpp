@@ -937,7 +937,7 @@ SDL_snprintf (reg, sizeof reg, "%c", 0xAE);
     if ( LoadStaffTextIntoMemory("- Corsair 32GB DDR3 RAM Memory -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- nVidia GeForce GTX 970TT 4GB GDDR5 GPU -", 255) == false)  return(false);
     if ( LoadStaffTextIntoMemory("- ADATA 1TB SSD Hard Drive[OS/Apps] -", 255) == false)  return(false);
-    if (LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive(Personal Data) -", 255) == false)  return(false);
+    if ( LoadStaffTextIntoMemory("- Western Digital 1TB HDD Hard Drive[Personal Data] -", 255) == false)  return(false);
 
     SDL_strlcpy(textToDisplay, "Microsoft", sizeof textToDisplay);
     SDL_strlcat(textToDisplay, " Windows", sizeof textToDisplay);
